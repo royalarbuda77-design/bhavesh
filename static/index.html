@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Inkwell — Markdown Notes</title>
+<meta name="description" content="A fast markdown notebook backed by SQLite.">
+<link rel="icon" href="/favicon.ico">
+<link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+<div class="app" id="app">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <header class="sidebar-head">
+      <div class="brand">
+        <span class="brand-mark">I</span>
+        <div class="brand-text">
+          <strong>Inkwell</strong>
+          <small id="statLine">loading…</small>
+        </div>
+      </div>
+      <button class="icon-btn only-mobile" id="closeSidebar" title="Close" aria-label="Close sidebar">✕</button>
+    </header>
+
+    <div class="search-row">
+      <div class="search">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="search" type="search" placeholder="Search notes…" autocomplete="off" aria-label="Search notes">
+        <kbd>⌃K</kbd>
+      </div>
+      <button class="btn primary new-btn" id="newNote" title="New note (Ctrl+N)">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        New
+      </button>
+    </div>
+
+    <div class="filter-row">
+      <select id="sort" aria-label="Sort notes">
+        <option value="updated">Recently updated</option>
+        <option value="created">Recently created</option>
+        <option value="title">Title A–Z</option>
+      </select>
+      <span class="count" id="listCount"></span>
+    </div>
+
+    <div class="tags" id="tagBar"></div>
+
+    <nav class="note-list" id="noteList" aria-label="Notes"></nav>
+  </aside>
+
+  <!-- Editor -->
+  <main class="main">
+    <div class="topbar">
+      <button class="icon-btn only-mobile" id="openSidebar" title="Notes" aria-label="Open notes list">☰</button>
+
+      <div class="modes" role="tablist" aria-label="View mode">
+        <button data-mode="split" class="mode active" role="tab">Split</button>
+        <button data-mode="write" class="mode" role="tab">Write</button>
+        <button data-mode="read" class="mode" role="tab">Read</button>
+      </div>
+
+      <div class="spacer"></div>
+      <span class="save-state" id="saveState"></span>
+
+      <div class="tools">
+        <button class="icon-btn" id="pinBtn" title="Pin note" aria-label="Pin note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6l-1 6 4 3v2H6v-2l4-3-1-6z"/><path d="M12 14v7"/></svg>
+        </button>
+        <button class="icon-btn" id="dupBtn" title="Duplicate note" aria-label="Duplicate note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V6a2 2 0 012-2h9"/></svg>
+        </button>
+        <button class="icon-btn" id="exportBtn" title="Export as .md" aria-label="Export note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11"/><path d="M8 11l4 4 4-4"/><path d="M5 19h14"/></svg>
+        </button>
+        <button class="icon-btn danger" id="deleteBtn" title="Delete note" aria-label="Delete note">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/></svg>
+        </button>
+        <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 13a8 8 0 11-9-9 6.5 6.5 0 009 9z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Empty state -->
+    <section class="empty" id="empty">
+      <div class="empty-inner">
+        <div class="empty-mark">✎</div>
+        <h2>Nothing selected</h2>
+        <p>Pick a note from the list, or start a new one.</p>
+        <button class="btn primary" id="emptyNew">Create your first note</button>
+      </div>
+    </section>
+
+    <!-- Editor pane -->
+    <section class="editor" id="editor" hidden>
+      <div class="title-row">
+        <input id="title" class="title-input" placeholder="Untitled note" maxlength="200" aria-label="Note title">
+      </div>
+
+      <div class="tag-row">
+        <div class="tag-chips" id="tagChips"></div>
+        <input id="tagInput" class="tag-input" placeholder="Add tag…" maxlength="32" aria-label="Add tag">
+      </div>
+
+      <div class="panes" id="panes">
+        <div class="pane pane-write">
+          <textarea id="content" spellcheck="true" placeholder="Start writing markdown…" aria-label="Note content"></textarea>
+        </div>
+        <div class="pane pane-read">
+          <article class="markdown" id="preview"></article>
+        </div>
+      </div>
+
+      <footer class="statusbar">
+        <span id="metaLine"></span>
+        <span class="spacer"></span>
+        <span id="wordCount"></span>
+      </footer>
+    </section>
+  </main>
+
+  <div class="scrim" id="scrim"></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="/static/markdown.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
