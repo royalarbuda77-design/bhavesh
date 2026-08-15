@@ -1,0 +1,299 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [6 0 R 8 0 R 10 0 R] /Count 3 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Courier >>
+endobj
+5 0 obj
+<< /Length 1190 >>
+stream
+BT
+/F1 18 Tf
+1 0 0 1 54 730 Tm
+(Python Calculator) Tj
+/F1 10 Tf
+1 0 0 1 54 707 Tm
+(Complete source code and quick-start guide) Tj
+/F1 10.5 Tf
+1 0 0 1 54 674 Tm
+(This handout contains a complete command-line calculator written in Python 3.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 659 Tm
+(It supports addition, subtraction, multiplication, and division.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 644 Tm
+( ) Tj
+/F1 10.5 Tf
+1 0 0 1 54 629 Tm
+(Highlights) Tj
+/F1 10.5 Tf
+1 0 0 1 54 614 Tm
+(- Re-prompts for invalid numeric input.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 599 Tm
+(- Validates the selected operator.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 584 Tm
+(- Handles division by zero without crashing.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 569 Tm
+(- Lets the user perform more than one calculation.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 554 Tm
+( ) Tj
+/F1 10.5 Tf
+1 0 0 1 54 539 Tm
+(Run it) Tj
+/F1 10.5 Tf
+1 0 0 1 54 524 Tm
+(1. Save the source as calculator.py.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 509 Tm
+(2. In a terminal, run: python calculator.py) Tj
+/F1 10.5 Tf
+1 0 0 1 54 494 Tm
+(3. Follow the prompts. Enter n when you are finished.) Tj
+/F1 10.5 Tf
+1 0 0 1 54 479 Tm
+( ) Tj
+/F1 10.5 Tf
+1 0 0 1 54 464 Tm
+(Source code follows.) Tj
+/F1 8 Tf
+1 0 0 1 528 34 Tm
+(Page 1) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 5 0 R >>
+endobj
+7 0 obj
+<< /Length 3880 >>
+stream
+BT
+/F1 18 Tf
+1 0 0 1 54 730 Tm
+(calculator.py) Tj
+/F1 10 Tf
+1 0 0 1 54 707 Tm
+(Python 3 source code) Tj
+/F2 8.6 Tf
+1 0 0 1 54 674 Tm
+(  1  """A small command-line calculator for the four basic operations.""") Tj
+/F2 8.6 Tf
+1 0 0 1 54 662.5 Tm
+(  2  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 651.0 Tm
+(  3  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 639.5 Tm
+(  4  def get_number\(prompt\):) Tj
+/F2 8.6 Tf
+1 0 0 1 54 628.0 Tm
+(  5      """Keep asking until the user supplies a valid number.""") Tj
+/F2 8.6 Tf
+1 0 0 1 54 616.5 Tm
+(  6      while True:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 605.0 Tm
+(  7          try:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 593.5 Tm
+(  8              return float\(input\(prompt\)\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 582.0 Tm
+(  9          except ValueError:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 570.5 Tm
+( 10              print\("Please enter a valid number."\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 559.0 Tm
+( 11  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 547.5 Tm
+( 12  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 536.0 Tm
+( 13  def calculate\(first, operator, second\):) Tj
+/F2 8.6 Tf
+1 0 0 1 54 524.5 Tm
+( 14      """Return the result for a supported calculator operation.""") Tj
+/F2 8.6 Tf
+1 0 0 1 54 513.0 Tm
+( 15      if operator == "+":) Tj
+/F2 8.6 Tf
+1 0 0 1 54 501.5 Tm
+( 16          return first + second) Tj
+/F2 8.6 Tf
+1 0 0 1 54 490.0 Tm
+( 17      if operator == "-":) Tj
+/F2 8.6 Tf
+1 0 0 1 54 478.5 Tm
+( 18          return first - second) Tj
+/F2 8.6 Tf
+1 0 0 1 54 467.0 Tm
+( 19      if operator == "*":) Tj
+/F2 8.6 Tf
+1 0 0 1 54 455.5 Tm
+( 20          return first * second) Tj
+/F2 8.6 Tf
+1 0 0 1 54 444.0 Tm
+( 21      if operator == "/":) Tj
+/F2 8.6 Tf
+1 0 0 1 54 432.5 Tm
+( 22          if second == 0:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 421.0 Tm
+( 23              raise ZeroDivisionError\("Division by zero is not allowed."\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 409.5 Tm
+( 24          return first / second) Tj
+/F2 8.6 Tf
+1 0 0 1 54 398.0 Tm
+( 25      raise ValueError\("Unsupported operator."\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 386.5 Tm
+( 26  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 375.0 Tm
+( 27  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 363.5 Tm
+( 28  def main\(\):) Tj
+/F2 8.6 Tf
+1 0 0 1 54 352.0 Tm
+( 29      print\("Simple Python Calculator"\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 340.5 Tm
+( 30      print\("Available operations: +  -  *  /"\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 329.0 Tm
+( 31  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 317.5 Tm
+( 32      while True:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 306.0 Tm
+( 33          first = get_number\("First number: "\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 294.5 Tm
+( 34  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 283.0 Tm
+( 35          operator = input\("Operation \(+, -, *, /\): "\).strip\(\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 271.5 Tm
+( 36          while operator not in {"+", "-", "*", "/"}:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 260.0 Tm
+( 37              operator = input\("Choose +, -, *, or /: "\).strip\(\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 248.5 Tm
+( 38  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 237.0 Tm
+( 39          second = get_number\("Second number: "\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 225.5 Tm
+( 40  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 214.0 Tm
+( 41          try:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 202.5 Tm
+( 42              result = calculate\(first, operator, second\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 191.0 Tm
+( 43              print\(f"Result: {result:g}"\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 179.5 Tm
+( 44          except ZeroDivisionError as error:) Tj
+/F2 8.6 Tf
+1 0 0 1 54 168.0 Tm
+( 45              print\(error\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 156.5 Tm
+( 46  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 145.0 Tm
+( 47          again = input\("Calculate again? \(y/n\): "\).strip\(\).lower\(\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 133.5 Tm
+( 48          if again != "y":) Tj
+/F2 8.6 Tf
+1 0 0 1 54 122.0 Tm
+( 49              print\("Thanks for using the calculator!"\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 110.5 Tm
+( 50              break) Tj
+/F2 8.6 Tf
+1 0 0 1 54 99.0 Tm
+( 51          print\(\)) Tj
+/F2 8.6 Tf
+1 0 0 1 54 87.5 Tm
+( 52  ) Tj
+/F2 8.6 Tf
+1 0 0 1 54 76.0 Tm
+( 53  ) Tj
+/F1 8 Tf
+1 0 0 1 528 34 Tm
+(Page 2) Tj
+ET
+endstream
+endobj
+8 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 7 0 R >>
+endobj
+9 0 obj
+<< /Length 265 >>
+stream
+BT
+/F1 18 Tf
+1 0 0 1 54 730 Tm
+(calculator.py) Tj
+/F1 10 Tf
+1 0 0 1 54 707 Tm
+(Python 3 source code) Tj
+/F2 8.6 Tf
+1 0 0 1 54 674 Tm
+( 54  if __name__ == "__main__":) Tj
+/F2 8.6 Tf
+1 0 0 1 54 662.5 Tm
+( 55      main\(\)) Tj
+/F1 8 Tf
+1 0 0 1 528 34 Tm
+(Page 3) Tj
+ET
+endstream
+endobj
+10 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Resources << /Font << /F1 3 0 R /F2 4 0 R >> >> /Contents 9 0 R >>
+endobj
+xref
+0 11
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000134 00000 n 
+0000000204 00000 n 
+0000000272 00000 n 
+0000001514 00000 n 
+0000001650 00000 n 
+0000005582 00000 n 
+0000005718 00000 n 
+0000006034 00000 n 
+trailer
+<< /Size 11 /Root 1 0 R >>
+startxref
+6171
+%%EOF
