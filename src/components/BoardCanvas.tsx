@@ -8,13 +8,17 @@ import { SnapshotHistory } from '../lib/history'
 import { renderPdfBackground } from '../lib/pdf'
 import { ContinuousPencilBrush } from '../lib/ContinuousPencilBrush'
 
-FabricObject.customProperties = ['annotationType', 'annotationId', 'createdAt', 'updatedAt']
+FabricObject.customProperties = ['annotationType', 'annotationId', 'createdAt', 'updatedAt', 'tool', 'points', 'pressure', 'timestamp']
 
 type AnnotationObject = FabricObject & {
   annotationType?: string
   annotationId?: string
   createdAt?: number
   updatedAt?: number
+  tool?: string
+  points?: { x: number; y: number; pressure: number; timestamp: number }[]
+  pressure?: number[]
+  timestamp?: number
 }
 
 export interface SelectionStyle {
@@ -31,6 +35,8 @@ export interface SelectionStyle {
   backgroundColor?: string
 }
 
+export type VirtualPointerPhase = 'move' | 'down' | 'up' | 'leave'
+
 export interface BoardHandle {
   serialize: () => Record<string, unknown>
   undo: () => boolean
@@ -45,6 +51,7 @@ export interface BoardHandle {
   setSelectedText: (text: string) => void
   editSelectedText: () => { object: IText; text: string } | null
   getBackgroundCanvas: () => HTMLCanvasElement | null
+  dispatchVirtualPointer: (phase: VirtualPointerPhase, x: number, y: number, cursorSize: number) => void
   discardSelection: () => void
 }
 
@@ -98,6 +105,8 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
 }, ref) {
   const canvasElement = useRef<HTMLCanvasElement>(null)
   const eraserPreviewElement = useRef<HTMLDivElement>(null)
+  const handCursorElement = useRef<HTMLDivElement>(null)
+  const virtualPointerDown = useRef(false)
   const [canvasReady, setCanvasReady] = useState(0)
   const backgroundElement = useRef<HTMLCanvasElement>(null)
   const canvasRef = useRef<Canvas | null>(null)
@@ -127,8 +136,10 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
 
   const mark = (object: AnnotationObject, annotationType: string) => {
     object.annotationType = annotationType
+    object.tool = annotationType
     object.annotationId ||= crypto.randomUUID()
     object.createdAt ||= Date.now()
+    object.timestamp ||= object.createdAt
     object.updatedAt = Date.now()
     object.set({ cornerColor: '#6c5ce7', borderColor: '#6c5ce7', cornerStyle: 'circle', transparentCorners: false, cornerSize: 18, touchCornerSize: 50 })
     return object
@@ -167,11 +178,32 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
     if (!canvasElement.current) return
     const canvas = new Canvas(canvasElement.current, {
       width: page.width, height: page.height, preserveObjectStacking: true,
-      selectionColor: 'rgba(108,92,231,.12)', selectionBorderColor: '#6c5ce7', allowTouchScrolling: false
+      selectionColor: 'rgba(108,92,231,.12)', selectionBorderColor: '#6c5ce7', allowTouchScrolling: false,
+      enablePointerEvents: true, enableRetinaScaling: true
     })
     canvasRef.current = canvas
     loading.current = true
     let disposed = false
+
+    // Fabric does not finalize free drawing on pointercancel. Mobile browsers can
+    // emit pointercancel during rapid stylus/touch input; without this bridge the
+    // active path is discarded by the next pointerdown and looks like it vanished.
+    const finalizeCancelledPointer = (event: PointerEvent) => {
+      if (!canvas.isDrawingMode || !event.isPrimary) return
+      canvas.upperCanvasEl.dispatchEvent(new PointerEvent('pointerup', {
+        pointerId: event.pointerId,
+        pointerType: event.pointerType,
+        isPrimary: true,
+        bubbles: true,
+        cancelable: true,
+        clientX: event.clientX,
+        clientY: event.clientY,
+        button: 0,
+        buttons: 0,
+        pressure: 0
+      }))
+    }
+    canvas.upperCanvasEl.addEventListener('pointercancel', finalizeCancelledPointer)
 
     const sendSelection = () => onSelectionChange(canvas.getActiveObject() || null)
     const changed = (event?: { target?: FabricObject }) => {
@@ -181,6 +213,11 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
     const pathCreated = (event: { path: FabricObject }) => {
       const isAreaEraser = currentTool.current === 'eraser' && currentSettings.current.eraserMode === 'area'
       const path = mark(event.path as AnnotationObject, isAreaEraser ? 'area-eraser' : currentTool.current === 'shapes' ? 'freehand' : currentTool.current)
+      const brush = canvas.freeDrawingBrush
+      if (brush instanceof ContinuousPencilBrush) {
+        path.points = brush.getInputSamples()
+        path.pressure = path.points.map(point => point.pressure)
+      }
       if (isAreaEraser) {
         path.set({ globalCompositeOperation: 'destination-out', selectable: false, evented: false, objectCaching: false })
       } else {
@@ -218,6 +255,7 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
     return () => {
       disposed = true
       loading.current = true
+      canvas.upperCanvasEl.removeEventListener('pointercancel', finalizeCancelledPointer)
       canvas.dispose()
       canvasRef.current = null
       onSelectionChange(null)
@@ -409,6 +447,59 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
     return true
   }
 
+  const dispatchVirtualPointer = (phase: VirtualPointerPhase, normalizedX: number, normalizedY: number, cursorSize: number) => {
+    const canvas = canvasRef.current
+    const cursor = handCursorElement.current
+    if (!canvas || !cursor) return
+    const x = Math.max(0, Math.min(1, normalizedX)) * page.width
+    const y = Math.max(0, Math.min(1, normalizedY)) * page.height
+    cursor.style.left = `${x}px`
+    cursor.style.top = `${y}px`
+    cursor.style.width = `${cursorSize}px`
+    cursor.style.height = `${cursorSize}px`
+    cursor.classList.toggle('drawing', phase === 'down' || (phase === 'move' && virtualPointerDown.current))
+    cursor.classList.toggle('eraser', currentTool.current === 'eraser')
+
+    const element = canvas.upperCanvasEl
+    const bounds = element.getBoundingClientRect()
+    const clientX = bounds.left + normalizedX * bounds.width
+    const clientY = bounds.top + normalizedY * bounds.height
+    const emit = (type: 'pointerdown' | 'pointermove' | 'pointerup', buttons: number) => {
+      element.dispatchEvent(new PointerEvent(type, {
+        pointerId: 9042,
+        pointerType: 'pen',
+        isPrimary: true,
+        bubbles: true,
+        cancelable: true,
+        clientX,
+        clientY,
+        buttons,
+        button: type === 'pointermove' ? -1 : 0,
+        pressure: buttons ? 0.65 : 0
+      }))
+    }
+
+    if (phase === 'leave') {
+      if (virtualPointerDown.current) emit('pointerup', 0)
+      virtualPointerDown.current = false
+      cursor.classList.remove('visible', 'drawing')
+      eraserPreviewElement.current?.classList.remove('visible', 'active')
+      return
+    }
+
+    cursor.classList.add('visible')
+    if (phase === 'down' && !virtualPointerDown.current) {
+      virtualPointerDown.current = true
+      emit('pointerdown', 1)
+    } else if (phase === 'up' && virtualPointerDown.current) {
+      emit('pointerup', 0)
+      virtualPointerDown.current = false
+      cursor.classList.remove('drawing')
+    } else {
+      emit('pointermove', virtualPointerDown.current ? 1 : 0)
+    }
+  }
+
   useImperativeHandle(ref, () => ({
     serialize,
     canUndo: () => history.current.canUndo,
@@ -479,6 +570,7 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
       return object instanceof IText ? { object, text: object.text } : null
     },
     getBackgroundCanvas: () => backgroundElement.current,
+    dispatchVirtualPointer,
     discardSelection: () => { canvasRef.current?.discardActiveObject(); canvasRef.current?.requestRenderAll(); onSelectionChange(null) }
   }), [page.id, settings, onSelectionChange])
 
@@ -492,6 +584,7 @@ const BoardCanvas = forwardRef<BoardHandle, Props>(function BoardCanvas({
       style={{ width: settings.eraserSize, height: settings.eraserSize }}
       aria-hidden="true"
     />
+    <div ref={handCursorElement} className="hand-draw-cursor" aria-hidden="true" />
   </div>
 })
 

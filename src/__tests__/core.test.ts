@@ -5,6 +5,7 @@ import { deleteDocument, getDocument, listDocuments, renameDocument, saveDocumen
 import { SnapshotHistory } from '../lib/history'
 import { ContinuousPencilBrush } from '../lib/ContinuousPencilBrush'
 import { Point, type Canvas } from 'fabric'
+import { mapHandPoint, pinchIsActive, smoothHandPoint } from '../lib/handTracking'
 
 describe('document model', () => {
   it('creates mobile-fit editable blank paper models', () => {
@@ -56,6 +57,22 @@ describe('continuous handwriting brush', () => {
   })
 })
 
+describe('HD hand tracking math', () => {
+  it('maps mirrored camera coordinates and clamps them to the board', () => {
+    expect(mapHandPoint({ x: .2, y: .4 }, { mirror: true, sensitivity: 1, calibrationX: 0, calibrationY: 0 })).toEqual({ x: .8, y: .4 })
+    expect(mapHandPoint({ x: 0, y: 1 }, { mirror: false, sensitivity: 1.6, calibrationX: -.2, calibrationY: .2 })).toEqual({ x: 0, y: 1 })
+  })
+
+  it('smooths jitter and uses pinch hysteresis', () => {
+    const point = smoothHandPoint({ x: .4, y: .4 }, { x: .6, y: .8 }, .5)
+    expect(point.x).toBeGreaterThan(.4)
+    expect(point.x).toBeLessThan(.6)
+    expect(pinchIsActive(.36, false, 1)).toBe(true)
+    expect(pinchIsActive(.48, true, 1)).toBe(true)
+    expect(pinchIsActive(.6, true, 1)).toBe(false)
+  })
+})
+
 describe('real undo and redo snapshots', () => {
   it('handles drawing, erasing and redo branches', () => {
     const history = new SnapshotHistory<{ objects: string[] }>()
@@ -74,6 +91,16 @@ describe('real undo and redo snapshots', () => {
 describe('IndexedDB persistence and reopen flow', () => {
   beforeEach(async () => {
     for (const item of await listDocuments()) await deleteDocument(item.id)
+  })
+
+  it('migrates legacy boards to the accurate partial-area eraser once', async () => {
+    const legacy = createBlankDocument('Legacy', 'white', 'a4-portrait')
+    legacy.settings.eraserMode = 'stroke'
+    delete (legacy.settings as Partial<typeof legacy.settings>).eraserAreaV2
+    await saveDocument(legacy)
+    const reopened = await getDocument(legacy.id)
+    expect(reopened?.settings.eraserMode).toBe('area')
+    expect(reopened?.settings.eraserAreaV2).toBe(true)
   })
 
   it('stores editable annotations, blobs, metadata and renamed documents', async () => {

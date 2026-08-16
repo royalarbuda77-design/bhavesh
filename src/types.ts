@@ -32,6 +32,7 @@ export interface ToolSettings {
   highlighterWidth: number
   eraserSize: number
   eraserMode: 'stroke' | 'area'
+  eraserAreaV2: boolean
   fontSize: number
   fontFamily: string
   bold: boolean
@@ -40,6 +41,14 @@ export interface ToolSettings {
   textBackground: string
   textAlign: 'left' | 'center' | 'right'
   recentColors: string[]
+  hdSensitivity: number
+  hdCursorSize: number
+  hdSmoothing: number
+  hdPinchToDraw: boolean
+  hdHandPreference: 'any' | 'Left' | 'Right'
+  hdMirror: boolean
+  hdCalibrationX: number
+  hdCalibrationY: number
 }
 
 export interface StudyDocument {
@@ -77,7 +86,8 @@ export const DEFAULT_SETTINGS: ToolSettings = {
   highlighterColor: '#FADB14',
   highlighterWidth: 20,
   eraserSize: 28,
-  eraserMode: 'stroke',
+  eraserMode: 'area',
+  eraserAreaV2: true,
   fontSize: 28,
   fontFamily: 'Inter, sans-serif',
   bold: false,
@@ -85,5 +95,13 @@ export const DEFAULT_SETTINGS: ToolSettings = {
   underline: false,
   textBackground: 'transparent',
   textAlign: 'left',
-  recentColors: ['#17203b', '#EF4444', '#2563EB']
+  recentColors: ['#17203b', '#EF4444', '#2563EB'],
+  hdSensitivity: 1,
+  hdCursorSize: 16,
+  hdSmoothing: 0.35,
+  hdPinchToDraw: true,
+  hdHandPreference: 'any',
+  hdMirror: true,
+  hdCalibrationX: 0,
+  hdCalibrationY: 0
 }

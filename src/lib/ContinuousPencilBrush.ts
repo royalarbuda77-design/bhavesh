@@ -1,4 +1,15 @@
-import { PencilBrush, type Point, type TSimplePathData } from 'fabric'
+import { PencilBrush, type Point, type TEvent, type TSimplePathData } from 'fabric'
+
+export interface StrokeInputPoint {
+  x: number
+  y: number
+  pressure: number
+  timestamp: number
+}
+
+function eventPressure(event: Event) {
+  return 'pressure' in event && typeof event.pressure === 'number' && event.pressure > 0 ? event.pressure : 0.5
+}
 
 /**
  * A free-drawing brush that keeps every sampled pointer point.
@@ -10,6 +21,28 @@ import { PencilBrush, type Point, type TSimplePathData } from 'fabric'
  */
 export class ContinuousPencilBrush extends PencilBrush {
   override decimate = 0
+  private inputSamples: StrokeInputPoint[] = []
+
+  override onMouseDown(point: Point, event: TEvent) {
+    this.inputSamples = []
+    this.capture(point, event.e)
+    super.onMouseDown(point, event)
+  }
+
+  override onMouseMove(point: Point, event: TEvent) {
+    this.capture(point, event.e)
+    super.onMouseMove(point, event)
+  }
+
+  private capture(point: Point, event: Event) {
+    const previous = this.inputSamples[this.inputSamples.length - 1]
+    if (previous && previous.x === point.x && previous.y === point.y) return
+    this.inputSamples.push({ x: point.x, y: point.y, pressure: eventPressure(event), timestamp: performance.now() })
+  }
+
+  getInputSamples() {
+    return this.inputSamples.map(point => ({ ...point }))
+  }
 
   override decimatePoints(points: Point[], _distance: number) {
     return points.slice()

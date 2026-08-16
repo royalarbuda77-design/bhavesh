@@ -19,6 +19,7 @@
     "@capacitor/filesystem": "^8.1.2",
     "@capacitor/share": "^8.0.1",
     "@capacitor/status-bar": "^8.0.3",
+    "@mediapipe/tasks-vision": "^1.0.1",
     "fabric": "^7.4.0",
     "idb": "^8.0.3",
     "lucide-react": "^0.468.0",

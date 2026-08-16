@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { initializeNativeApp, isNativeApp } from './lib/native'
 import './styles.css'
+import './hd-mode.css'
 
 void initializeNativeApp()
 ReactDOM.createRoot(document.getElementById('root')!).render(<App />)

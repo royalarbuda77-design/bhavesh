@@ -8,6 +8,7 @@ import {
   Triangle, Underline, Undo2, X, ZoomIn, ZoomOut
 } from 'lucide-react'
 import BoardCanvas, { type BoardHandle, type SelectionStyle } from './BoardCanvas'
+import HandGestureMode from './HandGestureMode'
 import { duplicatePage, makeBlankPage, validateFile } from '../lib/documents'
 import { saveDocument, storageErrorMessage } from '../lib/storage'
 import { clearPdfCache, getPdf } from '../lib/pdf'
@@ -210,6 +211,7 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
   const [exportMenu, setExportMenu] = useState(false)
   const [moreMenu, setMoreMenu] = useState(false)
   const [smartMode, setSmartMode] = useState(false)
+  const [hdEnabled, setHdEnabled] = useState(false)
   const [selected, setSelected] = useState<FabricObject | null>(null)
   const [selectionStyleOpen, setSelectionStyleOpen] = useState(false)
   const [textPoint, setTextPoint] = useState<{ x: number; y: number } | null>(null)
@@ -372,6 +374,15 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
     setMoreMenu(false)
   }
 
+  const toggleHdMode = () => {
+    setHdEnabled(value => {
+      const next = !value
+      if (next && !['pen', 'pencil', 'highlighter', 'eraser', 'shapes', 'arrow', 'line'].includes(tool)) setTool('pen')
+      return next
+    })
+    setMoreMenu(false)
+  }
+
   const chooseShape = (kind: ShapeKind) => {
     setShape(kind); setTool(kind === 'arrow' ? 'arrow' : kind === 'line' ? 'line' : 'shapes'); setShapeMenu(false); setSettingsOpen(true)
   }
@@ -423,6 +434,7 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
   })
 
   const pointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerId === 9042) return
     pointers.current.set(event.pointerId, { x: event.clientX, y: event.clientY })
     if (pointers.current.size === 2) {
       const points = [...pointers.current.values()]
@@ -434,6 +446,7 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
     }
   }
   const pointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerId === 9042) return
     if (pointers.current.has(event.pointerId)) pointers.current.set(event.pointerId, { x: event.clientX, y: event.clientY })
     if (pointers.current.size >= 2 && lastPinch.current) {
       const points = [...pointers.current.values()].slice(0, 2), viewport = viewportRef.current
@@ -450,6 +463,7 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
     }
   }
   const pointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (event.pointerId === 9042) return
     pointers.current.delete(event.pointerId); if (pointers.current.size < 2) lastPinch.current = null; panStart.current = null
     if (saveStatus === 'saving') { documentRef.current.zoom = zoomRef.current }
   }
@@ -461,7 +475,7 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
     <header className="editor-topbar">
       <div className="topbar-left"><button className="icon-btn" onClick={() => void exit()} aria-label="Back to home"><ChevronLeft /></button><div className="document-title"><b>{documentModel.name}</b><span>{page.name} · {pageIndex + 1} / {documentModel.pages.length}</span></div></div>
       <div className="topbar-actions"><SaveIndicator status={saveStatus} /><button className="top-action" onClick={() => void saveNow()} title="Save"><Save size={19} /><span>Save</span></button><button className="icon-btn" onClick={() => setMoreMenu(value => !value)} aria-label="More"><Menu /></button></div>
-      {moreMenu && <div className="menu-popover more-popover surface"><button onClick={() => { setSmartMode(value => !value); setMoreMenu(false) }}><Focus /> {smartMode ? 'Exit Smart Board' : 'Smart Board mode'}</button><button onClick={() => void fullscreen()}><Maximize /> Fullscreen</button><button onClick={renameDocument}><Pencil /> Rename document</button><button onClick={onToggleDark}><Sparkles /> {dark ? 'Light UI' : 'Dark UI'}</button><button onClick={() => { setTool('pan'); setMoreMenu(false) }}><Hand /> Pan / hand tool</button></div>}
+      {moreMenu && <div className="menu-popover more-popover surface"><button onClick={toggleHdMode}><Hand /> {hdEnabled ? 'Turn off HD Hand Draw' : 'HD Hand Draw (camera)'}</button><button onClick={() => { setSmartMode(value => !value); setMoreMenu(false) }}><Focus /> {smartMode ? 'Exit Smart Board' : 'Smart Board mode'}</button><button onClick={() => void fullscreen()}><Maximize /> Fullscreen</button><button onClick={renameDocument}><Pencil /> Rename document</button><button onClick={onToggleDark}><Sparkles /> {dark ? 'Light UI' : 'Dark UI'}</button><button onClick={() => { setTool('pan'); setMoreMenu(false) }}><Hand /> Pan / hand tool</button></div>}
     </header>
 
     <div className={`editor-workspace ${pagesOpen ? 'with-pages' : ''}`}>
@@ -474,6 +488,16 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
         </div>
       </div>
     </div>
+
+    <HandGestureMode
+      enabled={hdEnabled}
+      tool={tool}
+      settings={settings}
+      onPointer={(phase, x, y, cursorSize) => boardRef.current?.dispatchVirtualPointer(phase, x, y, cursorSize)}
+      onSettingsChange={updateSettings}
+      onClose={() => setHdEnabled(false)}
+      onError={onError}
+    />
 
     {selected && <div className="selection-bar surface"><span>{isText ? 'Text selected' : `${selectionType || 'Object'} selected`}</span>{isText && <button onClick={() => setEditingText(boardRef.current?.editSelectedText()?.text || '')}><TextCursorInput /> Edit</button>}<button onClick={() => setSelectionStyleOpen(value => !value)}><SlidersHorizontal /> Style</button><button onClick={() => void boardRef.current?.duplicateSelected()}><Copy /> Duplicate</button><button className="danger" onClick={() => boardRef.current?.deleteSelected()}><Trash2 /> Delete</button></div>}
 
@@ -490,6 +514,7 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
       <button className="tool-button" onClick={redo} disabled={!historyState.redo && structuralFuture.current.length === 0} title="Redo"><Redo2 /><span>Redo</span></button>
       <div className="tool-divider" />
       {toolItems.map(item => <button key={item.tool} className={`tool-button ${tool === item.tool || (item.tool === 'shapes' && ['arrow', 'line'].includes(tool)) ? 'active' : ''}`} onClick={() => chooseTool(item.tool)} title={item.label}><item.icon /><span>{item.label}</span>{item.tool === 'shapes' && <ChevronDown className="mini-chevron" />}</button>)}
+      <button className={`tool-button hd-tool-button ${hdEnabled ? 'active' : ''}`} onClick={toggleHdMode} title="HD Hand Gesture Drawing"><span className="hd-tool-icon"><Hand /></span><span>HD Draw</span></button>
       <div className="tool-divider" />
       <button className="tool-button" onClick={() => setZoomMenu(value => !value)} title="Zoom"><ZoomIn /><span>{Math.round(zoom * 100)}%</span></button>
       <button className="tool-button export-tool" onClick={() => setExportMenu(value => !value)} title="Export"><FileOutput /><span>Export</span></button>

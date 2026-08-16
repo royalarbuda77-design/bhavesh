@@ -1,5 +1,5 @@
 import { DBSchema, IDBPDatabase, openDB } from 'idb'
-import type { DocumentMeta, StudyDocument } from '../types'
+import { DEFAULT_SETTINGS, type DocumentMeta, type StudyDocument } from '../types'
 
 interface StudyBoardDB extends DBSchema {
   documents: {
@@ -52,7 +52,16 @@ export async function saveDocument(document: StudyDocument) {
 }
 
 export async function getDocument(id: string) {
-  return (await db()).get('documents', id)
+  const document = await (await db()).get('documents', id)
+  if (document) {
+    const needsAccurateAreaEraserMigration = !document.settings.eraserAreaV2
+    document.settings = { ...structuredClone(DEFAULT_SETTINGS), ...document.settings }
+    if (needsAccurateAreaEraserMigration) {
+      document.settings.eraserMode = 'area'
+      document.settings.eraserAreaV2 = true
+    }
+  }
+  return document
 }
 
 export async function listDocuments(): Promise<DocumentMeta[]> {
