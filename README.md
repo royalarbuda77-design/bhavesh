@@ -28,6 +28,8 @@ npm run android:apk
 
 The debug APK is written to `android/app/build/outputs/apk/debug/app-debug.apk`. A Play Store-ready bundle can be generated from Android Studio after configuring a private release-signing key.
 
+The optional **HD Hand Draw** tool runs Google MediaPipe Hand Landmarker entirely on-device. After the user grants camera permission, the index fingertip controls the board cursor and a thumb/index pinch starts or stops a normal Fabric stroke. The model and WebAssembly runtime are bundled locally, so camera frames are never uploaded.
+
 Native integrations include:
 
 - Persistent on-device IndexedDB document storage

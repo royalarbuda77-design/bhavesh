@@ -375,11 +375,9 @@ export default function Editor({ initialDocument, dark, onToggleDark, onExit, on
   }
 
   const toggleHdMode = () => {
-    setHdEnabled(value => {
-      const next = !value
-      if (next && !['pen', 'pencil', 'highlighter', 'eraser', 'shapes', 'arrow', 'line'].includes(tool)) setTool('pen')
-      return next
-    })
+    const next = !hdEnabled
+    if (next && !['pen', 'pencil', 'highlighter', 'eraser', 'shapes', 'arrow', 'line'].includes(tool)) setTool('pen')
+    setHdEnabled(next)
     setMoreMenu(false)
   }
 
