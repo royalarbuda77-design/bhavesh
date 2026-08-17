@@ -1,0 +1,227 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">કોષવિભાજનમાં સૂક્ષ્મ નલિકાઓની ભૂમિકા</title>
+  <desc id="desc">પ્રાણીકોષની મધ્યાવસ્થામાં ત્રાક, તારા-કિરણો, સેન્ટ્રોસોમ, કાઇનેટોકોર સૂક્ષ્મ નલિકા, ધ્રુવીય સૂક્ષ્મ નલિકા અને રંગસૂત્રો દર્શાવતી ગુજરાતી શૈક્ષણિક આકૃતિ.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f4fbff"/>
+      <stop offset="1" stop-color="#eef8f3"/>
+    </linearGradient>
+    <radialGradient id="cellFill" cx="50%" cy="45%" r="65%">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#e8f7f5"/>
+    </radialGradient>
+    <linearGradient id="header" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0f4c5c"/>
+      <stop offset="1" stop-color="#087f8c"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#153b45" flood-opacity="0.17"/>
+    </filter>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#153b45" flood-opacity="0.2"/>
+    </filter>
+    <marker id="arrowTeal" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M0,0 L10,5.5 L0,11 Z" fill="#087f8c"/>
+    </marker>
+    <marker id="arrowDark" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto">
+      <path d="M0,0 L10,5.5 L0,11 Z" fill="#253b4b"/>
+    </marker>
+    <marker id="arrowPurple" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#7b2cbf"/>
+    </marker>
+    <style>
+      .gu { font-family: "Noto Sans Gujarati", "Nirmala UI", Shruti, sans-serif; }
+      .title { font-size: 39px; font-weight: 700; fill: #ffffff; }
+      .subtitle { font-size: 20px; font-weight: 500; fill: #d9fbff; }
+      .label { font-size: 22px; font-weight: 700; fill: #173340; }
+      .small { font-size: 17px; font-weight: 500; fill: #35515d; }
+      .tiny { font-size: 15px; font-weight: 600; fill: #35515d; }
+      .stepTitle { font-size: 20px; font-weight: 700; fill: #173340; }
+      .stepText { font-size: 16px; font-weight: 500; fill: #35515d; }
+      .leader { fill: none; stroke: #253b4b; stroke-width: 2.5; marker-end: url(#arrowDark); }
+      .kinetochore { fill: none; stroke: #159a9c; stroke-width: 5; stroke-linecap: round; opacity: .92; }
+      .polar { fill: none; stroke: #4b9fea; stroke-width: 4; stroke-linecap: round; opacity: .78; }
+      .astral { stroke: #f2a900; stroke-width: 4; stroke-linecap: round; opacity: .9; }
+    </style>
+  </defs>
+
+  <!-- Background and heading -->
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <path d="M0 0 H1600 V145 H0 Z" fill="url(#header)"/>
+  <text x="800" y="57" text-anchor="middle" class="gu title">કોષવિભાજનમાં સૂક્ષ્મ નલિકાઓની ભૂમિકા</text>
+  <text x="800" y="101" text-anchor="middle" class="gu subtitle">મધ્યાવસ્થા (Metaphase) — પ્રાણીકોષમાં ત્રાક અને તારા-કિરણોની રચના</text>
+
+  <!-- Cell -->
+  <ellipse cx="800" cy="490" rx="545" ry="290" fill="url(#cellFill)" stroke="#087f8c" stroke-width="7" filter="url(#shadow)"/>
+  <ellipse cx="800" cy="490" rx="527" ry="272" fill="none" stroke="#8bd3cf" stroke-width="2" stroke-dasharray="7 9"/>
+
+  <!-- Equatorial plate -->
+  <line x1="800" y1="280" x2="800" y2="698" stroke="#7b2cbf" stroke-width="3" stroke-dasharray="10 10" opacity=".48"/>
+  <rect x="682" y="239" width="236" height="42" rx="21" fill="#f2e9fb" stroke="#b58cdb" stroke-width="2"/>
+  <text x="800" y="267" text-anchor="middle" class="gu small" style="font-weight:700;fill:#6a269f">વિષુવવૃત્તીય પટ્ટ</text>
+
+  <!-- Astral rays, left pole -->
+  <g class="astral">
+    <line x1="390" y1="490" x2="280" y2="360"/><line x1="390" y1="490" x2="330" y2="320"/>
+    <line x1="390" y1="490" x2="400" y2="291"/><line x1="390" y1="490" x2="468" y2="322"/>
+    <line x1="390" y1="490" x2="515" y2="365"/><line x1="390" y1="490" x2="548" y2="420"/>
+    <line x1="390" y1="490" x2="520" y2="562"/><line x1="390" y1="490" x2="470" y2="655"/>
+    <line x1="390" y1="490" x2="400" y2="687"/><line x1="390" y1="490" x2="330" y2="660"/>
+    <line x1="390" y1="490" x2="280" y2="620"/><line x1="390" y1="490" x2="267" y2="548"/>
+    <line x1="390" y1="490" x2="267" y2="435"/>
+  </g>
+  <!-- Astral rays, right pole -->
+  <g class="astral">
+    <line x1="1210" y1="490" x2="1320" y2="360"/><line x1="1210" y1="490" x2="1270" y2="320"/>
+    <line x1="1210" y1="490" x2="1200" y2="291"/><line x1="1210" y1="490" x2="1132" y2="322"/>
+    <line x1="1210" y1="490" x2="1085" y2="365"/><line x1="1210" y1="490" x2="1052" y2="420"/>
+    <line x1="1210" y1="490" x2="1080" y2="562"/><line x1="1210" y1="490" x2="1130" y2="655"/>
+    <line x1="1210" y1="490" x2="1200" y2="687"/><line x1="1210" y1="490" x2="1270" y2="660"/>
+    <line x1="1210" y1="490" x2="1320" y2="620"/><line x1="1210" y1="490" x2="1333" y2="548"/>
+    <line x1="1210" y1="490" x2="1333" y2="435"/>
+  </g>
+
+  <!-- Polar/interpolar microtubules -->
+  <g class="polar">
+    <path d="M410 480 C585 330 775 337 930 414"/>
+    <path d="M410 493 C600 391 790 395 950 449"/>
+    <path d="M410 507 C590 584 785 586 945 529"/>
+    <path d="M410 520 C575 652 770 646 930 570"/>
+    <path d="M1190 480 C1015 330 825 337 670 414"/>
+    <path d="M1190 493 C1000 391 810 395 650 449"/>
+    <path d="M1190 507 C1010 584 815 586 655 529"/>
+    <path d="M1190 520 C1025 652 830 646 670 570"/>
+  </g>
+
+  <!-- Kinetochore spindle fibers -->
+  <g class="kinetochore">
+    <path d="M410 478 C555 437 680 410 800 410"/>
+    <path d="M410 486 C555 463 680 455 800 455"/>
+    <path d="M410 495 C555 494 680 500 800 500"/>
+    <path d="M410 503 C555 525 680 545 800 545"/>
+    <path d="M410 512 C555 563 680 590 800 590"/>
+    <path d="M1190 478 C1045 437 920 410 800 410"/>
+    <path d="M1190 486 C1045 463 920 455 800 455"/>
+    <path d="M1190 495 C1045 494 920 500 800 500"/>
+    <path d="M1190 503 C1045 525 920 545 800 545"/>
+    <path d="M1190 512 C1045 563 920 590 800 590"/>
+  </g>
+
+  <!-- Spindle label inside cell -->
+  <rect x="615" y="303" width="370" height="52" rx="26" fill="#ffffff" fill-opacity=".92" stroke="#79c6d0" stroke-width="2" filter="url(#softShadow)"/>
+  <text x="800" y="337" text-anchor="middle" class="gu label" style="fill:#087f8c">ત્રાક (Spindle) = સૂક્ષ્મ નલિકાઓનું તંત્ર</text>
+
+  <!-- Centrosomes -->
+  <g transform="translate(390 490)" filter="url(#softShadow)">
+    <circle r="30" fill="#fff4cd" stroke="#d98b00" stroke-width="4"/>
+    <rect x="-19" y="-7" width="39" height="14" rx="6" fill="#f06449" stroke="#a83828" stroke-width="2" transform="rotate(28)"/>
+    <rect x="-19" y="-7" width="39" height="14" rx="6" fill="#ff8a5b" stroke="#a83828" stroke-width="2" transform="rotate(118)"/>
+  </g>
+  <g transform="translate(1210 490)" filter="url(#softShadow)">
+    <circle r="30" fill="#fff4cd" stroke="#d98b00" stroke-width="4"/>
+    <rect x="-19" y="-7" width="39" height="14" rx="6" fill="#f06449" stroke="#a83828" stroke-width="2" transform="rotate(28)"/>
+    <rect x="-19" y="-7" width="39" height="14" rx="6" fill="#ff8a5b" stroke="#a83828" stroke-width="2" transform="rotate(118)"/>
+  </g>
+
+  <!-- Chromosomes: each X meets at the equatorial plate -->
+  <g stroke="#7b2cbf" stroke-width="13" stroke-linecap="round" filter="url(#softShadow)">
+    <path d="M781 389 L819 431 M819 389 L781 431"/>
+    <path d="M781 434 L819 476 M819 434 L781 476"/>
+    <path d="M781 479 L819 521 M819 479 L781 521"/>
+    <path d="M781 524 L819 566 M819 524 L781 566"/>
+    <path d="M781 569 L819 611 M819 569 L781 611"/>
+  </g>
+  <g fill="#ffe66d" stroke="#5f238e" stroke-width="3">
+    <circle cx="800" cy="410" r="8"/><circle cx="800" cy="455" r="8"/><circle cx="800" cy="500" r="8"/>
+    <circle cx="800" cy="545" r="8"/><circle cx="800" cy="590" r="8"/>
+  </g>
+
+  <!-- Direction arrows indicating chromosome pull -->
+  <path d="M760 635 H685" fill="none" stroke="#7b2cbf" stroke-width="4" marker-end="url(#arrowPurple)"/>
+  <path d="M840 635 H915" fill="none" stroke="#7b2cbf" stroke-width="4" marker-end="url(#arrowPurple)"/>
+  <text x="800" y="665" text-anchor="middle" class="gu tiny" style="fill:#6a269f">વિભાજન સમયે બહેન-ક્રોમેટિડ વિરુદ્ધ ધ્રુવો તરફ ખેંચાય છે</text>
+
+  <!-- Callout boxes and leaders -->
+  <g>
+    <rect x="36" y="183" width="275" height="72" rx="15" fill="#fff8df" stroke="#e0a221" stroke-width="2.5"/>
+    <text x="55" y="215" class="gu label" style="fill:#9a6200">તારા-કિરણો</text>
+    <text x="55" y="241" class="gu small">કોષપટલ તરફ ફેલાય છે</text>
+    <path d="M282 255 L333 335" class="leader"/>
+  </g>
+  <g>
+    <rect x="35" y="424" width="286" height="83" rx="15" fill="#fff1eb" stroke="#e36b4a" stroke-width="2.5"/>
+    <text x="54" y="457" class="gu label" style="fill:#a43b27">સેન્ટ્રોસોમ</text>
+    <text x="54" y="485" class="gu small">ત્રાક-ધ્રુવ; અહીંથી નલિકાઓ ઊગે</text>
+    <path d="M321 468 L364 484" class="leader"/>
+  </g>
+  <g>
+    <rect x="1284" y="184" width="278" height="70" rx="15" fill="#e8f8f7" stroke="#2b9c98" stroke-width="2.5"/>
+    <text x="1302" y="217" class="gu label" style="fill:#087f8c">કોષપટલ</text>
+    <text x="1302" y="242" class="gu small">તારા-કિરણોને આધાર આપે</text>
+    <path d="M1325 254 L1350 292" class="leader"/>
+  </g>
+  <g>
+    <rect x="1260" y="347" width="305" height="81" rx="15" fill="#eaf4ff" stroke="#4b9fea" stroke-width="2.5"/>
+    <text x="1278" y="379" class="gu label" style="fill:#276ca7">ધ્રુવીય સૂક્ષ્મ નલિકા</text>
+    <text x="1278" y="406" class="gu small">બંને ધ્રુવોને સ્થિર રાખે છે</text>
+    <path d="M1260 408 L1090 431" class="leader"/>
+  </g>
+  <g>
+    <rect x="1260" y="549" width="305" height="84" rx="15" fill="#e9fbf8" stroke="#159a9c" stroke-width="2.5"/>
+    <text x="1278" y="581" class="gu label" style="fill:#087f8c">કાઇનેટોકોર નલિકા</text>
+    <text x="1278" y="608" class="gu small">રંગસૂત્ર સાથે જોડાઈ ખેંચે છે</text>
+    <path d="M1260 577 L1055 548" class="leader"/>
+  </g>
+  <g>
+    <rect x="38" y="584" width="286" height="83" rx="15" fill="#f3eafb" stroke="#9d65cb" stroke-width="2.5"/>
+    <text x="57" y="617" class="gu label" style="fill:#6a269f">રંગસૂત્ર</text>
+    <text x="57" y="644" class="gu small">મધ્યમાં કાઇનેટોકોર હોય છે</text>
+    <path d="M324 626 C460 690 650 686 791 590" class="leader"/>
+  </g>
+
+  <!-- Plus/minus-end note -->
+  <rect x="542" y="706" width="516" height="47" rx="23" fill="#ffffff" stroke="#afd9d8" stroke-width="2"/>
+  <text x="800" y="736" text-anchor="middle" class="gu small"><tspan style="font-weight:700;fill:#d27500">− છેડો</tspan><tspan> ધ્રુવ પાસે  •  </tspan><tspan style="font-weight:700;fill:#087f8c">+ છેડો</tspan><tspan> રંગસૂત્ર/કોષપટલ તરફ વધે-ઘટે</tspan></text>
+
+  <!-- Legend -->
+  <g transform="translate(300 784)">
+    <rect width="1000" height="54" rx="27" fill="#ffffff" stroke="#bed8df" stroke-width="2" filter="url(#softShadow)"/>
+    <line x1="38" y1="27" x2="85" y2="27" class="astral"/><text x="98" y="34" class="gu small">તારા-કિરણો</text>
+    <line x1="275" y1="27" x2="322" y2="27" class="kinetochore"/><text x="335" y="34" class="gu small">કાઇનેટોકોર નલિકા</text>
+    <line x1="600" y1="27" x2="647" y2="27" class="polar"/><text x="660" y="34" class="gu small">ધ્રુવીય નલિકા</text>
+    <line x1="847" y1="14" x2="870" y2="40" stroke="#7b2cbf" stroke-width="8" stroke-linecap="round"/>
+    <line x1="870" y1="14" x2="847" y2="40" stroke="#7b2cbf" stroke-width="8" stroke-linecap="round"/>
+    <text x="887" y="34" class="gu small">રંગસૂત્ર</text>
+  </g>
+
+  <!-- Four-step explanation strip -->
+  <text x="800" y="882" text-anchor="middle" class="gu label" style="font-size:26px;fill:#0f4c5c">આ પ્રક્રિયા કેવી રીતે થાય છે?</text>
+  <g transform="translate(48 910)">
+    <rect width="338" height="143" rx="20" fill="#ffffff" stroke="#7fc8d1" stroke-width="2.5" filter="url(#softShadow)"/>
+    <circle cx="37" cy="36" r="22" fill="#087f8c"/><text x="37" y="44" text-anchor="middle" class="gu label" style="fill:white">૧</text>
+    <text x="70" y="42" class="gu stepTitle">ટ્યૂબ્યુલિન જોડાય</text>
+    <text x="25" y="76" class="gu stepText"><tspan x="25" dy="0">ટ્યૂબ્યુલિન પ્રોટીનના એકમો જોડાઈ</tspan><tspan x="25" dy="25">સૂક્ષ્મ નલિકાઓ બનાવે છે.</tspan></text>
+  </g>
+  <path d="M396 980 H428" fill="none" stroke="#087f8c" stroke-width="4" marker-end="url(#arrowTeal)"/>
+  <g transform="translate(438 910)">
+    <rect width="338" height="143" rx="20" fill="#ffffff" stroke="#e7b34d" stroke-width="2.5" filter="url(#softShadow)"/>
+    <circle cx="37" cy="36" r="22" fill="#d98b00"/><text x="37" y="44" text-anchor="middle" class="gu label" style="fill:white">૨</text>
+    <text x="70" y="42" class="gu stepTitle">બે પ્રકારનું ફેલાવું</text>
+    <text x="25" y="76" class="gu stepText"><tspan x="25" dy="0">અંદર તરફ નલિકાઓ ત્રાક બનાવે;</tspan><tspan x="25" dy="25">બહાર તરફની તારા-કિરણ બને.</tspan></text>
+  </g>
+  <path d="M786 980 H818" fill="none" stroke="#087f8c" stroke-width="4" marker-end="url(#arrowTeal)"/>
+  <g transform="translate(828 910)">
+    <rect width="338" height="143" rx="20" fill="#ffffff" stroke="#9a7ac0" stroke-width="2.5" filter="url(#softShadow)"/>
+    <circle cx="37" cy="36" r="22" fill="#7b2cbf"/><text x="37" y="44" text-anchor="middle" class="gu label" style="fill:white">૩</text>
+    <text x="70" y="42" class="gu stepTitle">રંગસૂત્ર સાથે જોડાણ</text>
+    <text x="25" y="76" class="gu stepText"><tspan x="25" dy="0">કાઇનેટોકોર નલિકા રંગસૂત્રને</tspan><tspan x="25" dy="25">વિષુવવૃત્તીય પટ્ટ પર ગોઠવે છે.</tspan></text>
+  </g>
+  <path d="M1176 980 H1208" fill="none" stroke="#087f8c" stroke-width="4" marker-end="url(#arrowTeal)"/>
+  <g transform="translate(1218 910)">
+    <rect width="334" height="143" rx="20" fill="#ffffff" stroke="#67bca7" stroke-width="2.5" filter="url(#softShadow)"/>
+    <circle cx="37" cy="36" r="22" fill="#159a75"/><text x="37" y="44" text-anchor="middle" class="gu label" style="fill:white">૪</text>
+    <text x="70" y="42" class="gu stepTitle">સમાન વિતરણ</text>
+    <text x="25" y="76" class="gu stepText"><tspan x="25" dy="0">નલિકાઓ ટૂંકી થઈ ક્રોમેટિડને</tspan><tspan x="25" dy="25">વિરુદ્ધ ધ્રુવો તરફ લઈ જાય છે.</tspan></text>
+  </g>
+  <text x="800" y="1082" text-anchor="middle" class="gu small" style="font-weight:700;fill:#0f4c5c">યાદ રાખો: અંદરની સૂક્ષ્મ નલિકાઓ = ત્રાક  |  બહારની કિરણાકાર સૂક્ષ્મ નલિકાઓ = તારા-કિરણો</text>
+</svg>
