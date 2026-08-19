@@ -1,0 +1,10 @@
+MediaPipe Hand Landmarker
+
+The hand_landmarker.task model and MediaPipe Tasks Vision runtime are provided by Google under the Apache License 2.0.
+Official model URL:
+https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task
+
+Model SHA-256:
+fbc2a30080c3c557093b5ddfc334698132eb341044ccee322ccf8bcf3607cde1
+
+https://www.apache.org/licenses/LICENSE-2.0
