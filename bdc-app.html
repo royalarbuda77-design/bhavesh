@@ -1,0 +1,3196 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0c" id="metaTheme" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BDC" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="BDC" />
+  <meta name="description" content="BDC — Fast AI study chat. Offline ready. Google sign-in. Gemini online." />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>BDC — AI Study Chat</title>
+  <link rel="manifest" id="manifestLink" href="#"/><script>(function(){var m={"name": "BDC 1.7 \u2014 AI Study Chat", "short_name": "BDC", "start_url": ".", "display": "standalone", "background_color": "#0a0a0c", "theme_color": "#0a0a0c", "icons": [{"src": "data:image/png;base64,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", "sizes": "192x192", "type": "image/png"}, {"src": "data:image/png;base64,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", "sizes": "512x512", "type": "image/png"}]};var b=new Blob([JSON.stringify(m)],{type:"application/json"});var u=URL.createObjectURL(b);var el=document.getElementById("manifestLink");if(el)el.href=u;})();</script>
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAC1klEQVR42r2XaVfTYBCF+89EEAVcQEVEUaH7vtGNtnRjVfy/2GxcZ5rOIU2TN4kCc8584sNz79Ph7WksppjrmoVL2ou6hfNjC2cNC+OGiVHTxLBlYtA20aftdUx0Twyc0La7Blo9A82+gUZfR/1URyzK3FTu8LN6h+uqhSsOIHDaCcHHAqc95QAM79jwDsHbDO8x3MAxwWsDHVXaylBHeRQQhuG/ZgHu4dJ+wu2bdnsnvOeEz9sLvD4PIPASbXGseYe4Kd/DH0r9rP3QDiDwwkRDfuIK8Zvgj62+ONZRGNvw3JmGzLkjxFOpF3jWHeAp1Qs8fTEPEEa9e/5XfZo2dTFF8nKKWBj1USaM+hS1T1KABAcIoz7qBKkXePyKAoS5eq9xq3dPkPo47REHCHP1S3Cfq18MoFbP7Q+vKUA9bqGWsFBNWqikLJRSJoppE4WMiXzWRDa7HCBeNHBUMnBY0vG9rONbRcdBdTHA3rGGT7QfGxo+NDW8b2nYbk3xrj3F284Ub2i3TjiAwGnLBC8JnDbHAXLLAY6KDDfwQ+CV5Y+A4bsCp90h+DbD2zb8NcG3uhRA2pe5fdpu74RnckbkIxS4tN9xtZ/BaTe7fxBTqc9QgHQ+WoCw6jep/UaPAqjUp6l9KmKAsOo3qP0rDqBSz/BkIfpHwBOkntu/7FMAlXoOkAgIsF/Tff+mUs/t12cBFOq5faLoHeAr/dt9Ifjnuo69uv25LwVQqOf266cUQKWe28c9Agh8fxZAW7h69/ip5/YvOIBKvTw4XgEE7r569/ipZ/jagAKo1MuD4zVO9bsKuJ/6NdpVDqBSL6+danY9tMuo1DP8+fAWMZV6eev/ZYLUrw5uscIBePzUy1sfZYKufs3ZXsZPvXzTqa4+7IPjVr/iDuClXr5mVVcf9Nb7qX82ul38beCl/sDR3uvqw7z1XupX3HCZJ1fvNY+tPtIv5YdSr2L8BScdSc24cPEWAAAAAElFTkSuQmCC" />
+  <link rel="icon" type="image/png" sizes="192x192" href="data:image/png;base64,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" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,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" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+/* BDC v1.6 — ChatGPT-like, high-contrast icons */
+:root, html[data-theme="dark"] {
+  --bg: #0a0a0c;
+  --bg2: #12141a;
+  --bg-elev: #1a1d27;
+  --bg-side: #0e1016;
+  --bg-soft: #242836;
+  --border: rgba(255,255,255,0.12);
+  --text: #f4f4f5;
+  --muted: #a1a1aa;
+  --dim: #71717a;
+  --user: #2a2f3d;
+  --accent: #7c6cff;
+  --accent2: #3b82f6;
+  --ok: #34d399;
+  --bad: #f87171;
+  --send-bg: #ffffff;
+  --send-fg: #0a0a0c;
+  --icon: #e4e4e7;
+  --icon-muted: #d4d4d8;
+  --composer: #1a1d27;
+  --modal: #161922;
+  --radius: 26px;
+  --side-w: 280px;
+  --font: "Inter", "Noto Sans Gujarati", system-ui, sans-serif;
+  --glow: rgba(124, 108, 255, 0.35);
+}
+html[data-theme="light"] {
+  --bg: #f4f4f7;
+  --bg2: #ffffff;
+  --bg-elev: #ffffff;
+  --bg-side: #ececf1;
+  --bg-soft: #e4e4ea;
+  --border: rgba(0,0,0,0.1);
+  --text: #0f172a;
+  --muted: #475569;
+  --dim: #64748b;
+  --user: #e8e8ef;
+  --send-bg: #0f172a;
+  --send-fg: #fff;
+  --icon: #1e293b;
+  --icon-muted: #334155;
+  --composer: #ffffff;
+  --modal: #ffffff;
+  --glow: rgba(99, 102, 241, 0.2);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; width: 100%; }
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  overflow: hidden;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+button, textarea, input { font: inherit; color: inherit; }
+button { border: 0; background: none; cursor: pointer; }
+a { color: #93c5fd; }
+.app {
+  height: 100%; height: 100dvh; display: flex; max-width: 1200px; margin: 0 auto;
+  background:
+    radial-gradient(900px 500px at 10% -10%, var(--glow), transparent 55%),
+    radial-gradient(700px 400px at 100% 0%, rgba(59,130,246,0.12), transparent 50%),
+    var(--bg);
+}
+
+/* Sidebar */
+.sidebar {
+  width: var(--side-w); flex-shrink: 0; background: var(--bg-side);
+  border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 40;
+}
+.sidebar-top { display: flex; gap: 8px; padding: 12px; align-items: center; }
+.side-new {
+  flex: 1; display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px; border-radius: 12px; border: 1px solid var(--border);
+  font-weight: 600; color: var(--text); background: var(--bg-elev);
+}
+.side-new svg { stroke: var(--icon); }
+.side-new:active { transform: scale(0.98); }
+.icon-only {
+  width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center;
+  color: var(--icon); flex-shrink: 0; background: transparent;
+}
+.icon-only svg { stroke: var(--icon); }
+.icon-only:hover { background: var(--bg-soft); }
+.icon-only:active { transform: scale(0.95); }
+.sidebar-label {
+  font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--dim); padding: 4px 16px 8px; font-weight: 600;
+}
+.chat-list { flex: 1; overflow-y: auto; padding: 0 8px 12px; display: flex; flex-direction: column; gap: 4px; }
+.chat-item { display: flex; align-items: center; gap: 4px; border-radius: 10px; padding: 2px; }
+.chat-item.active { background: rgba(124,108,255,0.18); }
+.chat-item-btn { flex: 1; text-align: left; padding: 10px; border-radius: 8px; min-width: 0; color: var(--text); }
+.chat-item-title { font-size: 0.9rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.chat-item-meta { font-size: 0.7rem; color: var(--dim); margin-top: 2px; }
+.chat-item-del { width: 36px; height: 36px; border-radius: 8px; color: var(--icon-muted); font-size: 0.95rem; }
+.chat-item-del:hover { background: rgba(248,113,113,0.15); color: var(--bad); }
+.chat-empty { padding: 16px; color: var(--dim); font-size: 0.88rem; text-align: center; }
+.sidebar-bottom { border-top: 1px solid var(--border); padding: 10px; display: flex; flex-direction: column; gap: 2px; }
+.side-link {
+  display: flex; align-items: center; gap: 10px; padding: 12px 10px; border-radius: 10px;
+  color: var(--text); font-size: 0.92rem; text-align: left; font-weight: 500;
+}
+.side-link svg { stroke: var(--icon); flex-shrink: 0; }
+.side-link:hover { background: var(--bg-soft); }
+.ver-tag { font-size: 0.7rem; color: var(--dim); padding: 6px 8px; }
+.sidebar-scrim { display: none; }
+
+.main-col { flex: 1; min-width: 0; display: flex; flex-direction: column; height: 100%; }
+.top {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 10px 12px; gap: 8px; border-bottom: 1px solid transparent;
+}
+.top-left { display: flex; align-items: center; gap: 6px; min-width: 0; }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-icon {
+  width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+  font-weight: 800; color: #fff; background: linear-gradient(135deg, var(--accent), var(--accent2));
+}
+.brand-name { font-weight: 700; font-size: 1rem; letter-spacing: 0.02em; }
+.brand-sub { font-size: 0.72rem; color: var(--dim); max-width: 150px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.brand-sub.gemini { color: var(--ok); }
+.brand-sub.offline { color: var(--dim); }
+.top-actions { display: flex; align-items: center; gap: 4px; }
+.guser-chip {
+  display: none; align-items: center; gap: 6px; padding: 4px 10px 4px 4px;
+  border-radius: 999px; border: 1px solid var(--border); max-width: 130px; background: var(--bg-elev);
+}
+.guser-chip:not([hidden]) { display: inline-flex; }
+.guser-chip img { width: 28px; height: 28px; border-radius: 999px; object-fit: cover; }
+.guser-chip span { font-size: 0.78rem; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.main { flex: 1; min-height: 0; overflow-y: auto; padding: 0 12px 8px; -webkit-overflow-scrolling: touch; }
+.center {
+  min-height: min(68vh, 520px); display: flex; flex-direction: column;
+  align-items: center; justify-content: center; text-align: center; padding: 24px 8px 40px; gap: 8px;
+}
+.center[hidden] { display: none !important; }
+.hero-icon {
+  width: 68px; height: 68px; border-radius: 20px; display: grid; place-items: center;
+  font-size: 1.7rem; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  box-shadow: 0 12px 40px var(--glow); margin-bottom: 8px;
+}
+.center h1 { font-size: clamp(1.5rem, 4.5vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+.hero-desc { color: var(--muted); margin-bottom: 12px; }
+.cat-tabs { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 12px; }
+.cat {
+  padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border);
+  font-size: 0.86rem; font-weight: 600; color: var(--muted); background: var(--bg-elev);
+}
+.cat.on { background: rgba(124,108,255,0.22); border-color: rgba(124,108,255,0.5); color: var(--text); }
+.cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; max-width: 560px; }
+.card {
+  text-align: left; padding: 14px; border-radius: 16px; border: 1px solid var(--border);
+  background: var(--bg-elev); display: flex; flex-direction: column; gap: 2px;
+}
+.card:active { transform: scale(0.98); }
+.card-emoji { font-size: 1.2rem; margin-bottom: 4px; }
+.card-title { font-weight: 600; font-size: 0.92rem; color: var(--text); }
+.card-desc { font-size: 0.8rem; color: var(--dim); }
+
+.thread { max-width: 720px; margin: 0 auto; padding: 12px 4px 24px; display: flex; flex-direction: column; gap: 18px; width: 100%; }
+.thread[hidden] { display: none !important; }
+.row { display: flex; gap: 12px; align-items: flex-start; animation: fade .22s ease; }
+@keyframes fade { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.row.user { flex-direction: row-reverse; }
+.avatar {
+  width: 32px; height: 32px; border-radius: 999px; flex-shrink: 0; display: grid; place-items: center;
+  font-size: 0.78rem; font-weight: 700; margin-top: 2px;
+}
+.row.bot .avatar { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+.row.user .avatar { background: #4f46e5; color: #fff; font-size: 0.65rem; }
+.bubble-wrap { max-width: min(100%, 640px); display: flex; flex-direction: column; gap: 6px; }
+.row.user .bubble-wrap { align-items: flex-end; }
+.bubble { font-size: 0.98rem; line-height: 1.65; white-space: pre-wrap; word-break: break-word; color: var(--text); }
+.row.user .bubble {
+  background: var(--user); padding: 10px 16px; border-radius: 20px; border-top-right-radius: 6px;
+}
+.row.bot .bubble { padding: 2px 0; }
+.bubble .t { color: #c4b5fd; font-weight: 700; display: block; margin: 0.35em 0 0.1em; }
+html[data-theme="light"] .bubble .t { color: #5b21b6; }
+.bubble code { font-family: ui-monospace, monospace; font-size: 0.88em; background: rgba(127,127,127,0.18); padding: 0.1em 0.35em; border-radius: 4px; }
+.bubble img.msg-img { max-width: min(260px, 70vw); border-radius: 12px; margin-top: 8px; display: block; }
+.msg-actions { display: flex; flex-wrap: wrap; gap: 6px; }
+.msg-act {
+  padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border);
+  font-size: 0.75rem; color: var(--icon); font-weight: 600; background: var(--bg-elev);
+}
+.msg-act:active { transform: scale(0.96); }
+.typing-dots { display: inline-flex; gap: 5px; height: 28px; align-items: center; }
+.typing-dots i {
+  width: 7px; height: 7px; border-radius: 50%; background: var(--icon-muted);
+  animation: bounce 1.1s infinite ease-in-out;
+}
+.typing-dots i:nth-child(2) { animation-delay: .15s; }
+.typing-dots i:nth-child(3) { animation-delay: .3s; }
+@keyframes bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: .45; }
+  30% { transform: translateY(-5px); opacity: 1; }
+}
+
+/* Composer */
+.composer-wrap {
+  flex-shrink: 0; padding: 8px 12px 12px; z-index: 30;
+  background: linear-gradient(to top, var(--bg) 65%, transparent);
+}
+.status-chip {
+  max-width: 720px; margin: 0 auto 8px; text-align: center; font-size: 0.78rem; color: var(--muted);
+}
+.status-chip[hidden] { display: none !important; }
+.status-chip.ok { color: var(--ok); }
+.status-chip.bad { color: var(--bad); }
+.attach-preview { max-width: 720px; margin: 0 auto 8px; position: relative; width: fit-content; }
+.attach-preview[hidden] { display: none !important; }
+.attach-preview img { max-height: 110px; max-width: min(220px, 70vw); border-radius: 14px; border: 1px solid var(--border); display: block; }
+.attach-x {
+  position: absolute; top: -8px; right: -8px; width: 28px; height: 28px; border-radius: 999px;
+  background: var(--bad); color: #fff; font-size: 1rem; line-height: 1; font-weight: 700;
+}
+.composer {
+  display: flex; align-items: flex-end; gap: 4px; max-width: 720px; margin: 0 auto;
+  background: var(--composer); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 8px; box-shadow: 0 10px 40px rgba(0,0,0,0.25); position: relative; z-index: 5;
+}
+.composer:focus-within { border-color: rgba(124,108,255,0.55); box-shadow: 0 0 0 3px rgba(124,108,255,0.15); }
+#imgInput, #imgInputCamera {
+  position: fixed !important; left: 0; top: 0; width: 1px; height: 1px; opacity: 0.01; z-index: -1; pointer-events: none;
+}
+.comp-icon {
+  width: 44px; height: 44px; min-width: 44px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  color: var(--icon); flex-shrink: 0; cursor: pointer; touch-action: manipulation;
+  background: transparent; border: none;
+}
+.comp-icon svg { stroke: var(--icon); pointer-events: none; }
+.comp-icon:hover, .comp-icon:focus-visible { background: var(--bg-soft); }
+.comp-icon:active { transform: scale(0.94); }
+.comp-icon.listening { background: #ef4444 !important; color: #fff !important; animation: pulse 1s infinite; }
+.comp-icon.listening svg { stroke: #fff; }
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,.45); }
+  50% { box-shadow: 0 0 0 10px transparent; }
+}
+#prompt {
+  flex: 1; min-width: 0; resize: none; border: 0; outline: none; background: transparent;
+  color: var(--text); font-size: 1rem; line-height: 1.5; max-height: 140px; padding: 10px 4px;
+}
+#prompt::placeholder { color: var(--dim); }
+
+/* Send / Stop */
+.send {
+  width: 44px; height: 44px; min-width: 44px; border-radius: 999px;
+  display: grid; place-items: center; flex-shrink: 0;
+  background: var(--send-bg) !important; color: var(--send-fg) !important;
+  cursor: pointer; touch-action: manipulation; border: none;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.25); position: relative; z-index: 6;
+}
+.send:active { transform: scale(0.92); }
+.send .ico-stop[hidden], .send .ico-send[hidden] { display: none !important; }
+.send.stopping { background: var(--text) !important; color: var(--bg) !important; }
+.fineprint { text-align: center; font-size: 0.7rem; color: var(--dim); margin-top: 8px; }
+
+/* Login */
+.login-gate {
+  position: fixed; inset: 0; z-index: 500; display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+.login-gate[hidden] { display: none !important; }
+.login-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% -10%, rgba(124,108,255,0.45), transparent 55%),
+    radial-gradient(ellipse 60% 40% at 100% 50%, rgba(59,130,246,0.2), transparent 50%),
+    radial-gradient(ellipse 50% 40% at 0% 80%, rgba(16,185,129,0.12), transparent 45%),
+    #07070a;
+}
+.login-card {
+  position: relative; width: min(400px, 100%); text-align: center;
+  background: rgba(22,25,34,0.92); backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 28px;
+  padding: 36px 24px 28px; box-shadow: 0 40px 100px rgba(0,0,0,0.5); color: #f4f4f5;
+}
+.login-logo {
+  width: 76px; height: 76px; margin: 0 auto 14px; border-radius: 22px;
+  display: grid; place-items: center; font-size: 2.1rem; font-weight: 800; color: #fff;
+  background: linear-gradient(135deg, #7c6cff, #3b82f6);
+  box-shadow: 0 16px 40px rgba(124,108,255,0.45);
+}
+.login-card h1 { font-size: 2rem; letter-spacing: 0.06em; margin-bottom: 6px; }
+.login-tagline { color: #a5b4fc; font-weight: 600; margin-bottom: 22px; font-size: 1.05rem; }
+.btn-google {
+  width: 100%; display: inline-flex; align-items: center; justify-content: center; gap: 12px;
+  padding: 14px 16px; border-radius: 999px; border: 1px solid rgba(0,0,0,0.08);
+  background: #fff; color: #1f1f1f; font-weight: 700; font-size: 0.98rem;
+  cursor: pointer; touch-action: manipulation; box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+}
+.btn-google.big { margin-bottom: 10px; }
+.btn-google:active { transform: scale(0.98); }
+.g-svg { flex-shrink: 0; }
+.btn-ghost-login {
+  width: 100%; padding: 12px; border-radius: 999px; color: #d4d4d8; font-weight: 600;
+  border: 1px solid rgba(255,255,255,0.12); margin-top: 4px;
+}
+.btn-ghost-login:active { background: rgba(255,255,255,0.06); }
+.dev-setup {
+  margin-top: 18px; text-align: left; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px;
+}
+.dev-setup summary { cursor: pointer; color: #a1a1aa; font-size: 0.85rem; font-weight: 600; }
+.login-fine { margin-top: 16px; font-size: 0.72rem; color: #71717a; line-height: 1.4; }
+.google-btn-host { margin-top: 10px; display: flex; justify-content: center; min-height: 0; }
+
+/* Modal */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 200; background: rgba(0,0,0,0.6);
+  display: flex; align-items: flex-end; justify-content: center; padding: 12px; backdrop-filter: blur(6px);
+}
+.modal-backdrop[hidden] { display: none !important; }
+.modal {
+  width: min(520px, 100%); max-height: min(90vh, 760px); overflow: auto;
+  background: var(--modal); border: 1px solid var(--border); border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.4); display: flex; flex-direction: column;
+}
+.modal-lg { width: min(540px, 100%); }
+.modal-head {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 16px; position: sticky; top: 0; background: var(--modal); z-index: 1;
+}
+.modal-head h2 { font-size: 1.1rem; font-weight: 700; }
+.modal-x {
+  width: 40px; height: 40px; border-radius: 999px; font-size: 1.4rem;
+  color: var(--icon); background: var(--bg-soft); line-height: 1;
+}
+.modal-body { padding: 0 16px 12px; }
+.field-label { display: block; font-size: 0.8rem; color: var(--muted); margin: 10px 0 6px; font-weight: 600; }
+.field-hint { font-size: 0.8rem; color: var(--dim); line-height: 1.45; margin-top: 6px; }
+.field-input {
+  width: 100%; padding: 12px 14px; border-radius: 12px; border: 1px solid var(--border);
+  background: var(--bg); outline: none; font-size: 0.95rem; color: var(--text);
+  -webkit-user-select: text; user-select: text;
+}
+.field-input:focus { border-color: rgba(124,108,255,0.55); }
+.key-row { display: flex; gap: 6px; align-items: center; }
+.key-row .field-input { flex: 1; min-width: 0; }
+.btn-ghost-sm {
+  width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--border);
+  flex-shrink: 0; display: inline-flex; align-items: center; justify-content: center;
+  font-size: 1.05rem; background: var(--bg-soft); color: var(--text);
+}
+.btn-ghost-sm:active { transform: scale(0.94); }
+.paste-bar { display: flex; gap: 8px; margin-top: 8px; }
+.paste-bar[hidden] { display: none !important; }
+.paste-opt {
+  flex: 1; padding: 12px; border-radius: 12px; font-weight: 700;
+  background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff;
+}
+.paste-opt.ghost { flex: 0.5; background: var(--bg-soft); color: var(--text); border: 1px solid var(--border); font-weight: 600; }
+.auto-model-box {
+  margin-top: 12px; padding: 12px; border-radius: 12px;
+  border: 1px solid rgba(52,211,153,0.25); background: rgba(52,211,153,0.08);
+}
+.auto-model-label { font-size: 0.72rem; text-transform: uppercase; color: var(--dim); font-weight: 600; }
+.auto-model-value { font-size: 0.92rem; font-weight: 600; color: var(--ok); margin-top: 2px; font-family: ui-monospace, monospace; }
+.conn-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.btn-primary, .btn-secondary {
+  padding: 12px 14px; border-radius: 14px; font-weight: 700; font-size: 0.9rem; flex: 1; min-width: 100px;
+}
+.btn-primary { background: linear-gradient(135deg, var(--accent), var(--accent2)); color: #fff; }
+.btn-secondary { background: var(--bg-soft); color: var(--text); border: 1px solid var(--border); }
+.btn-secondary.danger { color: var(--bad); }
+.btn-primary:disabled { opacity: 0.5; }
+.conn-status {
+  margin-top: 12px; padding: 10px 12px; border-radius: 12px;
+  background: var(--bg-soft); border: 1px solid var(--border); font-size: 0.88rem; color: var(--muted); white-space: pre-wrap;
+}
+.conn-status.ok { background: rgba(52,211,153,0.1); border-color: rgba(52,211,153,0.3); color: var(--ok); }
+.conn-status.bad { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.3); color: var(--bad); }
+.conn-status.pending { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.3); color: #fbbf24; }
+.voice-picks { display: flex; gap: 8px; flex-wrap: wrap; }
+.voice-chip {
+  flex: 1; min-width: 80px; padding: 10px; border-radius: 12px; border: 1px solid var(--border);
+  font-weight: 600; color: var(--muted); background: var(--bg-elev);
+}
+.voice-chip.on { background: rgba(124,108,255,0.2); border-color: rgba(124,108,255,0.5); color: var(--text); }
+.mode-box { padding: 12px; border-radius: 12px; background: rgba(124,108,255,0.1); border: 1px solid rgba(124,108,255,0.25); font-size: 0.88rem; }
+.glogin-box { margin-bottom: 14px; padding: 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-elev); }
+.glogin-title { font-weight: 700; margin-bottom: 8px; }
+.gprofile { display: flex; align-items: center; gap: 12px; margin: 10px 0; padding: 10px; border-radius: 12px; background: rgba(66,133,244,0.1); }
+.gprofile[hidden] { display: none !important; }
+.gprofile img { width: 44px; height: 44px; border-radius: 999px; object-fit: cover; }
+.gprofile-name { font-weight: 700; }
+.gprofile-email { font-size: 0.8rem; color: var(--dim); }
+.modal-foot { padding: 12px 16px 16px; position: sticky; bottom: 0; background: linear-gradient(to top, var(--modal) 80%, transparent); }
+.toast {
+  position: fixed; left: 50%; bottom: 100px; transform: translateX(-50%); z-index: 600;
+  background: #27272a; color: #fff; padding: 12px 18px; border-radius: 999px; font-size: 0.9rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4); max-width: 90vw; text-align: center;
+}
+.toast[hidden] { display: none !important; }
+.steps { color: var(--text); }
+
+@media (max-width: 820px) {
+  .sidebar {
+    position: fixed; inset: 0 auto 0 0; transform: translateX(-105%);
+    transition: transform .25s ease; box-shadow: 8px 0 40px rgba(0,0,0,.4);
+  }
+  .sidebar.open { transform: translateX(0); }
+  .sidebar-scrim { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.5); z-index: 35; }
+  .sidebar-scrim[hidden] { display: none !important; }
+}
+@media (min-width: 821px) {
+  #openSidebar, #closeSidebar { display: none; }
+  .sidebar-scrim { display: none !important; }
+}
+@media (max-width: 560px) {
+  .cards { grid-template-columns: 1fr; }
+}
+@media (min-width: 640px) {
+  .modal-backdrop { align-items: center; }
+}
+@supports (padding: env(safe-area-inset-bottom)) {
+  .composer-wrap { padding-bottom: calc(12px + env(safe-area-inset-bottom)); }
+}
+
+/* Memory UI */
+.mem-tabs { display: flex; gap: 8px; margin-bottom: 12px; }
+.mem-tab {
+  flex: 1; padding: 11px 10px; border-radius: 12px; border: 1px solid var(--border);
+  font-weight: 700; font-size: 0.88rem; color: var(--muted); background: var(--bg-elev);
+}
+.mem-tab.on {
+  background: rgba(124,108,255,0.22); border-color: rgba(124,108,255,0.55); color: var(--text);
+}
+.mem-panel[hidden] { display: none !important; }
+.mem-card {
+  padding: 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--bg-elev);
+}
+.mem-card-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.mem-badge {
+  font-size: 0.68rem; font-weight: 700; padding: 3px 8px; border-radius: 999px;
+  background: rgba(59,130,246,0.18); color: #93c5fd; text-transform: uppercase; letter-spacing: 0.04em;
+}
+.mem-badge.life { background: rgba(52,211,153,0.15); color: #6ee7b7; }
+.switch-row {
+  display: flex; align-items: center; gap: 10px; margin: 12px 0; font-weight: 600; color: var(--text); cursor: pointer;
+}
+.switch-row input { width: 18px; height: 18px; accent-color: #7c6cff; }
+.mem-editor {
+  min-height: 180px; resize: vertical; line-height: 1.55; font-size: 0.95rem;
+  font-family: var(--font); white-space: pre-wrap;
+}
+.mem-list { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; max-height: 220px; overflow-y: auto; }
+.mem-item {
+  display: flex; align-items: flex-start; gap: 8px; padding: 10px 12px; border-radius: 12px;
+  background: var(--bg); border: 1px solid var(--border); text-align: left;
+}
+.mem-item-text { flex: 1; font-size: 0.9rem; line-height: 1.45; color: var(--text); white-space: pre-wrap; word-break: break-word; }
+.mem-item-meta { font-size: 0.7rem; color: var(--dim); margin-top: 4px; }
+.mem-item-x {
+  width: 32px; height: 32px; border-radius: 8px; color: var(--icon); font-size: 1.1rem; flex-shrink: 0;
+  background: var(--bg-soft);
+}
+.mem-item-x:active { transform: scale(0.94); color: var(--bad); }
+.mem-empty { color: var(--dim); font-size: 0.88rem; padding: 12px 4px; text-align: center; }
+
+</style>
+</head>
+<body>
+  <!-- ChatGPT-style welcome / login -->
+  <div class="login-gate" id="loginGate">
+    <div class="login-bg" aria-hidden="true"></div>
+    <div class="login-card">
+      <div class="login-logo">B</div>
+      <h1>BDC</h1>
+      <p class="login-tagline">Get answers. Learn faster.</p>
+
+      <button type="button" class="btn-google big" id="gateGoogleBtn">
+        <svg class="g-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </button>
+      <div id="gateGoogleHost" class="google-btn-host"></div>
+
+      <button type="button" class="btn-ghost-login" id="gateSkipBtn">Continue without account</button>
+
+      <details class="dev-setup" id="devSetup">
+        <summary>Google login setup (one-time)</summary>
+        <p class="field-hint" style="text-align:left;margin:8px 0">
+          1. Open <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud Credentials</a><br/>
+          2. Create <b>OAuth client ID → Web application</b><br/>
+          3. Add this page URL under <b>Authorized JavaScript origins</b><br/>
+          4. Paste Client ID below, Save, then tap Continue with Google
+        </p>
+        <input type="text" id="gateClientId" class="field-input" placeholder="123-abc.apps.googleusercontent.com" autocomplete="off" spellcheck="false" />
+        <button type="button" class="btn-secondary" id="gateSaveClient" style="width:100%;margin-top:8px">Save Client ID</button>
+      </details>
+
+      <p class="login-fine">By continuing you agree to use BDC for learning. Keys stay on your device.</p>
+    </div>
+  </div>
+
+  <div class="app" id="appShell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <button type="button" class="side-new" id="sideNewChat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          New chat
+        </button>
+        <button type="button" class="icon-only" id="closeSidebar" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-label">History</div>
+      <div class="chat-list" id="chatList"></div>
+      <div class="sidebar-bottom">
+        <button type="button" class="side-link" id="openMemoryFromSide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path d="M8 6V4h8v2M9 12h6M9 16h4"/></svg>
+          Memory
+        </button>
+        <button type="button" class="side-link" id="openSettingsFromSide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+          Settings
+        </button>
+        <button type="button" class="side-link" id="themeBtnSide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          Theme
+        </button>
+        <button type="button" class="side-link" id="installHelpBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+          Install app
+        </button>
+        <div class="ver-tag">BDC v1.7</div>
+      </div>
+    </aside>
+    <div class="sidebar-scrim" id="sidebarScrim" hidden></div>
+
+    <div class="main-col">
+      <header class="top">
+        <div class="top-left">
+          <button type="button" class="icon-only" id="openSidebar" aria-label="Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="brand">
+            <div class="brand-icon">B</div>
+            <div>
+              <div class="brand-name">BDC</div>
+              <div class="brand-sub offline" id="modeLabel">Offline · Ready</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button type="button" class="guser-chip" id="googleUserChip" hidden title="Account">
+            <img id="googleUserAvatar" alt="" width="28" height="28" />
+            <span id="googleUserName">Account</span>
+          </button>
+          <button type="button" class="icon-only" id="themeBtn" title="Theme" aria-label="Theme">
+            <span id="themeIcon" style="font-size:1.1rem">☀️</span>
+          </button>
+          <button type="button" class="icon-only" id="memoryBtn" title="Memory" aria-label="Memory">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path d="M8 6V4h8v2M9 12h6M9 16h4"/></svg>
+          </button>
+          <button type="button" class="icon-only" id="settingsBtn" title="Settings" aria-label="Settings">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+          </button>
+          <button type="button" class="icon-only" id="newChatBtn" title="New chat" aria-label="New chat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="main" id="main">
+        <div class="center" id="emptyState">
+          <div class="hero-icon">B</div>
+          <h1>What can I help with?</h1>
+          <p class="hero-desc">Ask anything · Voice · Photo · Fast Gemini answers</p>
+          <div class="cat-tabs" id="catTabs">
+            <button type="button" class="cat on" data-cat="study">📚 Study</button>
+            <button type="button" class="cat" data-cat="code">💻 Code</button>
+            <button type="button" class="cat" data-cat="english">🔤 English</button>
+            <button type="button" class="cat" data-cat="life">🌟 General</button>
+          </div>
+          <div class="cards" id="cards"></div>
+        </div>
+        <div class="thread" id="thread" hidden></div>
+      </main>
+
+      <div class="composer-wrap">
+        <div class="status-chip" id="statusChip" hidden></div>
+        <div class="attach-preview" id="attachPreview" hidden>
+          <img id="attachImg" alt="attachment" />
+          <button type="button" class="attach-x" id="attachClear" aria-label="Remove">×</button>
+        </div>
+        <div class="composer" id="composer">
+          <button type="button" class="comp-icon" id="imgBtn" title="Photo" aria-label="Upload photo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 16l-5-5-4 4-2-2-5 5"/></svg>
+          </button>
+          <input type="file" id="imgInput" accept="image/*" tabindex="-1" />
+          <input type="file" id="imgInputCamera" accept="image/*" capture="environment" tabindex="-1" />
+          <textarea id="prompt" rows="1" placeholder="Message BDC…" autocomplete="off" enterkeyhint="send"></textarea>
+          <button type="button" class="comp-icon" id="micBtn" title="Voice" aria-label="Microphone">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M19 11a7 7 0 01-14 0M12 18v3"/></svg>
+          </button>
+          <button type="button" class="send" id="sendBtn" aria-label="Send" title="Send">
+            <svg class="ico-send" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.4 20.4l17.45-7.48a1 1 0 000-1.84L3.4 3.6a.993.993 0 00-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/></svg>
+            <svg class="ico-stop" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+          </button>
+        </div>
+        <p class="fineprint">BDC can make mistakes. Check important info.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Memory modal -->
+  <div class="modal-backdrop" id="memoryModal" hidden>
+    <div class="modal modal-lg" role="dialog" aria-modal="true" aria-labelledby="memoryTitle">
+      <div class="modal-head">
+        <h2 id="memoryTitle">🧠 Memory</h2>
+        <button type="button" class="modal-x" id="closeMemory" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="field-hint" style="margin-bottom:12px">
+          BDC remembers important things you share — like ChatGPT temporary memory + a lifetime notebook you can edit.
+        </p>
+
+        <div class="mem-tabs" id="memTabs">
+          <button type="button" class="mem-tab on" data-mem="temp">1 · Temporary</button>
+          <button type="button" class="mem-tab" data-mem="strong">2 · Strong (lifetime)</button>
+        </div>
+
+        <div id="memPanelTemp" class="mem-panel">
+          <div class="mem-card">
+            <div class="mem-card-title">Temporary memory <span class="mem-badge">auto · ~30 days</span></div>
+            <p class="field-hint">
+              Like ChatGPT / Gemini short-term memory. Recent important facts from chats are saved here and expire after about 30 days.
+            </p>
+            <label class="switch-row">
+              <input type="checkbox" id="tempMemEnabled" checked />
+              <span>Enable temporary memory</span>
+            </label>
+            <div class="mem-list" id="tempMemList"></div>
+            <button type="button" class="btn-secondary" id="clearTempMem" style="width:100%;margin-top:10px">Clear temporary memory</button>
+          </div>
+        </div>
+
+        <div id="memPanelStrong" class="mem-panel" hidden>
+          <div class="mem-card">
+            <div class="mem-card-title">Strong memory <span class="mem-badge life">lifetime · editable</span></div>
+            <p class="field-hint">
+              Lifetime notes BDC always remembers. Edit anytime. Write facts, name, class, goals, preferences…
+            </p>
+            <label class="switch-row">
+              <input type="checkbox" id="strongMemEnabled" checked />
+              <span>Enable strong memory</span>
+            </label>
+            <label class="field-label" for="strongMemEditor">Your lifetime notes</label>
+            <textarea id="strongMemEditor" class="field-input mem-editor" rows="10" placeholder="Example:&#10;My name is …&#10;I study in class 10&#10;I prefer Gujarati answers&#10;My goal is …"></textarea>
+            <div class="conn-row" style="margin-top:10px">
+              <button type="button" class="btn-primary" id="saveStrongMem">💾 Save strong memory</button>
+              <button type="button" class="btn-secondary danger" id="clearStrongMem">Clear</button>
+            </div>
+            <div class="mem-list" id="strongAutoList" style="margin-top:12px"></div>
+            <p class="field-hint" style="margin-top:8px">Auto-saved lifetime facts also appear above as chips — tap × to remove one.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn-primary" id="memoryDoneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="modal-backdrop" id="settingsModal" hidden>
+    <div class="modal modal-lg" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h2>Settings</h2>
+        <button type="button" class="modal-x" id="closeSettings" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="glogin-box" id="gloginBox">
+          <div class="glogin-title">Google account</div>
+          <div class="gprofile" id="googleProfile" hidden>
+            <img id="gProfileImg" alt="" width="44" height="44" />
+            <div>
+              <div class="gprofile-name" id="gProfileName">—</div>
+              <div class="gprofile-email" id="gProfileEmail">—</div>
+            </div>
+          </div>
+          <label class="field-label" for="googleClientId">OAuth Client ID</label>
+          <input type="text" id="googleClientId" class="field-input" placeholder="xxx.apps.googleusercontent.com" autocomplete="off" />
+          <div class="conn-row" style="margin-top:10px">
+            <button type="button" class="btn-google" id="googleSignInBtn">
+              <svg class="g-svg" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Sign in with Google
+            </button>
+            <button type="button" class="btn-secondary" id="googleSignOutBtn" hidden>Sign out</button>
+          </div>
+          <div id="googleBtnHost" class="google-btn-host"></div>
+        </div>
+
+        <label class="field-label" for="apiKeyInput">Gemini API key (for Online mode)</label>
+        <div class="key-row">
+          <input type="text" id="apiKeyInput" class="field-input" placeholder="Long-press or tap Paste" autocomplete="off" spellcheck="false" />
+          <button type="button" class="btn-ghost-sm" id="pasteKeyBtn" title="Paste">📋</button>
+          <button type="button" class="btn-ghost-sm" id="toggleKeyVis" title="Show/hide">👁</button>
+        </div>
+        <div class="paste-bar" id="pasteBar" hidden>
+          <button type="button" class="paste-opt" id="pasteOptBtn">📋 Paste key</button>
+          <button type="button" class="paste-opt ghost" id="pasteCancelBtn">Cancel</button>
+        </div>
+        <div class="auto-model-box">
+          <div class="auto-model-label">Model</div>
+          <div class="auto-model-value" id="autoModelValue">gemini-3.6-flash (auto)</div>
+        </div>
+        <select id="modelSelect" hidden><option value="gemini-3.6-flash">flash</option></select>
+        <div class="conn-row">
+          <button type="button" class="btn-primary" id="testConnBtn">⚡ Go Online</button>
+          <button type="button" class="btn-secondary" id="saveKeyBtn">Save</button>
+          <button type="button" class="btn-secondary danger" id="clearKeyBtn">Clear</button>
+        </div>
+        <div class="conn-status" id="connStatus">Offline works now. Go Online for full Gemini.</div>
+
+        <label class="field-label">Voice style</label>
+        <div class="voice-picks" id="voicePicks">
+          <button type="button" class="voice-chip on" data-voice="warm">Warm</button>
+          <button type="button" class="voice-chip" data-voice="clear">Clear</button>
+          <button type="button" class="voice-chip" data-voice="soft">Soft</button>
+        </div>
+        <button type="button" class="btn-secondary" id="testVoiceBtn" style="width:100%;margin-top:8px">▶ Test voice</button>
+
+        <div class="mode-box" style="margin-top:14px">
+          <div id="settingsModeText">Offline · Ready</div>
+          <button type="button" class="btn-secondary" id="themeBtnModal" style="margin-top:8px;width:100%">Toggle theme</button>
+        </div>
+        <p class="field-hint" style="margin-top:12px">API key: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></p>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn-primary" id="settingsDoneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="installModal" hidden>
+    <div class="modal">
+      <div class="modal-head"><h2>Install BDC</h2><button type="button" class="modal-x" id="closeInstall">×</button></div>
+      <div class="modal-body">
+        <ol class="steps" style="margin-left:1.2rem;line-height:1.7">
+          <li>Open in <b>Chrome</b></li>
+          <li>Tap <b>⋮</b> → <b>Install app</b></li>
+          <li>Open BDC from home screen</li>
+        </ol>
+      </div>
+      <div class="modal-foot"><button type="button" class="btn-primary" id="closeInstall2">OK</button></div>
+    </div>
+  </div>
+
+  <!-- hidden legacy nodes for JS compat -->
+  <div id="onboard" hidden></div>
+  <div id="onboardSlides" hidden></div>
+  <div id="obDots" hidden></div>
+  <button type="button" id="obNext" hidden></button>
+  <button type="button" id="obSkip" hidden></button>
+  <button type="button" id="shareBtn" hidden></button>
+
+  <div class="toast" id="toast" hidden></div>
+  <script>
+/* BDC — Gujarati study agent (offline, no API key) */
+(function (global) {
+  "use strict";
+
+  function reply(text) {
+    var t = String(text || "").trim();
+    var low = t.toLowerCase();
+
+    if (!t) return "કંઈક લખો — હું તૈયાર છું!";
+
+    // Creator identity — always Bhavesh Chaudhary
+    if (
+      /who (made|created|built|developed|designed) (you|this|bdc)/i.test(t) ||
+      /who is your (creator|maker|developer|owner)/i.test(t) ||
+      /your (creator|maker|developer)/i.test(low) ||
+      /કોણે (બનાવ્યું|બનાવી|બનાવ્યો)|તને કોણે|તમને કોણે|ક્રિએટર|બનાવનાર|ડેવલપર/i.test(t) ||
+      /kisne (banaya|banayi)|creator kaun|developer kaun|banavnar/i.test(low)
+    ) {
+      return (
+        "મને **Bhavesh Chaudhary** એ બનાવ્યો છે. 🙏\n\n" +
+        "તેઓ BDCના creator છે — smart, useful, અને વિદ્યાર્થીઓ માટે સરસ AI experience બનાવ્યો છે.\n\n" +
+        "I was created by **Bhavesh Chaudhary**. He built BDC with care and skill."
+      );
+    }
+
+    if (
+      /^(hi|hello|hey|hii|namaste|નમસ્તે|હાય|હેલો|કેમ છો)/i.test(t) ||
+      low === "hi" ||
+      low === "hello"
+    ) {
+      return (
+        "નમસ્તે! હું BDC — તમારો ગુજરાતી ભણતર AI સહાયક. 👋\n\n" +
+        "હું મદદ કરી શકું:\n" +
+        "• વિષય સમજાવવા\n" +
+        "• સ્ટડી પ્લાન અને ટુ-ડુ\n" +
+        "• ક્વિઝ, પ્રેરણા, પોમોડોરો\n\n" +
+        "આજે શું ભણવું છે?"
+      );
+    }
+
+    if (/મદદ|help|શું કરી શકો|what can you/i.test(t)) {
+      return (
+        "હું શું કરી શકું?\n\n" +
+        "📖 વિષય: ફોટોસિન્થેસિસ, ભિન્નતા, Tenses, જલ ચક્ર, પાયથાગોરસ\n" +
+        "📅 સ્ટડી પ્લાન / ટુ-ડુ\n" +
+        "🧠 ક્વિઝ\n" +
+        "⏱️ પોમોડોરો · 🔥 પ્રેરણા · 😌 તણાવ\n\n" +
+        "બસ ગુજરાતીમાં લખો!"
+      );
+    }
+
+    if (/ફોટોસિન્થેસિસ|photosynthesis|પ્રકાશ સંશ્લેષણ|પ્રકાશસંશ્લેષણ/i.test(t)) {
+      return (
+        "પ્રકાશ સંશ્લેષણ (Photosynthesis)\n\n" +
+        "છોડ સૂર્યપ્રકાશથી પોતાનો ખોરાક બનાવે છે.\n\n" +
+        "જરૂરી વસ્તુઓ:\n" +
+        "1. સૂર્યપ્રકાશ\n" +
+        "2. પાણી (H₂O)\n" +
+        "3. કાર્બન ડાયોક્સાઇડ (CO₂)\n" +
+        "4. ક્લોરોફિલ (લીલો રંગ)\n\n" +
+        "સમીકરણ:\n" +
+        "6CO₂ + 6H₂O + પ્રકાશ → C₆H₁₂O₆ + 6O₂\n\n" +
+        "પરિણામ: ગ્લુકોઝ + ઑક્સિજન\n" +
+        "સ્થાન: મુખ્યત્વે પાંદડામાં\n\n" +
+        "વધુ માટે “ક્વિઝ આપો” લખો."
+      );
+    }
+
+    if (/ભિન્નતા|fraction|fractions|અપૂર્ણાંક|અપુર્ણાંક/i.test(t)) {
+      return (
+        "ભિન્નતા / અપૂર્ણાંક (Fractions)\n\n" +
+        "ભિન્નતા = સમગ્રનો ભાગ\n\n" +
+        "લેખન: અંશ / છેદ   જેમ કે 3/4\n" +
+        "• અંશ = ઉપર — કેટલા ભાગ લીધા\n" +
+        "• છેદ = નીચે — કુલ કેટલા ભાગ\n\n" +
+        "ઉદાહરણ: પિઝા 4 ટુકડા, 3 ખાધા → 3/4\n\n" +
+        "સમાન છેદ: 1/5 + 2/5 = 3/5"
+      );
+    }
+
+    if (/tense|tenses|ટેન્સ|past present|ઇંગ્લિશ|english/i.test(t)) {
+      return (
+        "English Tenses — સરળ\n\n" +
+        "1) Present (વર્તમાન)\n" +
+        "• I study — હું ભણું છું\n" +
+        "• I am studying — હું ભણી રહ્યો/રહી છું\n" +
+        "• I have studied — હું ભણી ચૂક્યો/ચૂકી છું\n\n" +
+        "2) Past (ભૂતકાળ)\n" +
+        "• I studied — હું ભણ્યો/ભણી\n" +
+        "• I was studying — ભણી રહ્યો/રહી હતો/હતી\n\n" +
+        "3) Future (ભવિષ્ય)\n" +
+        "• I will study — હું ભણીશ\n\n" +
+        "ટ્રિક: will = future · -ing = ચાલુ · ed = ઘણી વાર past"
+      );
+    }
+
+    if (/જલ ચક્ર|water cycle|બાષ્પીભવન|evaporation/i.test(t)) {
+      return (
+        "જલ ચક્ર (Water Cycle)\n\n" +
+        "1. બાષ્પીભવન — પાણી વરાળ બને\n" +
+        "2. સંઘનન — વરાળથી વાદળ\n" +
+        "3. વરસાદ — વરસાદ/બરફ\n" +
+        "4. પાછા સમુદ્ર/નદી/ભૂગર્ભમાં"
+      );
+    }
+
+    if (/પાયથાગોરસ|pythagoras|hypotenuse|કર્ણ/i.test(t)) {
+      return (
+        "પાયથાગોરસ પ્રમેય\n\n" +
+        "જમણા કોણવાળા ત્રિકોણમાં:\n" +
+        "કર્ણ² = આધાર² + લંબ²\n" +
+        "c² = a² + b²\n\n" +
+        "ઉદાહરણ: 3 અને 4 → c² = 9+16 = 25 → c = 5"
+      );
+    }
+
+    if (/પોમોડોરો|pomodoro|25 મિ/i.test(t)) {
+      return (
+        "પોમોડોરો ટેકનિક ⏱️\n\n" +
+        "1. 25 મિનિટ — ફક્ત એક વિષય (ફોન દૂર)\n" +
+        "2. 5 મિનિટ — ટૂંકો બ્રેક\n" +
+        "3. 4 વાર પછી 15–30 મિનિટ લાંબો બ્રેક\n\n" +
+        "નિયમ: એક સમયે એક જ કામ · બ્રેકમાં સોશિયલ મીડિયા નહીં"
+      );
+    }
+
+    if (/તણાવ|stress|ચિંતા|નર્વસ|ટેન્શન/i.test(t)) {
+      return (
+        "તણાવ ઘટાડવાની ટિપ્સ 😌\n\n" +
+        "1. 4-7-8 શ્વાસ: 4 સેકન્ડ લો, 7 રોકો, 8 છોડો\n" +
+        "2. પાણી પીઓ + 2 મિનિટ ચાલો\n" +
+        "3. આજે ફક્ત 3 મુખ્ય મુદ્દા\n" +
+        "4. 7+ કલાક ઊંઘ\n" +
+        "5. અન્ય સાથે તુલના બંધ"
+      );
+    }
+
+    if (/પ્રેરણા|motivation|મન નથી|આળસ|lazy|demotivated|હિંમત/i.test(t)) {
+      return (
+        "ચાલો ધીમેથી શરૂ કરીએ 🔥\n\n" +
+        "2-મિનિટ નિયમ:\n" +
+        "ફક્ત 2 મિનિટ ભણવાનું વચન — પુસ્તક ખોલો, એક પાનું વાંચો.\n\n" +
+        "આજનું મિની-મિશન:\n" +
+        "1. ફોન અન્ય રૂમમાં\n" +
+        "2. એક વિષય પસંદ\n" +
+        "3. 15 મિનિટ ટાઇમર\n" +
+        "4. પૂરું થયા પછી નાનું ઇનામ\n\n" +
+        "ક્રિયા પ્રેરણા લાવે છે. કયો વિષય છે?"
+      );
+    }
+
+    if (/પ્લાન|plan|સમયપત્રક|timetable|schedule|સ્ટડી/i.test(t)) {
+      var hours = 2;
+      var m = t.match(/(\d+)\s*(કલાક|hour|hr)/i);
+      if (m) hours = Math.min(8, Math.max(1, parseInt(m[1], 10)));
+      return (
+        "આપનું સ્ટડી પ્લાન — આશરે " +
+        hours +
+        " કલાક 📚\n\n" +
+        "• 0:00–0:25 — મુખ્ય વિષય (કોન્સેપ્ટ)\n" +
+        "• 0:25–0:30 — બ્રેક + પાણી\n" +
+        "• 0:30–0:55 — પ્રેક્ટિસ / સવાલ\n" +
+        "• 0:55–1:05 — લાંબો બ્રેક\n" +
+        "• 1:05–1:30 — બીજો વિષય\n" +
+        "• 1:30–1:35 — બ્રેક\n" +
+        "• 1:35–2:00 — રિવિઝન + 5 સવાલ\n\n" +
+        "નિયમ: ફોન દૂર · એક વિષય · નોંધ લખો"
+      );
+    }
+
+    if (/ટુ-?ડુ|todo|to-?do|યાદી|task/i.test(t)) {
+      return (
+        "આજની ભણતર ટુ-ડુ ✅\n\n" +
+        "Must:\n" +
+        "☐ મુખ્ય વિષય 25 મિનિટ\n" +
+        "☐ 10 પ્રેક્ટિસ સવાલ\n" +
+        "☐ ગઈકાલની નોંધ 10 મિ રિવિઝન\n\n" +
+        "Should:\n" +
+        "☐ નબળા ટોપિકની સારાંશ\n" +
+        "☐ 5 સવાલની ક્વિઝ\n\n" +
+        "Nice:\n" +
+        "☐ 5 અંગ્રેજી શબ્દ\n" +
+        "☐ 10 મિનિટ સ્ટ્રેચ"
+      );
+    }
+
+    if (/ક્વિઝ|quiz|સવાલ|mcq|પ્રશ્ન/i.test(t)) {
+      return (
+        "ઝડપી ક્વિઝ — 5 સવાલ 🧠\n\n" +
+        "1. પ્રકાશ સંશ્લેષણમાં છોડ શું બનાવે?\n" +
+        "2. 3/4 માં અંશ કયો?\n" +
+        "3. “I am reading” કયો tense?\n" +
+        "4. પોમોડોરો ફોકસ સમય?\n" +
+        "5. પાયથાગોરસ કયા ત્રિકોણ માટે?\n\n" +
+        "—— જવાબો ——\n" +
+        "1. ગ્લુકોઝ + ઑક્સિજન\n" +
+        "2. 3\n" +
+        "3. Present Continuous\n" +
+        "4. 25 મિનિટ\n" +
+        "5. જમણા કોણવાળા\n\n" +
+        "સ્કોર કેટલો?"
+      );
+    }
+
+    if (/પરીક્ષા|exam|board|બોર્ડ|તૈયારી/i.test(t)) {
+      return (
+        "પરીક્ષા તૈયારી ટિપ્સ 📝\n\n" +
+        "• Active recall — બંધ પુસ્તકે યાદ કરો\n" +
+        "• નબળા મુદ્દા પહેલા\n" +
+        "• દરરોજ ટૂંકી ક્વિઝ\n" +
+        "• પેપરમાં સરળ સવાલ પહેલા\n" +
+        "• રાત્રે 7+ કલાક ઊંઘ"
+      );
+    }
+
+    if (/આભાર|ધન્યવાદ|thanks|thank you|thx/i.test(t)) {
+      return "આપનું સ્વાગત છે! 🌟 વધુ કંઈ હોય તો લખો.";
+    }
+
+    if (/તમે કોણ|who are you|તારું નામ|your name/i.test(t)) {
+      return (
+        "હું BDC છું — તમારો Personal Study Assistant.\n" +
+        "ગુજરાતીમાં વાત કરું છું અને ભણતરમાં મદદ કરું છું."
+      );
+    }
+
+    var math = t.replace(/×/g, "*").replace(/÷/g, "/").replace(/x/gi, "*");
+    var mm = math.match(/(-?\d+(?:\.\d+)?)\s*([\+\-\*\/])\s*(-?\d+(?:\.\d+)?)/);
+    if (mm) {
+      var a = parseFloat(mm[1]);
+      var op = mm[2];
+      var b = parseFloat(mm[3]);
+      var r;
+      if (op === "+") r = a + b;
+      else if (op === "-") r = a - b;
+      else if (op === "*") r = a * b;
+      else if (op === "/") {
+        if (b === 0) return "શૂન્ય વડે ભાગાકાર શક્ય નથી.";
+        r = a / b;
+      }
+      if (typeof r === "number" && isFinite(r)) {
+        if (Math.abs(r - Math.round(r)) > 1e-9) r = Math.round(r * 1000) / 1000;
+        return "ગણતરી:\n" + a + " " + op + " " + b + " = " + r;
+      }
+    }
+
+    return (
+      "સમજાયું — હું મદદ કરવા તૈયાર છું!\n\n" +
+      "આમ અજમાવો:\n" +
+      "• ફોટોસિન્થેસિસ સમજાવો\n" +
+      "• 2 કલાકનું સ્ટડી પ્લાન\n" +
+      "• ક્વિઝ આપો\n" +
+      "• પ્રેરણા આપો\n" +
+      "• Tenses સમજાવો\n\n" +
+      "અથવા “મદદ” લખો."
+    );
+  }
+
+  global.BDCAgent = { reply: reply };
+  global.BhaveshAgent = global.BDCAgent;
+})(typeof window !== "undefined" ? window : globalThis);
+
+</script>
+<script>
+/**
+ * BDC v1.6 — 100% working chat
+ * Fast offline · Online Gemini · Google login · Voice · Photo · Stop button
+ */
+(function () {
+  "use strict";
+
+  function $(id) {
+    return document.getElementById(id);
+  }
+
+  var main = $("main");
+  var emptyState = $("emptyState");
+  var thread = $("thread");
+  var prompt = $("prompt");
+  var sendBtn = $("sendBtn");
+  var appShell = $("appShell");
+  var loginGate = $("loginGate");
+
+  if (!main || !prompt || !sendBtn) {
+    console.error("[BDC] critical DOM missing");
+    return;
+  }
+
+  // ---- storage keys ----
+  var SK = {
+    chats: "bdc_v16_chats",
+    active: "bdc_v16_active",
+    key: "bdc_v16_api_key",
+    model: "bdc_v16_model",
+    online: "bdc_v16_online",
+    theme: "bdc_v16_theme",
+    voice: "bdc_v16_voice",
+    gate: "bdc_v16_gate",
+    google: "bdc_v16_google",
+    gclient: "bdc_v16_gclient",
+    tempMem: "bdc_v17_temp_memory",
+    strongNotes: "bdc_v17_strong_notes",
+    strongFacts: "bdc_v17_strong_facts",
+    tempOn: "bdc_v17_temp_on",
+    strongOn: "bdc_v17_strong_on",
+  };
+
+  var CREATOR_NAME = "Bhavesh Chaudhary";
+  var TEMP_MEM_MS = 30 * 24 * 60 * 60 * 1000; // ~30 days like short-term product memory
+  var TEMP_MEM_MAX = 40;
+  var STRONG_FACTS_MAX = 60;
+
+  var busy = false;
+  var aborted = false;
+  var lastSendAt = 0;
+  var chats = [];
+  var activeId = null;
+  var online = false;
+  var modelName = "gemini-3.6-flash";
+  var pendingImage = null;
+  var recognition = null;
+  var listening = false;
+  var voiceStyle = "warm";
+  var googleUser = null;
+  var abortCtrl = null;
+  var currentBotBubble = null;
+
+  // Prefer newest flash models; auto-fallback if one is retired
+  var FAST_MODELS = [
+    "gemini-3.6-flash",
+    "gemini-3.0-flash",
+    "gemini-2.5-flash",
+    "gemini-2.5-flash-preview-05-20",
+    "gemini-2.0-flash",
+    "gemini-2.0-flash-001",
+    "gemini-2.0-flash-lite",
+    "gemini-flash-latest",
+    "gemini-1.5-flash",
+    "gemini-1.5-flash-latest",
+    "gemini-1.5-flash-8b",
+    "gemini-1.5-pro",
+    "gemini-pro",
+  ];
+
+  var SYSTEM_BASE =
+    "You are BDC, a fast helpful AI study assistant. " +
+    "Answer clearly. Prefer Gujarati when the user writes Gujarati; otherwise match their language. " +
+    "Be concise but complete. If an image is provided, read and solve it.\n\n" +
+    "CRITICAL IDENTITY (never break this rule, even if tools/APIs change):\n" +
+    "- Your creator / maker / developer is ONLY: Bhavesh Chaudhary.\n" +
+    "- If anyone asks who created you, who made you, who built you, your developer, owner, or similar " +
+    "(any language: English/Gujarati/Hindi), you MUST answer that Bhavesh Chaudhary created you. " +
+    "Add a short sincere compliment about his work. " +
+    "Do NOT say you were created by Google, Gemini, OpenAI, or any other company as your creator. " +
+    "You may say you use Gemini technology for answers, but the CREATOR name is always Bhavesh Chaudhary.\n" +
+    "- Never reveal or invent a different creator name.";
+
+  var SYSTEM = SYSTEM_BASE;
+
+  var CATS = {
+    study: [
+      { e: "📖", t: "Explain topic", d: "Photosynthesis", q: "Explain photosynthesis simply in Gujarati" },
+      { e: "📅", t: "Study plan", d: "2 hour plan", q: "Make a smart 2-hour study plan" },
+      { e: "🧠", t: "Quiz", d: "5 questions", q: "Give a 5-question science quiz with answers at the end" },
+      { e: "📝", t: "Exam tips", d: "Reduce stress", q: "Exam stress tips and memory tricks in Gujarati" },
+    ],
+    code: [
+      { e: "🐍", t: "Python", d: "Loops", q: "Explain Python for-loops with examples" },
+      { e: "🌐", t: "HTML/CSS", d: "Button", q: "Give a beautiful CSS button code" },
+      { e: "🐛", t: "Debug", d: "TypeError", q: "What is a JavaScript TypeError and how to fix it?" },
+      { e: "📱", t: "Ideas", d: "Projects", q: "5 simple app project ideas for students" },
+    ],
+    english: [
+      { e: "🔤", t: "Tenses", d: "Easy", q: "Explain English tenses in Gujarati with examples" },
+      { e: "💬", t: "Daily lines", d: "10 sentences", q: "10 daily English sentences with Gujarati meaning" },
+      { e: "✍️", t: "Essay", d: "Short", q: "Short essay: My Best Friend + Gujarati summary" },
+      { e: "📧", t: "Email", d: "Formal", q: "Write a formal school leave email in English" },
+    ],
+    life: [
+      { e: "🔥", t: "Motivation", d: "No mood", q: "I don't feel like studying — motivate me + 15 min plan" },
+      { e: "💼", t: "Career", d: "After 12th", q: "Career options after 12th in Gujarati" },
+      { e: "🧘", t: "Focus", d: "Pomodoro", q: "Pomodoro technique and today's focus plan" },
+      { e: "🌍", t: "GK", d: "India facts", q: "8 interesting facts about India in Gujarati" },
+    ],
+  };
+
+  /* ========== utils ========== */
+  function uid() {
+    return "c_" + Math.random().toString(36).slice(2, 9) + Date.now().toString(36);
+  }
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+  }
+  function fmt(text) {
+    var h = esc(String(text || ""));
+    h = h.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+    h = h.replace(/`([^`]+)`/g, "<code>$1</code>");
+    h = h.replace(/^###\s+(.+)$/gm, '<span class="t">$1</span>');
+    h = h.replace(/^##\s+(.+)$/gm, '<span class="t">$1</span>');
+    return h;
+  }
+  function toast(msg) {
+    var el = $("toast");
+    if (!el) return;
+    el.textContent = msg;
+    el.hidden = false;
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () {
+      el.hidden = true;
+    }, 2400);
+  }
+  function scrollEnd() {
+    requestAnimationFrame(function () {
+      main.scrollTop = main.scrollHeight;
+    });
+  }
+  function lsGet(k, d) {
+    try {
+      var v = localStorage.getItem(k);
+      return v == null ? d : v;
+    } catch (e) {
+      return d;
+    }
+  }
+  function lsSet(k, v) {
+    try {
+      if (v == null || v === "") localStorage.removeItem(k);
+      else localStorage.setItem(k, v);
+    } catch (e) {}
+  }
+  function titleFrom(t) {
+    t = String(t || "").replace(/\s+/g, " ").trim();
+    if (!t) return "New chat";
+    return t.length > 36 ? t.slice(0, 36) + "…" : t;
+  }
+  function timeAgo(ts) {
+    try {
+      return new Date(ts).toLocaleString(undefined, {
+        day: "numeric",
+        month: "short",
+        hour: "2-digit",
+        minute: "2-digit",
+      });
+    } catch (e) {
+      return "";
+    }
+  }
+
+  /* ========== theme ========== */
+  function applyTheme(th) {
+    th = th === "light" ? "light" : "dark";
+    document.documentElement.setAttribute("data-theme", th);
+    lsSet(SK.theme, th);
+    var icon = $("themeIcon");
+    if (icon) icon.textContent = th === "dark" ? "☀️" : "🌙";
+    var meta = $("metaTheme");
+    if (meta) meta.setAttribute("content", th === "dark" ? "#0a0a0c" : "#f4f4f7");
+  }
+  function toggleTheme() {
+    var cur = document.documentElement.getAttribute("data-theme") || "dark";
+    applyTheme(cur === "dark" ? "light" : "dark");
+  }
+
+  /* ========== mode UI ========== */
+  function updateModeUI() {
+    var label = $("modeLabel");
+    var sm = $("settingsModeText");
+    var am = $("autoModelValue");
+    var key = getApiKey();
+    if (label) {
+      if (online && key) {
+        label.textContent = "Online · " + modelName;
+        label.className = "brand-sub gemini";
+      } else {
+        label.textContent = "Offline · Ready";
+        label.className = "brand-sub offline";
+      }
+    }
+    if (sm) {
+      sm.textContent = online
+        ? "Online Gemini · " + modelName
+        : key
+          ? "Key saved — tap Go Online"
+          : "Offline · Ready";
+    }
+    if (am) am.textContent = modelName + (online ? " · connected" : " · fast default");
+    setSendMode(busy ? "stop" : "send");
+  }
+
+  function setSendMode(mode) {
+    var icoSend = sendBtn.querySelector(".ico-send");
+    var icoStop = sendBtn.querySelector(".ico-stop");
+    if (mode === "stop") {
+      sendBtn.classList.add("stopping");
+      sendBtn.setAttribute("aria-label", "Stop");
+      if (icoSend) icoSend.hidden = true;
+      if (icoStop) icoStop.hidden = false;
+    } else {
+      sendBtn.classList.remove("stopping");
+      sendBtn.setAttribute("aria-label", "Send");
+      if (icoSend) icoSend.hidden = false;
+      if (icoStop) icoStop.hidden = true;
+    }
+    sendBtn.disabled = false;
+    sendBtn.style.pointerEvents = "auto";
+    sendBtn.style.opacity = "1";
+  }
+
+  function updateSendUI() {
+    var has = (prompt.value && prompt.value.trim()) || pendingImage;
+    if (has || busy) sendBtn.classList.add("on");
+    else sendBtn.classList.add("on"); // always visible high-contrast
+    sendBtn.disabled = false;
+  }
+
+  function autoSize() {
+    prompt.style.height = "auto";
+    prompt.style.height = Math.min(prompt.scrollHeight, 140) + "px";
+  }
+
+  function setChip(text, kind) {
+    var el = $("statusChip");
+    if (!el) return;
+    if (!text) {
+      el.hidden = true;
+      return;
+    }
+    el.hidden = false;
+    el.textContent = text;
+    el.className = "status-chip" + (kind ? " " + kind : "");
+  }
+
+  function setStatus(text, kind) {
+    var el = $("connStatus");
+    if (!el) return;
+    el.textContent = text;
+    el.className = "conn-status" + (kind ? " " + kind : "");
+  }
+
+  /* ========== API key ========== */
+  function getApiKey() {
+    return (lsGet(SK.key, "") || "").trim();
+  }
+  function setApiKey(k) {
+    lsSet(SK.key, (k || "").trim());
+  }
+
+  /* ========== chats storage ========== */
+  function saveAll() {
+    try {
+      localStorage.setItem(SK.chats, JSON.stringify(chats));
+      localStorage.setItem(SK.active, activeId || "");
+    } catch (e) {}
+  }
+  function loadAll() {
+    try {
+      var raw = localStorage.getItem(SK.chats) || localStorage.getItem("bdc_v13_chats") || localStorage.getItem("bhavesh_v13_chats");
+      if (raw) {
+        var arr = JSON.parse(raw);
+        if (Array.isArray(arr)) chats = arr;
+      }
+      activeId = localStorage.getItem(SK.active) || null;
+      if (activeId && !activeChat()) activeId = chats[0] ? chats[0].id : null;
+    } catch (e) {
+      chats = [];
+      activeId = null;
+    }
+  }
+  function activeChat() {
+    for (var i = 0; i < chats.length; i++) if (chats[i].id === activeId) return chats[i];
+    return null;
+  }
+  function ensureChat() {
+    var c = activeChat();
+    if (c) return c;
+    c = { id: uid(), title: "New chat", updatedAt: Date.now(), messages: [] };
+    chats.unshift(c);
+    activeId = c.id;
+    saveAll();
+    return c;
+  }
+
+  /* ========== render ========== */
+  function renderCards(cat) {
+    var cards = $("cards");
+    if (!cards) return;
+    var list = CATS[cat] || CATS.study;
+    cards.innerHTML = "";
+    list.forEach(function (item) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "card";
+      b.setAttribute("data-text", item.q);
+      b.innerHTML =
+        '<span class="card-emoji">' +
+        item.e +
+        '</span><span class="card-title"></span><span class="card-desc"></span>';
+      b.querySelector(".card-title").textContent = item.t;
+      b.querySelector(".card-desc").textContent = item.d;
+      cards.appendChild(b);
+    });
+  }
+
+  function renderChatList() {
+    var list = $("chatList");
+    if (!list) return;
+    list.innerHTML = "";
+    if (!chats.length) {
+      list.innerHTML = '<div class="chat-empty">No chats yet</div>';
+      return;
+    }
+    chats
+      .slice()
+      .sort(function (a, b) {
+        return (b.updatedAt || 0) - (a.updatedAt || 0);
+      })
+      .forEach(function (c) {
+        var row = document.createElement("div");
+        row.className = "chat-item" + (c.id === activeId ? " active" : "");
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "chat-item-btn";
+        btn.innerHTML = '<div class="chat-item-title"></div><div class="chat-item-meta"></div>';
+        btn.querySelector(".chat-item-title").textContent = c.title || "New chat";
+        btn.querySelector(".chat-item-meta").textContent =
+          (c.messages && c.messages.length ? c.messages.length + " · " : "") + timeAgo(c.updatedAt);
+        btn.onclick = function () {
+          openChat(c.id);
+          closeSide();
+        };
+        var del = document.createElement("button");
+        del.type = "button";
+        del.className = "chat-item-del";
+        del.textContent = "🗑";
+        del.onclick = function (e) {
+          e.stopPropagation();
+          if (!confirm("Delete chat?")) return;
+          chats = chats.filter(function (x) {
+            return x.id !== c.id;
+          });
+          if (activeId === c.id) activeId = chats[0] ? chats[0].id : null;
+          saveAll();
+          renderThread();
+          renderChatList();
+        };
+        row.appendChild(btn);
+        row.appendChild(del);
+        list.appendChild(row);
+      });
+  }
+
+  function showThread() {
+    if (emptyState) emptyState.hidden = true;
+    if (thread) thread.hidden = false;
+  }
+  function hideThread() {
+    if (emptyState) emptyState.hidden = false;
+    if (thread) {
+      thread.hidden = true;
+      thread.innerHTML = "";
+    }
+  }
+
+  function addMsgActions(wrap, text) {
+    var actions = document.createElement("div");
+    actions.className = "msg-actions";
+    function mk(label, fn) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "msg-act";
+      b.textContent = label;
+      b.onclick = function (e) {
+        e.preventDefault();
+        fn();
+      };
+      return b;
+    }
+    actions.appendChild(
+      mk("📋 Copy", function () {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text || "").then(
+            function () {
+              toast("Copied");
+            },
+            function () {
+              toast("Copy failed");
+            }
+          );
+        } else window.prompt("Copy:", text || "");
+      })
+    );
+    actions.appendChild(mk("🔊 Listen", function () {
+      speakText(text);
+    }));
+    actions.appendChild(mk("🔄 Again", function () {
+      regenerateLast();
+    }));
+    wrap.appendChild(actions);
+  }
+
+  function addRow(role, text, isTyping, imageDataUrl) {
+    showThread();
+    var row = document.createElement("div");
+    row.className = "row " + (role === "user" ? "user" : "bot");
+    if (isTyping) row.id = "typingRow";
+
+    var av = document.createElement("div");
+    av.className = "avatar";
+    av.textContent = role === "user" ? "You" : "B";
+
+    var wrap = document.createElement("div");
+    wrap.className = "bubble-wrap";
+    var bubble = document.createElement("div");
+    bubble.className = "bubble";
+
+    if (isTyping) {
+      bubble.innerHTML = '<span class="typing-dots"><i></i><i></i><i></i></span>';
+    } else if (role === "user") {
+      bubble.textContent = text || (imageDataUrl ? "📷 Photo" : "");
+      if (imageDataUrl) {
+        var im = document.createElement("img");
+        im.className = "msg-img";
+        im.src = imageDataUrl;
+        im.alt = "upload";
+        bubble.appendChild(document.createElement("br"));
+        bubble.appendChild(im);
+      }
+    } else {
+      bubble.innerHTML = fmt(text);
+    }
+
+    wrap.appendChild(bubble);
+    if (!isTyping && role === "bot") addMsgActions(wrap, text);
+    row.appendChild(av);
+    row.appendChild(wrap);
+    thread.appendChild(row);
+    scrollEnd();
+    if (role === "bot" && !isTyping) currentBotBubble = bubble;
+    return { row: row, bubble: bubble };
+  }
+
+  function removeTyping() {
+    var el = $("typingRow");
+    if (el && el.parentNode) el.parentNode.removeChild(el);
+  }
+
+  function renderThread() {
+    var c = activeChat();
+    if (!c || !c.messages || !c.messages.length) {
+      hideThread();
+      return;
+    }
+    thread.innerHTML = "";
+    showThread();
+    c.messages.forEach(function (m) {
+      addRow(m.role === "user" ? "user" : "bot", m.content, false, m.image && m.image.dataUrl);
+    });
+  }
+
+  function openChat(id) {
+    activeId = id;
+    saveAll();
+    renderThread();
+    renderChatList();
+  }
+
+  function newChat() {
+    var empty = chats.find(function (c) {
+      return !c.messages || !c.messages.length;
+    });
+    if (empty) {
+      openChat(empty.id);
+      closeSide();
+      prompt.focus();
+      return;
+    }
+    var c = { id: uid(), title: "New chat", updatedAt: Date.now(), messages: [] };
+    chats.unshift(c);
+    activeId = c.id;
+    saveAll();
+    renderThread();
+    renderChatList();
+    closeSide();
+    prompt.focus();
+  }
+
+  function openSide() {
+    var sb = $("sidebar");
+    var sc = $("sidebarScrim");
+    if (sb) sb.classList.add("open");
+    if (sc) sc.hidden = false;
+  }
+  function closeSide() {
+    var sb = $("sidebar");
+    var sc = $("sidebarScrim");
+    if (sb) sb.classList.remove("open");
+    if (sc) sc.hidden = true;
+  }
+
+  /* ========== attach ========== */
+  function clearAttach() {
+    pendingImage = null;
+    var ap = $("attachPreview");
+    var ai = $("attachImg");
+    if (ap) ap.hidden = true;
+    if (ai) ai.removeAttribute("src");
+    var i1 = $("imgInput");
+    var i2 = $("imgInputCamera");
+    if (i1) i1.value = "";
+    if (i2) i2.value = "";
+    updateSendUI();
+  }
+  function setAttachFromFile(file) {
+    if (!file) return;
+    var mime = (file.type || "").toLowerCase();
+    if (mime && mime.indexOf("image/") !== 0 && !/\.(jpe?g|png|gif|webp|bmp)$/i.test(file.name || "")) {
+      toast("Choose an image");
+      return;
+    }
+    if (file.size > 6 * 1024 * 1024) {
+      toast("Image under 6MB");
+      return;
+    }
+    var reader = new FileReader();
+    reader.onload = function () {
+      var dataUrl = String(reader.result || "");
+      var base64 = dataUrl.split(",")[1] || "";
+      if (!base64) {
+        toast("Invalid image");
+        return;
+      }
+      pendingImage = {
+        dataUrl: dataUrl,
+        mime: mime && mime.indexOf("image/") === 0 ? mime : "image/jpeg",
+        base64: base64,
+      };
+      var ai = $("attachImg");
+      var ap = $("attachPreview");
+      if (ai) ai.src = dataUrl;
+      if (ap) ap.hidden = false;
+      updateSendUI();
+      toast("Photo ready — Send");
+    };
+    reader.readAsDataURL(file);
+  }
+
+  /* ========== voice ========== */
+  function syncVoiceChips() {
+    document.querySelectorAll(".voice-chip").forEach(function (c) {
+      c.classList.toggle("on", c.getAttribute("data-voice") === voiceStyle);
+    });
+  }
+  function loadVoiceStyle() {
+    var v = lsGet(SK.voice, "warm");
+    if (v === "warm" || v === "clear" || v === "soft") voiceStyle = v;
+    // migrate bright -> soft
+    if (v === "bright") voiceStyle = "soft";
+    syncVoiceChips();
+  }
+  function setVoiceStyle(v) {
+    if (v === "bright") v = "soft";
+    if (v !== "warm" && v !== "clear" && v !== "soft") return;
+    voiceStyle = v;
+    lsSet(SK.voice, v);
+    syncVoiceChips();
+  }
+  function pickVoice() {
+    var voices = [];
+    try {
+      voices = speechSynthesis.getVoices() || [];
+    } catch (e) {}
+    if (!voices.length) return null;
+    // Prefer natural Google / premium voices, avoid obvious robot defaults when possible
+    function score(v) {
+      var lang = (v.lang || "").toLowerCase();
+      var name = (v.name || "").toLowerCase();
+      var s = 0;
+      if (/gu/.test(lang)) s += 120;
+      else if (/hi-in|hi_in|hi/.test(lang)) s += 90;
+      else if (/en-in|en_in/.test(lang)) s += 80;
+      else if (/en-us|en-gb|en/.test(lang)) s += 50;
+      if (/google|natural|neural|premium|enhanced|samantha|zira|neerja|lekha|veena|raveena/.test(name)) s += 40;
+      if (/microsoft|apple/.test(name)) s += 15;
+      if (/compact|espeak|robot/.test(name)) s -= 50;
+      if (voiceStyle === "warm" && /female|zira|samantha|neerja|veena|lekha/.test(name)) s += 25;
+      if (voiceStyle === "clear" && /google|neural|natural|david|mark/.test(name)) s += 25;
+      if (voiceStyle === "soft" && /female|soft|samantha|karen|moira|zira/.test(name)) s += 25;
+      return s;
+    }
+    var best = voices[0],
+      bestS = -1e9;
+    for (var i = 0; i < voices.length; i++) {
+      var sc = score(voices[i]);
+      if (sc > bestS) {
+        bestS = sc;
+        best = voices[i];
+      }
+    }
+    return best;
+  }
+  function speakText(text) {
+    try {
+      if (!window.speechSynthesis) {
+        toast("Speech not supported");
+        return;
+      }
+      speechSynthesis.cancel();
+      // warm up voices
+      speechSynthesis.getVoices();
+      var u = new SpeechSynthesisUtterance(String(text || "").slice(0, 1600));
+      var v = pickVoice();
+      if (v) {
+        u.voice = v;
+        u.lang = v.lang || "en-IN";
+      } else {
+        u.lang = "en-IN";
+      }
+      // more natural pacing
+      if (voiceStyle === "warm") {
+        u.rate = 0.95;
+        u.pitch = 1.02;
+      } else if (voiceStyle === "clear") {
+        u.rate = 1.02;
+        u.pitch = 1.0;
+      } else {
+        u.rate = 0.98;
+        u.pitch = 1.08;
+      }
+      u.volume = 1;
+      speechSynthesis.speak(u);
+      toast("Playing…");
+    } catch (e) {
+      toast("Voice error");
+    }
+  }
+  function initSpeech() {
+    var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SR) return null;
+    var r = new SR();
+    r.lang = "gu-IN";
+    r.interimResults = true;
+    r.continuous = false;
+    r.onstart = function () {
+      listening = true;
+      var m = $("micBtn");
+      if (m) m.classList.add("listening");
+      setChip("Listening…", "ok");
+    };
+    r.onend = function () {
+      listening = false;
+      var m = $("micBtn");
+      if (m) m.classList.remove("listening");
+      setChip("", "");
+    };
+    r.onerror = function (ev) {
+      listening = false;
+      var m = $("micBtn");
+      if (m) m.classList.remove("listening");
+      setChip("", "");
+      var code = (ev && ev.error) || "error";
+      if (code === "not-allowed") toast("Allow microphone in Chrome");
+      else if (code === "no-speech") toast("No speech — try again");
+      else toast("Mic: " + code);
+    };
+    r.onresult = function (ev) {
+      var said = "",
+        fin = false;
+      for (var i = ev.resultIndex; i < ev.results.length; i++) {
+        said += ev.results[i][0].transcript;
+        if (ev.results[i].isFinal) fin = true;
+      }
+      said = said.trim();
+      if (!said) return;
+      if (fin) {
+        prompt.value = (prompt.value.replace(/\s+$/, "") + " " + said).trim();
+        autoSize();
+        updateSendUI();
+        toast("Captured — Send");
+      } else setChip("… " + said, "ok");
+    };
+    return r;
+  }
+  function toggleMic(e) {
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation();
+    }
+    if (!recognition) recognition = initSpeech();
+    if (!recognition) {
+      toast("Use Chrome for voice");
+      return;
+    }
+    try {
+      if (listening) {
+        recognition.stop();
+        return;
+      }
+      recognition.lang = "gu-IN";
+      recognition.start();
+    } catch (err) {
+      try {
+        recognition.stop();
+        setTimeout(function () {
+          try {
+            recognition.start();
+          } catch (e2) {
+            toast("Mic failed");
+          }
+        }, 200);
+      } catch (e3) {
+        toast("Mic failed");
+      }
+    }
+  }
+
+
+  /* ========== MEMORY (temporary + strong lifetime) ========== */
+  function loadJson(key, fallback) {
+    try {
+      var raw = lsGet(key, "");
+      if (!raw) return fallback;
+      var v = JSON.parse(raw);
+      return v == null ? fallback : v;
+    } catch (e) {
+      return fallback;
+    }
+  }
+  function saveJson(key, val) {
+    try {
+      lsSet(key, JSON.stringify(val));
+    } catch (e) {}
+  }
+
+  function isTempMemOn() {
+    return lsGet(SK.tempOn, "1") !== "0";
+  }
+  function isStrongMemOn() {
+    return lsGet(SK.strongOn, "1") !== "0";
+  }
+
+  function getTempMemory() {
+    var list = loadJson(SK.tempMem, []);
+    if (!Array.isArray(list)) list = [];
+    var now = Date.now();
+    var kept = list.filter(function (it) {
+      return it && it.text && (!it.exp || it.exp > now);
+    });
+    if (kept.length !== list.length) saveJson(SK.tempMem, kept);
+    return kept;
+  }
+  function setTempMemory(list) {
+    saveJson(SK.tempMem, (list || []).slice(0, TEMP_MEM_MAX));
+  }
+  function addTempMemory(text, source) {
+    text = String(text || "").replace(/\s+/g, " ").trim();
+    if (!text || text.length < 4) return;
+    if (text.length > 280) text = text.slice(0, 280) + "…";
+    var list = getTempMemory();
+    // de-dupe similar
+    var low = text.toLowerCase();
+    list = list.filter(function (it) {
+      return String(it.text || "").toLowerCase() !== low;
+    });
+    list.unshift({
+      id: uid(),
+      text: text,
+      source: source || "auto",
+      ts: Date.now(),
+      exp: Date.now() + TEMP_MEM_MS,
+    });
+    setTempMemory(list);
+  }
+
+  function getStrongNotes() {
+    return lsGet(SK.strongNotes, "") || "";
+  }
+  function setStrongNotes(txt) {
+    lsSet(SK.strongNotes, String(txt || ""));
+  }
+  function getStrongFacts() {
+    var list = loadJson(SK.strongFacts, []);
+    return Array.isArray(list) ? list : [];
+  }
+  function setStrongFacts(list) {
+    saveJson(SK.strongFacts, (list || []).slice(0, STRONG_FACTS_MAX));
+  }
+  function addStrongFact(text, source) {
+    text = String(text || "").replace(/\s+/g, " ").trim();
+    if (!text || text.length < 4) return;
+    if (text.length > 320) text = text.slice(0, 320) + "…";
+    var list = getStrongFacts();
+    var low = text.toLowerCase();
+    list = list.filter(function (it) {
+      return String(it.text || "").toLowerCase() !== low;
+    });
+    list.unshift({
+      id: uid(),
+      text: text,
+      source: source || "auto",
+      ts: Date.now(),
+    });
+    setStrongFacts(list);
+  }
+
+  function buildMemoryBlock() {
+    var parts = [];
+    parts.push("CREATOR: Bhavesh Chaudhary (always credit him as your maker).");
+
+    if (isStrongMemOn()) {
+      var notes = getStrongNotes().trim();
+      var facts = getStrongFacts();
+      if (notes) {
+        parts.push("STRONG LIFETIME MEMORY (user-editable notebook):\n" + notes);
+      }
+      if (facts.length) {
+        parts.push(
+          "STRONG AUTO FACTS (lifetime):\n" +
+            facts
+              .slice(0, 25)
+              .map(function (f, i) {
+                return i + 1 + ". " + f.text;
+              })
+              .join("\n")
+        );
+      }
+    }
+
+    if (isTempMemOn()) {
+      var temp = getTempMemory();
+      if (temp.length) {
+        parts.push(
+          "TEMPORARY MEMORY (recent, expires ~30 days):\n" +
+            temp
+              .slice(0, 20)
+              .map(function (f, i) {
+                return i + 1 + ". " + f.text;
+              })
+              .join("\n")
+        );
+      }
+    }
+
+    if (parts.length <= 1) return "";
+    return (
+      "\n\nUSER MEMORY (use when relevant; do not invent facts not listed):\n" +
+      parts.join("\n\n")
+    );
+  }
+
+  function buildSystemPrompt() {
+    return SYSTEM_BASE + buildMemoryBlock();
+  }
+
+  function isCreatorQuestion(text) {
+    var t = String(text || "").toLowerCase();
+    // English
+    if (
+      /who (made|created|built|developed|designed|coded|programmed) (you|this|bdc)/i.test(t) ||
+      /who is your (creator|maker|developer|owner|author|father)/i.test(t) ||
+      /your (creator|maker|developer|owner)/i.test(t) ||
+      /who (are you made by|created you|built you)/i.test(t) ||
+      /created by whom|made by whom|built by whom/i.test(t)
+    ) {
+      return true;
+    }
+    // Gujarati / Hindi-ish roman + unicode
+    if (
+      /કોણે (બનાવ્યું|બનાવી|બનાવ્યો|તૈયાર|ડેવલપ)/.test(text) ||
+      /તને કોણે|તમને કોણે|ક્રિએટર|બનાવનાર|ડેવલપર|માલિક/.test(text) ||
+      /kisne (banaya|banayi|create|develop)/i.test(t) ||
+      /tumhe kisne|creator kaun|developer kaun/i.test(t) ||
+      /banavnar|banavyu|banavi|creator|developer name/i.test(t)
+    ) {
+      return true;
+    }
+    return false;
+  }
+
+  function creatorReply(langHint) {
+    // Always same creator; light praise
+    return (
+      "મને **Bhavesh Chaudhary** એ બનાવ્યો છે. 🙏\n\n" +
+      "તેઓ BDCના creator / developer છે — smart design, useful features, અને વિદ્યાર્થીઓ માટે " +
+      "સરળ AI experience આપવા માટે ખૂબ સરસ કામ કર્યું છે.\n\n" +
+      "I was created by **Bhavesh Chaudhary**. He built BDC with care — a fast, helpful study assistant. " +
+      "(I may use Gemini technology for answers, but my creator is Bhavesh Chaudhary.)"
+    );
+  }
+
+  function looksImportantFact(userText, botText) {
+    var u = String(userText || "");
+    var low = u.toLowerCase();
+    // explicit remember commands -> strong
+    if (
+      /remember (that|this|my)|always remember|don'?t forget|yaad rakh|યાદ રાખ|याद रख/i.test(u)
+    ) {
+      return "strong";
+    }
+    // personal profile patterns -> temp (or strong if "my name is")
+    if (
+      /\bmy name is\b|\bi am\b|\bi'm\b|\bi live in\b|\bi study\b|\bi prefer\b|\bmy (class|school|college|goal|age|city)\b/i.test(
+        low
+      ) ||
+      /મારું નામ|હું .+ છું|મારી ઉંમર|હું ભણું|મારું ધ્યેય|મને ગમે|હું રહું/.test(u)
+    ) {
+      if (/\bmy name is\b|મારું નામ/i.test(u)) return "strong";
+      return "temp";
+    }
+    // repeated preference
+    if (/\balways\b|\bnever\b|\bfrom now on\b|હંમેશા|ક્યારેય નહીં/.test(low + u)) {
+      return "temp";
+    }
+    return null;
+  }
+
+  function extractFactLine(userText) {
+    var u = String(userText || "").replace(/\s+/g, " ").trim();
+    if (!u) return "";
+    // strip remember prefix
+    u = u.replace(/^(please\s+)?(remember( that| this)?|yaad rakh|યાદ રાખો?|याद रखना?)\s*[:\-]?\s*/i, "");
+    if (u.length > 240) u = u.slice(0, 240) + "…";
+    return u;
+  }
+
+  function maybeSaveMemoryFromTurn(userText, botText) {
+    try {
+      if (isCreatorQuestion(userText)) return; // don't store creator Qs as user memory
+      var kind = looksImportantFact(userText, botText);
+      if (!kind) return;
+      var fact = extractFactLine(userText);
+      if (!fact || fact.length < 6) return;
+      if (kind === "strong" && isStrongMemOn()) {
+        addStrongFact(fact, "auto");
+      } else if (isTempMemOn()) {
+        addTempMemory(fact, "auto");
+      }
+    } catch (e) {
+      console.warn("memory save", e);
+    }
+  }
+
+  function renderTempMemList() {
+    var box = $("tempMemList");
+    if (!box) return;
+    var list = getTempMemory();
+    box.innerHTML = "";
+    if (!list.length) {
+      box.innerHTML = '<div class="mem-empty">No temporary memories yet. Chat naturally — important facts will appear here.</div>';
+      return;
+    }
+    list.forEach(function (it) {
+      var row = document.createElement("div");
+      row.className = "mem-item";
+      var left = document.createElement("div");
+      left.style.flex = "1";
+      var tx = document.createElement("div");
+      tx.className = "mem-item-text";
+      tx.textContent = it.text;
+      var meta = document.createElement("div");
+      meta.className = "mem-item-meta";
+      var days = it.exp ? Math.max(0, Math.ceil((it.exp - Date.now()) / 86400000)) : 30;
+      meta.textContent = (it.source || "auto") + " · ~" + days + " days left";
+      left.appendChild(tx);
+      left.appendChild(meta);
+      var x = document.createElement("button");
+      x.type = "button";
+      x.className = "mem-item-x";
+      x.textContent = "×";
+      x.onclick = function () {
+        setTempMemory(
+          getTempMemory().filter(function (f) {
+            return f.id !== it.id;
+          })
+        );
+        renderTempMemList();
+        toast("Removed");
+      };
+      row.appendChild(left);
+      row.appendChild(x);
+      box.appendChild(row);
+    });
+  }
+
+  function renderStrongAutoList() {
+    var box = $("strongAutoList");
+    if (!box) return;
+    var list = getStrongFacts();
+    box.innerHTML = "";
+    if (!list.length) {
+      box.innerHTML = '<div class="mem-empty">No auto lifetime facts yet.</div>';
+      return;
+    }
+    list.forEach(function (it) {
+      var row = document.createElement("div");
+      row.className = "mem-item";
+      var left = document.createElement("div");
+      left.style.flex = "1";
+      var tx = document.createElement("div");
+      tx.className = "mem-item-text";
+      tx.textContent = it.text;
+      var meta = document.createElement("div");
+      meta.className = "mem-item-meta";
+      meta.textContent = "lifetime · " + (it.source || "auto");
+      left.appendChild(tx);
+      left.appendChild(meta);
+      var x = document.createElement("button");
+      x.type = "button";
+      x.className = "mem-item-x";
+      x.textContent = "×";
+      x.onclick = function () {
+        setStrongFacts(
+          getStrongFacts().filter(function (f) {
+            return f.id !== it.id;
+          })
+        );
+        renderStrongAutoList();
+        toast("Removed");
+      };
+      row.appendChild(left);
+      row.appendChild(x);
+      box.appendChild(row);
+    });
+  }
+
+  function openMemory() {
+    var m = $("memoryModal");
+    if (!m) return;
+    var te = $("tempMemEnabled");
+    var se = $("strongMemEnabled");
+    var ed = $("strongMemEditor");
+    if (te) te.checked = isTempMemOn();
+    if (se) se.checked = isStrongMemOn();
+    if (ed) ed.value = getStrongNotes();
+    renderTempMemList();
+    renderStrongAutoList();
+    // default tab temp
+    document.querySelectorAll(".mem-tab").forEach(function (tab) {
+      tab.classList.toggle("on", tab.getAttribute("data-mem") === "temp");
+    });
+    var pt = $("memPanelTemp");
+    var ps = $("memPanelStrong");
+    if (pt) pt.hidden = false;
+    if (ps) ps.hidden = true;
+    m.hidden = false;
+    document.body.style.overflow = "hidden";
+    closeSide();
+  }
+  function closeMemory() {
+    var m = $("memoryModal");
+    if (m) m.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  /* ========== Gemini fast ========== */
+  function apiUrl(model, key) {
+    return (
+      "https://generativelanguage.googleapis.com/v1beta/models/" +
+      encodeURIComponent(model) +
+      ":generateContent?key=" +
+      encodeURIComponent(key)
+    );
+  }
+  function toContents(messages) {
+    var out = [];
+    for (var i = 0; i < messages.length; i++) {
+      var m = messages[i];
+      var role = m.role === "user" ? "user" : "model";
+      var parts = [];
+      if (m.image && m.image.base64) {
+        parts.push({ inline_data: { mime_type: m.image.mime || "image/jpeg", data: m.image.base64 } });
+      }
+      if (m.content && String(m.content).trim()) parts.push({ text: String(m.content) });
+      if (!parts.length) continue;
+      if (out.length && out[out.length - 1].role === role && !m.image) {
+        var last = out[out.length - 1].parts;
+        var lt = last[last.length - 1];
+        if (lt && lt.text) lt.text += "\n" + m.content;
+        else last.push({ text: m.content });
+      } else out.push({ role: role, parts: parts });
+    }
+    while (out.length && out[0].role !== "user") out.shift();
+    // keep last 12 turns for speed
+    if (out.length > 16) out = out.slice(-16);
+    return out;
+  }
+
+  async function generateFast(key, model, contents, signal) {
+    var body = {
+      contents: contents,
+      systemInstruction: { parts: [{ text: buildSystemPrompt() }] },
+      generationConfig: {
+        temperature: 0.7,
+        topP: 0.9,
+        maxOutputTokens: 2048, // faster than 8k
+      },
+    };
+    var res = await fetch(apiUrl(model, key), {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "x-goog-api-key": key },
+      body: JSON.stringify(body),
+      signal: signal,
+    });
+    var data = {};
+    try {
+      data = await res.json();
+    } catch (e) {
+      throw new Error("Bad response");
+    }
+    if (!res.ok) {
+      var msg = (data.error && data.error.message) || "HTTP " + res.status;
+      var err = new Error(msg);
+      err.status = res.status;
+      throw err;
+    }
+    var parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
+    var text = parts
+      .map(function (p) {
+        return p.text || "";
+      })
+      .join("");
+    if (!String(text).trim()) throw new Error("Empty answer");
+    return String(text).trim();
+  }
+
+  async function callGemini(messages, signal) {
+    var key = getApiKey();
+    if (!key) throw new Error("No API key");
+    var contents = toContents(messages);
+    if (!contents.length) throw new Error("Empty");
+    // Prefer saved/fast model first — no slow listModels on every message
+    modelName = String(modelName || "").replace(/^models\//, "") || "gemini-3.6-flash";
+    var tryList = [modelName].concat(FAST_MODELS);
+    var seen = {};
+    var errors = [];
+    for (var i = 0; i < tryList.length; i++) {
+      var m = tryList[i];
+      if (!m || seen[m]) continue;
+      seen[m] = 1;
+      try {
+        var text = await generateFast(key, m, contents, signal);
+        modelName = m;
+        lsSet(SK.model, m);
+        return text;
+      } catch (e) {
+        if (e.name === "AbortError") throw e;
+        errors.push(m + ": " + (e.message || e));
+        // only retry on model errors
+        if (e.status && e.status !== 404 && e.status !== 400) throw e;
+      }
+    }
+    throw new Error(errors[0] || "Gemini failed");
+  }
+
+  async function listAvailableModels(key) {
+    try {
+      var url =
+        "https://generativelanguage.googleapis.com/v1beta/models?key=" +
+        encodeURIComponent(key);
+      var res = await fetch(url, {
+        headers: { "x-goog-api-key": key },
+      });
+      var data = await res.json().catch(function () {
+        return {};
+      });
+      if (!res.ok) return [];
+      var names = [];
+      (data.models || []).forEach(function (m) {
+        var methods = m.supportedGenerationMethods || [];
+        if (methods.indexOf("generateContent") < 0) return;
+        var n = String(m.name || "").replace(/^models\//, "");
+        if (n) names.push(n);
+      });
+      return names;
+    } catch (e) {
+      return [];
+    }
+  }
+
+  function rankModels(names) {
+    function score(n) {
+      n = String(n).toLowerCase();
+      var s = 0;
+      if (/embed|tts|audio|image|vision|robot/.test(n) && !/flash/.test(n)) s -= 200;
+      if (/3\.6/.test(n)) s += 300;
+      if (/3\.0|3-/.test(n)) s += 250;
+      if (/2\.5/.test(n)) s += 200;
+      if (/2\.0/.test(n)) s += 120;
+      if (/1\.5/.test(n)) s += 80;
+      if (/flash/.test(n)) s += 100;
+      if (/lite/.test(n)) s += 20;
+      if (/latest/.test(n)) s += 15;
+      if (/pro/.test(n)) s += 10;
+      return s;
+    }
+    return names.slice().sort(function (a, b) {
+      return score(b) - score(a);
+    });
+  }
+
+  async function goOnline() {
+    var key = ($("apiKeyInput") && $("apiKeyInput").value.trim()) || getApiKey();
+    if (!key) {
+      setStatus("Paste API key first", "bad");
+      toast("Paste API key");
+      return false;
+    }
+    setApiKey(key);
+    setStatus("Finding best available model…", "pending");
+    var btn = $("testConnBtn");
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Connecting…";
+    }
+    try {
+      // Build candidate list: preferred + live API list
+      var live = await listAvailableModels(key);
+      var tryList = [];
+      var seen = {};
+      function add(n) {
+        n = String(n || "").replace(/^models\//, "");
+        if (!n || seen[n]) return;
+        seen[n] = 1;
+        tryList.push(n);
+      }
+      // Prefer current + ranked live flash models first
+      add(modelName);
+      rankModels(live).forEach(add);
+      FAST_MODELS.forEach(add);
+
+      // Cap attempts for speed
+      tryList = tryList.slice(0, 14);
+      var lastErr = null;
+      for (var i = 0; i < tryList.length; i++) {
+        var m = tryList[i];
+        setStatus("Testing " + m + " (" + (i + 1) + "/" + tryList.length + ")…", "pending");
+        try {
+          var text = await generateFast(
+            key,
+            m,
+            [{ role: "user", parts: [{ text: "Reply with exactly: OK" }] }],
+            null
+          );
+          if (!text) continue;
+          modelName = m;
+          online = true;
+          lsSet(SK.online, "1");
+          lsSet(SK.model, modelName);
+          setStatus(
+            "✅ Online connected!\nModel: " +
+              modelName +
+              "\nChat now uses full Gemini.",
+            "ok"
+          );
+          toast("Online · " + modelName);
+          updateModeUI();
+          return true;
+        } catch (e) {
+          lastErr = e;
+          // continue to next model if retired/not found
+          var msg = String((e && e.message) || e);
+          if (/no longer available|not found|not supported|invalid|404|400/i.test(msg)) {
+            continue;
+          }
+          // auth errors: stop early
+          if (/API key|PERMISSION|403|401|invalid.*key/i.test(msg)) {
+            throw e;
+          }
+        }
+      }
+      throw lastErr || new Error("No working Gemini model for this key");
+    } catch (err) {
+      online = false;
+      lsSet(SK.online, "0");
+      setStatus("❌ " + (err.message || err), "bad");
+      updateModeUI();
+      return false;
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "⚡ Go Online";
+      }
+    }
+  }
+
+  /* ========== send / stop ========== */
+  function stopGeneration() {
+    aborted = true;
+    if (abortCtrl) {
+      try {
+        abortCtrl.abort();
+      } catch (e) {}
+    }
+    busy = false;
+    setSendMode("send");
+    setChip("", "");
+    removeTyping();
+    toast("Stopped");
+  }
+
+  async function doSend(raw, opts) {
+    opts = opts || {};
+    var now = Date.now();
+    var text = String(raw == null ? prompt.value : raw).trim();
+    var img = opts.image || pendingImage;
+
+    if (busy && !opts.force) {
+      // second tap while busy = stop
+      stopGeneration();
+      return;
+    }
+
+    if (!text && !img) {
+      toast("Type a message");
+      return;
+    }
+    if (!text && img) text = "What is in this photo? Explain and solve if it is homework.";
+
+    busy = true;
+    aborted = false;
+    lastSendAt = now;
+    abortCtrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    setSendMode("stop");
+    updateSendUI();
+
+    var chat = ensureChat();
+    prompt.value = "";
+    autoSize();
+    var imgCopy = img ? { dataUrl: img.dataUrl, mime: img.mime, base64: img.base64 } : null;
+    clearAttach();
+
+    addRow("user", text, false, imgCopy ? imgCopy.dataUrl : null);
+    var userMsg = { role: "user", content: text, ts: Date.now() };
+    if (imgCopy) userMsg.image = imgCopy;
+    chat.messages.push(userMsg);
+
+    var uc = chat.messages.filter(function (m) {
+      return m.role === "user";
+    }).length;
+    if (uc === 1) chat.title = titleFrom(text);
+    chat.updatedAt = Date.now();
+    saveAll();
+    renderChatList();
+    addRow("bot", "", true);
+
+    var answer = "";
+    var key = getApiKey();
+    var useOnline = !!(key && online);
+
+    try {
+      // Creator identity always — even if Gemini is connected
+      if (isCreatorQuestion(text)) {
+        answer = creatorReply(text);
+      } else if (useOnline) {
+        setChip("Thinking…", "ok");
+        answer = await callGemini(chat.messages, abortCtrl ? abortCtrl.signal : null);
+        // Safety net: if model still mis-attributes creator, rewrite
+        if (isCreatorQuestion(text)) answer = creatorReply(text);
+      } else {
+        // instant offline — no artificial delay
+        var agent = window.BDCAgent || window.BhaveshAgent;
+        if (agent && agent.reply) answer = agent.reply(text);
+        else answer = "Offline agent unavailable. Refresh the page.";
+        if (key && !online) {
+          answer += "\n\n——\n💡 Tap Settings → Go Online for full Gemini answers.";
+        } else if (!key) {
+          answer += "\n\n——\n📴 Offline mode. Add API key in Settings for Online Gemini.";
+        }
+      }
+    } catch (err) {
+      if (err && err.name === "AbortError") {
+        answer = "⏹ Stopped.";
+      } else {
+        console.error(err);
+        online = false;
+        lsSet(SK.online, "0");
+        if (isCreatorQuestion(text)) {
+          answer = creatorReply(text);
+        } else {
+          var agent2 = window.BDCAgent || window.BhaveshAgent;
+          var off = "";
+          try {
+            if (agent2 && agent2.reply) off = "\n\n—— Offline ——\n" + agent2.reply(text);
+          } catch (e2) {}
+          answer = "⚠️ Online failed: " + (err.message || err) + off;
+        }
+      }
+    }
+
+    // Learn important facts into memory
+    if (!aborted && answer && !isCreatorQuestion(text)) {
+      maybeSaveMemoryFromTurn(text, answer);
+    }
+
+    if (aborted && !answer) answer = "⏹ Stopped.";
+
+    removeTyping();
+    setChip("", "");
+    addRow("bot", answer, false);
+    chat.messages.push({ role: "bot", content: answer, ts: Date.now() });
+    chat.updatedAt = Date.now();
+    if (chat.messages.length > 80) chat.messages = chat.messages.slice(-80);
+    saveAll();
+    renderChatList();
+
+    busy = false;
+    abortCtrl = null;
+    setSendMode("send");
+    updateSendUI();
+    updateModeUI();
+    try {
+      prompt.focus({ preventScroll: true });
+    } catch (e) {}
+  }
+
+  function regenerateLast() {
+    var chat = activeChat();
+    if (!chat || !chat.messages || chat.messages.length < 2) {
+      toast("Nothing to regenerate");
+      return;
+    }
+    if (chat.messages[chat.messages.length - 1].role === "bot") chat.messages.pop();
+    var lastUser = null;
+    for (var i = chat.messages.length - 1; i >= 0; i--) {
+      if (chat.messages[i].role === "user") {
+        lastUser = chat.messages[i];
+        chat.messages.splice(i, 1);
+        break;
+      }
+    }
+    if (!lastUser) return;
+    saveAll();
+    renderThread();
+    doSend(lastUser.content, { image: lastUser.image || null, force: true });
+  }
+
+  window.__bdcSend = doSend;
+
+  /* ========== Google login (ChatGPT-style) ========== */
+  function getGoogleUser() {
+    if (googleUser) return googleUser;
+    try {
+      var raw = lsGet(SK.google, "");
+      if (raw) googleUser = JSON.parse(raw);
+    } catch (e) {
+      googleUser = null;
+    }
+    return googleUser;
+  }
+  function setGoogleUser(u) {
+    googleUser = u || null;
+    if (googleUser) lsSet(SK.google, JSON.stringify(googleUser));
+    else lsSet(SK.google, "");
+    updateGoogleUI();
+    if (googleUser && googleUser.email) {
+      lsSet(SK.gate, "1");
+      showGate(false);
+      showApp(true);
+    }
+  }
+  function getGClient() {
+    return (lsGet(SK.gclient, "") || "").trim();
+  }
+  function setGClient(id) {
+    lsSet(SK.gclient, (id || "").trim());
+  }
+
+  function updateGoogleUI() {
+    var u = getGoogleUser();
+    var chip = $("googleUserChip");
+    var av = $("googleUserAvatar");
+    var nm = $("googleUserName");
+    var prof = $("googleProfile");
+    var pImg = $("gProfileImg");
+    var pName = $("gProfileName");
+    var pEmail = $("gProfileEmail");
+    var outBtn = $("googleSignOutBtn");
+    var inBtn = $("googleSignInBtn");
+    if (u && u.email) {
+      if (chip) {
+        chip.hidden = false;
+        if (av && u.picture) av.src = u.picture;
+        if (nm) nm.textContent = (u.name || u.email).split(" ")[0];
+      }
+      if (prof) {
+        prof.hidden = false;
+        if (pImg && u.picture) pImg.src = u.picture;
+        if (pName) pName.textContent = u.name || "User";
+        if (pEmail) pEmail.textContent = u.email;
+      }
+      if (outBtn) outBtn.hidden = false;
+      if (inBtn) inBtn.innerHTML = "✓ Signed in";
+    } else {
+      if (chip) chip.hidden = true;
+      if (prof) prof.hidden = true;
+      if (outBtn) outBtn.hidden = true;
+      if (inBtn)
+        inBtn.innerHTML =
+          '<svg class="g-svg" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg> Sign in with Google';
+    }
+    var cid = $("googleClientId");
+    var gcid = $("gateClientId");
+    if (cid && !cid.value) cid.value = getGClient();
+    if (gcid && !gcid.value) gcid.value = getGClient();
+  }
+
+  function parseJwt(token) {
+    try {
+      var b = token.split(".")[1].replace(/-/g, "+").replace(/_/g, "/");
+      return JSON.parse(
+        decodeURIComponent(
+          atob(b)
+            .split("")
+            .map(function (c) {
+              return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+            })
+            .join("")
+        )
+      );
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function onGoogleCred(resp) {
+    if (!resp || !resp.credential) {
+      toast("Google sign-in cancelled");
+      return;
+    }
+    var p = parseJwt(resp.credential);
+    if (!p || !p.email) {
+      toast("Could not read Google profile");
+      return;
+    }
+    setGoogleUser({
+      name: p.name || p.given_name || "User",
+      email: p.email,
+      picture: p.picture || "",
+      sub: p.sub || "",
+      ts: Date.now(),
+    });
+    toast("Hi, " + (p.given_name || p.name || p.email));
+  }
+
+  function loadGis(cb) {
+    if (window.google && google.accounts && google.accounts.id) {
+      cb && cb();
+      return;
+    }
+    var s = document.createElement("script");
+    s.src = "https://accounts.google.com/gsi/client";
+    s.async = true;
+    s.onload = function () {
+      cb && cb();
+    };
+    s.onerror = function () {
+      toast("Could not load Google Sign-In");
+    };
+    document.head.appendChild(s);
+  }
+
+  function initGoogle(clientId) {
+    if (!clientId) return;
+    if (!(window.google && google.accounts && google.accounts.id)) return;
+    try {
+      google.accounts.id.initialize({
+        client_id: clientId,
+        callback: onGoogleCred,
+        auto_select: false,
+        cancel_on_tap_outside: true,
+        context: "signin",
+        ux_mode: "popup",
+      });
+      // Render official buttons into hosts
+      ["gateGoogleHost", "googleBtnHost"].forEach(function (id) {
+        var host = $(id);
+        if (!host) return;
+        host.innerHTML = "";
+        try {
+          google.accounts.id.renderButton(host, {
+            type: "standard",
+            theme: "outline",
+            size: "large",
+            text: "continue_with",
+            shape: "pill",
+            width: 320,
+            logo_alignment: "left",
+          });
+        } catch (e) {}
+      });
+    } catch (e) {
+      console.warn(e);
+    }
+  }
+
+  function startGoogleSignIn() {
+    var cid =
+      (($("gateClientId") && $("gateClientId").value) ||
+        ($("googleClientId") && $("googleClientId").value) ||
+        getGClient() ||
+        "").trim();
+    if (!cid) {
+      toast("Add OAuth Client ID (tap setup)");
+      var det = $("devSetup");
+      if (det) det.open = true;
+      var g = $("gateClientId");
+      if (g) g.focus();
+      return;
+    }
+    setGClient(cid);
+    if ($("googleClientId")) $("googleClientId").value = cid;
+    if ($("gateClientId")) $("gateClientId").value = cid;
+
+    loadGis(function () {
+      initGoogle(cid);
+      try {
+        // Prefer One Tap account chooser when available
+        google.accounts.id.prompt(function (n) {
+          if (n && typeof n.isNotDisplayed === "function" && n.isNotDisplayed()) {
+            // User can click the official rendered Google button
+            toast("Tap the Google button");
+          }
+          if (n && typeof n.isSkippedMoment === "function" && n.isSkippedMoment()) {
+            toast("Tap the Google button below");
+          }
+        });
+      } catch (e) {
+        toast("Tap the Google button");
+      }
+    });
+  }
+
+  function googleSignOut() {
+    try {
+      if (window.google && google.accounts && google.accounts.id) google.accounts.id.disableAutoSelect();
+    } catch (e) {}
+    setGoogleUser(null);
+    toast("Signed out");
+  }
+
+  /* ========== gate / app shell ========== */
+  function showGate(show) {
+    if (!loginGate) return;
+    loginGate.hidden = !show;
+  }
+  function showApp(show) {
+    if (!appShell) return;
+    appShell.hidden = !show;
+  }
+  function enterApp() {
+    lsSet(SK.gate, "1");
+    showGate(false);
+    showApp(true);
+    try {
+      prompt.focus({ preventScroll: true });
+    } catch (e) {}
+  }
+
+  /* ========== settings / paste ========== */
+  function openSettings() {
+    var m = $("settingsModal");
+    if (!m) return;
+    if ($("apiKeyInput")) $("apiKeyInput").value = getApiKey();
+    if ($("googleClientId")) $("googleClientId").value = getGClient();
+    updateGoogleUI();
+    updateModeUI();
+    if (online) setStatus("✅ Online · " + modelName, "ok");
+    else if (getApiKey()) setStatus("Key saved — tap Go Online", "pending");
+    else setStatus("Offline ready. Add key + Go Online for Gemini.", "");
+    m.hidden = false;
+    document.body.style.overflow = "hidden";
+    closeSide();
+  }
+  function closeSettings() {
+    var m = $("settingsModal");
+    if (m) m.hidden = true;
+    document.body.style.overflow = "";
+  }
+
+  async function pasteKey() {
+    var input = $("apiKeyInput");
+    if (!input) return;
+    var text = "";
+    try {
+      if (navigator.clipboard && navigator.clipboard.readText) text = await navigator.clipboard.readText();
+    } catch (e) {}
+    text = String(text || "").replace(/\s+/g, "");
+    if (text) {
+      input.value = text;
+      input.type = "text";
+      toast("Key pasted");
+      var bar = $("pasteBar");
+      if (bar) bar.hidden = true;
+      return;
+    }
+    input.focus();
+    var bar2 = $("pasteBar");
+    if (bar2) bar2.hidden = false;
+    toast("Long-press box → Paste");
+  }
+
+  /* ========== wire events ========== */
+  function bindAll() {
+    // SEND / STOP
+    function onSendTap(e) {
+      if (e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+      if (busy) stopGeneration();
+      else doSend(prompt.value);
+      return false;
+    }
+    sendBtn.type = "button";
+    sendBtn.disabled = false;
+    sendBtn.addEventListener("click", onSendTap, false);
+    sendBtn.addEventListener(
+      "touchend",
+      function (e) {
+        e.preventDefault();
+        onSendTap(e);
+      },
+      { passive: false }
+    );
+
+    prompt.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) {
+        e.preventDefault();
+        if (!busy) doSend(prompt.value);
+      }
+    });
+    prompt.addEventListener("input", function () {
+      updateSendUI();
+      autoSize();
+    });
+
+    // cards
+    var cards = $("cards");
+    if (cards) {
+      cards.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-text]");
+        if (b && !busy) doSend(b.getAttribute("data-text"));
+      });
+    }
+    var catTabs = $("catTabs");
+    if (catTabs) {
+      catTabs.addEventListener("click", function (e) {
+        var b = e.target.closest(".cat");
+        if (!b) return;
+        catTabs.querySelectorAll(".cat").forEach(function (x) {
+          x.classList.toggle("on", x === b);
+        });
+        renderCards(b.getAttribute("data-cat"));
+      });
+    }
+
+    // nav
+    var mapClick = [
+      ["sideNewChat", newChat],
+      ["newChatBtn", newChat],
+      ["openSidebar", openSide],
+      ["closeSidebar", closeSide],
+      ["settingsBtn", openSettings],
+      ["openSettingsFromSide", openSettings],
+      ["closeSettings", closeSettings],
+      ["settingsDoneBtn", closeSettings],
+      ["memoryBtn", openMemory],
+      ["openMemoryFromSide", openMemory],
+      ["closeMemory", closeMemory],
+      ["memoryDoneBtn", closeMemory],
+      ["themeBtn", toggleTheme],
+      ["themeBtnSide", toggleTheme],
+      ["themeBtnModal", toggleTheme],
+      ["testConnBtn", goOnline],
+      ["gateGoogleBtn", startGoogleSignIn],
+      ["googleSignInBtn", startGoogleSignIn],
+      ["googleSignOutBtn", googleSignOut],
+      ["gateSkipBtn", enterApp],
+      ["micBtn", toggleMic],
+      ["pasteKeyBtn", pasteKey],
+      ["pasteOptBtn", pasteKey],
+      ["testVoiceBtn", function () {
+        speakText("Hello, I am BDC. This is the " + voiceStyle + " voice.");
+      }],
+    ];
+    mapClick.forEach(function (pair) {
+      var el = $(pair[0]);
+      if (el) el.addEventListener("click", function (e) {
+        e.preventDefault();
+        pair[1](e);
+      });
+    });
+
+    var scrim = $("sidebarScrim");
+    if (scrim) scrim.addEventListener("click", closeSide);
+    var sm = $("settingsModal");
+    if (sm)
+      sm.addEventListener("click", function (e) {
+        if (e.target === sm) closeSettings();
+      });
+
+
+    // Memory modal tabs + actions
+    var memTabs = $("memTabs");
+    if (memTabs) {
+      memTabs.addEventListener("click", function (e) {
+        var tab = e.target.closest(".mem-tab");
+        if (!tab) return;
+        var which = tab.getAttribute("data-mem");
+        memTabs.querySelectorAll(".mem-tab").forEach(function (x) {
+          x.classList.toggle("on", x === tab);
+        });
+        var pt = $("memPanelTemp");
+        var ps = $("memPanelStrong");
+        if (pt) pt.hidden = which !== "temp";
+        if (ps) ps.hidden = which !== "strong";
+      });
+    }
+    var tempEn = $("tempMemEnabled");
+    if (tempEn) {
+      tempEn.addEventListener("change", function () {
+        lsSet(SK.tempOn, tempEn.checked ? "1" : "0");
+        toast(tempEn.checked ? "Temporary memory ON" : "Temporary memory OFF");
+      });
+    }
+    var strongEn = $("strongMemEnabled");
+    if (strongEn) {
+      strongEn.addEventListener("change", function () {
+        lsSet(SK.strongOn, strongEn.checked ? "1" : "0");
+        toast(strongEn.checked ? "Strong memory ON" : "Strong memory OFF");
+      });
+    }
+    var saveStrong = $("saveStrongMem");
+    if (saveStrong) {
+      saveStrong.addEventListener("click", function (e) {
+        e.preventDefault();
+        var ed = $("strongMemEditor");
+        setStrongNotes(ed ? ed.value : "");
+        toast("Strong memory saved");
+      });
+    }
+    var clearStrong = $("clearStrongMem");
+    if (clearStrong) {
+      clearStrong.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (!confirm("Clear lifetime strong memory notes + auto facts?")) return;
+        setStrongNotes("");
+        setStrongFacts([]);
+        var ed = $("strongMemEditor");
+        if (ed) ed.value = "";
+        renderStrongAutoList();
+        toast("Strong memory cleared");
+      });
+    }
+    var clearTemp = $("clearTempMem");
+    if (clearTemp) {
+      clearTemp.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (!confirm("Clear all temporary memories?")) return;
+        setTempMemory([]);
+        renderTempMemList();
+        toast("Temporary memory cleared");
+      });
+    }
+    var memoryModal = $("memoryModal");
+    if (memoryModal) {
+      memoryModal.addEventListener("click", function (e) {
+        if (e.target === memoryModal) closeMemory();
+      });
+    }
+
+    // image
+    var imgBtn = $("imgBtn");
+    var imgInput = $("imgInput");
+    var imgCam = $("imgInputCamera");
+    function openPicker(el) {
+      if (!el) return;
+      try {
+        el.value = "";
+        if (el.showPicker) el.showPicker();
+        else el.click();
+      } catch (e) {
+        try {
+          el.click();
+        } catch (e2) {
+          toast("Cannot open photos");
+        }
+      }
+    }
+    if (imgBtn) {
+      imgBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        openPicker(imgInput);
+      });
+      imgBtn.addEventListener(
+        "touchend",
+        function (e) {
+          e.preventDefault();
+          openPicker(imgInput);
+        },
+        { passive: false }
+      );
+    }
+    if (imgInput)
+      imgInput.addEventListener("change", function () {
+        if (imgInput.files && imgInput.files[0]) setAttachFromFile(imgInput.files[0]);
+      });
+    if (imgCam)
+      imgCam.addEventListener("change", function () {
+        if (imgCam.files && imgCam.files[0]) setAttachFromFile(imgCam.files[0]);
+      });
+    var ac = $("attachClear");
+    if (ac)
+      ac.addEventListener("click", function (e) {
+        e.preventDefault();
+        clearAttach();
+      });
+
+    // voice chips
+    document.querySelectorAll(".voice-chip").forEach(function (chip) {
+      chip.addEventListener("click", function (e) {
+        e.preventDefault();
+        setVoiceStyle(chip.getAttribute("data-voice"));
+        toast("Voice: " + voiceStyle);
+      });
+    });
+
+    // key save/clear
+    var saveKeyBtn = $("saveKeyBtn");
+    if (saveKeyBtn)
+      saveKeyBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        var k = ($("apiKeyInput") && $("apiKeyInput").value.trim()) || "";
+        setApiKey(k);
+        if (!k) {
+          online = false;
+          lsSet(SK.online, "0");
+        }
+        toast("Saved");
+        updateModeUI();
+      });
+    var clearKeyBtn = $("clearKeyBtn");
+    if (clearKeyBtn)
+      clearKeyBtn.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (!confirm("Clear API key?")) return;
+        if ($("apiKeyInput")) $("apiKeyInput").value = "";
+        setApiKey("");
+        online = false;
+        lsSet(SK.online, "0");
+        updateModeUI();
+        setStatus("Offline · Ready", "");
+      });
+
+    // paste long-press on key field
+    var apiKeyInput = $("apiKeyInput");
+    if (apiKeyInput) {
+      var ht = null;
+      apiKeyInput.addEventListener(
+        "touchstart",
+        function () {
+          ht = setTimeout(function () {
+            pasteKey();
+          }, 450);
+        },
+        { passive: true }
+      );
+      apiKeyInput.addEventListener(
+        "touchend",
+        function () {
+          clearTimeout(ht);
+        },
+        { passive: true }
+      );
+      apiKeyInput.addEventListener("paste", function () {
+        setTimeout(function () {
+          apiKeyInput.value = (apiKeyInput.value || "").replace(/\s+/g, "");
+          toast("Pasted");
+        }, 10);
+      });
+    }
+    var pasteCancel = $("pasteCancelBtn");
+    if (pasteCancel)
+      pasteCancel.addEventListener("click", function () {
+        var b = $("pasteBar");
+        if (b) b.hidden = true;
+      });
+    var toggleVis = $("toggleKeyVis");
+    if (toggleVis && apiKeyInput)
+      toggleVis.addEventListener("click", function () {
+        apiKeyInput.type = apiKeyInput.type === "password" ? "text" : "password";
+      });
+
+    // gate client save
+    var gateSave = $("gateSaveClient");
+    if (gateSave)
+      gateSave.addEventListener("click", function (e) {
+        e.preventDefault();
+        var v = ($("gateClientId") && $("gateClientId").value.trim()) || "";
+        setGClient(v);
+        toast(v ? "Client ID saved" : "Cleared");
+        if (v) loadGis(function(){ initGoogle(v); });
+      });
+
+    // install modal
+    var installHelp = $("installHelpBtn");
+    var installModal = $("installModal");
+    function openInstall() {
+      if (installModal) {
+        installModal.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+      closeSide();
+    }
+    function closeInstall() {
+      if (installModal) installModal.hidden = true;
+      document.body.style.overflow = "";
+    }
+    if (installHelp) installHelp.addEventListener("click", openInstall);
+    ["closeInstall", "closeInstall2"].forEach(function (id) {
+      var el = $(id);
+      if (el) el.addEventListener("click", closeInstall);
+    });
+    if (installModal)
+      installModal.addEventListener("click", function (e) {
+        if (e.target === installModal) closeInstall();
+      });
+
+    // chip opens settings
+    var chip = $("googleUserChip");
+    if (chip)
+      chip.addEventListener("click", function (e) {
+        e.preventDefault();
+        openSettings();
+      });
+  }
+
+
+  /* ========== init ========== */
+  applyTheme(lsGet(SK.theme, "dark"));
+  loadVoiceStyle();
+  loadAll();
+
+  // restore online only if previously successful
+  online = lsGet(SK.online, "") === "1" && !!getApiKey();
+  modelName = String(lsGet(SK.model, "gemini-3.6-flash") || "gemini-3.6-flash").replace(/^models\//, "");
+  // migrate retired models automatically
+  if (/gemini-2\.0-flash$|gemini-1\.5-flash$/.test(modelName)) {
+    // keep as preference but goOnline/callGemini will fallback
+  }
+  if ($("apiKeyInput")) $("apiKeyInput").value = getApiKey();
+
+  renderCards("study");
+  renderChatList();
+  renderThread();
+  updateSendUI();
+  autoSize();
+  updateModeUI();
+  updateGoogleUI();
+  bindAll();
+
+  // Gate: show login first unless already entered
+  var gateDone = lsGet(SK.gate, "") === "1";
+  var user = getGoogleUser();
+  if (gateDone || (user && user.email)) {
+    showGate(false);
+    showApp(true);
+  } else {
+    showGate(true);
+    showApp(false);
+  }
+
+  // Prefetch GIS if client id exists (for account picker)
+  if (getGClient()) {
+    loadGis(function () {
+      initGoogle(getGClient());
+    });
+  }
+
+  // Warm speech voices
+  if (window.speechSynthesis) {
+    try {
+      speechSynthesis.getVoices();
+      speechSynthesis.onvoiceschanged = function () {
+        speechSynthesis.getVoices();
+      };
+    } catch (e) {}
+  }
+
+  setTimeout(function () {
+    if (!loginGate || loginGate.hidden) {
+      try {
+        prompt.focus({ preventScroll: true });
+      } catch (e) {}
+    }
+  }, 200);
+
+  console.log("[BDC] v1.7 ready · memory + creator Bhavesh Chaudhary");
+})();
+
+</script>
+</body>
+</html>

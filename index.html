@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0a0a0c" id="metaTheme" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="BDC" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="application-name" content="BDC" />
+  <meta name="description" content="BDC — Fast AI study chat. Offline ready. Google sign-in. Gemini online." />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <title>BDC — AI Study Chat</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css?v=40" />
+</head>
+<body>
+  <!-- ChatGPT-style welcome / login -->
+  <div class="login-gate" id="loginGate">
+    <div class="login-bg" aria-hidden="true"></div>
+    <div class="login-card">
+      <div class="login-logo">B</div>
+      <h1>BDC</h1>
+      <p class="login-tagline">Get answers. Learn faster.</p>
+
+      <button type="button" class="btn-google big" id="gateGoogleBtn">
+        <svg class="g-svg" viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        Continue with Google
+      </button>
+      <div id="gateGoogleHost" class="google-btn-host"></div>
+
+      <button type="button" class="btn-ghost-login" id="gateSkipBtn">Continue without account</button>
+
+      <details class="dev-setup" id="devSetup">
+        <summary>Google login setup (one-time)</summary>
+        <p class="field-hint" style="text-align:left;margin:8px 0">
+          1. Open <a href="https://console.cloud.google.com/apis/credentials" target="_blank" rel="noopener">Google Cloud Credentials</a><br/>
+          2. Create <b>OAuth client ID → Web application</b><br/>
+          3. Add this page URL under <b>Authorized JavaScript origins</b><br/>
+          4. Paste Client ID below, Save, then tap Continue with Google
+        </p>
+        <input type="text" id="gateClientId" class="field-input" placeholder="123-abc.apps.googleusercontent.com" autocomplete="off" spellcheck="false" />
+        <button type="button" class="btn-secondary" id="gateSaveClient" style="width:100%;margin-top:8px">Save Client ID</button>
+      </details>
+
+      <p class="login-fine">By continuing you agree to use BDC for learning. Keys stay on your device.</p>
+    </div>
+  </div>
+
+  <div class="app" id="appShell" hidden>
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-top">
+        <button type="button" class="side-new" id="sideNewChat">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          New chat
+        </button>
+        <button type="button" class="icon-only" id="closeSidebar" aria-label="Close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="sidebar-label">History</div>
+      <div class="chat-list" id="chatList"></div>
+      <div class="sidebar-bottom">
+        <button type="button" class="side-link" id="openMemoryFromSide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path d="M8 6V4h8v2M9 12h6M9 16h4"/></svg>
+          Memory
+        </button>
+        <button type="button" class="side-link" id="openSettingsFromSide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+          Settings
+        </button>
+        <button type="button" class="side-link" id="themeBtnSide">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+          Theme
+        </button>
+        <button type="button" class="side-link" id="installHelpBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+          Install app
+        </button>
+        <div class="ver-tag">BDC v1.7</div>
+      </div>
+    </aside>
+    <div class="sidebar-scrim" id="sidebarScrim" hidden></div>
+
+    <div class="main-col">
+      <header class="top">
+        <div class="top-left">
+          <button type="button" class="icon-only" id="openSidebar" aria-label="Menu">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+          </button>
+          <div class="brand">
+            <div class="brand-icon">B</div>
+            <div>
+              <div class="brand-name">BDC</div>
+              <div class="brand-sub offline" id="modeLabel">Offline · Ready</div>
+            </div>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button type="button" class="guser-chip" id="googleUserChip" hidden title="Account">
+            <img id="googleUserAvatar" alt="" width="28" height="28" />
+            <span id="googleUserName">Account</span>
+          </button>
+          <button type="button" class="icon-only" id="themeBtn" title="Theme" aria-label="Theme">
+            <span id="themeIcon" style="font-size:1.1rem">☀️</span>
+          </button>
+          <button type="button" class="icon-only" id="memoryBtn" title="Memory" aria-label="Memory">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M4 6h16v12a2 2 0 01-2 2H6a2 2 0 01-2-2V6z"/><path d="M8 6V4h8v2M9 12h6M9 16h4"/></svg>
+          </button>
+          <button type="button" class="icon-only" id="settingsBtn" title="Settings" aria-label="Settings">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4"/></svg>
+          </button>
+          <button type="button" class="icon-only" id="newChatBtn" title="New chat" aria-label="New chat">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 5v14M5 12h14"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="main" id="main">
+        <div class="center" id="emptyState">
+          <div class="hero-icon">B</div>
+          <h1>What can I help with?</h1>
+          <p class="hero-desc">Ask anything · Voice · Photo · Fast Gemini answers</p>
+          <div class="cat-tabs" id="catTabs">
+            <button type="button" class="cat on" data-cat="study">📚 Study</button>
+            <button type="button" class="cat" data-cat="code">💻 Code</button>
+            <button type="button" class="cat" data-cat="english">🔤 English</button>
+            <button type="button" class="cat" data-cat="life">🌟 General</button>
+          </div>
+          <div class="cards" id="cards"></div>
+        </div>
+        <div class="thread" id="thread" hidden></div>
+      </main>
+
+      <div class="composer-wrap">
+        <div class="status-chip" id="statusChip" hidden></div>
+        <div class="attach-preview" id="attachPreview" hidden>
+          <img id="attachImg" alt="attachment" />
+          <button type="button" class="attach-x" id="attachClear" aria-label="Remove">×</button>
+        </div>
+        <div class="composer" id="composer">
+          <button type="button" class="comp-icon" id="imgBtn" title="Photo" aria-label="Upload photo">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10.5" r="1.5"/><path d="M21 16l-5-5-4 4-2-2-5 5"/></svg>
+          </button>
+          <input type="file" id="imgInput" accept="image/*" tabindex="-1" />
+          <input type="file" id="imgInputCamera" accept="image/*" capture="environment" tabindex="-1" />
+          <textarea id="prompt" rows="1" placeholder="Message BDC…" autocomplete="off" enterkeyhint="send"></textarea>
+          <button type="button" class="comp-icon" id="micBtn" title="Voice" aria-label="Microphone">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3a3 3 0 00-3 3v6a3 3 0 006 0V6a3 3 0 00-3-3z"/><path d="M19 11a7 7 0 01-14 0M12 18v3"/></svg>
+          </button>
+          <button type="button" class="send" id="sendBtn" aria-label="Send" title="Send">
+            <svg class="ico-send" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.4 20.4l17.45-7.48a1 1 0 000-1.84L3.4 3.6a.993.993 0 00-1.39.91L2 9.12c0 .5.37.93.87.99L17 12 2.87 13.88c-.5.07-.87.5-.87 1l.01 4.61c0 .71.73 1.2 1.39.91z"/></svg>
+            <svg class="ico-stop" width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" hidden><rect x="6" y="6" width="12" height="12" rx="2"/></svg>
+          </button>
+        </div>
+        <p class="fineprint">BDC can make mistakes. Check important info.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Memory modal -->
+  <div class="modal-backdrop" id="memoryModal" hidden>
+    <div class="modal modal-lg" role="dialog" aria-modal="true" aria-labelledby="memoryTitle">
+      <div class="modal-head">
+        <h2 id="memoryTitle">🧠 Memory</h2>
+        <button type="button" class="modal-x" id="closeMemory" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="field-hint" style="margin-bottom:12px">
+          BDC remembers important things you share — like ChatGPT temporary memory + a lifetime notebook you can edit.
+        </p>
+
+        <div class="mem-tabs" id="memTabs">
+          <button type="button" class="mem-tab on" data-mem="temp">1 · Temporary</button>
+          <button type="button" class="mem-tab" data-mem="strong">2 · Strong (lifetime)</button>
+        </div>
+
+        <div id="memPanelTemp" class="mem-panel">
+          <div class="mem-card">
+            <div class="mem-card-title">Temporary memory <span class="mem-badge">auto · ~30 days</span></div>
+            <p class="field-hint">
+              Like ChatGPT / Gemini short-term memory. Recent important facts from chats are saved here and expire after about 30 days.
+            </p>
+            <label class="switch-row">
+              <input type="checkbox" id="tempMemEnabled" checked />
+              <span>Enable temporary memory</span>
+            </label>
+            <div class="mem-list" id="tempMemList"></div>
+            <button type="button" class="btn-secondary" id="clearTempMem" style="width:100%;margin-top:10px">Clear temporary memory</button>
+          </div>
+        </div>
+
+        <div id="memPanelStrong" class="mem-panel" hidden>
+          <div class="mem-card">
+            <div class="mem-card-title">Strong memory <span class="mem-badge life">lifetime · editable</span></div>
+            <p class="field-hint">
+              Lifetime notes BDC always remembers. Edit anytime. Write facts, name, class, goals, preferences…
+            </p>
+            <label class="switch-row">
+              <input type="checkbox" id="strongMemEnabled" checked />
+              <span>Enable strong memory</span>
+            </label>
+            <label class="field-label" for="strongMemEditor">Your lifetime notes</label>
+            <textarea id="strongMemEditor" class="field-input mem-editor" rows="10" placeholder="Example:&#10;My name is …&#10;I study in class 10&#10;I prefer Gujarati answers&#10;My goal is …"></textarea>
+            <div class="conn-row" style="margin-top:10px">
+              <button type="button" class="btn-primary" id="saveStrongMem">💾 Save strong memory</button>
+              <button type="button" class="btn-secondary danger" id="clearStrongMem">Clear</button>
+            </div>
+            <div class="mem-list" id="strongAutoList" style="margin-top:12px"></div>
+            <p class="field-hint" style="margin-top:8px">Auto-saved lifetime facts also appear above as chips — tap × to remove one.</p>
+          </div>
+        </div>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn-primary" id="memoryDoneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Settings -->
+  <div class="modal-backdrop" id="settingsModal" hidden>
+    <div class="modal modal-lg" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h2>Settings</h2>
+        <button type="button" class="modal-x" id="closeSettings" aria-label="Close">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="glogin-box" id="gloginBox">
+          <div class="glogin-title">Google account</div>
+          <div class="gprofile" id="googleProfile" hidden>
+            <img id="gProfileImg" alt="" width="44" height="44" />
+            <div>
+              <div class="gprofile-name" id="gProfileName">—</div>
+              <div class="gprofile-email" id="gProfileEmail">—</div>
+            </div>
+          </div>
+          <label class="field-label" for="googleClientId">OAuth Client ID</label>
+          <input type="text" id="googleClientId" class="field-input" placeholder="xxx.apps.googleusercontent.com" autocomplete="off" />
+          <div class="conn-row" style="margin-top:10px">
+            <button type="button" class="btn-google" id="googleSignInBtn">
+              <svg class="g-svg" viewBox="0 0 24 24" width="18" height="18"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Sign in with Google
+            </button>
+            <button type="button" class="btn-secondary" id="googleSignOutBtn" hidden>Sign out</button>
+          </div>
+          <div id="googleBtnHost" class="google-btn-host"></div>
+        </div>
+
+        <label class="field-label" for="apiKeyInput">Gemini API key (for Online mode)</label>
+        <div class="key-row">
+          <input type="text" id="apiKeyInput" class="field-input" placeholder="Long-press or tap Paste" autocomplete="off" spellcheck="false" />
+          <button type="button" class="btn-ghost-sm" id="pasteKeyBtn" title="Paste">📋</button>
+          <button type="button" class="btn-ghost-sm" id="toggleKeyVis" title="Show/hide">👁</button>
+        </div>
+        <div class="paste-bar" id="pasteBar" hidden>
+          <button type="button" class="paste-opt" id="pasteOptBtn">📋 Paste key</button>
+          <button type="button" class="paste-opt ghost" id="pasteCancelBtn">Cancel</button>
+        </div>
+        <div class="auto-model-box">
+          <div class="auto-model-label">Model</div>
+          <div class="auto-model-value" id="autoModelValue">gemini-3.6-flash (auto)</div>
+        </div>
+        <select id="modelSelect" hidden><option value="gemini-3.6-flash">flash</option></select>
+        <div class="conn-row">
+          <button type="button" class="btn-primary" id="testConnBtn">⚡ Go Online</button>
+          <button type="button" class="btn-secondary" id="saveKeyBtn">Save</button>
+          <button type="button" class="btn-secondary danger" id="clearKeyBtn">Clear</button>
+        </div>
+        <div class="conn-status" id="connStatus">Offline works now. Go Online for full Gemini.</div>
+
+        <label class="field-label">Voice style</label>
+        <div class="voice-picks" id="voicePicks">
+          <button type="button" class="voice-chip on" data-voice="warm">Warm</button>
+          <button type="button" class="voice-chip" data-voice="clear">Clear</button>
+          <button type="button" class="voice-chip" data-voice="soft">Soft</button>
+        </div>
+        <button type="button" class="btn-secondary" id="testVoiceBtn" style="width:100%;margin-top:8px">▶ Test voice</button>
+
+        <div class="mode-box" style="margin-top:14px">
+          <div id="settingsModeText">Offline · Ready</div>
+          <button type="button" class="btn-secondary" id="themeBtnModal" style="margin-top:8px;width:100%">Toggle theme</button>
+        </div>
+        <p class="field-hint" style="margin-top:12px">API key: <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">aistudio.google.com/apikey</a></p>
+      </div>
+      <div class="modal-foot">
+        <button type="button" class="btn-primary" id="settingsDoneBtn">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="installModal" hidden>
+    <div class="modal">
+      <div class="modal-head"><h2>Install BDC</h2><button type="button" class="modal-x" id="closeInstall">×</button></div>
+      <div class="modal-body">
+        <ol class="steps" style="margin-left:1.2rem;line-height:1.7">
+          <li>Open in <b>Chrome</b></li>
+          <li>Tap <b>⋮</b> → <b>Install app</b></li>
+          <li>Open BDC from home screen</li>
+        </ol>
+      </div>
+      <div class="modal-foot"><button type="button" class="btn-primary" id="closeInstall2">OK</button></div>
+    </div>
+  </div>
+
+  <!-- hidden legacy nodes for JS compat -->
+  <div id="onboard" hidden></div>
+  <div id="onboardSlides" hidden></div>
+  <div id="obDots" hidden></div>
+  <button type="button" id="obNext" hidden></button>
+  <button type="button" id="obSkip" hidden></button>
+  <button type="button" id="shareBtn" hidden></button>
+
+  <div class="toast" id="toast" hidden></div>
+  <script src="agent.js?v=40"></script>
+  <script src="app.js?v=40"></script>
+</body>
+</html>

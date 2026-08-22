@@ -1,0 +1,10 @@
+{
+  "name": "bhavesh-study-agent",
+  "version": "1.7.0",
+  "private": true,
+  "description": "BDC 1.4 offline-first + Google login + Gemini",
+  "scripts": {
+    "dev": "npx --yes serve -l 3000 -n .",
+    "start": "npx --yes serve -l 3000 -n ."
+  }
+}
