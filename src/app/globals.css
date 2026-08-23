@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --surface: #ffffff;
+  --surface-raised: #f7f8fa;
+  --surface-overlay: #ffffff;
+  --surface-border: #e4e7ec;
+  --surface-hover: #f0f2f5;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --accent-subtle: #eef2ff;
+  --accent-fg: #ffffff;
+  --ink-primary: #111827;
+  --ink-secondary: #4b5563;
+  --ink-tertiary: #8b93a3;
+  --danger: #dc2626;
+  --success: #059669;
+  --warning: #d97706;
+}
+
+.dark {
+  --surface: #131417;
+  --surface-raised: #1a1c20;
+  --surface-overlay: #1e2126;
+  --surface-border: #2a2e35;
+  --surface-hover: #24272d;
+  --accent: #818cf8;
+  --accent-hover: #6366f1;
+  --accent-subtle: #26264f;
+  --accent-fg: #0b0c10;
+  --ink-primary: #f3f4f6;
+  --ink-secondary: #b6bcc8;
+  --ink-tertiary: #7d8492;
+  --danger: #f87171;
+  --success: #34d399;
+  --warning: #fbbf24;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  @apply bg-surface text-ink-primary antialiased;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--surface-border) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--surface-border);
+  border-radius: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* markdown content */
+.md > *:first-child { margin-top: 0; }
+.md > *:last-child { margin-bottom: 0; }
+.md h1, .md h2, .md h3, .md h4 { @apply font-semibold text-ink-primary mt-5 mb-2 leading-snug; }
+.md h1 { @apply text-xl; }
+.md h2 { @apply text-lg; }
+.md h3 { @apply text-base; }
+.md p { @apply my-2.5 leading-relaxed; }
+.md ul { @apply list-disc pl-6 my-2.5 space-y-1; }
+.md ol { @apply list-decimal pl-6 my-2.5 space-y-1; }
+.md blockquote { @apply border-l-4 border-surface-border pl-4 my-3 text-ink-secondary italic; }
+.md a { @apply text-accent underline underline-offset-2 hover:opacity-80; }
+.md hr { @apply border-surface-border my-4; }
+.md code:not(pre code) {
+  @apply rounded bg-surface-raised border border-surface-border px-1.5 py-0.5 font-mono text-[0.85em];
+}
+.md pre {
+  @apply my-3 overflow-x-auto rounded-lg border border-surface-border bg-surface-raised p-3.5 font-mono text-[13px] leading-relaxed;
+}
+.md table { @apply my-3 w-full border-collapse text-sm; }
+.md th, .md td { @apply border border-surface-border px-2.5 py-1.5 text-left; }
+.md th { @apply bg-surface-raised font-medium; }
+
+.skeleton {
+  @apply rounded-md bg-surface-raised relative overflow-hidden;
+}
+.skeleton::after {
+  content: "";
+  @apply absolute inset-0;
+  background: linear-gradient(90deg, transparent, rgba(125, 125, 125, 0.12), transparent);
+  background-size: 400px 100%;
+  animation: shimmer 1.4s linear infinite;
+}
