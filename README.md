@@ -59,6 +59,12 @@ database operation is implemented and covered by an automated end-to-end suite (
 
 ## Quick start
 
+[![Deploy to Render](https://render.com/images/deploy-to-render.svg)](https://render.com/deploy?repo=https://github.com/royalarbuda77-design/bhavesh/tree/arena/01a02a37-bhavesh)
+
+> **Note:** a CDN link (jsDelivr/raw.githack) cannot run this app — it's a full-stack
+> Next.js application (auth, streaming API, SQLite database, encrypted key storage)
+> that needs a Node.js server. Use the button above or see [DEPLOY.md](./DEPLOY.md).
+
 ```bash
 cp .env.example .env          # optional — sane dev defaults work out of the box
 npm install

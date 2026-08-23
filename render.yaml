@@ -1,0 +1,25 @@
+# Render.com one-click deployment for Nexus AI
+# Use the "Deploy to Render" button in README.md, or:
+# render.com → New → Blueprint → select this repo.
+services:
+  - type: web
+    name: nexus-ai
+    runtime: docker          # uses the repo Dockerfile (Node 22 + SQLite)
+    plan: starter
+    healthCheckPath: /api/health
+    disk:                    # persistent SQLite storage (users, chats, encrypted keys)
+      name: nexus-data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: AUTH_SECRET      # random secret for session JWTs
+        generateValue: true
+      - key: ENCRYPTION_KEY   # random 32-byte key for encrypting provider API keys at rest
+        generateValue: true
+      - key: APP_URL          # set after first deploy: https://<your-service>.onrender.com
+        sync: false
+      # Optional — reliable web search for the agent:
+      # - key: TAVILY_API_KEY
+      #   sync: false
