@@ -1,0 +1,28 @@
+{
+  "id": "/",
+  "name": "Nexus AI — Multi-Model AI Assistant",
+  "short_name": "Nexus AI",
+  "description": "Connect your own AI providers (OpenAI, Anthropic, Google, OpenRouter, Groq, Mistral, xAI or any OpenAI-compatible endpoint) and chat with all your models in one unified interface.",
+  "start_url": "/chat",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#131417",
+  "theme_color": "#4f46e5",
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "New chat",
+      "url": "/chat",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "AI Models",
+      "url": "/models",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

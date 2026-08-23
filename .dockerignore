@@ -1,0 +1,9 @@
+node_modules
+.next
+data
+assets-src
+.git
+.env
+.env.*
+Dockerfile
+.dockerignore

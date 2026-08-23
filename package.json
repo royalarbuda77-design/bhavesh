@@ -1,0 +1,37 @@
+{
+  "name": "nexus-ai-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Multi-model AI assistant platform — bring your own provider keys, one unified chat.",
+  "scripts": {
+    "dev": "next dev -H 0.0.0.0 -p 3000",
+    "build": "next build",
+    "start": "next start -H 0.0.0.0 -p 3000",
+    "test": "tsx --test tests/unit/*.test.ts",
+    "test:e2e": "node scripts/e2e.mjs",
+    "db:reset": "node -e \"require('fs').rmSync('data',{recursive:true,force:true});console.log('data/ removed')\"",
+    "test:unit": "tsx --test tests/unit/*.test.ts"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.9.6",
+    "lucide-react": "^0.460.0",
+    "mammoth": "^1.8.0",
+    "next": "^15.3.0",
+    "pdfjs-dist": "^6.2.108",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^22.15.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "sharp": "^0.35.3",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.23.12",
+    "typescript": "^5.6.0"
+  }
+}
