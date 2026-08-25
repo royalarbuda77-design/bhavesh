@@ -4,6 +4,7 @@ A premium opening to the journey — a personal aspirant website for **Saad Sakh
 
 ## ✨ Highlights
 
+- 🎁 **Gift Surprise Entrance** — a premium dark-luxury gift box greets visitors; opening it reveals an elegant "Are You Saad Sakhidas?" moment before entering the site (session-aware, mobile-first, pure CSS/JS — the main site is never touched)
 - 🎨 Animated gradient hero name with floating starfield & aurora glow
 - ⏳ Live countdown to **02 May 2027** (NEET–UG 2027, 2:00 PM IST)
 - 🔥 Preparation momentum meter that grows every day until the exam
@@ -26,8 +27,10 @@ python3 -m http.server 8000
 ## 📂 Structure
 
 ```
-├── index.html          # Page markup
-├── css/style.css       # Premium dark-glass theme
+├── index.html          # Page markup (+ gift-gate overlay markup)
+├── css/style.css       # Premium dark-glass theme (untouched site styles)
+├── css/gift.css        # Gift Surprise Entrance styles (overlay only)
+├── js/gift.js          # Gift flow controller (open → question → enter)
 ├── js/script.js        # Countdown, particles, tilt, reveals, quotes
 └── assets/             # AIIMS Rishikesh campus image
 ```

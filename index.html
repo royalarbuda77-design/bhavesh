@@ -11,9 +11,63 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/gift.css" />
+  <script>
+    /* Anti-flash: show the gift gate only if this session hasn't entered yet */
+    (function () {
+      try {
+        if (sessionStorage.getItem("ss_gift_entered") !== "1")
+          document.documentElement.classList.add("gift-show");
+      } catch (e) { document.documentElement.classList.add("gift-show"); }
+    })();
+  </script>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>" />
 </head>
 <body>
+
+  <!-- ============ GIFT SURPRISE ENTRANCE (overlay layer — site below stays untouched) ============ -->
+  <div id="giftGate" class="gift-gate" role="dialog" aria-modal="true" aria-label="A surprise gift">
+    <div class="gift-halo" aria-hidden="true"></div>
+    <div class="gift-dust" id="giftDust" aria-hidden="true"></div>
+
+    <div class="gift-stage" id="giftStage">
+      <div class="gift-intro">
+        <span class="gift-kicker">✦ A Gift For You ✦</span>
+        <p class="gift-whisper">Someone left you a little surprise…</p>
+      </div>
+
+      <div class="gift-float">
+        <div class="gift-box" id="giftBox" role="button" tabindex="0" aria-label="Open the gift">
+          <div class="gift-rays" aria-hidden="true"></div>
+          <div class="gift-light" aria-hidden="true"></div>
+          <div class="gift-burst" id="giftBurst" aria-hidden="true"></div>
+          <div class="gift-body" aria-hidden="true">
+            <span class="gift-ribbon"></span>
+            <span class="gift-shine"></span>
+          </div>
+          <div class="gift-lid" aria-hidden="true">
+            <span class="gift-ribbon"></span>
+            <span class="gift-bow"><i></i><i></i></span>
+          </div>
+          <div class="gift-shadow" aria-hidden="true"></div>
+        </div>
+      </div>
+
+      <button type="button" class="gift-open-btn" id="giftOpenBtn">Open the Gift</button>
+    </div>
+
+    <div class="gift-question" id="giftQuestion" hidden>
+      <div class="gq-card">
+        <span class="gq-kicker">A little surprise awaits inside.</span>
+        <h2 class="gq-title">Are You <em>Saad&nbsp;Sakhidas?</em></h2>
+        <div class="gq-actions">
+          <button type="button" class="gq-btn gq-yes" id="giftYes">Yes, Open My Gift</button>
+          <button type="button" class="gq-btn gq-no" id="giftNo">No, Go Back</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- ============ /GIFT SURPRISE ENTRANCE ============ -->
 
   <!-- Ambience layers -->
   <canvas id="particles" aria-hidden="true"></canvas>
@@ -281,6 +335,7 @@
 
   <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
 
+  <script src="js/gift.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
