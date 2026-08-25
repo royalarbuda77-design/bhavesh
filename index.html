@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Saad Sakhidas — NEET 2027 Aspirant at Aakash Institute. Dream: AIIMS Rishikesh. Follow the journey to the white coat." />
+  <title>Saad Sakhidas • NEET 2027 • Dream — AIIMS Rishikesh</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🩺</text></svg>" />
+</head>
+<body>
+
+  <!-- Ambience layers -->
+  <canvas id="particles" aria-hidden="true"></canvas>
+  <div class="aurora" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+  <div class="grid-overlay" aria-hidden="true"></div>
+  <div class="cursor-glow" aria-hidden="true"></div>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollBar"></span></div>
+
+  <!-- Navbar -->
+  <nav class="nav" id="nav">
+    <a href="#home" class="brand">
+      <span class="brand-dot">SS</span>
+      <span class="brand-name">Saad&nbsp;Sakhidas</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about" class="nav-link">About</a>
+      <a href="#countdown" class="nav-link">Countdown</a>
+      <a href="#dream" class="nav-link">The Dream</a>
+      <a href="#pattern" class="nav-link">Pattern</a>
+      <a href="#journey" class="nav-link">Journey</a>
+    </div>
+    <a href="#dream" class="nav-cta">✦ AIIMS Rishikesh</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero" id="home">
+    <div class="hero-badge reveal">
+      <span class="pulse-dot"></span> NEET–UG 2027 &nbsp;ASPIRANT
+    </div>
+
+    <h1 class="hero-title">
+      <span class="hero-line" id="nameTop">SAAD</span>
+      <span class="hero-line gradient-name" id="nameMain">SAKHIDAS</span>
+    </h1>
+
+    <p class="hero-tagline reveal">
+      Future Doctor in the making <span class="accent">🩺</span><br />
+      Studying at <strong>Aakash Institute</strong> • Target <strong>NEET 2027</strong> • Dream <strong class="accent-grad">AIIMS&nbsp;Rishikesh</strong>
+    </p>
+
+    <div class="hero-ctas reveal">
+      <a href="#journey" class="btn btn-primary">🚀 My Journey</a>
+      <a href="#countdown" class="btn btn-ghost">⏳ Live Countdown</a>
+    </div>
+
+    <div class="hero-chips reveal">
+      <div class="chip"><span class="chip-k">Exam</span><span class="chip-v">NEET–UG 2027</span></div>
+      <div class="chip"><span class="chip-k">Coaching</span><span class="chip-v">Aakash Institute</span></div>
+      <div class="chip"><span class="chip-k">Dream College</span><span class="chip-v gold">AIIMS Rishikesh</span></div>
+    </div>
+
+    <a href="#about" class="scroll-hint" aria-label="Scroll down">
+      <span class="mouse"><span class="wheel"></span></span>
+      <span class="scroll-txt">scroll</span>
+    </a>
+  </header>
+
+  <!-- Marquee -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>DREAM BIG ✦ NEET 2027 ✦ AIIMS RISHIKESH ✦ WORK HARD IN SILENCE ✦ LET THE RANK MAKE THE NOISE ✦ 700+ TARGET ✦ WHITE COAT LOADING ✦&nbsp;</span>
+      <span>DREAM BIG ✦ NEET 2027 ✦ AIIMS RISHIKESH ✦ WORK HARD IN SILENCE ✦ LET THE RANK MAKE THE NOISE ✦ 700+ TARGET ✦ WHITE COAT LOADING ✦&nbsp;</span>
+    </div>
+  </div>
+
+  <!-- About -->
+  <section class="section" id="about">
+    <div class="section-head reveal">
+      <span class="kicker">01 • About Me</span>
+      <h2>Ek <span class="grad-text">Sapna</span>, Ek <span class="grad-text2">Mission</span></h2>
+      <p class="section-sub">Hoon Saad Sakhidas — ek NEET aspirant, Aakash classroom no student, ane mane Rishikesh na parvat vachche AIIMS na white coat nu sapnu chhe.</p>
+    </div>
+
+    <div class="cards three">
+      <article class="glass-card tilt reveal" data-tilt>
+        <div class="card-icon">📚</div>
+        <h3>Aakash Classroom</h3>
+        <p>Preparing with India's most trusted NEET coaching — disciplined study hours, daily tests, NCERT-first strategy and concept clarity in every subject.</p>
+        <div class="card-tag">Class 11 → 12 • Foundation Batch</div>
+      </article>
+
+      <article class="glass-card tilt reveal" data-tilt>
+        <div class="card-icon">🩺</div>
+        <h3>NEET–UG 2027</h3>
+        <p>India's biggest medical entrance — 180 questions, 720 marks, 3 hours. My mission: cross <b>700+</b> and secure an All-India Rank that opens AIIMS doors.</p>
+        <div class="card-tag">First attempt • Target AIR under 1000</div>
+      </article>
+
+      <article class="glass-card tilt reveal" data-tilt>
+        <div class="card-icon">🏔️</div>
+        <h3>AIIMS Rishikesh</h3>
+        <p>The dream destination — an Institute of National Importance in the Himalayan foothills, where the Ganga flows and great doctors are made.</p>
+        <div class="card-tag gold-tag">MBBS • Batch of 2027</div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Countdown -->
+  <section class="section countdown-section" id="countdown">
+    <div class="section-head reveal">
+      <span class="kicker">02 • Mission Clock</span>
+      <h2>Countdown to <span class="grad-text">NEET 2027</span></h2>
+      <p class="section-sub">Every second is a syllabus page waiting to be conquered.<br/>Target date: <b>02 May 2027 • 2:00 PM IST</b></p>
+    </div>
+
+    <div class="countdown reveal" id="countdownGrid">
+      <div class="cd-box"><span class="cd-num" id="cdDays">000</span><span class="cd-label">Days</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cdHours">00</span><span class="cd-label">Hours</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box"><span class="cd-num" id="cdMins">00</span><span class="cd-label">Minutes</span></div>
+      <div class="cd-sep">:</div>
+      <div class="cd-box gold"><span class="cd-num" id="cdSecs">00</span><span class="cd-label">Seconds</span></div>
+    </div>
+
+    <div class="prep-meter reveal">
+      <div class="prep-head"><span>🔥 Preparation Momentum</span><span id="prepPct">0%</span></div>
+      <div class="prep-track"><div class="prep-fill" id="prepFill"></div></div>
+      <p class="prep-note">Consistency beat karva mate roj 1% better — <i>“Dhime dhime, pakka pakka.”</i></p>
+    </div>
+
+    <div class="fact-row reveal">
+      <div class="fact"><b>180</b><span>Questions</span></div>
+      <div class="fact"><b>720</b><span>Marks</span></div>
+      <div class="fact"><b>3:00</b><span>Hours</span></div>
+      <div class="fact gold"><b>700+</b><span>My Target</span></div>
+    </div>
+  </section>
+
+  <!-- Dream -->
+  <section class="section" id="dream">
+    <div class="section-head reveal">
+      <span class="kicker">03 • The Dream</span>
+      <h2>Where I'm <span class="grad-text">Meant To Be</span></h2>
+    </div>
+
+    <div class="dream-wrap reveal">
+      <div class="dream-media tilt" data-tilt>
+        <img src="assets/aiims-rishikesh.jpg" alt="AIIMS Rishikesh campus in the Himalayan foothills" loading="lazy" />
+        <div class="dream-badge">🏔️ Rishikesh, Uttarakhand</div>
+      </div>
+      <div class="dream-body">
+        <h3>All India Institute of Medical Sciences, <span class="grad-text2">Rishikesh</span></h3>
+        <p class="dream-para">In the valley of sages and the sound of the Ganga, stands one of India's finest medical institutes. This is where the white-coat dream becomes reality — and this is exactly where I'm headed.</p>
+        <div class="dream-stats">
+          <div class="d-stat"><b>2012</b><span>Established</span></div>
+          <div class="d-stat"><b>125</b><span>MBBS Seats</span></div>
+          <div class="d-stat"><b>INI</b><span>Institute of National Importance</span></div>
+          <div class="d-stat"><b>#Goal</b><span>My Rank Destination</span></div>
+        </div>
+        <blockquote class="dream-quote">“Ambition chhe nanu shabd, pan aana pachhal chhe&nbsp;—&nbsp;roj no struggle, roj ni mehnat, ane ek ne ek divas AIIMS na darwaje mari entry.”</blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEET Pattern -->
+  <section class="section" id="pattern">
+    <div class="section-head reveal">
+      <span class="kicker">04 • Battle Blueprint</span>
+      <h2>The <span class="grad-text">NEET</span> Battlefield</h2>
+      <p class="section-sub">4 subjects. 180 questions. 720 marks. +4 for right, −1 for wrong.<br/>Every mark is made in the study room, months before the exam hall.</p>
+    </div>
+
+    <div class="cards four">
+      <article class="glass-card subject tilt reveal" data-tilt>
+        <div class="card-icon">⚛️</div>
+        <h3>Physics</h3>
+        <div class="marks"><b>180</b> marks • 45 Qs</div>
+        <p>Mechanics → Electrodynamics → Modern Physics. Numericals na master.</p>
+        <div class="bar"><span style="--w:75%"></span></div>
+      </article>
+      <article class="glass-card subject tilt reveal" data-tilt>
+        <div class="card-icon">🧪</div>
+        <h3>Chemistry</h3>
+        <div class="marks"><b>180</b> marks • 45 Qs</div>
+        <p>Physical + Organic + Inorganic — NCERT lines rattvi, reactions samajva.</p>
+        <div class="bar"><span style="--w:82%"></span></div>
+      </article>
+      <article class="glass-card subject tilt reveal" data-tilt>
+        <div class="card-icon">🌿</div>
+        <h3>Botany</h3>
+        <div class="marks"><b>180</b> marks • 45 Qs</div>
+        <p>From Cells to Ecosystems — diagrams, cycles ane NCERT one-liners.</p>
+        <div class="bar"><span style="--w:88%"></span></div>
+      </article>
+      <article class="glass-card subject tilt reveal" data-tilt>
+        <div class="card-icon">🧬</div>
+        <h3>Zoology</h3>
+        <div class="marks"><b>180</b> marks • 45 Qs</div>
+        <p>Human physiology to evolution — mara favourite chapters ni malki.</p>
+        <div class="bar"><span style="--w:90%"></span></div>
+      </article>
+    </div>
+  </section>
+
+  <!-- Journey timeline -->
+  <section class="section" id="journey">
+    <div class="section-head reveal">
+      <span class="kicker">05 • The Roadmap</span>
+      <h2>Journey to the <span class="grad-text">White Coat</span></h2>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card glass-card">
+          <span class="tl-year">2025 – 26</span>
+          <h3>Class 11 • Aakash Institute</h3>
+          <p>Strong foundation mode ON — NCERT line-by-line, daily practice problems, weekly Aakash tests, ane concept ni pakad.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card glass-card">
+          <span class="tl-year">2026 – 27</span>
+          <h3>Class 12 • Boards + NEET</h3>
+          <p>Double preparation — Board exams sathe NEET mock marathons, previous-year papers ane full-syllabus revisions.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot"></div>
+        <div class="tl-card glass-card">
+          <span class="tl-year">02 May 2027</span>
+          <h3>NEET–UG 2027 • The Big Day</h3>
+          <p>Exam hall ma confidence sathe entry. Target 700+ marks ane ek All-India Rank jhe AIIMS na darwaja khole.</p>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-dot gold"></div>
+        <div class="tl-card glass-card gold-border">
+          <span class="tl-year">August 2027</span>
+          <h3>🏥 MBBS at AIIMS Rishikesh</h3>
+          <p>White coat, stethoscope ane Himalayan sunrise — Dream unlocked. “Dr. Saad Sakhidas” na nav chapter ni sharuaat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quotes rotator -->
+  <section class="quote-section">
+    <div class="quote-orbit" aria-hidden="true">✦</div>
+    <blockquote class="rot-quote" id="quoteBox">
+      <p id="quoteText">Dream big. Work hard. Stay humble — AIIMS is calling.</p>
+      <cite id="quoteAuthor">— Saad Sakhidas</cite>
+    </blockquote>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner reveal">
+      <span class="footer-kicker">✦ Created &amp; Crafted with ❤️ by ✦</span>
+      <div class="footer-name" id="footerName">Saad&nbsp;Sakhidas</div>
+      <p class="footer-sub">NEET 2027 Aspirant • Aakash Institute • Future — <b>AIIMS Rishikesh</b></p>
+      <div class="footer-tags">
+        <span>🩺 Future Doctor</span><span>📖 NCERT Warrior</span><span>🏔️ Rishikesh Bound</span>
+      </div>
+      <p class="footer-copy">© <span id="year"></span> Saad Sakhidas — “Sapna jota raho, mehnat karta raho.”</p>
+    </div>
+  </footer>
+
+  <button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
