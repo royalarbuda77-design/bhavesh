@@ -162,6 +162,19 @@
         card.style.transform = "";
       });
     });
+
+    /* Cursor-follow glow hotspot on contact cards */
+    document.querySelectorAll(".contact-card").forEach(card => {
+      card.addEventListener("mousemove", e => {
+        const r = card.getBoundingClientRect();
+        card.style.setProperty("--glow-x", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
+        card.style.setProperty("--glow-y", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
+      });
+      card.addEventListener("mouseleave", () => {
+        card.style.setProperty("--glow-x", "50%");
+        card.style.setProperty("--glow-y", "0%");
+      });
+    });
   }
 
   /* ---------- NEET 2027 Countdown ---------- */

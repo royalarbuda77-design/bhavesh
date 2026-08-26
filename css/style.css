@@ -474,7 +474,99 @@ html.js-fx .visible .bar span { width: var(--w); }
 .rot-quote.switch p, .rot-quote.switch cite { opacity: 0; transform: translateY(14px); }
 .rot-quote cite { transition: opacity .55s ease .05s, transform .55s ease .05s; }
 
-/* ---------------- Footer ---------------- */
+/* ---------------- Contact cards ---------------- */
+.contact-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px;
+  max-width: 1020px; margin: 0 auto;
+}
+
+@property --cc-a-angle { syntax: "<angle>"; initial-value: 0deg; inherits: false; }
+
+.contact-card {
+  --cc-a-angle: 0deg;
+  position: relative; display: flex; align-items: center; gap: 16px;
+  padding: 22px 20px; border-radius: 20px;
+  text-decoration: none; color: var(--txt);
+  background:
+    radial-gradient(140px 90px at var(--glow-x, 50%) var(--glow-y, 0%), rgba(255,255,255,.07), transparent 70%),
+    var(--glass);
+  border: 1px solid var(--stroke);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  overflow: hidden;
+  transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+}
+.contact-card::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1px;
+  background: conic-gradient(from var(--cc-a-angle), transparent 0%, var(--cc-a) 12%, var(--cc-b) 26%, transparent 42%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: ccBorder 4.5s linear infinite;
+}
+.contact-card::after {
+  content: ""; position: absolute; inset: -40%; pointer-events: none;
+  background: linear-gradient(100deg, transparent 42%, rgba(255,255,255,.12) 50%, transparent 58%);
+  transform: translateX(-70%) skewX(-12deg);
+  transition: transform .9s ease; opacity: 0;
+}
+.contact-card:hover { transform: translateY(-6px); box-shadow: 0 22px 46px rgba(0,0,0,.5), 0 0 34px -6px var(--cc-a); border-color: transparent; }
+.contact-card:hover::after { transform: translateX(70%) skewX(-12deg); opacity: 1; }
+.contact-card:active { transform: translateY(-2px) scale(.98); }
+
+@keyframes ccBorder { to { --cc-a-angle: 360deg; } }
+/* Fallback for engines without @property: gentle pulsing border */
+@supports not (background: conic-gradient(from var(--cc-a-angle), red, blue)) {
+  .contact-card::before { animation: none; opacity: .45; }
+}
+
+.cc-icon {
+  flex: 0 0 auto; width: 56px; height: 56px; border-radius: 16px;
+  display: grid; place-items: center; color: #fff;
+  position: relative; z-index: 1;
+  animation: ccFloat 3.8s ease-in-out infinite;
+  transition: transform .35s ease;
+}
+.contact-card:hover .cc-icon { animation-play-state: paused; transform: scale(1.12) rotate(-6deg); }
+.cc-icon svg { width: 30px; height: 30px; display: block; }
+@keyframes ccFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+.ic-insta {
+  background: linear-gradient(135deg, #feda75 0%, #fa7e1e 22%, #d62976 48%, #962fbf 76%, #4f5bd5 100%);
+  box-shadow: 0 10px 26px -6px rgba(214, 41, 118, .55), inset 0 1px 2px rgba(255,255,255,.4);
+}
+.ic-wa {
+  background: linear-gradient(135deg, #5de08c 0%, #25d366 45%, #128c7e 100%);
+  box-shadow: 0 10px 26px -6px rgba(37, 211, 102, .5), inset 0 1px 2px rgba(255,255,255,.4);
+}
+.ic-call {
+  background: linear-gradient(135deg, #67e8f9 0%, #22d3ee 40%, #6366f1 100%);
+  box-shadow: 0 10px 26px -6px rgba(34, 211, 238, .5), inset 0 1px 2px rgba(255,255,255,.4);
+}
+
+.cc-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.cc-label {
+  font-family: var(--font-display); font-size: 12px; font-weight: 600;
+  letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted);
+}
+.cc-value {
+  font-family: var(--font-display); font-size: 17px; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.cc-go {
+  margin-left: auto; font-size: 19px; color: var(--cc-a);
+  transition: transform .3s ease; flex: 0 0 auto;
+}
+.contact-card:hover .cc-go { transform: translate(4px, -4px); }
+
+@media (max-width: 980px) { .contact-grid { grid-template-columns: 1fr; max-width: 520px; } }
+
+/* ---------------- Extra premium ambience: hero name sparkle + silky card hover ---------------- */
+.glass-card { will-change: transform; }
+
+.footer-tags span, .chip, .fact, .d-stat { will-change: transform; }
+
+/* Cursor-follow glow tracked by JS */
+.contact-card, .glass-card { position: relative; }
+.contact-card { --glow-x: 50%; --glow-y: 0%; }
 .footer {
   position: relative; z-index: 2; text-align: center; padding: 100px 24px 46px;
   border-top: 1px solid var(--stroke);
