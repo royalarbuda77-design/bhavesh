@@ -484,8 +484,8 @@ html.js-fx .visible .bar span { width: var(--w); }
 
 .contact-card {
   --cc-a-angle: 0deg;
-  position: relative; display: flex; align-items: center; gap: 16px;
-  padding: 22px 20px; border-radius: 20px;
+  position: relative; display: flex; align-items: center; gap: 15px;
+  padding: 17px 20px; border-radius: 18px;
   text-decoration: none; color: var(--txt);
   background:
     radial-gradient(140px 90px at var(--glow-x, 50%) var(--glow-y, 0%), rgba(255,255,255,.07), transparent 70%),
@@ -518,15 +518,16 @@ html.js-fx .visible .bar span { width: var(--w); }
   .contact-card::before { animation: none; opacity: .45; }
 }
 
+/* App-icon sized: compact like a real home-screen app icon */
 .cc-icon {
-  flex: 0 0 auto; width: 56px; height: 56px; border-radius: 16px;
+  flex: 0 0 auto; width: 42px; height: 42px; border-radius: 12px;
   display: grid; place-items: center; color: #fff;
   position: relative; z-index: 1;
   animation: ccFloat 3.8s ease-in-out infinite;
   transition: transform .35s ease;
 }
 .contact-card:hover .cc-icon { animation-play-state: paused; transform: scale(1.12) rotate(-6deg); }
-.cc-icon svg { width: 30px; height: 30px; display: block; }
+.cc-icon svg { width: 23px; height: 23px; display: block; }
 @keyframes ccFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
 .ic-insta {
@@ -548,8 +549,9 @@ html.js-fx .visible .bar span { width: var(--w); }
   letter-spacing: 2.5px; text-transform: uppercase; color: var(--muted);
 }
 .cc-value {
-  font-family: var(--font-display); font-size: 17px; font-weight: 700;
+  font-family: var(--font-display); font-size: clamp(15px, 4vw, 17px); font-weight: 700;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  letter-spacing: .3px;
 }
 .cc-go {
   margin-left: auto; font-size: 19px; color: var(--cc-a);
