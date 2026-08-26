@@ -3,6 +3,9 @@
    ============================================================ */
 (() => {
   "use strict";
+  /* Mark JS as active: only then does CSS hide .reveal elements for animation.
+     If JS never runs (blocked/offline/proxy), content stays fully visible. */
+  document.documentElement.classList.add("js-fx");
   const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- Split hero name & footer name into animated letters ---------- */
@@ -115,18 +118,34 @@
   }, { passive: true });
 
   /* ---------- Reveal on scroll ---------- */
-  const io = new IntersectionObserver(entries => {
-    entries.forEach((e, i) => {
-      if (e.isIntersecting) {
-        e.target.classList.add("visible");
-        io.unobserve(e.target);
-      }
+  let io = null;
+  try {
+    io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add("visible");
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: "0px 0px -6% 0px" });
+    document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+  } catch (e) { io = null; }
+
+  /* Failsafe: nothing on the page may stay hidden.
+     1) immediately reveal whatever is already on screen,
+     2) after 2.2s reveal everything no matter what. */
+  const revealInView = () => {
+    const vh = window.innerHeight || 800;
+    document.querySelectorAll(".reveal:not(.visible)").forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.top < vh && r.bottom > 0) el.classList.add("visible");
     });
-  }, { threshold: 0.14 });
-  document.querySelectorAll(".reveal").forEach(el => {
-    el.style.transitionDelay = el.style.transitionDelay || "";
-    io.observe(el);
-  });
+  };
+  revealInView();
+  setTimeout(revealInView, 400);
+  setTimeout(() => {
+    document.querySelectorAll(".reveal:not(.visible)").forEach(el => el.classList.add("visible"));
+  }, 2200);
 
   /* ---------- 3D tilt on cards ---------- */
   if (matchMedia("(pointer: fine)").matches && !prefersReduced) {

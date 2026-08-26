@@ -422,11 +422,11 @@ body {
 .subject .marks b { font-size: 19px; color: var(--txt); }
 .bar { height: 8px; border-radius: 999px; background: rgba(255,255,255,.07); margin-top: 18px; overflow: hidden; }
 .bar span {
-  display: block; height: 100%; width: 0; border-radius: inherit;
+  display: block; height: 100%; width: var(--w); border-radius: inherit;
   background: var(--grad-main); background-size: 250% 100%; animation: gradShift 5s linear infinite;
-  transition: width 1.6s cubic-bezier(.2,.8,.2,1) .2s;
 }
-.visible .bar span { width: var(--w); }
+html.js-fx .bar span { width: 0; transition: width 1.6s cubic-bezier(.2,.8,.2,1) .2s; }
+html.js-fx .visible .bar span { width: var(--w); }
 
 /* ---------------- Timeline ---------------- */
 .timeline { position: relative; max-width: 760px; margin: 0 auto; padding-left: 38px; }
@@ -516,9 +516,9 @@ body {
 .to-top.show { opacity: 1; pointer-events: auto; transform: none; }
 .to-top:hover { border-color: rgba(168,85,247,.7); box-shadow: 0 10px 26px rgba(168,85,247,.35); }
 
-/* ---------------- Reveal ---------------- */
-.reveal { opacity: 0; transform: translateY(34px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
-.reveal.visible { opacity: 1; transform: none; }
+/* ---------------- Reveal (JS-safe: hidden ONLY when JS is confirmed active) ---------------- */
+html.js-fx .reveal { opacity: 0; transform: translateY(34px); transition: opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+html.js-fx .reveal.visible { opacity: 1; transform: none; }
 .reveal.d1 { transition-delay: .12s; } .reveal.d2 { transition-delay: .24s; }
 
 /* ---------------- Responsive ---------------- */
