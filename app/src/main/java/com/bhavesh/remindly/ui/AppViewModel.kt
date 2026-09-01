@@ -106,8 +106,8 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
                     updatedAt = timestamp,
                     lastTriggeredAt = existing?.lastTriggeredAt,
                     nextTriggerAt = null,
-                    enabled = true,
-                    completed = false
+                    enabled = existing?.completed != true,
+                    completed = existing?.completed ?: false
                 )
                 val id = if (existing == null) repository.insert(entity) else { repository.update(entity); entity.id }
                 val saved = repository.get(id)
