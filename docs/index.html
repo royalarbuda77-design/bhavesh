@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101012" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icons/icon-192.png" />
+  <title>Remindly — Smart reminders</title>
+  <style>
+    :root {
+      --bg: #101012; --panel: #19191d; --panel-2: #212126; --panel-3: #2a2a30;
+      --ink: #f5f5f0; --muted: #92929d; --line: #34343b; --lime: #c9f65b;
+      --lime-ink: #171719; --purple: #a9b4ff; --orange: #ffb86b; --pink: #ff8c9e;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: #09090a; color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    button, input, textarea, select { font: inherit; }
+    button { border: 0; cursor: pointer; }
+    .app { min-height: 100vh; display: flex; max-width: 1440px; margin: 0 auto; background: var(--bg); }
+    .sidebar { width: 242px; padding: 30px 18px; border-right: 1px solid #25252a; display: flex; flex-direction: column; gap: 34px; background: #121214; }
+    .brand { display: flex; align-items: center; gap: 11px; padding: 0 12px; }
+    .brand-mark { width: 34px; height: 34px; border: 2px solid var(--lime); border-radius: 50%; position: relative; }
+    .brand-mark:before { content: ""; width: 5px; height: 13px; border-radius: 4px; background: var(--lime); position: absolute; left: 13px; top: 8px; }
+    .brand-mark:after { content: ""; width: 5px; height: 5px; border-radius: 50%; background: var(--lime); position: absolute; left: 13px; top: 4px; }
+    .brand strong { letter-spacing: -.03em; font-size: 20px; }
+    .brand small { display: block; color: var(--muted); font-size: 10px; letter-spacing: .15em; margin-top: 1px; text-transform: uppercase; }
+    .nav-label { color: #676770; letter-spacing: .16em; font-size: 10px; font-weight: 800; padding: 0 13px 8px; text-transform: uppercase; }
+    .nav { display: grid; gap: 5px; }
+    .nav button { padding: 12px 13px; background: transparent; color: var(--muted); border-radius: 13px; display: flex; align-items: center; gap: 12px; text-align: left; font-weight: 650; transition: .2s ease; }
+    .nav button:hover { color: var(--ink); background: #1a1a1e; }
+    .nav button.active { color: var(--lime); background: rgba(201,246,91,.11); }
+    .nav .symbol { width: 20px; text-align: center; font-size: 17px; }
+    .sidebar-bottom { margin-top: auto; padding: 15px; border: 1px solid #303036; border-radius: 17px; background: #19191d; }
+    .sidebar-bottom .mini-dot { display: inline-block; width: 7px; height: 7px; background: var(--lime); border-radius: 50%; margin-right: 6px; }
+    .sidebar-bottom p { margin: 8px 0 0; color: var(--muted); line-height: 1.5; font-size: 12px; }
+    main { flex: 1; min-width: 0; }
+    .main-inner { max-width: 1000px; margin: 0 auto; padding: 28px 42px 48px; }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 30px; }
+    .eyebrow { color: var(--muted); letter-spacing: .14em; font-size: 11px; text-transform: uppercase; font-weight: 800; }
+    h1, h2, h3, p { margin: 0; }
+    h1 { font-size: clamp(28px, 4vw, 42px); letter-spacing: -.055em; line-height: 1; margin-top: 8px; }
+    h2 { font-size: 23px; letter-spacing: -.04em; }
+    h3 { font-size: 16px; letter-spacing: -.02em; }
+    .top-actions { display: flex; align-items: center; gap: 10px; }
+    .icon-btn { width: 42px; height: 42px; color: var(--muted); background: var(--panel); border: 1px solid #2d2d33; border-radius: 50%; transition: .2s ease; }
+    .icon-btn:hover { color: var(--ink); border-color: #55555e; transform: translateY(-1px); }
+    .avatar { width: 42px; height: 42px; border-radius: 50%; background: #363640; border: 1px solid #55555e; display: grid; place-items: center; color: var(--lime); font-weight: 800; }
+    .grid { display: grid; grid-template-columns: 1.25fr .75fr; gap: 18px; }
+    .card { background: var(--panel); border: 1px solid #29292f; border-radius: 25px; padding: 23px; box-shadow: 0 16px 35px rgba(0,0,0,.13); }
+    .hero { min-height: 240px; background: var(--lime); color: var(--lime-ink); border: 0; position: relative; overflow: hidden; }
+    .hero:after { content: ""; position: absolute; width: 220px; height: 220px; border: 1px solid rgba(22,22,25,.12); border-radius: 50%; right: -75px; bottom: -110px; box-shadow: 0 0 0 25px rgba(22,22,25,.035), 0 0 0 52px rgba(22,22,25,.035); }
+    .hero-top, .row-between { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+    .hero .eyebrow { color: rgba(22,22,25,.58); }
+    .hero-title { margin-top: 17px; font-size: 29px; letter-spacing: -.05em; max-width: 460px; }
+    .hero-meta { margin-top: 8px; font-size: 15px; font-weight: 650; color: rgba(22,22,25,.72); }
+    .hero-foot { margin-top: 23px; display: flex; align-items: center; justify-content: space-between; }
+    .countdown { font-weight: 850; font-size: 17px; }
+    .link-btn { background: transparent; color: inherit; font-weight: 800; padding: 7px 0; }
+    .stats { display: flex; flex-direction: column; justify-content: space-between; gap: 14px; }
+    .stat { display: flex; align-items: center; gap: 15px; }
+    .stat .num { font-size: 36px; letter-spacing: -.07em; font-weight: 850; }
+    .stat p { color: var(--muted); font-size: 13px; margin-top: 4px; }
+    .stat-icon { width: 45px; height: 45px; border-radius: 15px; display: grid; place-items: center; font-size: 20px; background: rgba(169,180,255,.13); color: var(--purple); }
+    .stat:nth-child(2) .stat-icon { color: var(--orange); background: rgba(255,184,107,.13); }
+    .section { margin-top: 34px; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .section-head p { color: var(--muted); font-size: 12px; margin-top: 6px; }
+    .ghost-btn { color: var(--muted); background: transparent; padding: 7px 0; font-size: 13px; font-weight: 700; }
+    .ghost-btn:hover { color: var(--lime); }
+    .reminder-list { display: grid; gap: 7px; }
+    .reminder { display: grid; grid-template-columns: 65px 4px 1fr auto; gap: 14px; align-items: center; padding: 15px 14px 15px 0; border-bottom: 1px solid #28282d; transition: .2s ease; }
+    .reminder:hover { background: #1d1d21; border-radius: 15px; padding-left: 10px; }
+    .reminder:last-child { border-bottom: 0; }
+    .time { color: var(--ink); font-weight: 750; font-size: 13px; }
+    .colorbar { height: 42px; width: 4px; border-radius: 5px; background: var(--lime); }
+    .colorbar.purple { background: var(--purple); } .colorbar.orange { background: var(--orange); } .colorbar.pink { background: var(--pink); }
+    .reminder-title { font-weight: 750; font-size: 15px; }
+    .reminder-sub { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .check { width: 28px; height: 28px; color: #6f7079; border: 1px solid #4b4b54; border-radius: 50%; background: transparent; }
+    .check:hover { color: var(--lime); border-color: var(--lime); }
+    .check.done { border-color: var(--lime); color: var(--lime); background: rgba(201,246,91,.1); }
+    .date-pills { display: flex; gap: 8px; overflow-x: auto; padding: 2px 0 4px; scrollbar-width: none; }
+    .date-pill { min-width: max-content; color: var(--muted); border: 1px solid #323239; background: #17171a; border-radius: 13px; padding: 11px 13px; font-size: 12px; font-weight: 750; }
+    .date-pill.active, .date-pill:hover { color: var(--lime-ink); background: var(--lime); border-color: var(--lime); }
+    .fab { position: fixed; right: 38px; bottom: 30px; height: 56px; padding: 0 20px 0 16px; display: flex; gap: 9px; align-items: center; color: var(--lime-ink); background: var(--lime); border-radius: 18px; box-shadow: 0 14px 28px rgba(0,0,0,.35); font-weight: 850; z-index: 5; transition: .2s ease; }
+    .fab:hover { transform: translateY(-3px) scale(1.02); }
+    .fab b { font-size: 24px; line-height: 1; font-weight: 400; }
+    .calendar-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+    .month-nav { display: flex; gap: 6px; }
+    .month-nav button { width: 37px; height: 37px; border-radius: 11px; background: var(--panel-2); color: var(--muted); border: 1px solid var(--line); }
+    .month-nav button:hover { color: var(--ink); border-color: #5c5c67; }
+    .calendar { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+    .weekday { color: #70707a; text-align: center; font-size: 10px; font-weight: 850; letter-spacing: .08em; text-transform: uppercase; padding-bottom: 5px; }
+    .day { min-height: 61px; background: #17171a; color: var(--muted); border: 1px solid #24242a; border-radius: 14px; padding: 10px; text-align: left; transition: .18s; }
+    .day:hover { border-color: #5a5a62; color: var(--ink); transform: translateY(-1px); }
+    .day.today { border-color: var(--lime); color: var(--ink); }
+    .day.selected { background: var(--lime); color: var(--lime-ink); border-color: var(--lime); }
+    .day .day-number { font-size: 13px; font-weight: 800; }
+    .dots { display: flex; gap: 3px; margin-top: 13px; }
+    .dots i { width: 4px; height: 4px; border-radius: 50%; background: var(--lime); display: block; }
+    .selected-day { margin-top: 19px; display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 18px; border-top: 1px solid var(--line); }
+    .selected-day p { color: var(--muted); font-size: 12px; margin-top: 5px; }
+    .primary { color: var(--lime-ink); background: var(--lime); padding: 12px 16px; border-radius: 13px; font-weight: 850; }
+    .primary:hover { filter: brightness(1.06); }
+    .back { color: var(--muted); background: transparent; padding: 4px 0 20px; font-weight: 700; }
+    .form-card { max-width: 720px; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .field { display: grid; gap: 8px; margin-bottom: 18px; }
+    .field.full { grid-column: 1/-1; }
+    label { color: var(--muted); font-size: 10px; letter-spacing: .14em; font-weight: 850; text-transform: uppercase; }
+    input, textarea, select { width: 100%; color: var(--ink); background: #121214; border: 1px solid #383840; border-radius: 14px; outline: 0; padding: 14px; }
+    input:focus, textarea:focus, select:focus { border-color: var(--lime); box-shadow: 0 0 0 3px rgba(201,246,91,.08); }
+    textarea { resize: vertical; min-height: 92px; }
+    .choice-row { display: flex; flex-wrap: wrap; gap: 8px; }
+    .choice { color: var(--muted); background: #17171a; border: 1px solid #36363d; border-radius: 11px; padding: 10px 12px; font-size: 12px; font-weight: 700; }
+    .choice.selected { color: var(--lime-ink); border-color: var(--lime); background: var(--lime); }
+    .switch-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+    .switch-row p { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .switch { width: 42px; height: 25px; border-radius: 20px; background: #3c3c43; position: relative; }
+    .switch:after { content: ""; width: 19px; height: 19px; border-radius: 50%; position: absolute; top: 3px; left: 4px; background: white; transition: .2s; }
+    .switch.on { background: var(--lime); } .switch.on:after { left: 19px; background: var(--lime-ink); }
+    .settings-list { display: grid; gap: 2px; max-width: 720px; }
+    .setting-group { color: #73737c; letter-spacing: .15em; font-size: 10px; font-weight: 850; text-transform: uppercase; padding: 24px 0 9px; }
+    .setting { display: flex; align-items: center; gap: 13px; padding: 15px 0; border-bottom: 1px solid #27272c; }
+    .setting-icon { width: 39px; height: 39px; border-radius: 12px; display: grid; place-items: center; color: var(--lime); background: rgba(201,246,91,.1); }
+    .setting-copy { flex: 1; } .setting-copy strong { display: block; font-size: 14px; } .setting-copy span { color: var(--muted); display: block; margin-top: 4px; font-size: 12px; }
+    .status { color: var(--lime); font-size: 12px; font-weight: 800; }
+    .empty { text-align: center; padding: 60px 20px; color: var(--muted); } .empty .empty-icon { font-size: 35px; margin-bottom: 15px; } .empty strong { color: var(--ink); display: block; font-size: 18px; margin-bottom: 7px; }
+    .mobile-nav { display: none; }
+    .install-app { position: fixed; left: 28px; bottom: 28px; z-index: 20; display: none; align-items: center; gap: 7px; color: var(--lime-ink); background: var(--lime); border-radius: 13px; padding: 11px 15px; box-shadow: 0 10px 24px rgba(0,0,0,.35); font-size: 12px; font-weight: 850; }
+    .install-app.visible { display: flex; }
+    @media (max-width: 570px) { .install-app { left: 17px; bottom: 78px; } }
+    @media (max-width: 850px) {
+      .sidebar { width: 82px; padding: 24px 11px; } .brand { justify-content: center; padding: 0; } .brand > div:last-child, .nav-label, .nav button span:not(.symbol), .sidebar-bottom { display: none; } .nav button { justify-content: center; padding: 13px 0; } .nav .symbol { font-size: 19px; }
+      .main-inner { padding: 24px 24px 110px; } .grid { grid-template-columns: 1fr; } .stats { flex-direction: row; } .stat { flex: 1; } .fab { right: 24px; bottom: 78px; }
+    }
+    @media (max-width: 570px) {
+      .app { display: block; } .sidebar { display: none; } .main-inner { padding: 22px 17px 98px; } .topbar { margin-bottom: 24px; } .top-actions .avatar { display: none; } .top-actions .icon-btn { width: 39px; height: 39px; }
+      .card { padding: 18px; border-radius: 21px; } .hero { min-height: 226px; } .stats { gap: 9px; } .stat .num { font-size: 28px; } .stat-icon { width: 38px; height: 38px; font-size: 16px; } .stat p { font-size: 11px; }
+      .reminder { grid-template-columns: 52px 3px 1fr auto; gap: 10px; } .time { font-size: 11px; } .reminder-title { font-size: 14px; } .check { width: 25px; height: 25px; }
+      .calendar { gap: 5px; } .day { min-height: 50px; padding: 8px; border-radius: 11px; } .dots { margin-top: 9px; }
+      .mobile-nav { position: fixed; left: 0; right: 0; bottom: 0; height: 67px; padding: 8px 12px; display: flex; justify-content: space-around; background: rgba(25,25,29,.97); border-top: 1px solid #303038; z-index: 10; } .mobile-nav button { color: var(--muted); background: transparent; display: grid; gap: 2px; place-items: center; font-size: 10px; } .mobile-nav button b { font-size: 18px; font-weight: 400; } .mobile-nav button.active { color: var(--lime); }
+      .form-grid { grid-template-columns: 1fr; } .field.full { grid-column: auto; }
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="brand-mark"></div><div><strong>Remindly</strong><small>calm planning</small></div></div>
+    <div><div class="nav-label">Workspace</div><nav class="nav" id="side-nav">
+      <button data-screen="today" class="active"><span class="symbol">◷</span><span>Today</span></button>
+      <button data-screen="calendar"><span class="symbol">▦</span><span>Calendar</span></button>
+      <button data-screen="upcoming"><span class="symbol">→</span><span>Upcoming</span></button>
+      <button data-screen="library"><span class="symbol">✓</span><span>Library</span></button>
+    </nav></div>
+    <div><div class="nav-label">Personal</div><nav class="nav"><button data-screen="settings"><span class="symbol">⚙</span><span>Settings</span></button></nav></div>
+    <div class="sidebar-bottom"><span class="mini-dot"></span><strong>All synced locally</strong><p>Your reminders stay private on this device.</p></div>
+  </aside>
+  <main><div class="main-inner" id="view"></div></main>
+</div>
+<nav class="mobile-nav" id="mobile-nav">
+  <button data-screen="today" class="active"><b>◷</b>Today</button><button data-screen="calendar"><b>▦</b>Calendar</button><button data-screen="upcoming"><b>→</b>Upcoming</button><button data-screen="settings"><b>⚙</b>Settings</button>
+</nav>
+<button class="fab" id="fab"><b>＋</b><span>Add reminder</span></button>
+<button class="install-app" id="install-app">＋ Install app</button>
+
+<script>
+  const now = new Date();
+  const key = d => d.toISOString().slice(0,10);
+  const todayKey = key(now);
+  const tomorrow = new Date(now); tomorrow.setDate(now.getDate()+1);
+  const pad = n => String(n).padStart(2,'0');
+  const formatDate = d => new Intl.DateTimeFormat(undefined,{weekday:'long', day:'numeric', month:'long'}).format(d);
+  const formatShort = iso => new Intl.DateTimeFormat(undefined,{weekday:'short', day:'numeric', month:'short'}).format(new Date(iso+'T12:00:00'));
+  const formatTime = value => { const [h,m] = value.split(':').map(Number); const x = new Date(); x.setHours(h,m); return new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(x); };
+  const starterReminders = [
+    {id:1,title:'Deep work block',description:'Finish the product review',date:todayKey,time:'10:30',category:'Work',color:'purple',done:false},
+    {id:2,title:'Call Mom',description:'',date:todayKey,time:'19:00',category:'Personal',color:'pink',done:false},
+    {id:3,title:'Physics Revision',description:'Chapter 4 · practice problems',date:key(tomorrow),time:'08:30',category:'Study',color:'lime',done:false},
+    {id:4,title:'Team sync',description:'Weekly product check-in',date:key(new Date(now.getFullYear(),now.getMonth(),now.getDate()+3)),time:'11:00',category:'Meeting',color:'orange',done:false}
+  ];
+  let reminders = (() => { try { return JSON.parse(localStorage.getItem('remindly-reminders')) || starterReminders; } catch (_) { return starterReminders; } })();
+  const persist = () => localStorage.setItem('remindly-reminders', JSON.stringify(reminders));
+  const reminderTimers = new Map();
+  function scheduleTimers(){
+    reminderTimers.forEach(timer => clearTimeout(timer)); reminderTimers.clear();
+    reminders.filter(r => !r.done).forEach(r => {
+      const at = new Date(`${r.date}T${r.time}`).getTime(), delay = at - Date.now();
+      if (delay > 0 && delay < 2147483647) reminderTimers.set(r.id, setTimeout(() => {
+        const message = r.description || `${relative(r.date)} · ${formatTime(r.time)}`;
+        try { if ('Notification' in window && Notification.permission === 'granted') new Notification(r.title, {body: message, icon: './icons/icon-192.png'}); else alert(`${r.title}\\n\\n${message}`); } catch (_) {}
+      }, delay));
+    });
+  }
+  async function enableNotifications(){
+    if (!('Notification' in window)) { alert('Browser alerts are not supported on this device.'); return; }
+    const permission = await Notification.requestPermission();
+    const status = document.getElementById('notification-status'); if (status) status.textContent = permission === 'granted' ? 'Browser alerts are enabled' : 'Permission was not granted';
+    scheduleTimers();
+  }
+  let screen = 'today'; let calendarDate = new Date(now.getFullYear(), now.getMonth(), 1); let selectedDate = todayKey;
+  const view = document.getElementById('view');
+  const colorClass = c => c === 'purple' ? 'purple' : c === 'orange' ? 'orange' : c === 'pink' ? 'pink' : '';
+  const active = () => reminders.filter(r=>!r.done).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  const reminderRow = r => `<div class="reminder" data-id="${r.id}"><div class="time">${formatTime(r.time)}</div><div class="colorbar ${colorClass(r.color)}"></div><div><div class="reminder-title">${escapeHtml(r.title)}</div><div class="reminder-sub">${escapeHtml(r.category)}${r.description ? ' · '+escapeHtml(r.description) : ''}</div></div><button class="check ${r.done?'done':''}" onclick="toggleDone(${r.id})">${r.done?'✓':'○'}</button></div>`;
+  const escapeHtml = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[c]));
+  const relative = iso => iso===todayKey?'Today':iso===key(tomorrow)?'Tomorrow':formatShort(iso);
+  function render(){
+    document.querySelectorAll('[data-screen]').forEach(b=>b.classList.toggle('active',b.dataset.screen===screen));
+    document.getElementById('fab').style.display = ['today','calendar','upcoming'].includes(screen) ? 'flex' : 'none';
+    if(screen==='today') renderToday(); else if(screen==='calendar') renderCalendar(); else if(screen==='upcoming') renderUpcoming(); else if(screen==='library') renderLibrary(); else if(screen==='settings') renderSettings(); else if(screen==='add') renderAdd();
+  }
+  function renderToday(){
+    const upcoming = active().filter(r=>(r.date+r.time)>(todayKey+pad(now.getHours())+pad(now.getMinutes())));
+    const next = upcoming[0]; const todayItems = reminders.filter(r=>r.date===todayKey);
+    view.innerHTML = `<div class="topbar"><div><div class="eyebrow">${formatDate(now)}</div><h1>Good morning, Bhavesh.</h1></div><div class="top-actions"><button class="icon-btn" onclick="screen='calendar';render()">⌕</button><button class="icon-btn" onclick="screen='settings';render()">⚙</button><div class="avatar">B</div></div></div>
+      <div class="grid"><div class="card hero"><div class="hero-top"><span class="eyebrow">What's coming up?</span><span style="font-size:22px">✦</span></div>${next?`<div class="eyebrow" style="margin-top:25px">Next reminder</div><div class="hero-title">${escapeHtml(next.title)}</div><div class="hero-meta">${relative(next.date)} &nbsp;·&nbsp; ${formatTime(next.time)}</div><div class="hero-foot"><span class="countdown">${next.date===todayKey?'Today':'Tomorrow'} · staying on track</span><button class="link-btn" onclick="openDetails(${next.id})">View details →</button></div>`:`<div class="hero-title">Your schedule is clear.</div><div class="hero-meta">A quiet moment. Add something you want to remember.</div>`}</div>
+      <div class="card stats"><div class="stat"><div class="stat-icon">◷</div><div><div class="num">${todayItems.filter(r=>!r.done).length}</div><p>on your day</p></div></div><div class="stat"><div class="stat-icon">✦</div><div><div class="num">${active().length}</div><p>upcoming reminders</p></div></div><div style="color:var(--muted);font-size:12px;line-height:1.5">Small steps, consistently<br><span style="color:var(--lime)">make meaningful progress.</span></div></div></div>
+      <div class="date-pills" style="margin-top:18px"><button class="date-pill active">Today</button><button class="date-pill" onclick="openAdd('${key(tomorrow)}')">Tomorrow</button><button class="date-pill" onclick="screen='calendar';render()">Next week</button><button class="date-pill" onclick="screen='library';render()">Completed</button></div>
+      <section class="section"><div class="section-head"><div><h2>Today's reminders</h2><p>${todayItems.length ? todayItems.length+' reminders scheduled' : 'Your schedule is clear ✨'}</p></div></div><div class="card" style="padding:7px 18px">${todayItems.length?`<div class="reminder-list">${todayItems.map(reminderRow).join('')}</div>`:`<div class="empty"><div class="empty-icon">◌</div><strong>No reminders today</strong><span>Add something important to get started.</span></div>`}</div></section>
+      <section class="section"><div class="section-head"><div><h2>Upcoming</h2><p>The next few things on your horizon</p></div><button class="ghost-btn" onclick="screen='upcoming';render()">See all →</button></div><div class="reminder-list">${active().filter(r=>r.date>todayKey).slice(0,3).map(r=>`<div><div class="eyebrow" style="margin:10px 0 0 5px">${relative(r.date)}</div>${reminderRow(r)}</div>`).join('')||'<div class="card"><div class="empty"><div class="empty-icon">▦</div><strong>No upcoming reminders</strong><span>Your future is wide open.</span></div></div>'}</div></section>`;
+  }
+  function renderCalendar(){
+    const y=calendarDate.getFullYear(), m=calendarDate.getMonth(); const monthName=new Intl.DateTimeFormat(undefined,{month:'long'}).format(calendarDate); const first=new Date(y,m,1).getDay(); const days=new Date(y,m+1,0).getDate(); let cells='';
+    ['SUN','MON','TUE','WED','THU','FRI','SAT'].forEach(d=>cells+=`<div class="weekday">${d}</div>`); for(let i=0;i<first;i++) cells+='<div></div>'; for(let d=1;d<=days;d++){const iso=key(new Date(y,m,d));const dayRs=reminders.filter(r=>r.date===iso&&!r.done);cells+=`<button class="day ${iso===todayKey?'today':''} ${iso===selectedDate?'selected':''}" onclick="selectDay('${iso}')"><div class="day-number">${d}</div><div class="dots">${dayRs.slice(0,3).map(()=>'<i></i>').join('')}</div></button>`;}
+    const picked=reminders.filter(r=>r.date===selectedDate); view.innerHTML=`<div class="topbar"><div><div class="eyebrow">Your schedule</div><h1>Calendar.</h1></div><div class="top-actions"><button class="icon-btn" onclick="jumpToday()">◎</button><button class="icon-btn" onclick="screen='settings';render()">⚙</button></div></div><div class="card"><div class="calendar-head"><div><h2>${monthName}</h2><div style="color:var(--lime);font-weight:800;font-size:12px;margin-top:4px">${y}</div></div><div class="month-nav"><button onclick="moveMonth(-1)">←</button><button onclick="moveMonth(1)">→</button></div></div><div class="calendar">${cells}</div><div class="selected-day"><div><h3>${relative(selectedDate)}</h3><p>${new Intl.DateTimeFormat(undefined,{weekday:'long',day:'numeric',month:'long',year:'numeric'}).format(new Date(selectedDate+'T12:00:00'))}</p></div><button class="primary" onclick="openAdd('${selectedDate}')">＋ Add reminder</button></div></div><section class="section"><div class="section-head"><div><h2>Selected day</h2><p>${picked.length} reminder${picked.length===1?'':'s'}</p></div></div><div class="card" style="padding:7px 18px">${picked.length?picked.map(reminderRow).join(''):'<div class="empty"><div class="empty-icon">◌</div><strong>Nothing planned</strong><span>Add a reminder for this date.</span></div>'}</div></section>`;
+  }
+  function renderUpcoming(){
+    const rs=active().filter(r=>r.date>=todayKey);
+    const list=rs.length ? rs.map(r => {
+      const day = `<div class="eyebrow" style="margin:12px 0 0 5px">${relative(r.date)}</div>`;
+      return `<div>${day}${reminderRow(r)}</div>`;
+    }).join('') : '<div class="empty"><div class="empty-icon">→</div><strong>No upcoming reminders</strong><span>You have room for what\'s next.</span></div>';
+    view.innerHTML=`<div class="topbar"><div><div class="eyebrow">All that lies ahead</div><h1>Upcoming.</h1></div><button class="icon-btn" onclick="screen=\'today\';render()">×</button></div><p style="color:var(--muted);margin-bottom:24px">Everything ahead, in one calm view.</p><div class="card" style="padding:7px 18px">${list}</div>`;
+  }
+  function renderLibrary(){ const done=reminders.filter(r=>r.done); view.innerHTML=`<div class="topbar"><div><div class="eyebrow">Your history</div><h1>Library.</h1></div><button class="icon-btn" onclick="screen='today';render()">×</button></div><div class="date-pills"><button class="date-pill active">Completed</button><button class="date-pill">Missed</button><button class="date-pill">Recurring</button><button class="date-pill">All reminders</button></div><section class="section"><div class="card" style="padding:7px 18px">${done.length?done.map(reminderRow).join(''):'<div class="empty"><div class="empty-icon">✓</div><strong>No completed reminders yet</strong><span>Finish a reminder and it will appear here.</span></div>'}</div></section>`; }
+  function renderSettings(){ view.innerHTML=`<div class="topbar"><div><div class="eyebrow">Make it yours</div><h1>Settings.</h1></div><button class="icon-btn" onclick="screen='today';render()">×</button></div><div class="settings-list"><div class="setting-group">General</div><div class="setting"><div class="setting-icon">◷</div><div class="setting-copy"><strong>Default alert</strong><span>Notification</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting"><div class="setting-icon">◴</div><div class="setting-copy"><strong>Default snooze</strong><span>10 minutes</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Notifications</div><div class="setting"><div class="setting-icon">♧</div><div class="setting-copy"><strong>Notifications</strong><span id="notification-status">Browser alerts are available</span></div><button class="ghost-btn" onclick="enableNotifications()">Enable</button></div><div class="setting"><div class="setting-icon">◌</div><div class="setting-copy"><strong>Vibration</strong><span>Use haptics on reminder alerts</span></div><button class="switch on" onclick="this.classList.toggle('on')"></button></div><div class="setting-group">Alarm reliability</div><div class="setting"><div class="setting-icon">◴</div><div class="setting-copy"><strong>Precise reminders</strong><span>Exact alarm access is enabled</span></div><span class="status">Enabled</span></div><div class="setting"><div class="setting-icon">⌁</div><div class="setting-copy"><strong>Battery optimization</strong><span>Keep reminders reliable in power-saving mode</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Appearance</div><div class="setting"><div class="setting-icon">◐</div><div class="setting-copy"><strong>Theme</strong><span>Dark · system default</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Data</div><div class="setting"><div class="setting-icon">⇧</div><div class="setting-copy"><strong>Export reminders</strong><span>Save an offline JSON backup</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting"><div class="setting-icon">⇩</div><div class="setting-copy"><strong>Import reminders</strong><span>Restore from a Remindly backup</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">About</div><div class="setting"><div class="setting-icon">✦</div><div class="setting-copy"><strong>Remindly</strong><span>Version 1.0 · Built for calm, focused days</span></div></div></div>`; }
+  function renderAdd(date=selectedDate){ screen='add'; view.innerHTML=`<button class="back" onclick="screen='${selectedDate===todayKey?'today':'calendar'}';render()">← Back</button><div class="topbar" style="margin-bottom:22px"><div><div class="eyebrow">Create something memorable</div><h1>New reminder.</h1></div><button class="primary" onclick="saveReminder()">Save</button></div><div class="card form-card"><div class="form-grid"><div class="field full"><label>Title</label><input id="r-title" placeholder="Enter reminder title" autofocus></div><div class="field full"><label>Description</label><textarea id="r-description" placeholder="Optional note"></textarea></div><div class="field"><label>Date</label><input id="r-date" type="date" value="${date}"></div><div class="field"><label>Time</label><input id="r-time" type="time" value="08:30"></div><div class="field full"><label>Category</label><div class="choice-row" id="categories">${['Personal','Study','Meeting','Task','Birthday','Important'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="choose(this,'categories')">${x}</button>`).join('')}</div></div><div class="field full"><label>Repeat</label><div class="choice-row" id="repeat">${['Never','Daily','Weekly','Monthly','Yearly'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="choose(this,'repeat')">${x}</button>`).join('')}</div></div><div class="field full"><label>Alert behavior</label><div class="choice-row" id="alerts">${['Notification','Alarm','Sound + notification','Silent notification'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="choose(this,'alerts')">${x}</button>`).join('')}</div></div><div class="field full"><label>Remind me before</label><div class="choice-row" id="lead">${['At event time','5 min','10 min','15 min','30 min','1 hour','1 day'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="this.classList.toggle('selected')">${x}</button>`).join('')}</div></div><div class="field full"><div class="switch-row"><div><strong style="font-size:14px">Vibration</strong><p>Use haptic feedback with this reminder</p></div><button class="switch on" onclick="this.classList.toggle('on')"></button></div></div></div><button class="primary" style="width:100%;margin-top:5px" onclick="saveReminder()">Set reminder</button></div>`; }
+  function choose(el,id){document.querySelectorAll('#'+id+' .choice').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');}
+  function saveReminder(){const title=document.getElementById('r-title').value.trim();if(!title){document.getElementById('r-title').focus();return;} reminders.push({id:Date.now(),title,description:document.getElementById('r-description').value.trim(),date:document.getElementById('r-date').value,time:document.getElementById('r-time').value,category:document.querySelector('#categories .selected').textContent,color:'lime',done:false});persist();scheduleTimers();screen='today';render();}
+  function openAdd(date=todayKey){renderAdd(date)} function openDetails(id){const r=reminders.find(x=>x.id===id);if(r) alert(`${r.title}\n\n${relative(r.date)} · ${formatTime(r.time)}\n${r.description||'No description'}`)}
+  function toggleDone(id){const r=reminders.find(x=>x.id===id);if(r) r.done=!r.done;persist();render();}
+  let deferredInstallPrompt = null;
+  const installButton = document.getElementById('install-app');
+  window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); deferredInstallPrompt = event; installButton.classList.add('visible'); });
+  installButton.addEventListener('click', async () => { if (!deferredInstallPrompt) return; deferredInstallPrompt.prompt(); await deferredInstallPrompt.userChoice; deferredInstallPrompt = null; installButton.classList.remove('visible'); });
+  window.addEventListener('appinstalled', () => installButton.classList.remove('visible'));
+  if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
+  function selectDay(iso){selectedDate=iso;calendarDate=new Date(iso+'T12:00:00');calendarDate.setDate(1);render();}
+  function moveMonth(delta){calendarDate.setMonth(calendarDate.getMonth()+delta);render();}
+  function jumpToday(){selectedDate=todayKey;calendarDate=new Date(now.getFullYear(),now.getMonth(),1);render();}
+  document.querySelectorAll('[data-screen]').forEach(b=>b.addEventListener('click',()=>{screen=b.dataset.screen;render();})); document.getElementById('fab').addEventListener('click',()=>openAdd()); scheduleTimers(); render();
+</script>
+</body>
+</html>
