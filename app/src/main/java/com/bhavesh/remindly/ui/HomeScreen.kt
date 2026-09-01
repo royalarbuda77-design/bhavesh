@@ -1,3 +1,4 @@
+@file:OptIn(androidx.compose.material3.ExperimentalMaterial3Api::class)
 package com.bhavesh.remindly.ui
 
 import androidx.compose.foundation.horizontalScroll
