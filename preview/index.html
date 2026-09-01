@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#101012" />
+  <link rel="manifest" href="./manifest.json" />
+  <link rel="icon" href="./icons/icon-192.png" />
   <title>Remindly — Smart reminders</title>
   <style>
     :root {
@@ -125,6 +128,9 @@
     .status { color: var(--lime); font-size: 12px; font-weight: 800; }
     .empty { text-align: center; padding: 60px 20px; color: var(--muted); } .empty .empty-icon { font-size: 35px; margin-bottom: 15px; } .empty strong { color: var(--ink); display: block; font-size: 18px; margin-bottom: 7px; }
     .mobile-nav { display: none; }
+    .install-app { position: fixed; left: 28px; bottom: 28px; z-index: 20; display: none; align-items: center; gap: 7px; color: var(--lime-ink); background: var(--lime); border-radius: 13px; padding: 11px 15px; box-shadow: 0 10px 24px rgba(0,0,0,.35); font-size: 12px; font-weight: 850; }
+    .install-app.visible { display: flex; }
+    @media (max-width: 570px) { .install-app { left: 17px; bottom: 78px; } }
     @media (max-width: 850px) {
       .sidebar { width: 82px; padding: 24px 11px; } .brand { justify-content: center; padding: 0; } .brand > div:last-child, .nav-label, .nav button span:not(.symbol), .sidebar-bottom { display: none; } .nav button { justify-content: center; padding: 13px 0; } .nav .symbol { font-size: 19px; }
       .main-inner { padding: 24px 24px 110px; } .grid { grid-template-columns: 1fr; } .stats { flex-direction: row; } .stat { flex: 1; } .fab { right: 24px; bottom: 78px; }
@@ -158,6 +164,7 @@
   <button data-screen="today" class="active"><b>◷</b>Today</button><button data-screen="calendar"><b>▦</b>Calendar</button><button data-screen="upcoming"><b>→</b>Upcoming</button><button data-screen="settings"><b>⚙</b>Settings</button>
 </nav>
 <button class="fab" id="fab"><b>＋</b><span>Add reminder</span></button>
+<button class="install-app" id="install-app">＋ Install app</button>
 
 <script>
   const now = new Date();
@@ -168,12 +175,31 @@
   const formatDate = d => new Intl.DateTimeFormat(undefined,{weekday:'long', day:'numeric', month:'long'}).format(d);
   const formatShort = iso => new Intl.DateTimeFormat(undefined,{weekday:'short', day:'numeric', month:'short'}).format(new Date(iso+'T12:00:00'));
   const formatTime = value => { const [h,m] = value.split(':').map(Number); const x = new Date(); x.setHours(h,m); return new Intl.DateTimeFormat(undefined,{hour:'numeric',minute:'2-digit'}).format(x); };
-  let reminders = [
+  const starterReminders = [
     {id:1,title:'Deep work block',description:'Finish the product review',date:todayKey,time:'10:30',category:'Work',color:'purple',done:false},
     {id:2,title:'Call Mom',description:'',date:todayKey,time:'19:00',category:'Personal',color:'pink',done:false},
     {id:3,title:'Physics Revision',description:'Chapter 4 · practice problems',date:key(tomorrow),time:'08:30',category:'Study',color:'lime',done:false},
     {id:4,title:'Team sync',description:'Weekly product check-in',date:key(new Date(now.getFullYear(),now.getMonth(),now.getDate()+3)),time:'11:00',category:'Meeting',color:'orange',done:false}
   ];
+  let reminders = (() => { try { return JSON.parse(localStorage.getItem('remindly-reminders')) || starterReminders; } catch (_) { return starterReminders; } })();
+  const persist = () => localStorage.setItem('remindly-reminders', JSON.stringify(reminders));
+  const reminderTimers = new Map();
+  function scheduleTimers(){
+    reminderTimers.forEach(timer => clearTimeout(timer)); reminderTimers.clear();
+    reminders.filter(r => !r.done).forEach(r => {
+      const at = new Date(`${r.date}T${r.time}`).getTime(), delay = at - Date.now();
+      if (delay > 0 && delay < 2147483647) reminderTimers.set(r.id, setTimeout(() => {
+        const message = r.description || `${relative(r.date)} · ${formatTime(r.time)}`;
+        try { if ('Notification' in window && Notification.permission === 'granted') new Notification(r.title, {body: message, icon: './icons/icon-192.png'}); else alert(`${r.title}\\n\\n${message}`); } catch (_) {}
+      }, delay));
+    });
+  }
+  async function enableNotifications(){
+    if (!('Notification' in window)) { alert('Browser alerts are not supported on this device.'); return; }
+    const permission = await Notification.requestPermission();
+    const status = document.getElementById('notification-status'); if (status) status.textContent = permission === 'granted' ? 'Browser alerts are enabled' : 'Permission was not granted';
+    scheduleTimers();
+  }
   let screen = 'today'; let calendarDate = new Date(now.getFullYear(), now.getMonth(), 1); let selectedDate = todayKey;
   const view = document.getElementById('view');
   const colorClass = c => c === 'purple' ? 'purple' : c === 'orange' ? 'orange' : c === 'pink' ? 'pink' : '';
@@ -210,16 +236,22 @@
     view.innerHTML=`<div class="topbar"><div><div class="eyebrow">All that lies ahead</div><h1>Upcoming.</h1></div><button class="icon-btn" onclick="screen=\'today\';render()">×</button></div><p style="color:var(--muted);margin-bottom:24px">Everything ahead, in one calm view.</p><div class="card" style="padding:7px 18px">${list}</div>`;
   }
   function renderLibrary(){ const done=reminders.filter(r=>r.done); view.innerHTML=`<div class="topbar"><div><div class="eyebrow">Your history</div><h1>Library.</h1></div><button class="icon-btn" onclick="screen='today';render()">×</button></div><div class="date-pills"><button class="date-pill active">Completed</button><button class="date-pill">Missed</button><button class="date-pill">Recurring</button><button class="date-pill">All reminders</button></div><section class="section"><div class="card" style="padding:7px 18px">${done.length?done.map(reminderRow).join(''):'<div class="empty"><div class="empty-icon">✓</div><strong>No completed reminders yet</strong><span>Finish a reminder and it will appear here.</span></div>'}</div></section>`; }
-  function renderSettings(){ view.innerHTML=`<div class="topbar"><div><div class="eyebrow">Make it yours</div><h1>Settings.</h1></div><button class="icon-btn" onclick="screen='today';render()">×</button></div><div class="settings-list"><div class="setting-group">General</div><div class="setting"><div class="setting-icon">◷</div><div class="setting-copy"><strong>Default alert</strong><span>Notification</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting"><div class="setting-icon">◴</div><div class="setting-copy"><strong>Default snooze</strong><span>10 minutes</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Notifications</div><div class="setting"><div class="setting-icon">♧</div><div class="setting-copy"><strong>Notifications</strong><span>Alerts are enabled</span></div><span class="status">Enabled</span></div><div class="setting"><div class="setting-icon">◌</div><div class="setting-copy"><strong>Vibration</strong><span>Use haptics on reminder alerts</span></div><button class="switch on" onclick="this.classList.toggle('on')"></button></div><div class="setting-group">Alarm reliability</div><div class="setting"><div class="setting-icon">◴</div><div class="setting-copy"><strong>Precise reminders</strong><span>Exact alarm access is enabled</span></div><span class="status">Enabled</span></div><div class="setting"><div class="setting-icon">⌁</div><div class="setting-copy"><strong>Battery optimization</strong><span>Keep reminders reliable in power-saving mode</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Appearance</div><div class="setting"><div class="setting-icon">◐</div><div class="setting-copy"><strong>Theme</strong><span>Dark · system default</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Data</div><div class="setting"><div class="setting-icon">⇧</div><div class="setting-copy"><strong>Export reminders</strong><span>Save an offline JSON backup</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting"><div class="setting-icon">⇩</div><div class="setting-copy"><strong>Import reminders</strong><span>Restore from a Remindly backup</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">About</div><div class="setting"><div class="setting-icon">✦</div><div class="setting-copy"><strong>Remindly</strong><span>Version 1.0 · Built for calm, focused days</span></div></div></div>`; }
+  function renderSettings(){ view.innerHTML=`<div class="topbar"><div><div class="eyebrow">Make it yours</div><h1>Settings.</h1></div><button class="icon-btn" onclick="screen='today';render()">×</button></div><div class="settings-list"><div class="setting-group">General</div><div class="setting"><div class="setting-icon">◷</div><div class="setting-copy"><strong>Default alert</strong><span>Notification</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting"><div class="setting-icon">◴</div><div class="setting-copy"><strong>Default snooze</strong><span>10 minutes</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Notifications</div><div class="setting"><div class="setting-icon">♧</div><div class="setting-copy"><strong>Notifications</strong><span id="notification-status">Browser alerts are available</span></div><button class="ghost-btn" onclick="enableNotifications()">Enable</button></div><div class="setting"><div class="setting-icon">◌</div><div class="setting-copy"><strong>Vibration</strong><span>Use haptics on reminder alerts</span></div><button class="switch on" onclick="this.classList.toggle('on')"></button></div><div class="setting-group">Alarm reliability</div><div class="setting"><div class="setting-icon">◴</div><div class="setting-copy"><strong>Precise reminders</strong><span>Exact alarm access is enabled</span></div><span class="status">Enabled</span></div><div class="setting"><div class="setting-icon">⌁</div><div class="setting-copy"><strong>Battery optimization</strong><span>Keep reminders reliable in power-saving mode</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Appearance</div><div class="setting"><div class="setting-icon">◐</div><div class="setting-copy"><strong>Theme</strong><span>Dark · system default</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">Data</div><div class="setting"><div class="setting-icon">⇧</div><div class="setting-copy"><strong>Export reminders</strong><span>Save an offline JSON backup</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting"><div class="setting-icon">⇩</div><div class="setting-copy"><strong>Import reminders</strong><span>Restore from a Remindly backup</span></div><b style="color:var(--muted);font-size:12px">›</b></div><div class="setting-group">About</div><div class="setting"><div class="setting-icon">✦</div><div class="setting-copy"><strong>Remindly</strong><span>Version 1.0 · Built for calm, focused days</span></div></div></div>`; }
   function renderAdd(date=selectedDate){ screen='add'; view.innerHTML=`<button class="back" onclick="screen='${selectedDate===todayKey?'today':'calendar'}';render()">← Back</button><div class="topbar" style="margin-bottom:22px"><div><div class="eyebrow">Create something memorable</div><h1>New reminder.</h1></div><button class="primary" onclick="saveReminder()">Save</button></div><div class="card form-card"><div class="form-grid"><div class="field full"><label>Title</label><input id="r-title" placeholder="Enter reminder title" autofocus></div><div class="field full"><label>Description</label><textarea id="r-description" placeholder="Optional note"></textarea></div><div class="field"><label>Date</label><input id="r-date" type="date" value="${date}"></div><div class="field"><label>Time</label><input id="r-time" type="time" value="08:30"></div><div class="field full"><label>Category</label><div class="choice-row" id="categories">${['Personal','Study','Meeting','Task','Birthday','Important'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="choose(this,'categories')">${x}</button>`).join('')}</div></div><div class="field full"><label>Repeat</label><div class="choice-row" id="repeat">${['Never','Daily','Weekly','Monthly','Yearly'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="choose(this,'repeat')">${x}</button>`).join('')}</div></div><div class="field full"><label>Alert behavior</label><div class="choice-row" id="alerts">${['Notification','Alarm','Sound + notification','Silent notification'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="choose(this,'alerts')">${x}</button>`).join('')}</div></div><div class="field full"><label>Remind me before</label><div class="choice-row" id="lead">${['At event time','5 min','10 min','15 min','30 min','1 hour','1 day'].map((x,i)=>`<button class="choice ${i===0?'selected':''}" onclick="this.classList.toggle('selected')">${x}</button>`).join('')}</div></div><div class="field full"><div class="switch-row"><div><strong style="font-size:14px">Vibration</strong><p>Use haptic feedback with this reminder</p></div><button class="switch on" onclick="this.classList.toggle('on')"></button></div></div></div><button class="primary" style="width:100%;margin-top:5px" onclick="saveReminder()">Set reminder</button></div>`; }
   function choose(el,id){document.querySelectorAll('#'+id+' .choice').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');}
-  function saveReminder(){const title=document.getElementById('r-title').value.trim();if(!title){document.getElementById('r-title').focus();return;} reminders.push({id:Date.now(),title,description:document.getElementById('r-description').value.trim(),date:document.getElementById('r-date').value,time:document.getElementById('r-time').value,category:document.querySelector('#categories .selected').textContent,color:'lime',done:false});screen='today';render();}
+  function saveReminder(){const title=document.getElementById('r-title').value.trim();if(!title){document.getElementById('r-title').focus();return;} reminders.push({id:Date.now(),title,description:document.getElementById('r-description').value.trim(),date:document.getElementById('r-date').value,time:document.getElementById('r-time').value,category:document.querySelector('#categories .selected').textContent,color:'lime',done:false});persist();scheduleTimers();screen='today';render();}
   function openAdd(date=todayKey){renderAdd(date)} function openDetails(id){const r=reminders.find(x=>x.id===id);if(r) alert(`${r.title}\n\n${relative(r.date)} · ${formatTime(r.time)}\n${r.description||'No description'}`)}
-  function toggleDone(id){const r=reminders.find(x=>x.id===id);if(r) r.done=!r.done;render();}
+  function toggleDone(id){const r=reminders.find(x=>x.id===id);if(r) r.done=!r.done;persist();render();}
+  let deferredInstallPrompt = null;
+  const installButton = document.getElementById('install-app');
+  window.addEventListener('beforeinstallprompt', event => { event.preventDefault(); deferredInstallPrompt = event; installButton.classList.add('visible'); });
+  installButton.addEventListener('click', async () => { if (!deferredInstallPrompt) return; deferredInstallPrompt.prompt(); await deferredInstallPrompt.userChoice; deferredInstallPrompt = null; installButton.classList.remove('visible'); });
+  window.addEventListener('appinstalled', () => installButton.classList.remove('visible'));
+  if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('./sw.js').catch(() => {}));
   function selectDay(iso){selectedDate=iso;calendarDate=new Date(iso+'T12:00:00');calendarDate.setDate(1);render();}
   function moveMonth(delta){calendarDate.setMonth(calendarDate.getMonth()+delta);render();}
   function jumpToday(){selectedDate=todayKey;calendarDate=new Date(now.getFullYear(),now.getMonth(),1);render();}
-  document.querySelectorAll('[data-screen]').forEach(b=>b.addEventListener('click',()=>{screen=b.dataset.screen;render();})); document.getElementById('fab').addEventListener('click',()=>openAdd()); render();
+  document.querySelectorAll('[data-screen]').forEach(b=>b.addEventListener('click',()=>{screen=b.dataset.screen;render();})); document.getElementById('fab').addEventListener('click',()=>openAdd()); scheduleTimers(); render();
 </script>
 </body>
 </html>

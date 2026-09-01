@@ -1,0 +1,16 @@
+{
+  "name": "Remindly — Smart reminders",
+  "short_name": "Remindly",
+  "description": "Calm, private reminders that stay on your device.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#101012",
+  "theme_color": "#101012",
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "./icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "./icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
