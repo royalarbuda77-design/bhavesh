@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Remindly</string>
+    <string name="notification_channel_important">Important reminders</string>
+    <string name="notification_channel_normal">Normal reminders</string>
+    <string name="notification_channel_silent">Silent reminders</string>
+    <string name="notification_channel_description">Remindly scheduled alerts</string>
+</resources>
