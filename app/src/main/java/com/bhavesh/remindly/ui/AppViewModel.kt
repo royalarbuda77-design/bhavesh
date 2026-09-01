@@ -24,6 +24,7 @@ import java.util.Locale
 import kotlin.time.Duration.Companion.seconds
 import org.json.JSONArray
 import org.json.JSONObject
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharingStarted
@@ -81,36 +82,42 @@ class AppViewModel(application: Application) : AndroidViewModel(application) {
 
     fun reminder(id: Long): Flow<ReminderEntity?> = repository.reminder(id)
 
-    fun save(draft: ReminderDraft, existing: ReminderEntity? = null, onSaved: (Long) -> Unit = {}) {
+    fun save(draft: ReminderDraft, existing: ReminderEntity? = null, onSaved: (Long) -> Unit = {}, onError: () -> Unit = {}) {
         viewModelScope.launch(Dispatchers.IO) {
-            val timestamp = System.currentTimeMillis()
-            val entity = ReminderEntity(
-                id = existing?.id ?: 0,
-                title = draft.title.trim(),
-                description = draft.description.trim(),
-                dateEpochDay = draft.date.toEpochDay(),
-                timeMinutes = draft.time.hour * 60 + draft.time.minute,
-                timezone = existing?.timezone ?: ZoneId.systemDefault().id,
-                category = draft.category,
-                icon = draft.icon,
-                color = draft.color,
-                repeatType = draft.repeat.name,
-                snoozeDuration = draft.snoozeMinutes,
-                alertType = draft.alert.name,
-                sound = existing?.sound ?: "default",
-                vibration = draft.vibration,
-                leadMinutes = draft.leadMinutes.sorted().joinToString(","),
-                createdAt = existing?.createdAt ?: timestamp,
-                updatedAt = timestamp,
-                lastTriggeredAt = existing?.lastTriggeredAt,
-                nextTriggerAt = null,
-                enabled = true,
-                completed = false
-            )
-            val id = if (existing == null) repository.insert(entity) else { repository.update(entity); entity.id }
-            val saved = repository.get(id)
-            if (saved != null) app.scheduler.schedule(saved)
-            kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) { onSaved(id) }
+            try {
+                val timestamp = System.currentTimeMillis()
+                val entity = ReminderEntity(
+                    id = existing?.id ?: 0,
+                    title = draft.title.trim(),
+                    description = draft.description.trim(),
+                    dateEpochDay = draft.date.toEpochDay(),
+                    timeMinutes = draft.time.hour * 60 + draft.time.minute,
+                    timezone = existing?.timezone ?: ZoneId.systemDefault().id,
+                    category = draft.category,
+                    icon = draft.icon,
+                    color = draft.color,
+                    repeatType = draft.repeat.name,
+                    snoozeDuration = draft.snoozeMinutes,
+                    alertType = draft.alert.name,
+                    sound = existing?.sound ?: "default",
+                    vibration = draft.vibration,
+                    leadMinutes = draft.leadMinutes.sorted().joinToString(","),
+                    createdAt = existing?.createdAt ?: timestamp,
+                    updatedAt = timestamp,
+                    lastTriggeredAt = existing?.lastTriggeredAt,
+                    nextTriggerAt = null,
+                    enabled = true,
+                    completed = false
+                )
+                val id = if (existing == null) repository.insert(entity) else { repository.update(entity); entity.id }
+                val saved = repository.get(id)
+                if (saved != null) app.scheduler.schedule(saved)
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) { onSaved(id) }
+            } catch (cancelled: CancellationException) {
+                throw cancelled
+            } catch (_: Exception) {
+                kotlinx.coroutines.withContext(kotlinx.coroutines.Dispatchers.Main) { onError() }
+            }
         }
     }
 

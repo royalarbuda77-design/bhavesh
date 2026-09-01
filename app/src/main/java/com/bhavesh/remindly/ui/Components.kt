@@ -109,7 +109,7 @@ fun SectionHeader(title: String, action: String? = null, onAction: (() -> Unit)?
 
 @Composable
 fun CircleIcon(icon: ImageVector, tint: Color = MaterialTheme.colorScheme.onSurface, background: Color = MaterialTheme.colorScheme.surfaceVariant, size: Int = 44, description: String? = null) {
-    Box(Modifier.size(size.dp).clip(CircleShape).background(background).semantics { if (description != null) contentDescription = description }, contentAlignment = Alignment.Center) {
+    Box(Modifier.size(size.dp).clip(CircleShape).background(background).semantics { description?.let { contentDescription = it } }, contentAlignment = Alignment.Center) {
         Icon(icon, description, Modifier.size((size / 2).dp), tint = tint)
     }
 }
@@ -180,7 +180,8 @@ fun LabeledField(label: String, value: String, onValueChange: (String) -> Unit, 
 
 @Composable
 fun SettingRow(icon: ImageVector, title: String, subtitle: String? = null, onClick: (() -> Unit)? = null, trailing: @Composable (() -> Unit)? = null) {
-    Row(Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).then(if (onClick != null) Modifier.clickable(onClick = onClick) else Modifier).padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
+    val clickModifier = onClick?.let { Modifier.clickable(onClick = it) } ?: Modifier
+    Row(Modifier.fillMaxWidth().clip(RoundedCornerShape(16.dp)).then(clickModifier).padding(vertical = 12.dp), verticalAlignment = Alignment.CenterVertically) {
         CircleIcon(icon, tint = MaterialTheme.colorScheme.primary, background = MaterialTheme.colorScheme.primary.copy(alpha = .12f), size = 40)
         Spacer(Modifier.width(14.dp))
         Column(Modifier.weight(1f)) {

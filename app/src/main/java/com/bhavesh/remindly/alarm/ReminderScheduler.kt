@@ -5,6 +5,8 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
+import com.bhavesh.remindly.BuildConfig
 import com.bhavesh.remindly.data.ReminderEntity
 import com.bhavesh.remindly.data.ReminderRepository
 import com.bhavesh.remindly.data.RepeatType
@@ -50,12 +52,18 @@ class ReminderScheduler(
 
     suspend fun scheduleAt(reminderId: Long, triggerAt: Long, leadMinutes: Long = 0L) = withContext(Dispatchers.IO) {
         val pendingIntent = pendingIntent(reminderId, leadMinutes)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && alarmManager.canScheduleExactAlarms()) {
-            alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
-        } else {
-            // The fallback still wakes from Doze, but Android may coalesce it. The UI
-            // explains how to grant precise alarm access when exact timing matters.
-            alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S && alarmManager.canScheduleExactAlarms()) {
+                alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            } else {
+                // The fallback still wakes from Doze, but Android may coalesce it. The UI
+                // explains how to grant precise alarm access when exact timing matters.
+                alarmManager.setAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, triggerAt, pendingIntent)
+            }
+        } catch (security: SecurityException) {
+            // Permission can be revoked between the check and the call. Keep the
+            // reminder in Room; the next resume/boot retry is safe.
+            if (BuildConfig.DEBUG) Log.w("Remindly", "Unable to schedule reminder $reminderId", security)
         }
     }
 
