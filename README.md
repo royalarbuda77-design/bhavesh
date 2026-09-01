@@ -18,6 +18,12 @@ Open the project in Android Studio Hedgehog or newer and let Gradle sync. The ap
 
 For a reliable production release, verify notification permission, exact alarm access, and battery policy on the device or OEM build. Android may coalesce the documented fallback alarm when the user declines precise alarm access; Remindly always surfaces the permission state in Settings rather than pretending an exact alarm was scheduled.
 
+## Installable browser preview
+
+The `preview/` and `docs/` folders contain an installable PWA version with a manifest, offline service worker, local browser storage, and an Install app prompt. In Arena, open the **Remindly preview** live preview, refresh once, then use **Install app** or the browser menu's **Add to Home screen** action. A browser PWA cannot provide Android's exact AlarmManager/lock-screen guarantees when the browser process is fully closed; use the native Android build for those guarantees.
+
+To publish the PWA publicly with GitHub Pages, enable Pages for the repository and select the `docs/` folder on the `arena/01a05af3-bhavesh` branch. The PWA files are already pushed to that branch.
+
 ## Structure
 
 - `data/` — Room entity, indexed DAO, database, and repository
