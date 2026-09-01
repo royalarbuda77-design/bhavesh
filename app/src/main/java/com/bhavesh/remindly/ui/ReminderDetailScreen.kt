@@ -52,7 +52,7 @@ fun ReminderDetailScreen(reminder: ReminderEntity, onBack: () -> Unit, onEdit: (
             item {
                 PremiumCard(Modifier.fillMaxWidth(), color = accent.copy(alpha = .18f)) {
                     Column(Modifier.fillMaxWidth().padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-                        CircleIcon(Icons.Rounded.Check, tint = accent, background = accent.copy(alpha = .22f), size = 72)
+                        CircleIcon(reminderIcon(reminder.icon), tint = accent, background = accent.copy(alpha = .22f), size = 72)
                         Spacer(Modifier.height(18.dp))
                         Text(reminder.title, style = MaterialTheme.typography.headlineMedium, fontWeight = FontWeight.Bold, textAlign = TextAlign.Center)
                         if (reminder.description.isNotBlank()) { Spacer(Modifier.height(8.dp)); Text(reminder.description, style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant, textAlign = TextAlign.Center) }

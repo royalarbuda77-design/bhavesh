@@ -79,6 +79,15 @@ val Accent = Color(0xFFC9F65B)
 val AccentMuted = Color(0xFFE5F7AE)
 val Purple = Color(0xFFA9B4FF)
 
+fun reminderIcon(name: String): ImageVector = when (name) {
+    "alarm" -> Icons.Rounded.Alarm
+    "calendar" -> Icons.Rounded.CalendarMonth
+    "schedule" -> Icons.Rounded.Schedule
+    "bell" -> Icons.Rounded.NotificationsNone
+    "spark" -> Icons.Rounded.AutoAwesome
+    else -> Icons.Rounded.Check
+}
+
 @Composable
 fun ScreenColumn(modifier: Modifier = Modifier, content: @Composable () -> Unit) {
     Column(modifier.fillMaxWidth().padding(horizontal = 20.dp), content = content)

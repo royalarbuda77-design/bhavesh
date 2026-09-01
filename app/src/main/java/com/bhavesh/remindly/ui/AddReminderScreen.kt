@@ -56,6 +56,7 @@ import java.time.format.DateTimeFormatter
 import java.util.Locale
 
 private val categories = listOf("Personal", "Study", "Meeting", "Task", "Birthday", "Important")
+private val iconOptions = listOf("check" to Icons.Rounded.Check, "alarm" to Icons.Rounded.Alarm, "calendar" to Icons.Rounded.CalendarMonth, "schedule" to Icons.Rounded.Schedule, "bell" to Icons.Rounded.NotificationsNone)
 private val colorOptions = listOf(0xFFC9F65BL, 0xFFA9B4FFFF, 0xFFFFB86BFF, 0xFFFF8C9EFF, 0xFF7DE2D1FF)
 private val leadOptions = listOf(0, 5, 10, 15, 30, 60, 1440)
 
@@ -93,6 +94,14 @@ fun AddReminderScreen(initial: ReminderEntity?, preselectedDate: LocalDate, onBa
                 Text("CATEGORY", style = MaterialTheme.typography.labelSmall, letterSpacing = 1.2.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant)
                 Spacer(Modifier.height(10.dp))
                 Row(Modifier.horizontalScroll(rememberScrollState()), horizontalArrangement = Arrangement.spacedBy(8.dp)) { categories.forEach { Chip(it, draft.category == it, { draft = draft.copy(category = it) }) } }
+            }
+            item {
+                Text("ICON", style = MaterialTheme.typography.labelSmall, letterSpacing = 1.2.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Spacer(Modifier.height(10.dp))
+                Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) { iconOptions.forEach { (name, icon) ->
+                    val chosen = draft.icon == name
+                    androidx.compose.material3.Surface(onClick = { draft = draft.copy(icon = name) }, shape = androidx.compose.foundation.shape.CircleShape, color = if (chosen) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.size(42.dp)) { Icon(icon, name, tint = if (chosen) MaterialTheme.colorScheme.onPrimary else MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(11.dp)) }
+                } }
             }
             item {
                 Text("COLOR", style = MaterialTheme.typography.labelSmall, letterSpacing = 1.2.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurfaceVariant)
