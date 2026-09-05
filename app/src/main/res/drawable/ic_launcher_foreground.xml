@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- outer ring -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#54E6FF"
+        android:strokeWidth="4"
+        android:pathData="M54,22a32,32 0 1,0 0.01,0Z" />
+    <!-- segmented mid ring (4 arcs) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AA8C9"
+        android:strokeWidth="5"
+        android:pathData="M54,31.5a22.5,22.5 0 0,1 22.5,22.5" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AA8C9"
+        android:strokeWidth="5"
+        android:pathData="M54,31.5a22.5,22.5 0 0,0 -22.5,22.5" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AA8C9"
+        android:strokeWidth="5"
+        android:pathData="M31.5,54a22.5,22.5 0 0,0 22.5,22.5" />
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#0AA8C9"
+        android:strokeWidth="5"
+        android:pathData="M76.5,54a22.5,22.5 0 0,1 -22.5,22.5" />
+    <!-- core -->
+    <path
+        android:fillColor="#C9F7FF"
+        android:pathData="M54,42.5a11.5,11.5 0 1,0 0.01,0Z" />
+    <path
+        android:fillColor="#062030"
+        android:pathData="M54,47.5a6.5,6.5 0 1,0 0.01,0Z" />
+    <path
+        android:fillColor="#EAFDFF"
+        android:pathData="M54,50.5a3.5,3.5 0 1,0 0.01,0Z" />
+</vector>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JARVIS</string>
+    <string name="tagline">हाज़िर हूँ, सर</string>
+
+    <string name="nav_home">होम</string>
+    <string name="nav_chat">चैट</string>
+    <string name="nav_settings">सेटिंग्स</string>
+    <string name="nav_permissions">अनुमतियाँ</string>
+    <string name="nav_commands">कमांड</string>
+    <string name="nav_diagnostics">डायग्नोस्टिक्स</string>
+    <string name="nav_memory">मेमोरी</string>
+
+    <string name="state_idle">“Wake up Jarvis” का इंतज़ार…</string>
+    <string name="state_listening">मैं सुन रहा हूँ</string>
+    <string name="state_thinking">सोच रहा हूँ…</string>
+    <string name="state_speaking">बोल रहा हूँ…</string>
+    <string name="state_sleeping">सोया हूँ — “Wake up Jarvis” बोलें या नीचे टैप करें</string>
+    <string name="state_error">रिकवर हो रहा हूँ…</string>
+
+    <string name="btn_start">Jarvis चालू करें</string>
+    <string name="btn_sleep">सो जाएँ</string>
+    <string name="btn_talk">बोलने के लिए टैप</string>
+    <string name="btn_stop_speaking">बोलना बंद करें</string>
+    <string name="notif_channel_service">एसिस्टेंट सर्विस</string>
+    <string name="notif_action_pause">सो जाएँ</string>
+    <string name="notif_action_wake">जागें</string>
+    <string name="notif_action_open">खोलें</string>
+
+    <string name="perm_grant">दें</string>
+    <string name="perm_open_settings">सिस्टम स्क्रीन खोलें</string>
+    <string name="perm_granted">मंज़ूर</string>
+    <string name="perm_title">एक बार की सेटअप</string>
+    <string name="perm_subtitle">इन अनुमतियों से ही Jarvis पूरी ताकत से चलेगा। माइक के अलावा सब वैकल्पिक है।</string>
+    <string name="perm_required">आवश्यक</string>
+    <string name="perm_recommended">सुझावित</string>
+    <string name="perm_optional">एक्स्ट्रा पावर-अप</string>
+
+    <string name="settings_ai">AI और Gemini</string>
+    <string name="settings_api_key">Gemini API कुंजी</string>
+    <string name="settings_api_key_hint">AIza… (पुरानी) और AQ.… (नई AI-Studio) दोनों कुंजियाँ चलेंगी। Keystore-एन्क्रिप्टेड स्टोरेज।</string>
+    <string name="settings_test_key">कुंजी जाँचें</string>
+    <string name="settings_model">मॉडल</string>
+    <string name="settings_voice">आवाज़</string>
+    <string name="settings_language">भाषाएँ</string>
+    <string name="settings_wake">वेक-वर्ड</string>
+    <string name="settings_wake_enable">हमेशा सुनें (“Wake up Jarvis”)</string>
+    <string name="settings_power">बैटरी प्रोफ़ाइल</string>
+    <string name="settings_overlay">फ्लोटिंग आर्क-रिएक्टर HUD</string>
+    <string name="settings_automation">ऑटोमेशन</string>
+    <string name="settings_danger">प्राइवेसी</string>
+
+    <string name="cmd_title">ગુજરાતી · हिन्दी · English तीनों में चलता हूँ</string>
+    <string name="cmd_hint">“Wake up Jarvis” के बाद (या tap-to-talk) कुछ भी कहें</string>
+
+    <string name="diag_title">सेल्फ-हीलिंग और लॉग</string>
+    <string name="diag_logs">इंजन लॉग</string>
+    <string name="diag_last_crash">आख़िरी uncaught एरर</string>
+    <string name="diag_no_crash">कोई क्रैश दर्ज नहीं ✨</string>
+    <string name="diag_safe_mode">ऍप बार-बार क्रैश होकर SAFE MODE में गया। ऑटो-रिस्टार्ट बंद है।</string>
+    <string name="diag_repair">रिपेयर करके फिर चालू करें</string>
+
+    <string name="mem_title">Jarvis आपके बारे में क्या जानता है</string>
+    <string name="mem_empty">अभी कुछ नहीं। “Remember that my wifi password is …” बोलकर देखें।</string>
+    <string name="mem_clear">सब भूल जाओ</string>
+
+    <string name="chat_placeholder">कुछ भी पूछें — फ़ोन भी चलाता हूँ।</string>
+    <string name="chat_type_hint">कमांड लिखें…</string>
+    <string name="chat_send">भेजें</string>
+
+    <string name="accessibility_label">JARVIS — स्क्रीन असिस्ट</string>
+    <string name="accessibility_description">Jarvis को स्क्रीन पढ़ने, स्क्रीनशॉट से समझाने और Back/Home/Scroll जेस्चर देने की सुविधा। जब तक आप न कहें, कुछ नहीं पढ़ता।</string>
+    <string name="notification_listener_label">JARVIS — नोटिफिकेशन रीडर</string>
+    <string name="widget_label">JARVIS ऑर्ब</string>
+    <string name="widget_desc">टैप करके बोलें</string>
+
+    <string name="key_ok">✅ कुंजी सही है — मॉडल मिल रहे हैं</string>
+    <string name="key_missing">दिमाग चालू करने के लिए Gemini API कुंजी डालें। बिना कुंजी भी ~40 ऑफ़लाइन कमांड चलेंगे।</string>
+    <string name="settings_danger_note" />
+<string name="perm_welcome">जार्विस को उसकी इंद्रियाँ दें</string>
+    <string name="perm_welcome_body">JARVIS शक्तिशाली है, पर Android के नियमों के भीतर — हर अनुमति केवल एक क्षमता खोलती है। मना करें तो भी Jarvis काम करेगा (कम फीचर के साथ)।</string>
+    <string name="btn_grant">अनुमति दें</string>
+    <string name="btn_grant_runtime">सभी runtime अनुमतियाँ दें</string>
+    <string name="btn_recheck">फ़िर जाँचें</string>
+    <string name="perm_note">नोटिफ़िकेशन एक्सेस और एक्सेसिबिलिटी Android के विशेष-एक्सेस स्विच हैं: JARVIS चुना हुआ सिस्टम पेज खुलेगा — टॉगल करें, वापस आएँ, स्थिति अपने-आप रिफ़्रेश होगी।</string>
+    <string name="diag_engines">इंजन</string>
+    <string name="diag_logs_hint">Jarvis क्या कर रहा है, लाइव लॉग (सिर्फ़ फ़ोन पर)। लाल = ठीक की गई ग़लतियाँ (ऐप क्रैश नहीं हुआ — Self-Healing ने संभाला)।</string>
+    <string name="diag_refresh">रिफ़्रेश</string>
+    <string name="diag_delete_crash">क्रैश रिपोर्ट हटाएँ</string>
+    <string name="diag_key_storage">हार्डवेयर की-स्टोरेज: %1$s</string>
+    <string name="notif_service_title">JARVIS %1$s</string>
+    <string name="mem_facts">यादे गए तथ्य</string>
+    <string name="mem_contacts">संपर्क उपनाम</string>
+    <string name="settings_stt_language">सुनने की भाषा (STT)</string>
+    <string name="settings_reply_language">जवाब की भाषा</string>
+    <string name="settings_voice_backend">आवाज़ का इंजन</string>
+    <string name="settings_model_auto">मॉडल</string>
+    <string name="settings_base_url">API बेस URL</string>
+    <string name="settings_sensitivity">वेक-वर्ड संवेदनशीलता</string>
+    <string name="settings_custom_wake">कस्टम वेक फ़्रेज़</string>
+    <string name="settings_wake_info">स्क्रीन बंद पर भी हमेशा सुनता है — 100% ऑन-डिवाइस</string>
+    <string name="settings_soundfx">HUD साउंड इफ़ेक्ट</string>
+    <string name="settings_barge">बोलते समय टोकना (barge-in)</string>
+    <string name="settings_boot">रिस्टार्ट/बूट पर अपने-आप चालू</string>
+    <string name="settings_ui">इंटरफ़ेस</string>
+    <string name="settings_system_actions">डिवाइस ऑटोमेशन</string>
+    <string name="settings_agent_always">स्मार्ट एजेंट मोड (Gemini)</string>
+    <string name="settings_search">लाइव Google खोज</string>
+    <string name="settings_forget_key">API हटायें</string>
+    <string name="settings_clear_chat">बातचीत का इतिहास मिटाएँ</string>
+    <string name="danger_zone">खतरा क्षेत्र</string>
+</resources>

@@ -1,0 +1,23 @@
+# Gradle / build outputs
+.gradle/
+**/build/
+captures/
+*.hprof
+
+# Android Studio / IntelliJ
+.idea/
+*.iml
+.kotlin/
+navigation/
+
+# Local, machine-specific or secret files — NEVER commit these
+local.properties
+*.keystore
+*.jks
+secrets/
+apikeys.env
+
+# Misc
+.DS_Store
+.externalNativeBuild/
+.cxx/

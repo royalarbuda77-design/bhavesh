@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JARVIS</string>
+    <string name="tagline">At your service, Boss</string>
+
+    <!-- navigation -->
+    <string name="nav_home">Home</string>
+    <string name="nav_chat">Chat</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_permissions">Permissions</string>
+    <string name="nav_commands">Commands</string>
+    <string name="nav_diagnostics">Diagnostics</string>
+    <string name="nav_memory">Memory</string>
+
+    <!-- states -->
+    <string name="state_idle">Listening for “Wake up Jarvis”…</string>
+    <string name="state_listening">I am listening</string>
+    <string name="state_thinking">Thinking…</string>
+    <string name="state_speaking">Speaking…</string>
+    <string name="state_sleeping">Sleeping — say “Wake up Jarvis” or tap below</string>
+    <string name="state_error">Recovering…</string>
+
+    <!-- actions -->
+    <string name="btn_start">Activate Jarvis</string>
+    <string name="btn_sleep">Go to sleep</string>
+    <string name="btn_talk">Tap to talk</string>
+    <string name="btn_stop_speaking">Stop speaking</string>
+    <string name="notif_channel_service">Assistant service</string>
+    <string name="notif_service_title">JARVIS %1$s</string>
+    <string name="notif_action_pause">Sleep</string>
+    <string name="notif_action_wake">Wake</string>
+    <string name="notif_action_open">Open</string>
+
+    <!-- permissions -->
+    <string name="perm_grant">Grant</string>
+    <string name="perm_open_settings">Open system screen</string>
+    <string name="perm_granted">Granted</string>
+    <string name="perm_title">One-time setup</string>
+    <string name="perm_subtitle">Jarvis can only be fully powerful with these grants. Everything is optional except Microphone.</string>
+    <string name="perm_required">Required</string>
+    <string name="perm_recommended">Recommended</string>
+    <string name="perm_optional">Optional power-up</string>
+
+    <!-- settings -->
+    <string name="settings_ai">AI &amp; Gemini</string>
+    <string name="settings_api_key">Gemini API key</string>
+    <string name="settings_api_key_hint">Accepts AIza… (legacy) and AQ.… (new AI-Studio) keys. Stored AES-256/Keystore encrypted.</string>
+    <string name="settings_test_key">Test key</string>
+    <string name="settings_base_url">API base URL</string>
+    <string name="settings_model">Model</string>
+    <string name="settings_model_auto">auto (probe &amp; remember)</string>
+    <string name="settings_voice">Voice</string>
+    <string name="settings_voice_backend">TTS engine</string>
+    <string name="settings_language">Languages</string>
+    <string name="settings_stt_language">Speech recognition</string>
+    <string name="settings_reply_language">Reply language</string>
+    <string name="settings_wake">Wake word</string>
+    <string name="settings_wake_enable">Always listening (“Wake up Jarvis”)</string>
+    <string name="settings_wake_info">Default triggers: “Wake up Jarvis”, “Hey Jarvis”, જારવિસ (any mis-hearing tolerated). “Shutdown Jarvis” sleeps everything.</string>
+    <string name="settings_custom_wake">Extra wake phrase (optional)</string>
+    <string name="settings_sensitivity">Sensitivity</string>
+    <string name="settings_power">Battery profile</string>
+    <string name="settings_ui">Interface</string>
+    <string name="settings_overlay">Floating Arc-Reactor HUD</string>
+    <string name="settings_soundfx">Sound effects</string>
+    <string name="settings_barge">Interrupt me when I speak (barge-in)</string>
+    <string name="settings_automation">Automation</string>
+    <string name="settings_system_actions">Allow device control</string>
+    <string name="settings_agent_always">Let Gemini parse every command (smarter, uses quota)</string>
+    <string name="settings_search">Ground answers with Google Search</string>
+    <string name="settings_boot">Start automatically after reboot</string>
+    <string name="settings_danger">Privacy</string>
+    <string name="settings_forget_key">Remove API key</string>
+    <string name="settings_clear_chat">Clear conversation history</string>
+
+    <!-- commands sheet -->
+    <string name="cmd_title">Works in Gujarati · हिन्दी · English</string>
+    <string name="cmd_hint">Try any of these after “Wake up Jarvis” (or tap-to-talk)</string>
+
+    <!-- diagnostics -->
+    <string name="diag_title">Self-healing &amp; logs</string>
+    <string name="diag_logs">Recent engine log</string>
+    <string name="diag_last_crash">Last uncaught error</string>
+    <string name="diag_no_crash">No crashes recorded ✨</string>
+    <string name="diag_safe_mode">The app crash-looped and entered SAFE MODE. Auto-restart is off.</string>
+    <string name="diag_repair">Repair &amp; re-enable</string>
+    <string name="diag_key_storage">Hardware key storage: %1$s</string>
+
+    <!-- memory -->
+    <string name="mem_title">What Jarvis knows about you</string>
+    <string name="mem_facts">Facts</string>
+    <string name="mem_contacts">Contact aliases</string>
+    <string name="mem_empty">Nothing yet. Say “Remember that my wifi password is …” or “Call mom” once and save the number as an alias.</string>
+    <string name="mem_clear">Forget everything</string>
+
+    <!-- chat -->
+    <string name="chat_placeholder">Ask me anything — I also run your phone.</string>
+    <string name="chat_type_hint">Type a command…</string>
+    <string name="chat_send">Send</string>
+
+    <string name="accessibility_label">JARVIS — Screen Assist</string>
+    <string name="accessibility_description">Lets Jarvis read the screen, take contextual screenshots, and perform Back/Home/Scroll gestures on your voice command. It reads nothing until you ask.</string>
+    <string name="notification_listener_label">JARVIS — Notification reader</string>
+    <string name="widget_label">JARVIS orb</string>
+    <string name="widget_desc">Tap to talk to Jarvis</string>
+
+    <string name="key_ok">✅ Key works — models are reachable</string>
+    <string name="key_missing">Add a Gemini API key to wake the brain. Jarvis still runs ~40 offline device commands without it.</string>
+<string name="perm_welcome">Give Jarvis its senses</string>
+    <string name="perm_welcome_body">JARVIS is powerful but only within Android\'s guard rails — each permission below unlocks one capability, nothing more. Deny any you are uncomfortable with; Jarvis keeps working without them (with reduced powers).</string>
+    <string name="btn_grant">Grant</string>
+    <string name="btn_grant_runtime">Grant runtime permissions</string>
+    <string name="btn_recheck">Re-check status</string>
+    <string name="perm_note">Notification access and accessibility are Android special-access switches: the system page opens with JARVIS pre-selected — toggle it, press back, statuses refresh automatically.</string>
+    <string name="diag_engines">Engines</string>
+    <string name="diag_logs_hint">Live ring-buffer of what Jarvis is doing, kept on-device. Red = healed errors (the app did NOT crash — Self-Healing caught them).</string>
+    <string name="diag_refresh">Refresh</string>
+    <string name="diag_delete_crash">Delete crash report</string>
+    <string name="danger_zone">Danger zone</string>
+</resources>

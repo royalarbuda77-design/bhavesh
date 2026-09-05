@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="64dp"
+    android:layout_height="64dp">
+
+    <ImageView
+        android:id="@+id/orb"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/widget_desc"
+        android:padding="2dp"
+        android:src="@drawable/ic_widget_orb" />
+</FrameLayout>

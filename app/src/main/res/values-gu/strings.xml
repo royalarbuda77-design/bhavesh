@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">JARVIS</string>
+    <string name="tagline">હાજર છું, સર</string>
+
+    <string name="nav_home">હોમ</string>
+    <string name="nav_chat">ચેટ</string>
+    <string name="nav_settings">સેટિંગ્સ</string>
+    <string name="nav_permissions">પરવાનગીઓ</string>
+    <string name="nav_commands">કમાન્ડ્સ</string>
+    <string name="nav_diagnostics">ડાયાગ્નોસ્ટિક્સ</string>
+    <string name="nav_memory">મેમરી</string>
+
+    <string name="state_idle">“Wake up Jarvis” ની રાહ…</string>
+    <string name="state_listening">હું સાંભળી રહ્યો છું</string>
+    <string name="state_thinking">વિચારું છું…</string>
+    <string name="state_speaking">બોલાઈ રહ્યું છે…</string>
+    <string name="state_sleeping">ઊંઘમાં છું — “Wake up Jarvis” કહો કે નીચે ટૅપ કરો</string>
+    <string name="state_error">રિકવર થઈ રહ્યું છે…</string>
+
+    <string name="btn_start">Jarvis ચાલુ કરો</string>
+    <string name="btn_sleep">સૂઈ જાઓ</string>
+    <string name="btn_talk">બોલવા ટૅપ કરો</string>
+    <string name="btn_stop_speaking">વાત બંધ કરો</string>
+    <string name="notif_channel_service">એસિસ્ટન્ટ સર્વિસ</string>
+    <string name="notif_action_pause">સૂઈ જાઓ</string>
+    <string name="notif_action_wake">જાગો</string>
+    <string name="notif_action_open">ખોલો</string>
+
+    <string name="perm_grant">આપો</string>
+    <string name="perm_open_settings">સિસ્ટમ સેટિંગ ખોલો</string>
+    <string name="perm_granted">મંજૂર</string>
+    <string name="perm_title">એકવારની સેટઅપ</string>
+    <string name="perm_subtitle">આ પરવાનગીઓથી જ Jarvis પૂરી શક્તિએ ચાલે. માઇક્રોફોન સિવાય બધું વૈકલ્પિક છે.</string>
+    <string name="perm_required">ફરજિયાત</string>
+    <string name="perm_recommended">ભલામણ</string>
+    <string name="perm_optional">એક્સ્ટ્રા પાવર-અપ</string>
+
+    <string name="settings_ai">AI અને Gemini</string>
+    <string name="settings_api_key">Gemini API કી</string>
+    <string name="settings_api_key_hint">AIza… (જૂની) અને AQ.… (નવી AI-Studio) કી બંને ચાલે. Keystore-એન્ક્રિપ્ટેડ સંગ્રહ.</string>
+    <string name="settings_test_key">કી ટૅસ્ટ કરો</string>
+    <string name="settings_base_url">API બેઝ URL</string>
+    <string name="settings_model">મોડલ</string>
+    <string name="settings_model_auto">auto (તપાસીને યાદ રાખે)</string>
+    <string name="settings_voice">આવાજ</string>
+    <string name="settings_voice_backend">TTS એન્જિન</string>
+    <string name="settings_language">ભાષાઓ</string>
+    <string name="settings_stt_language">બોલચાલ ઓળખ</string>
+    <string name="settings_reply_language">જવાબની ભાષા</string>
+    <string name="settings_wake">વેક-વર્ડ</string>
+    <string name="settings_wake_enable">હંમેશ સાંભળો (“Wake up Jarvis”)</string>
+    <string name="settings_wake_info">ટ્રિગર્સ: “Wake up Jarvis”, “Hey Jarvis”, જારવિસ. “Shutdown Jarvis” કહો એટલે બધું સ્લીપ મોડમાં.</string>
+    <string name="settings_custom_wake">વધારાની વેક-ફ્રેઝ (વૈકલ્પિક)</string>
+    <string name="settings_sensitivity">સંવેદનશીલતા</string>
+    <string name="settings_power">બૅટરી પ્રોફાઇલ</string>
+    <string name="settings_ui">ઇન્ટરફેસ</string>
+    <string name="settings_overlay">ફ્લોટિંગ આર્ક-રિએક્ટર HUD</string>
+    <string name="settings_soundfx">સાઉન્ડ ઈફેક્ટ્સ</string>
+    <string name="settings_barge">હું બોલું ત્યારે વાત તોડી શકાય (barge-in)</string>
+    <string name="settings_automation">ઑટોમેશન</string>
+    <string name="settings_system_actions">ડિવાઇસ કંટ્રોલની મંજૂરી</string>
+    <string name="settings_agent_always">દરેક કમાન્ડ Gemini પાસેથી પાર્સ કરાવો (સ્માર્ટ, ક્વોટા વપરાય)</string>
+    <string name="settings_search">જવાબોમાં Google Search વાપરો</string>
+    <string name="settings_boot">રિબૂટ પછી આપોઆપ ચાલુ</string>
+    <string name="settings_danger">પ્રાઈવસી</string>
+    <string name="settings_forget_key">API કી દૂર કરો</string>
+    <string name="settings_clear_chat">વાતચીતનો ઈતિહાસ કાઢી નાખો</string>
+
+    <string name="cmd_title">ગુજરાતી · हिन्दी · English ત્રણેમાં ચાલે</string>
+    <string name="cmd_hint">“Wake up Jarvis” પછી ( કે tap-to-talk ) આમાંનું કંઈ પણ કહો</string>
+
+    <string name="diag_title">સેલ્ફ-હીલિંગ અને લૉગ્સ</string>
+    <string name="diag_logs">એન્જિન લૉગ</string>
+    <string name="diag_last_crash">છેલ્લો Uncaught એરર</string>
+    <string name="diag_no_crash">કોઈ ક્રૅશ નોંધાયો નથી ✨</string>
+    <string name="diag_safe_mode">ઍપ વારંવાર ક્રૅશ થઈ SAFE MODE માં ગઈ. ઑટો-રિસ્ટાર્ટ બંધ છે.</string>
+    <string name="diag_repair">રિપેર કરો અને ફરી ચાલુ કરો</string>
+
+    <string name="mem_title">Jarvis તમારા વિશે શું જાણે છે</string>
+    <string name="mem_facts">તથ્યો</string>
+    <string name="mem_contacts">સંપર્ક એલિઅસ</string>
+    <string name="mem_empty">હજી કંઈ નહીં. “Remember that my wifi password is …” જેવું કહો.</string>
+    <string name="mem_clear">બધું ભૂલી જાઓ</string>
+
+    <string name="chat_placeholder">કંઈ પણ પૂછો — ફોન પણ ચલાવું છું.</string>
+    <string name="chat_type_hint">કમાન્ડ લખો…</string>
+    <string name="chat_send">મોકલો</string>
+
+    <string name="accessibility_label">JARVIS — સ્ક્રીન અસિસ્ટ</string>
+    <string name="accessibility_description">Jarvis ને સ્ક્રીન વાંચવા, સ્ક્રીનશોટ લઈને સમજાવવા અને Back/Home/Scroll જૅ્ચર કરવા માટે. જ્યાં સુધી તમે ન પૂછો ત્યાં સુધી કંઈ વાંચતું નથી.</string>
+    <string name="notification_listener_label">JARVIS — નોટિફિકેશન રીડર</string>
+    <string name="widget_label">JARVIS ઑર્બ</string>
+    <string name="widget_desc">ટૅપ કરીને બોલો</string>
+
+    <string name="key_ok">✅ કી ચાલુ છે — મોડલ્સ મળી રહે છે</string>
+    <string name="key_missing">બ્રેન ચાલુ કરવા Gemini API કી ઉમેરો. વગર કી પણ ~૪૦ ઑફલાઇન કમાન્ડ્સ ચાલશે.</string>
+<string name="perm_welcome">જાર્વિસને તેની ઇન્દ્રિયો આપો</string>
+    <string name="perm_welcome_body">JARVIS શક્તિશાળી છે પણ Android ના નિયમોમાં રહીને જ કામ કરે છે — દરેક મંજૂરી ફક્ત એક ક્ષમતા ખોલે છે. જો ન ઈચ્છો તો નકારો; Jarvis ઘટતા કાર્યો સાથે ચાલુ રહેશે.</string>
+    <string name="btn_grant">મંજૂરી આપો</string>
+    <string name="btn_grant_runtime">બધી runtime મંજૂરીઓ આપો</string>
+    <string name="btn_recheck">ફરી તપાસો</string>
+    <string name="perm_note">નોટિફિકેશન એક્સેસ અને એક્સેસિબિલિટી Android ના ખાસ સ્વિચ છે: સિસ્ટમ પેજ JARVIS પસંદ કરેલું ખૂલશે — ટૉગલ કરો, પાછા જાઓ, સ્ટેટસ આપોઆપ તાજું થશે.</string>
+    <string name="diag_engines">એન્જિન</string>
+    <string name="diag_logs_hint">Jarvis શું કરે છે એની લાઈવ લૉગ (ફક્ત ફોનમાં). લાલ = સાજા થયેલી ભૂલો (એપ ક્રેશ થઈ નથી — Self-Healing પકડી લીધી).</string>
+    <string name="diag_refresh">તાજું કરો</string>
+    <string name="diag_delete_crash">ક્રેશ રિપોર્ટ કાઢી નાખો</string>
+    <string name="diag_key_storage">હાર્ડવેર કી સ્ટોરેજ: %1$s</string>
+    <string name="notif_service_title">JARVIS %1$s</string>
+    <string name="danger_zone">જોખમ વિસ્તાર</string>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- API key & memory are deliberately excluded from any cloud backup. -->
+<full-backup-content>
+    <exclude domain="sharedpref" path="jarvis_settings.xml" />
+    <exclude domain="file" path="memory/" />
+    <exclude domain="file" path="logs/" />
+    <exclude domain="file" path="last_crash.txt" />
+</full-backup-content>
