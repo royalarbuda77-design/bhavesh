@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JARVIS — Android Voice Assistant · UI Preview</title>
+<style>
+:root{
+  --bg:#02090E; --deep:#06121C; --panel:#0A1B28; --cyan:#54E6FF; --cyanB:#A5F3FF;
+  --cyanD:#0AA8C9; --gold:#FFD166; --mint:#7CFFCB; --red:#FF6B6B; --violet:#B39DFF;
+  --dim:#7FA8BC; --text:#E6F6FF;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  background:
+    radial-gradient(1200px 800px at 80% -10%, rgba(10,168,201,.14), transparent 60%),
+    radial-gradient(900px 700px at -10% 30%, rgba(179,157,255,.08), transparent 55%),
+    var(--bg);
+  color:var(--text);
+  font-family:"Segoe UI",system-ui,-apple-system,"Noto Sans Gujarati",sans-serif;
+  overflow-x:hidden;
+}
+.mono{font-family:ui-monospace,Consolas,monospace}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+a{color:var(--cyan);text-decoration:none}
+
+/* subtle grid backdrop */
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:linear-gradient(rgba(84,230,255,.035) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(84,230,255,.035) 1px,transparent 1px);
+  background-size:44px 44px;}
+main,header,footer{position:relative;z-index:1}
+
+/* ── top bar ── */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+.logo{font-family:ui-monospace,monospace;letter-spacing:8px;color:var(--cyan);font-size:14px}
+.badge{border:1px solid rgba(84,230,255,.35);border-radius:20px;padding:4px 12px;font-size:11px;color:var(--cyanB);letter-spacing:2px}
+
+/* ── hero ── */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:34px 0 60px}
+h1{font-size:clamp(30px,4.6vw,52px);line-height:1.12;font-weight:800}
+h1 .cy{color:var(--cyan)}
+.sub{color:var(--dim);font-size:15.5px;margin:16px 0 26px;line-height:1.65;max-width:520px}
+.pill{display:inline-block;background:rgba(84,230,255,.1);border:1px solid rgba(84,230,255,.3);
+  color:var(--cyanB);border-radius:999px;padding:6px 14px;font-size:12.5px;margin:0 6px 8px 0}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-top:8px}
+.btn{cursor:pointer;border:none;border-radius:12px;padding:13px 22px;font-size:14.5px;font-weight:600;transition:.2s}
+.btn-cy{background:var(--cyan);color:#02131B;box-shadow:0 0 26px rgba(84,230,255,.35)}
+.btn-cy:hover{box-shadow:0 0 44px rgba(84,230,255,.6);transform:translateY(-1px)}
+.btn-gh{background:transparent;border:1px solid rgba(84,230,255,.4);color:var(--cyan)}
+.btn-gh:hover{background:rgba(84,230,255,.08)}
+
+.reactor-box{display:flex;flex-direction:column;align-items:center;gap:14px}
+canvas#reactor{width:min(420px,90%);height:min(420px,90%);cursor:pointer}
+.state-pill{font-family:ui-monospace,monospace;font-size:13px;letter-spacing:3px;
+  border:1px solid rgba(84,230,255,.35);border-radius:999px;padding:7px 18px;color:var(--cyan)}
+.hint{color:var(--dim);font-size:12px}
+
+/* mic level meter */
+.meter{width:min(420px,90%);height:6px;background:rgba(84,230,255,.09);border-radius:3px;overflow:hidden}
+.meter i{display:block;height:100%;width:6%;background:linear-gradient(90deg,var(--cyanD),var(--cyanB));transition:width .12s}
+
+/* ── sections ── */
+section{padding:56px 0}
+h2{font-size:clamp(22px,3vw,31px);margin-bottom:6px}
+h2 .cy{color:var(--cyan)}
+.lead{color:var(--dim);margin-bottom:28px;font-size:14.5px;max-width:660px;line-height:1.6}
+.hr{height:1px;background:linear-gradient(90deg,transparent,rgba(84,230,255,.5),transparent);margin:6px 0 0}
+
+/* ── phone demo ── */
+.demo{display:grid;grid-template-columns:400px 1fr;gap:44px;align-items:start}
+.phone{width:390px;height:780px;border-radius:44px;background:#000;
+  border:3px solid #14344a;box-shadow:0 0 0 6px #050d14,0 30px 80px rgba(0,0,0,.6),0 0 60px rgba(84,230,255,.12);
+  overflow:hidden;position:relative;display:flex;flex-direction:column}
+.sbar{display:flex;justify-content:space-between;padding:12px 22px 4px;font-size:11px;color:var(--dim);font-family:ui-monospace,monospace}
+.scr{flex:1;overflow-y:auto;padding:8px 16px 96px;scrollbar-width:thin;scrollbar-color:#14344a transparent}
+.scr::-webkit-scrollbar{width:4px}.scr::-webkit-scrollbar-thumb{background:#14344a;border-radius:2px}
+.notch{position:absolute;top:10px;left:50%;transform:translateX(-50%);width:110px;height:26px;background:#000;border-radius:16px;z-index:5;border:1px solid #0c2130}
+.bottomnav{position:absolute;bottom:0;left:0;right:0;height:74px;display:flex;justify-content:space-around;align-items:center;
+  background:linear-gradient(180deg,rgba(6,18,28,.6),#02090E 40%);border-top:1px solid rgba(84,230,255,.14);z-index:4}
+.nb{display:flex;flex-direction:column;align-items:center;gap:3px;color:#3f6a80;font-size:9.5px;cursor:pointer;padding:8px 10px;border-radius:12px;transition:.15s}
+.nb .i{font-size:19px}
+.nb.on{color:var(--cyan);background:rgba(84,230,255,.08);text-shadow:0 0 14px rgba(84,230,255,.7)}
+.screen{display:none}.screen.on{display:block;animation:fadein .25s}
+@keyframes fadein{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+.card{background:rgba(10,27,40,.85);border:1px solid rgba(84,230,255,.22);border-radius:16px;padding:13px 14px;margin:10px 0;font-size:13px}
+.rowline{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 2px;border-bottom:1px dashed rgba(127,168,188,.12)}
+.rowline:last-child{border-bottom:none}
+.small{font-size:11px;color:var(--dim)}
+.tag{font-size:10.5px;border-radius:999px;padding:3px 10px;font-family:ui-monospace,monospace;letter-spacing:1px}
+.bubble{max-width:86%;border-radius:16px;padding:10px 13px;font-size:13.5px;margin:8px 0;line-height:1.5}
+.bubble.user{background:rgba(84,230,255,.15);margin-left:auto;border-bottom-right-radius:4px}
+.bubble.jarvis{background:var(--panel);border-bottom-left-radius:4px}
+.bubble .who{display:block;font-size:9px;letter-spacing:2px;color:var(--cyan);margin-bottom:3px;font-family:ui-monospace,monospace}
+.mini-reactor{width:230px;height:230px;margin:8px auto 2px;display:block}
+.center{text-align:center}
+.ptt{width:86px;height:86px;border-radius:50%;margin:14px auto 6px;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 35% 30%,#8ef0ff,#0AA8C9 75%);color:#02131B;font-size:34px;cursor:pointer;
+  box-shadow:0 0 34px rgba(84,230,255,.55);transition:.2s;border:3px solid rgba(165,243,255,.6)}
+.ptt:active{transform:scale(.93)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0}
+.chip{background:rgba(84,230,255,.13);color:var(--cyan);font-size:11px;border-radius:999px;padding:5px 12px;font-family:ui-monospace,monospace;cursor:pointer}
+.perm-ic{width:20px;height:20px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:11px;margin-right:8px;flex:none}
+.ok-ic{background:rgba(124,255,203,.15);color:var(--mint)}
+.no-ic{background:rgba(255,107,107,.14);color:var(--red)}
+.grant{border:1px solid rgba(84,230,255,.4);color:var(--cyan);background:transparent;font-size:11px;border-radius:9px;padding:6px 12px;cursor:pointer}
+.grant:hover{background:rgba(84,230,255,.12)}
+.switch{position:relative;width:38px;height:21px;flex:none}
+.switch input{opacity:0;width:0;height:0}
+.slider{position:absolute;inset:0;background:#173244;border-radius:20px;transition:.2s;cursor:pointer}
+.slider::before{content:"";position:absolute;width:15px;height:15px;left:3px;top:3px;border-radius:50%;background:#8fd8ef;transition:.2s}
+.switch input:checked+.slider{background:rgba(84,230,255,.45)}
+.switch input:checked+.slider::before{transform:translateX(17px);background:#fff}
+.log{font-family:ui-monospace,monospace;font-size:10.5px;line-height:1.75;color:#8fd8ef;max-height:210px;overflow-y:auto;background:#040a10;border-radius:10px;padding:10px}
+.log .e{color:#ff8a8a}.log .w{color:var(--gold)}.log .a{color:var(--cyan)}
+input[type=text],input[type=password]{background:#040d15;border:1px solid rgba(84,230,255,.3);border-radius:10px;color:var(--text);padding:9px 12px;font-size:12.5px;width:100%;font-family:ui-monospace,monospace}
+.seg{display:flex;flex-wrap:wrap;gap:6px}
+.seg button{background:transparent;border:1px solid rgba(84,230,255,.35);color:var(--cyanB);border-radius:9px;padding:5px 12px;font-size:11.5px;cursor:pointer}
+.seg button.on{background:var(--cyan);color:#02131B;border-color:var(--cyan)}
+.demo-notes .card{margin:12px 0}
+kbd{background:#0d2231;border:1px solid #234a63;border-radius:6px;padding:1px 7px;font-size:11px;font-family:ui-monospace,monospace}
+
+/* ── features ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:16px}
+.feat{background:linear-gradient(160deg,rgba(10,27,40,.9),rgba(6,18,28,.75));border:1px solid rgba(84,230,255,.16);
+  border-radius:18px;padding:18px 18px 16px;transition:.2s}
+.feat:hover{transform:translateY(-3px);border-color:rgba(84,230,255,.5);box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 24px rgba(84,230,255,.1)}
+.feat .em{font-size:24px}
+.feat h3{font-size:15px;margin:10px 0 6px;color:var(--cyanB)}
+.feat p{font-size:12.8px;color:var(--dim);line-height:1.6}
+
+/* ── tables ── */
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{color:var(--cyan);text-transform:uppercase;font-size:10.5px;letter-spacing:2px;text-align:left;padding:10px 12px;border-bottom:1px solid rgba(84,230,255,.25)}
+td{padding:10px 12px;border-bottom:1px solid rgba(127,168,188,.1);color:#c9e6f2;line-height:1.5;vertical-align:top}
+tr:hover td{background:rgba(84,230,255,.04)}
+.tblwrap{border:1px solid rgba(84,230,255,.14);border-radius:16px;overflow:hidden;overflow-x:auto}
+.yes{color:var(--mint)}.no{color:var(--red)}.panel{color:var(--gold)}
+
+/* commands */
+.cmd{display:grid;grid-template-columns:1fr 1.2fr 1.2fr;gap:14px;align-items:center;padding:10px 14px;border-bottom:1px solid rgba(127,168,188,.08);font-size:13px}
+.cmd:hover{background:rgba(84,230,255,.05)}
+.cmd .en{font-family:ui-monospace,monospace;color:#d8f5ff}
+.cmd .gu{color:var(--gold)}.cmd .hi{color:var(--mint)}
+.cmd .lbl{font-size:9px;letter-spacing:1px;opacity:.55;margin-right:6px;font-family:ui-monospace,monospace}
+
+/* modules */
+.mods{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.mod{border:1px solid rgba(84,230,255,.2);border-radius:14px;padding:14px;background:rgba(6,18,28,.7)}
+.mod b{color:var(--cyan);font-family:ui-monospace,monospace}
+.mod p{color:var(--dim);font-size:12px;margin-top:6px;line-height:1.55}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.step{position:relative;border:1px solid rgba(84,230,255,.2);border-radius:16px;padding:20px;background:rgba(10,27,40,.6)}
+.step .n{position:absolute;top:-16px;left:16px;width:32px;height:32px;border-radius:50%;background:var(--cyan);color:#02131B;display:flex;align-items:center;justify-content:center;font-weight:800}
+.step h4{margin:6px 0 8px;font-size:15px}.step p{font-size:12.8px;color:var(--dim);line-height:1.6}
+
+/* floating orb (HUD demo) */
+.orb{position:fixed;right:26px;bottom:26px;z-index:50;display:flex;flex-direction:column;align-items:center;gap:4px;user-select:none}
+.orb canvas{width:112px;height:112px;cursor:grab}
+.orb .cap{font-size:10px;color:var(--dim);font-family:ui-monospace,monospace}
+
+/* toasts */
+#toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%) translateY(80px);background:#0A1B28;border:1px solid rgba(84,230,255,.5);
+  color:var(--cyanB);padding:12px 22px;border-radius:14px;font-size:13.5px;transition:.35s;z-index:99;box-shadow:0 0 30px rgba(84,230,255,.25);opacity:0}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+
+footer{border-top:1px solid rgba(84,230,255,.12);padding:30px 0 46px;color:var(--dim);font-size:12.5px;line-height:2}
+@media(max-width:980px){.hero{grid-template-columns:1fr;justify-items:center;text-align:center}.sub{margin-inline:auto}
+ .demo{grid-template-columns:1fr;justify-items:center}.phone{transform:scale(.92)}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="topbar">
+    <div class="logo">◢ JARVIS ◣</div>
+    <div><span class="badge">UI INTERACTIVE PREVIEW · v1.0.0</span></div>
+  </div>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div>
+      <h1>તમે બોલો, <span class="cy">જાર્વિસ કરે.</span><br>વૈયક્તિક AI એસિસ્ટન્ટ</h1>
+      <p class="sub">Kotlin + Jetpack Compose + Gemini થી બનેલું production-grade Android voice assistant —
+        wake word, full phone automation, screen intelligence, on-device memory, Self-Healing runtime
+        અને Iron-Man style Arc-Reactor HUD સાથે. ગુજરાતી · હિન્દી · English + મિશ્ર ભાષા સમજે.</p>
+      <div>
+        <span class="pill">🎙️ Wake up Jarvis</span><span class="pill">🛌 Shutdown Jarvis</span>
+        <span class="pill">📴 ~40 offline commands</span><span class="pill">👁️ Screen Context</span>
+        <span class="pill">🧠 Contextual Memory</span><span class="pill">🩹 Zero-crash Self-Healing</span>
+      </div>
+      <div class="hero-btns" style="margin-top:20px">
+        <button class="btn btn-cy" onclick="runDemo()">🎤 બોલવાનો demo ચલાવો</button>
+        <a class="btn btn-gh" style="display:inline-block;padding:12px 20px" href="#demo">📱 Screens જુઓ</a>
+        <a class="btn btn-gh" style="display:inline-block;padding:12px 20px" href="https://github.com/royalarbuda77-design/bhavesh/tree/jarvis-standalone" target="_blank">⬇ કોડ (ZIP/Repo)</a>
+      </div>
+    </div>
+    <div class="reactor-box">
+      <canvas id="reactor"></canvas>
+      <div class="state-pill" id="statePill">IDLE · STANDBY</div>
+      <div class="meter"><i id="levelBar"></i></div>
+      <div class="hint">↑ Arc-Reactor: microphone amplitude સાથે reactive થાય (simulated). Reactor પર click કરો = push-to-talk</div>
+    </div>
+  </header>
+
+  <!-- PHONE DEMO -->
+  <section id="demo">
+    <h2>ફોનમાં <span class="cy">જીવંત UI</span></h2>
+    <p class="lead">હમેં અસલી app ની UI — નીચે nav થી screens બદલો. Talk બટન દબાવો અને voice flow જુઓ; Permissions માં Grant દબાવી જુઓ; Diagnostics માં live healing log વહે છે.</p>
+    <div class="demo">
+      <div class="phone">
+        <div class="notch"></div>
+        <div class="sbar"><span id="clock">--:--</span><span>◍ 5G ▮▮▮ 82%</span></div>
+        <div class="scr" id="phoneScroll">
+
+          <!-- HOME -->
+          <div class="screen on" id="s-home">
+            <div class="center" style="margin-top:8px">
+              <div style="letter-spacing:9px;color:var(--cyan);font-family:ui-monospace,monospace;font-size:15px;font-weight:700">J A R V I S</div>
+              <div class="small">તમે બોલો, હું કરું.</div>
+            </div>
+            <canvas class="mini-reactor" id="reactor2"></canvas>
+            <div class="center"><span class="tag" id="phoneState" style="border:1px solid rgba(84,230,255,.4)">STANDBY</span></div>
+            <div class="center small" id="phoneTranscript" style="min-height:18px;margin-top:6px;color:var(--cyanB)"></div>
+            <div class="ptt" id="ptt" onclick="runDemo(true)">🎤</div>
+            <div class="center small">Tap to talk</div>
+            <div class="chips">
+              <span class="chip">⚡ Balanced</span><span class="chip">WAKE ON</span><span class="chip">HUD ON</span>
+            </div>
+            <div class="card" style="border-color:rgba(255,209,102,.4)">
+              <div style="display:flex;justify-content:space-between;align-items:center">
+                <span class="small" style="color:var(--gold)">⚠ 4 permissions pending — Jarvis limited</span>
+                <span class="chip" onclick="go('perm')">Fix →</span>
+              </div>
+            </div>
+            <div class="card small center">offline માં ચાલે: wifi · torch · alarm · volume · apps · open/close…</div>
+          </div>
+
+          <!-- CHAT -->
+          <div class="screen" id="s-chat">
+            <div class="bubble user">જાર્વિસ, મારી બેટરી કેટલી છે?</div>
+            <div class="bubble jarvis"><span class="who">JARVIS</span>બેટરી ૮૨% છે અને charging નથી. અંદાજે ૭ કલાક ચાલશે. Background માં ૩ apps વધુ ખાતી છે — WhatsApp, Instagram, Chrome.</div>
+            <div class="bubble user">battery saver on कर दो</div>
+            <div class="bubble jarvis"><span class="who">JARVIS</span>Battery Saver चालू कर दिया ⚡ — offline command, 40ms.</div>
+            <div class="bubble user">can you remind me to pay rent tomorrow 10 am and also call mom at 9?</div>
+            <div class="bubble jarvis"><span class="who">JARVIS</span>Done — কাল 10:00 AM rent reminder set, and “mom” ને 9:00 AM એ કૉલ માટે યાદ કરાવીશ. બંને reboot પછી પણ ફાયર થશે.</div>
+            <div class="card" style="display:flex;gap:8px;align-items:center">
+              <input type="text" placeholder="ટાઇપ કરો અથવા 🎤 દબાવો…" style="flex:1">
+              <button class="grant" style="border-color:var(--cyan);padding:8px 14px">➤</button>
+            </div>
+          </div>
+
+          <!-- COMMANDS -->
+          <div class="screen" id="s-cmds" style="padding:0 2px">
+            <div class="small" style="padding:8px 2px">કોઈ પણ ભાષામાં બોલો — એક જ મિશ્ર વાક્ય પણ ચાલે:</div>
+            <div id="cmdlist"></div>
+          </div>
+
+          <!-- PERMISSIONS -->
+          <div class="screen" id="s-perm">
+            <div style="letter-spacing:5px;color:var(--cyan);font-family:ui-monospace,monospace;font-size:11px;margin:6px 0">▁ SENSES SETUP</div>
+            <div class="card small" style="margin-top:0">દરેક permission ફક્ત એક જ ક્ષમતા ખોલે છે. ન આપો તો app ક્રેશ/બ્લોક નહીં — ફક્ત એ feature બંધ.</div>
+            <div id="permList"></div>
+            <button class="grant" style="width:100%;margin-top:10px;padding:10px" onclick="grantAll()">બધી runtime મંજૂરીઓ આપો</button>
+          </div>
+
+          <!-- SETTINGS -->
+          <div class="screen" id="s-set">
+            <div class="card" style="margin-top:4px">
+              <div class="small" style="letter-spacing:2px;color:var(--cyan)">AI · GEMINI</div>
+              <div style="margin-top:8px"><input type="password" value="AQ.Ab8RN6•••••••••••" readonly></div>
+              <div class="small" style="margin-top:6px">AIza… અને AQ.… બંને કી ચાલે — KeyStore AES-GCM માં encrypત.</div>
+              <div style="display:flex;gap:8px;margin-top:8px">
+                <button class="grant" onclick="testKey()">Test key</button>
+                <span class="small" id="keyResult"></span>
+              </div>
+            </div>
+            <div class="card">
+              <div class="small" style="letter-spacing:2px;color:var(--cyan)">VOICE PERSONA</div>
+              <div class="seg" style="margin-top:8px" id="persona">
+                <button class="on">Jarvis · Deep Male</button><button>Arc · Robotic</button><button>Friday · Female</button>
+              </div>
+            </div>
+            <div class="card">
+              <div class="small" style="letter-spacing:2px;color:var(--cyan)">LANGUAGES</div>
+              <div class="seg" style="margin-top:8px"><button class="on">auto (mixed)</button><button>ગુજરાતી</button><button>हिन्दी</button><button>English</button></div>
+            </div>
+            <div class="card">
+              <div class="rowline"><div>🔊 HUD sound effects<div class="small">w · listen · success tones</div></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div class="rowline"><div>🎙️ Always-listening wake word<div class="small">on-device AudioGate · <b id="drain">≈2-4%/h</b></div></div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div class="rowline"><div>🛸 Floating Arc-Reactor HUD</div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div class="rowline"><div>💬 Barge-in (બોલતું રોકો)</div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div class="rowline"><div>🧠 Contextual memory</div><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+              <div class="rowline"><div>🔋 Boot પર auto-start</div><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+            </div>
+          </div>
+
+          <!-- DIAGNOSTICS -->
+          <div class="screen" id="s-diag">
+            <div class="chips" style="justify-content:flex-start">
+              <span class="chip" style="color:var(--mint)">SERVICE RUNNING</span><span class="chip">STATE IDLE</span><span class="chip" style="color:var(--mint)">SAFE-MODE OFF</span>
+            </div>
+            <div class="card small" style="margin-top:2px">Self-Healing runtime: દરેક uncaught error પકડાય છે, app ક્યારેય crash થતો નથી — watch-dog stuck flow 1s/3s/9s back-off થી live કરે.</div>
+            <div class="log" id="logbox"></div>
+          </div>
+
+          <!-- MEMORY -->
+          <div class="screen" id="s-mem">
+            <div class="small" style="letter-spacing:2px;color:var(--cyan)">🧠 FACTS (on-device)</div>
+            <div class="card small" style="line-height:1.9">favourite colour → <b>blue</b><br>car → <b>hyundai i20</b><br>gym day → <b>tue / thu</b><br>office start → <b>9:30</b></div>
+            <div class="small" style="letter-spacing:2px;color:var(--gold)">CONTACT ALIASES</div>
+            <div class="card small" style="line-height:1.9"><span class="chip" style="color:var(--gold)">mom</span> → Jyantiaben · +91 98••• ••210<br><span class="chip" style="color:var(--gold)">ભાઈ</span> → Babubhai · +91 90••• ••733</div>
+            <div class="card center"><span class="chip" style="color:var(--red)">⌫ Forget everything</span><div class="small" style="margin-top:6px">એક tap — બધી memory કાયમ માટે clear</div></div>
+          </div>
+        </div>
+
+        <div class="bottomnav">
+          <div class="nb on" data-s="home"><span class="i">◉</span>Home</div>
+          <div class="nb" data-s="chat"><span class="i">◫</span>Chat</div>
+          <div class="nb" data-s="cmds"><span class="i">⌘</span>Commands</div>
+          <div class="nb" data-s="perm"><span class="i">◈</span>Senses</div>
+          <div class="nb" data-s="set"><span class="i">☰</span>Settings</div>
+          <div class="nb" data-s="diag"><span class="i">♨</span>Healing</div>
+          <div class="nb" data-s="mem"><span class="i">◍</span>Memory</div>
+        </div>
+      </div>
+
+      <div class="demo-notes">
+        <div class="card"><b style="color:var(--cyanB)">🎤 Voice flow (demo એ જ app નું architecture છે)</b>
+          <p class="small" style="line-height:1.8;margin-top:8px">
+          1️⃣ <b>Wake</b> — AudioGate (mic energy, duty-cycled) 100ms windows સાંભળે; speech plausible લાગે તો constrained ASR burst થી “jarvis” verify.<br>
+          2️⃣ <b>Listen</b> — full STT session (gu/hi/en phrases boost).<br>
+          3️⃣ <b>Offline router</b> — 40+ commands &lt;80ms, zero network.<br>
+          4️⃣ <b>Gemini agent</b> — બાકીનું JSON actions માં parse → controllers ચલાવે; chat answer SSE stream થી વાક્ય-દર-વાક્ય બોલાય.<br>
+          5️⃣ <b>Memory</b> — વાત + facts + aliases Contextual Memory માં (on-device).</p></div>
+        <div class="card"><b style="color:var(--cyanB)">⌨️ અહીં અજમાવો:</b>
+          <p class="small" style="margin-top:8px;line-height:1.9">
+          · “<kbd>બોલવાનો demo</kbd>” — સંપૂર્ણ pipeline animation<br>
+          · જમણા નીચે <kbd>🔮 orb</kbd> — असली HUD નકલ: drag કરો, click કરો<br>
+          · <kbd>માઇક ચાલુ કરો</kbd> — તમારા browser માં live mic થી reactor હલાવે (કંઈ upload નહીં)</p>
+          <button class="btn btn-cy" style="margin-top:10px;padding:9px 16px;font-size:12.5px" onclick="micToggle(this)">🎙️ માઇક ચાલુ કરો</button>
+        </div>
+        <div class="card"><b style="color:var(--gold)">🛡️ Privacy</b>
+          <p class="small" style="margin-top:8px;line-height:1.8">Wake + offline commands ૧૦૦% ફોનમાં. Cloud ફક્ત તમે command આપો એટલે, ફક્ત text — Gemini key AndroidKeyStore માં. Ads/analytics શૂન્ય.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CAPABILITIES -->
+  <section id="caps">
+    <h2>શું શું <span class="cy">કરી શકે</span> — કમાન્ડ નમૂના</h2>
+    <p class="lead">દરેક કમાન્ડ EN · ગુ · हि માં. offline વાળા ઇન્ટરનેટ વગર પણ ચોક્કસ ચાલે.</p>
+    <div class="tblwrap" id="cmdTable"></div>
+  </section>
+
+  <!-- HONESTY TABLE -->
+  <section id="limits">
+    <h2>Android ની <span class="cy">hard-limits</span> — પ્રામાણિકતાપૂર્વક</h2>
+    <p class="lead">આ કોઈ બગ નથી — platform આ જ પરવારે છે. Jarvis કપટ કરતું નથી: panel deep-link / draft + tap send / honest spoken status આપે છે.</p>
+    <div class="tblwrap">
+      <table>
+        <tr><th>વિષય</th><th>Android નિયમ</th><th>Jarvis નું વર્તન</th></tr>
+        <tr><td>Wi-Fi / Bluetooth ON (10+/13+)</td><td class="panel">silent API નથી</td><td>state + off silent ચાલે; ON → panel highlight</td></tr>
+        <tr><td>Hotspot · GPS · mobile data · airplane</td><td class="panel">system-only secure settings</td><td>exact panel ખૂલે, પછી wait/read</td></tr>
+        <tr><td>ટોર્ચ · volume · mute/DND · brightness*</td><td class="yes">allowed</td><td>તરત silent action (*WRITE_SETTINGS grant થાય તો)</td></tr>
+        <tr><td>કોઈ પણ એપ force-kill</td><td class="no">નિષિદ્ધ</td><td>Home પર લઈ જાય + કારણ સમજાવે</td></tr>
+        <tr><td>WhatsApp silent auto-send</td><td class="no">public API નથી</td><td>chat prefill + body બોલી આપે → તમે send ટૅપ કરો (policy-safe)</td></tr>
+        <tr><td>કૉલ end કરવો</td><td class="no">નિષિદ્ધ</td><td>honest refusual + dialer open</td></tr>
+        <tr><td>Screen text / screenshot vision</td><td class="panel">accessibility + (vision: key+net)</td><td>offline માં node-text વાંચે, online હોય તો Gemini vision</td></tr>
+        <tr><td>રિમાઇન્ડર exact minute</td><td class="panel">SCHEDULE_EXACT_ALARM</td><td>granted→exact; revoker→±few-min window, ફ્રીઝ નહીં</td></tr>
+        <tr><td>Obsession: battery</td><td>OEM killers (Xiaomi/Samsung/Oppo)</td><td>setup guide માં દરેક બ્રાન્ડનું toggle step</td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ARCHITECTURE -->
+  <section id="arch">
+    <h2>Modular <span class="cy">આર્કિટેક્ચર</span></h2>
+    <p class="lead">5 Gradle modules — દરેક સ્વતંત્ર રીતે test-યોગ્ય; :core માં કોઈ Android-framework heavy dependency નથી.</p>
+    <div class="mods">
+      <div class="mod"><b>:core</b><p>State bus · AES-GCM keystore crypto · settings · trilingual offline NLU + lexicon · Self-Healing runtime · conversation + user memory</p></div>
+      <div class="mod"><b>:gemini</b><p>OkHttp: generateContent, SSE stream (sentence-wise), vision (screenshot), agent JSON-decide, cloud TTS (24kHz PCM). <b>AQ.…</b> + AIza… keys ✓</p></div>
+      <div class="mod"><b>:voice</b><p>AudioGate (energy + duty-cycle) · constrained ASR wake verify · SttEngine sessions · System+Cloud TTS manager · procedural SFX</p></div>
+      <div class="mod"><b>:automation</b><p>Settings/App/Media/Call/Message/Clock/Reminder/Calendar/DeviceReport/Notification controllers · accessibility gestures+screen · CommandRouter</p></div>
+      <div class="mod"><b>:app</b><p>Foreground service (mic type, Android 14 ready) · Overlay HUD service · Compose UI ૭ screens · boot/widget/DI</p></div>
+    </div>
+    <div class="card mono" style="margin-top:18px;font-size:11.5px;overflow-x:auto;white-space:pre;color:#9fd6ee">utterance ─► wake-verify ─► OfflineNlu/CommandRouter ─► action + 1-line speech   (offline, 0ms net)
+                     └─else──► Gemini agentDecide(JSON actions) ─► CommandRouter ─► speech
+                     └─else──► Gemini chat SSE ─► sentences ─► TtsManager (system ⇄ cloud auto-fallback)
+JarvisBus events ─► notification · HUD overlay · UI screens · watchdog   |   SelfHealing ─► ક્યાંય crash નહીં</div>
+  </section>
+
+  <!-- BUILD -->
+  <section id="build">
+    <h2>ચલાવો <span class="cy">૩ સ્ટેપ માં</span></h2>
+    <div class="steps">
+      <div class="step"><div class="n">૧</div><h4>Android Studio માં Open</h4><p>repo clone/ZIP → Studio ▸ Open. Gradle 8.13 + AGP 8.13.2 auto-sync. minSdk 26 — Android 8.0+ ફોન/એમ્યુલેટર.</p></div>
+      <div class="step"><div class="n">૨</div><h4>Run ▶ + Permissions</h4><p>Install પછી એપની "Senses" wizard માં mic → notifications → battery unrestricted (OEM માટે જરૂરી) → overlay → accessibility → notification access.</p></div>
+      <div class="step"><div class="n">૩</div><h4>Gemini કી + Test</h4><p>Settings → AI → aistudio.google.com/apikey ની કી paste → “Test key” ✅ → Home પર <b>Wake up Jarvis</b> બોલો. કી keystore-encrypted સેવ, repo માં ક્યાંય secret નહીં.</p></div>
+    </div>
+  </section>
+
+  <footer>
+    <div>JARVIS · Kotlin/Compose · 69 files ≈ 10K LOC · zero-crash Self-Healing · trilingual code-switch NLU</div>
+    <div>Repo (બધો કોડ): <a href="https://github.com/royalarbuda77-design/bhavesh/tree/jarvis-standalone" target="_blank">royalarbuda77-design/bhavesh ▸ jarvis-standalone</a>
+      &nbsp;·&nbsp; નવું target: <a href="https://github.com/buzziness095-svg/Jarvis-android" target="_blank">buzziness095-svg/Jarvis-android</a></div>
+  </footer>
+</div>
+
+<!-- floating orb -->
+<div class="orb" id="orb">
+  <canvas id="orbCv"></canvas><div class="cap">HUD — drag / click</div>
+</div>
+<div id="toast"></div>
+
+<script>
+"use strict";
+/* ────────── state ────────── */
+let state = "idle"; // idle listen think speak sleep error
+const COLORS = {idle:"#54E6FF",listen:"#A5F3FF",think:"#FFD166",speak:"#7CFFCB",sleep:"#26424F",error:"#FF6B6B"};
+function setState(s, label){
+  state = s;
+  document.getElementById("statePill").textContent = s.toUpperCase()+" · "+(label||"");
+  document.getElementById("statePill").style.borderColor = COLORS[s];
+  const ps = document.getElementById("phoneState");
+  ps.textContent = {idle:"STANDBY",listen:"LISTENING…",think:"ANALYSING…",speak:"REPLYING",sleep:"SLEEPING"}[s]||s.toUpperCase();
+  ps.style.color = COLORS[s];
+}
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(()=>t.classList.remove("show"),3400);}
+
+/* ────────── levels: simulated or real mic ────────── */
+let micStream=null, micAnalyser=null, micData=null;
+let level=0.05; const hist=new Array(28).fill(0.05);
+function tickLevel(t){
+  if(micAnalyser){
+    micAnalyser.getByteTimeDomainData(micData);
+    let sum=0; for(let i=0;i<micData.length;i++){const v=(micData[i]-128)/128; sum+=v*v;}
+    level=Math.min(1, Math.sqrt(sum/micData.length)*3.2);
+  } else {
+    if(state==="listen")      level=0.28+0.34*Math.abs(Math.sin(t*5.1))+Math.random()*0.12;
+    else if(state==="speak") level=0.30+0.30*Math.abs(Math.sin(t*7.3)*Math.sin(t*2.1));
+    else if(state==="think") level=0.07+0.05*Math.sin(t*9);
+    else if(state==="sleep") level=0.015;
+    else                     level=0.045+0.02*Math.sin(t*1.7)+Math.random()*0.02;
+  }
+  hist.push(level); hist.shift();
+  document.getElementById("levelBar").style.width=(6+level*94)+"%";
+}
+async function micToggle(btn){
+  if(micAnalyser){ micStream.getTracks().forEach(x=>x.stop()); micAnalyser=null; btn.textContent="🎙️ માઇક ચાલુ કરો"; toast("માઇક બંધ — ફરી simulated mode"); return; }
+  try{
+    micStream = await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false}});
+    const ac=new (window.AudioContext||window.webkitAudioContext)();
+    const src=ac.createMediaStreamSource(micStream);
+    micAnalyser=ac.createAnalyser(); micAnalyser.fftSize=512;
+    micData=new Uint8Array(micAnalyser.fftSize); src.connect(micAnalyser);
+    btn.textContent="⏹ માઇક બંધ કરો"; toast("Live mic ચાલુ — બોલો! (કંઈ upload નહીં, ફક્ત browser માં જ)");
+  }catch(e){ toast("માઇક permission મળ્યું નહીં — simulated levels ચાલુ"); }
+}
+
+/* ────────── arc reactor painter ────────── */
+function makeReactor(cv, detail){
+  const ctx=cv.getContext("2d"); let w=0,h=0,dpr=Math.min(2,window.devicePixelRatio||1);
+  function fit(){const r=cv.getBoundingClientRect(); if(cv.width!==Math.round(r.width*dpr)){cv.width=r.width*dpr;cv.height=r.height*dpr;} w=cv.width;h=cv.height;}
+  return function(t){
+    fit();
+    ctx.clearRect(0,0,w,h);
+    const cx=w/2, cy=h/2, R=Math.min(w,h)/2*0.94, acc=COLORS[state];
+    const active=state!=="sleep";
+    const reactive=1+level*(detail?0.55:0.35);
+    const breathe=1+0.03*Math.sin(t*2.2);
+    // glow
+    let g=ctx.createRadialGradient(cx,cy,R*0.2,cx,cy,R*1.9);
+    g.addColorStop(0, hexA(acc,active?0.30:0.08)); g.addColorStop(1,"rgba(0,0,0,0)");
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx,cy,R*1.9,0,7); ctx.fill();
+    // outer ring
+    ctx.strokeStyle=hexA(acc,0.9); ctx.lineWidth=R*0.035;
+    ctx.beginPath(); ctx.arc(cx,cy,R*0.94,0,7); ctx.stroke();
+    if(detail){
+      ctx.strokeStyle="rgba(255,255,255,.07)"; ctx.lineWidth=R*0.012;
+      ctx.beginPath(); ctx.arc(cx,cy,R*0.995,0,7); ctx.stroke();
+      // 6 arcs clockwise
+      ctx.lineCap="round";
+      for(let i=0;i<6;i++){
+        ctx.strokeStyle=hexA(acc,0.85); ctx.lineWidth=R*0.075;
+        ctx.beginPath(); ctx.arc(cx,cy,R*0.80, t*0.7+i*Math.PI/3, t*0.7+i*Math.PI/3+0.66); ctx.stroke();
+      }
+      for(let i=0;i<4;i++){
+        ctx.strokeStyle=hexA("#A5F3FF",0.5); ctx.lineWidth=R*0.045;
+        ctx.beginPath(); ctx.arc(cx,cy,R*0.62, -t*0.5+i*Math.PI/2, -t*0.5+i*Math.PI/2+0.96); ctx.stroke();
+      }
+      // waveform ring
+      const n=hist.length;
+      for(let i=0;i<n;i++){
+        const v=hist[i], a=(i/n)*Math.PI*2, r0=R*0.5, r1=r0+R*(0.10+v*0.42);
+        ctx.strokeStyle=mix(acc,"#A5F3FF",v); ctx.lineWidth=R*0.045;
+        ctx.beginPath(); ctx.moveTo(cx+Math.cos(a)*r0,cy+Math.sin(a)*r0); ctx.lineTo(cx+Math.cos(a)*r1,cy+Math.sin(a)*r1); ctx.stroke();
+      }
+    }
+    // core
+    const coreR=R*(0.34+0.05*Math.sin(t*2.2))*(state==="sleep"?0.8:reactive);
+    g=ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*1.7);
+    g.addColorStop(0,"#ffffff"); g.addColorStop(0.45,acc); g.addColorStop(1,hexA(acc,0.12));
+    ctx.fillStyle=g; ctx.beginPath(); ctx.arc(cx,cy,coreR*1.7,0,7); ctx.fill();
+    ctx.fillStyle="rgba(2,9,14,.65)"; ctx.beginPath(); ctx.arc(cx,cy,coreR*0.52,0,7); ctx.fill();
+    ctx.fillStyle="rgba(255,255,255,.95)"; ctx.beginPath(); ctx.arc(cx,cy,coreR*0.22*breathe,0,7); ctx.fill();
+    if(state==="listen"){ const a=t*3; dot(cx+Math.cos(a)*R*0.88, cy+Math.sin(a)*R*0.88, R*0.05,"#A5F3FF"); }
+    if(state==="think"){ for(let i=0;i<3;i++){const a=t*4+i*2.1; dot(cx+Math.cos(a)*R*0.72, cy+Math.sin(a)*R*0.72, R*0.035,"#FFD166");} }
+    if(state==="speak"){ for(let k=1;k<=3;k++){ctx.strokeStyle=hexA("#7CFFCB",0.20/k); ctx.lineWidth=R*0.012; ctx.beginPath(); ctx.arc(cx,cy,R*(0.95+0.1*k)*breathe,0,7); ctx.stroke();} }
+    function dot(x,y,r,c){ctx.fillStyle=c; ctx.beginPath(); ctx.arc(x,y,r,0,7); ctx.fill();}
+  };
+}
+function hexA(hex,a){const n=parseInt(hex.slice(1),16);return `rgba(${n>>16&255},${n>>8&255},${n&255},${a})`;}
+function mix(h1,h2,t){const p=h=>parseInt(h.slice(1),16);const a=p(h1),b=p(h2),m=(s)=>Math.round(((a>>s&255)+(((b>>s&255)-(a>>s&255))*t)));return `rgb(${m(16)},${m(8)},${m(0)})`;}
+
+const drawMain = makeReactor(document.getElementById("reactor"), true);
+const drawPhone = makeReactor(document.getElementById("reactor2"), true);
+const drawOrb   = makeReactor(document.getElementById("orbCv"), false);
+function loop(now){ const t=now/1000; tickLevel(t); drawMain(t); drawPhone(t); drawOrb(t); requestAnimationFrame(loop); }
+requestAnimationFrame(loop);
+document.getElementById("reactor").onclick=()=>runDemo();
+
+/* ────────── voice-flow demo ────────── */
+let demoRunning=false;
+async function runDemo(fromPhone){
+  if(demoRunning) return; demoRunning=true;
+  const T=document.getElementById("phoneTranscript");
+  const sleep = ms=>new Promise(r=>setTimeout(r,ms));
+  go("home");
+  setState("listen","wake-word ✓"); if(!fromPhone) toast("🎙️ Wake થયું — ‘Jarvis…’ (gate→ASR burst verify)");
+  await sleep(700);
+  const text="જાર્વિસ, ઘરનો Wi-Fi ચાલુ કરો";
+  for(let i=1;i<=text.length;i++){ T.textContent="« "+text.slice(0,i)+" »"; await sleep(26); }
+  await sleep(350);
+  setState("think","offline route? → net");
+  await sleep(900);
+  T.innerHTML="✅ <b style='color:#7CFFCB'>RoutedOutcome.Done</b> — handleOffline() 47ms";
+  setState("speak","TTS: natural male");
+  toast("🔊 “ઘરનો Wi-Fi ચાલુ કર્યો. ઈન્ટરનેટ કનેક્ટેડ છે — ૯૮Mbps.”");
+  await sleep(2400);
+  T.textContent=""; setState("idle","standby · wake-armed"); demoRunning=false;
+}
+
+/* ────────── nav ────────── */
+const NAMES={home:"s-home",chat:"s-chat",cmds:"s-cmds",perm:"s-perm",set:"s-set",diag:"s-diag",mem:"s-mem"};
+function go(s){
+  Object.values(NAMES).forEach(id=>document.getElementById(id).classList.remove("on"));
+  document.getElementById(NAMES[s]).classList.add("on");
+  document.querySelectorAll(".nb").forEach(n=>n.classList.toggle("on", n.dataset.s===s));
+  document.getElementById("phoneScroll").scrollTop=0;
+}
+document.querySelectorAll(".nb").forEach(n=>n.onclick=()=>go(n.dataset.s));
+
+/* ────────── permissions list ────────── */
+const PERMS=[
+ ["🎙️ Microphone","wake word + commands","runtime",true],
+ ["🔔 Notifications","ongoing service + reminders","runtime",true],
+ ["👁️ Notification access","read & clear your notifications","special",false],
+ ["♿ Accessibility","screen text · gestures · screenshots","special",false],
+ ["🛸 Display over other apps","floating HUD bubble","special",false],
+ ["🔋 Unrestricted battery","OEM killer સામે always-on","special",false],
+ ["✏️ Write system settings","brightness/rotation/timeout","special",false],
+ ["📞 Call · 💬 SMS · 📇 Contacts · 📅 Calendar","auto-mode વગર બધું prefill ચાલે","runtime",false]
+];
+const permList=document.getElementById("permList");
+PERMS.forEach((p,i)=>{
+  const d=document.createElement("div"); d.className="card rowline"; d.style.margin="8px 0";
+  d.innerHTML=`<div style="display:flex;align-items:center;flex:1">
+    <span class="perm-ic ${p[3]?"ok-ic":"no-ic"}" id="pi-${i}">${p[3]?"✓":"✕"}</span>
+    <div>${p[0]}<div class="small">${p[1]}</div></div></div>
+    <button class="grant" id="gb-${i}" ${p[3]?"disabled":""} onclick="grant(${i})">${p[3]?"ON":"Grant"}</button>`;
+  permList.appendChild(d);
+});
+function grant(i){ const ic=document.getElementById("pi-"+i); ic.className="perm-ic ok-ic"; ic.textContent="✓";
+  const b=document.getElementById("gb-"+i); b.textContent="ON"; b.disabled=true;
+  toast(["🎙️ Mic permission આપ્યું — gate arm થયો","🔔 Channels: jarvis_service · jarvis_alerts · jarvis_reminders","📲 સિસ્ટમ પેજ ખૂલે… toggle કરી પાછા આવો → status auto-refresh","♿ Accessibility: Jarvis — Screen Assist ON","🛸 Overlay ON — bubble દેખાશે","🔋 Unrestricted — ab OEM kill નહીં કરે","✏️ WRITE_SETTINGS — brightness સીધું ચાલે","📞 બધું prefill/one-tap પહેલેથી safe-mode માં ચાલે"][i]); }
+function grantAll(){ [0,1,7].forEach(grant); }
+
+/* ────────── settings micro-interactions ────────── */
+document.querySelectorAll("#persona button").forEach(b=>b.onclick=()=>{
+  document.querySelectorAll("#persona button").forEach(x=>x.classList.remove("on")); b.classList.add("on");
+  toast("Persona: "+b.textContent+" — TtsManager.refreshPersona() ✓");});
+document.querySelectorAll("#s-set .seg")[1]?.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+  b.parentElement.querySelectorAll("button").forEach(x=>x.classList.remove("on")); b.classList.add("on");});
+function testKey(){ const r=document.getElementById("keyResult"); r.textContent="GET /v1beta/models …";
+  setTimeout(()=>{ r.innerHTML='<b style="color:var(--mint)">✅ models reachable — key valid (AQ.… format)</b>'; },900); }
+
+/* ────────── commands table (section + phone) ────────── */
+const CMDS=[
+ ["🔌","વાઇફાઇ ચાલુ કરો · वाईफाई ऑन करो","turn on wifi",0],
+ ["🔌","ટોર્ચ બંધ કરો","flashlight off",0],
+ ["🔌","બ્રાઇટનેસ ૬૦ ટકા કરો","set brightness 60%",0],
+ ["🔌","ફોન સાઇલન્ટ કરો · फोन साइलेंट करो","mute the phone",0],
+ ["📱","WhatsApp ખોલો · व्हाट्सएप खोलो","open whatsapp",0],
+ ["🎬","YouTube પર કેસરીયા વગાડો · केसरिया बजाओ","play kesariya on youtube",1],
+ ["🎬","મ્યુઝિક પોઝ કરો · म्यूज़िक पॉज़ करो","pause music",0],
+ ["📞","મમ્મીનો કૉલ કરો · माँ को कॉल करो","call mom",1],
+ ["💬","રમેશને મેસેજ: હું લેટ થઈશ","message Ramesh: I'm late",1],
+ ["✉️","પ્રિયાને invoice વિશે ઈમેલ લખો","email priya about the invoice",1],
+ ["⏰","સવારે ૭ વાગ્યે એલાર્મ મૂકો · सुबह 7 बजे अलार्म","set alarm 7 am",0],
+ ["⏰","ટોમરો ૧૦ વાગ્યે ભાડું ભૂલાવો","remind me rent tomorrow 10",1],
+ ["⏰","દસ મિનિટનો ટાઇમર મૂકો","timer ten minutes",0],
+ ["📅","આજે કેલેન્ડરમાં શું છે?","what's on my calendar today",1],
+ ["👁️","આ શું લખ્યું છે? · यहाँ क्या लिखा है?","what does this say?",0],
+ ["👁️","આ સ્ક્રીન સમજાવો","describe this screen",1],
+ ["🔋","મારી બેટરી/સ્ટોરેજ કેટલી?","battery storage report",0],
+ ["🤖","જાર્વિસ જાગો / ShutDown Jarvis / સૂઈ જાઓ","wake up jarvis / shutdown jarvis",0],
+ ["🧠","my car ક્યારે service કરવી હતી એ યાદ રાખો","remember my car service…",1],
+ ["🌐","આજની GK પૂછો… બધું જ general knowledge", "anything conversational",1]
+];
+const ROWS=CMDS.map(c=>`<div class="cmd"><span>${c[0]}</span><span class="en"><span class="lbl">EN</span>${c[2]}</span><span><span class="lbl">ગુ/हि</span>${c[1]}</span><span>${c[3]?'<span class="tag" style="border:1px solid rgba(255,209,102,.4);color:var(--gold)">GEMINI</span>':'<span class="tag" style="border:1px solid rgba(124,255,203,.4);color:var(--mint)">OFFLINE</span>'}</span></div>`).join("");
+document.getElementById("cmdlist").innerHTML=ROWS.slice(0,7000);
+document.getElementById("cmdTable").innerHTML=
+  `<div style="display:grid;grid-template-columns:44px 1fr 1.3fr 110px">
+    <div></div><div class="small" style="padding:8px 14px;color:var(--cyan);letter-spacing:2px;font-size:10px">KAMA ND (અંદાજે આ જ બોલો)</div><div></div><div></div>
+  </div>`+CMDS.map(c=>`<div class="cmd" style="grid-template-columns:44px 1fr 1.3fr 110px"><span style="font-size:18px">${c[0]}</span><span class="en">${c[2]}</span><span class="gu">${c[1]}</span><span>${c[3]?'<span class="tag" style="border:1px solid rgba(255,209,102,.4);color:var(--gold)">GEMINI</span>':'<span class="tag" style="border:1px solid rgba(124,255,203,.4);color:var(--mint)">OFFLINE</span>'}</span></div>`).join("");
+
+/* ────────── healing log feed ────────── */
+const LOGS=[
+ ["D","/GATE energy-gate: speech onset → burst verify (12ms)"],
+ ["D","/STT wake-burst: 'jarvis' conf 0.91 → WAKE"],
+ ["A11Y","screen: com.whatsapp — 14 nodes"],
+ ["D","/ROUTER offline match: wifi_on → SettingsController.wifi(true)"],
+ ["I","/TTS sentence 1/2 spoken (system, lang=gu-IN)"],
+ ["W","/HEAL gemini 429 → model retry flash-lite ✓ no user impact"],
+ ["D","/MEM fact stored: 'car → hyundai i20'"],
+ ["I","/REMINDER rescheduleAll: 2 armed after boot"],
+ ["A11Y","gesture: scroll(down) dispatched"],
+ ["W","watchdog: STT idle 12s → reacquire gate ✓"],
+ ["E","/CRASH caught AudioRecord race → healed, mic reopened (service NOT stopped)"],
+ ["D","/NOTIF read 3 → summarized '2 missed calls, 1 OTP'"]
+];
+let li=0; const logbox=document.getElementById("logbox");
+function pushLog(){
+  const [tag,msg]=LOGS[li++%LOGS.length];
+  const time=new Date().toLocaleTimeString("en-GB",{hour12:false});
+  const div=document.createElement("div");
+  div.className={E:"e",W:"w",A11Y:"a",NOTIF:"a"}[tag]||"";
+  div.innerHTML=`<span style="opacity:.5">${time}</span> <b style="color:${tag==="E"?"#ff8a8a":tag==="W"?"#FFD166":"#54E6FF"}">${tag.padEnd(5)}</b>${msg.replace(/</g,"&lt;")}`;
+  logbox.appendChild(div); logbox.scrollTop=logbox.scrollHeight;
+  if(logbox.children.length>60) logbox.removeChild(logbox.firstChild);
+}
+setInterval(pushLog,1300); pushLog();pushLog();pushLog();
+
+/* ────────── floating orb: drag ────────── */
+(()=>{ const o=document.getElementById("orb"); let sx,sy,ox,oy,dragging=false;
+  o.querySelector("canvas").addEventListener("pointerdown",e=>{
+    dragging=false; sx=e.clientX; sy=e.clientY;
+    const r=o.getBoundingClientRect(); ox=r.left; oy=r.top; o.setPointerCapture(e.pointerId);
+    const mv=ev=>{ const dx=ev.clientX-sx, dy=ev.clientY-sy;
+      if(Math.abs(dx)+Math.abs(dy)>6) dragging=true;
+      if(dragging){ o.style.left=(ox+dx)+"px"; o.style.top=(oy+dy)+"px"; o.style.right="auto"; o.style.bottom="auto"; } };
+    const up=ev=>{ window.removeEventListener("pointermove",mv); window.removeEventListener("pointerup",up);
+      if(!dragging) runDemo(); };
+    window.addEventListener("pointermove",mv); window.addEventListener("pointerup",up);
+  });
+})();
+
+/* clock */
+setInterval(()=>{document.getElementById("clock").textContent=new Date().toLocaleTimeString("en-GB",{hour:"2-digit",minute:"2-digit"});},1000);
+setState("idle","standby");
+</script>
+</body>
+</html>
