@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ગોળાકાર ગતિ | Circular Motion — GSEB · NEET 2025–26</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati:wght@400;500;600;700;800&family=Noto+Sans+Math&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a1020; --card:#111a30; --card2:#0d1526; --ink:#eaf1fd; --mut:#9db0cc;
+  --acc:#4cc2ff; --grn:#4ade80; --red:#fb7185; --org:#fbbf24; --pur:#c084fc; --blu:#60a5fa;
+  --line:#20304f;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:radial-gradient(1200px 600px at 80% -10%, #14224a 0%, var(--bg) 55%);color:var(--ink);
+  font-family:'Noto Sans Gujarati','Shruti','Nirmala UI',system-ui,sans-serif;line-height:1.75;font-size:16.5px}
+/* ---------- topbar ---------- */
+.topbar{position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  padding:10px 18px;background:rgba(10,16,32,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.topbar .logo{font-weight:800;font-size:1.05rem;letter-spacing:.2px}
+.topbar .logo span{color:var(--acc)}
+.topbar .right{margin-left:auto;display:flex;align-items:center;gap:10px;font-size:.9rem;color:var(--mut)}
+.topbar select{background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-family:inherit}
+/* ---------- layout ---------- */
+.layout{display:grid;grid-template-columns:262px minmax(0,1fr);gap:26px;max-width:1280px;margin:0 auto;padding:22px}
+nav.side{position:sticky;top:64px;align-self:start;max-height:calc(100vh - 84px);overflow:auto;
+  background:var(--card2);border:1px solid var(--line);border-radius:16px;padding:12px;font-size:.92rem}
+nav.side a{display:flex;gap:8px;align-items:center;color:var(--mut);text-decoration:none;padding:8px 10px;border-radius:10px}
+nav.side a:hover{background:#16223d;color:var(--ink)}
+nav.side a b{font-weight:600}
+nav.side .n{font-size:.75rem;background:#1b2a4a;border-radius:6px;padding:1px 7px;color:var(--acc)}
+@media(max-width:920px){.layout{grid-template-columns:1fr}nav.side{position:static;max-height:none;display:flex;flex-wrap:wrap;gap:4px}}
+/* ---------- sections ---------- */
+section{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px 28px;margin-bottom:30px;
+  scroll-margin-top:70px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+h2{margin:0 0 6px;font-size:1.5rem;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+h2 .chip{font-size:.7rem;font-weight:700;letter-spacing:.5px;color:var(--acc);border:1px solid var(--acc);
+  padding:2px 10px;border-radius:99px;background:rgba(76,194,255,.08)}
+h3{color:var(--acc);font-size:1.12rem;margin:26px 0 8px}
+.lead{color:var(--mut)}
+b,vit{color:#fff}
+.kw{color:var(--org);font-weight:600}
+.fx{font-family:'Noto Sans Math','Noto Sans Gujarati',serif}
+/* derivation steps */
+.step{border-left:3px solid #27406e;padding:2px 0 2px 16px;margin:14px 0;color:#d7e2f5}
+.step .why{color:var(--mut);font-size:.92rem}
+.eq{background:#0d1a31;border:1px solid #1e3358;border-radius:12px;padding:12px 16px;margin:12px 0;text-align:center;
+  font-size:1.12rem;font-family:'Noto Sans Math','Noto Sans Gujarati',serif;overflow-x:auto}
+.eq .lbl{display:block;font-size:.78rem;color:var(--mut);font-family:'Noto Sans Gujarati',sans-serif;margin-bottom:4px}
+.result{border:1.6px solid var(--acc);background:linear-gradient(135deg,rgba(76,194,255,.12),rgba(76,194,255,.03));
+  border-radius:14px;padding:14px 18px;margin:18px 0;text-align:center;font-size:1.25rem;font-weight:600;
+  font-family:'Noto Sans Math','Noto Sans Gujarati',serif;overflow-x:auto}
+.result .tagr{display:block;font-size:.8rem;color:var(--acc);font-family:'Noto Sans Gujarati';font-weight:700;margin-bottom:4px}
+/* boxes */
+.keys{background:var(--card2);border:1px dashed #2a3f6b;border-radius:12px;padding:14px 18px;margin:16px 0}
+.keys .t{font-weight:700;color:var(--grn);margin-bottom:6px}
+.keys ul{margin:0;padding-left:20px}
+.keys li{margin:5px 0}
+.warn{background:rgba(251,113,133,.08);border:1px solid rgba(251,113,133,.4);border-radius:12px;padding:12px 16px;margin:14px 0}
+.ex{background:rgba(74,222,128,.07);border:1px solid rgba(74,222,128,.35);border-radius:12px;padding:14px 18px;margin:16px 0}
+.ex .t{font-weight:700;color:var(--grn)}
+/* colors of forces */
+.cN{color:var(--grn);font-weight:700}.cf{color:var(--org);font-weight:700}.cW{color:var(--red);font-weight:700}
+.cT{color:var(--pur);font-weight:700}.cv{color:var(--blu);font-weight:700}
+/* figures */
+figure{margin:18px 0;text-align:center}
+figure svg{max-width:100%;height:auto;background:#0c1428;border:1px solid var(--line);border-radius:14px}
+figcaption{font-size:.85rem;color:var(--mut);margin-top:8px}
+/* labs (interactive) */
+.lab{background:linear-gradient(180deg,#101c3a,#0c1528);border:1px solid #2b4374;border-radius:16px;padding:18px;margin:20px 0}
+.lab .lt{font-weight:800;color:var(--acc);display:flex;gap:8px;align-items:center;margin-bottom:4px}
+.lab .ls{color:var(--mut);font-size:.88rem;margin-bottom:12px}
+.ctrl{display:flex;flex-wrap:wrap;gap:14px 22px;margin:10px 0}
+.ctrl label{display:flex;flex-direction:column;gap:4px;font-size:.85rem;color:var(--mut);min-width:190px}
+.ctrl input[type=range]{width:100%;accent-color:var(--acc)}
+.ctrl .vv{color:var(--ink);font-weight:700;font-size:.95rem}
+.ctrl select{background:#0d1830;color:var(--ink);border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-family:inherit}
+.read{display:flex;flex-wrap:wrap;gap:10px;margin-top:10px}
+.read .box{background:#0b1730;border:1px solid #234;border-radius:12px;padding:10px 14px;min-width:130px}
+.read .box .k{font-size:.75rem;color:var(--mut)}
+.read .box .val{font-size:1.25rem;font-weight:800;font-family:'Noto Sans Math',serif}
+.read .box.ok .val{color:var(--grn)} .read .box.bad .val{color:var(--red)} .read .box.mid .val{color:var(--org)}
+canvas{max-width:100%;background:#0c1428;border:1px solid var(--line);border-radius:12px;display:block;margin:10px auto}
+.subst{font-size:.88rem;color:var(--mut);font-family:'Noto Sans Math',serif;margin-top:6px}
+.note{font-size:.86rem;color:var(--mut)}
+/* math spans */
+.fr{display:inline-flex;flex-direction:column;vertical-align:middle;text-align:center;margin:0 2px}
+.fr .nu{border-bottom:1.6px solid currentColor;padding:0 5px}
+.fr .de{padding:0 5px}
+.rt{display:inline-block;white-space:nowrap}
+.rt .rin{border-top:1.6px solid currentColor;padding:1px 3px 0}
+i.vr{font-style:italic;font-family:'Noto Sans Math',serif}
+/* formula table */
+table.fs{width:100%;border-collapse:collapse;font-size:.95rem}
+table.fs th{background:#16264a;color:var(--acc);text-align:left;padding:10px 12px}
+table.fs td{border-top:1px solid var(--line);padding:10px 12px;vertical-align:top}
+table.fs td.f{font-family:'Noto Sans Math',serif;font-size:1.05rem}
+table.fs tr:nth-child(even) td{background:#0d1526}
+/* MCQ */
+details.q{background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 16px;margin:12px 0}
+details.q summary{cursor:pointer;font-weight:600}
+details.q .opts{margin:8px 0 4px;color:var(--mut)}
+details.q .opts div{padding:3px 0}
+details.q .sol{border-top:1px dashed #2a3f6b;margin-top:10px;padding-top:10px;color:#cfe3ff}
+details.q .ans{color:var(--grn);font-weight:700}
+.badge{display:inline-block;font-size:.72rem;background:#1b2a4a;color:var(--acc);border-radius:6px;padding:1px 8px;margin-right:6px}
+footer{color:var(--mut);text-align:center;padding:30px 10px;font-size:.85rem}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:760px){.grid2{grid-template-columns:1fr}}
+.mini{font-size:.85rem;color:var(--mut)}
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="logo">🌀 <span>ગોળાકાર ગતિ</span> · Circular Motion</div>
+  <div class="right">
+    <span>g =</span>
+    <select id="gSel"><option value="9.8">9.8 m/s²</option><option value="10">10 m/s² (NEET)</option></select>
+  </div>
+</header>
+
+<div class="layout">
+<nav class="side">
+  <a href="#basics"><span class="n">0</span><b>પાયો — અભિકેન્દ્ર બળ</b></a>
+  <a href="#flat"><span class="n">1</span><b>સપાટ વળાંક (ઘર્ષણ)</b></a>
+  <a href="#bank0"><span class="n">2</span><b>બેન્કિંગ — ઘર્ષણ વિના</b></a>
+  <a href="#bankmu"><span class="n">3</span><b>બેન્કિંગ + ઘર્ષણ</b></a>
+  <a href="#well"><span class="n">4</span><b>મોતનો કૂવો</b></a>
+  <a href="#vcm"><span class="n">5</span><b>ઊર્ધ્વાધર વર્તુળ (ક્રિટિકલ ઝડપ)</b></a>
+  <a href="#bowl"><span class="n">6</span><b>અર્ધગોળાકાર વાટકો / ગુંબજ</b></a>
+  <a href="#coni"><span class="n">7</span><b>શંક્વાકાર લોલક</b></a>
+  <a href="#sheet"><span class="n">8</span><b>સૂત્ર-સારણી</b></a>
+  <a href="#mcq"><span class="n">9</span><b>NEET પ્રેક્ટિસ (MCQ)</b></a>
+  <a href="#tips"><span class="n">10</span><b>યાદ રાખવાની ભૂલિયાટ</b></a>
+</nav>
+
+<main>
+
+<!-- ================= HERO ================= -->
+<section style="background:linear-gradient(135deg,#13224a,#0d1730)">
+  <h2 style="font-size:1.7rem">🌀 ગોળાકાર ગતિ — Circular Motion</h2>
+  <p class="lead" style="font-size:1.02rem">વળાંક, બેન્કિંગ, મોતનો કૂવો, ઊર્ધ્વાધર વર્તુળ, વાટકો, શંક્વાકાર લોલક — <b>દરેક કેસનું સંપૂર્ણ ડેરિવેશન + FBD ડાયાગ્રામ + ઇન્ટરેક્ટિવ એનિમેશન</b> — શિક્ષક જે રીતે બોર્ડ પર સમજાવે તે જ રીતે. 🎯 GSEB + NEET 2025–26 માટે.</p>
+  <div class="keys" style="margin-top:14px">
+    <div class="t">👉 કેવી રીતે વાપરવું?</div>
+    દરેક વિભાગમાં <b>“🔬 લેબ”</b> બોક્સ છે — ત્યાં <b>slider</b> ખસેડીને θ, μ, r, v બદલો અને ડાયાગ્રામ-એનિમેશન જીવંત બનેલું જુઓ. ઉપર જમણી બાજુ <b>g = 9.8 / 10</b> પસંદ કરી શકાય.
+  </div>
+</section>
+
+<!-- ================= BASICS ================= -->
+<section id="basics">
+  <h2>0️⃣ પાયો — અભિકેન્દ્ર બળ <span class="chip">BASICS</span></h2>
+  <p class="lead">આખા પ્રકરણની ચાવી એક જ વિચાર છે — <b>વર્તુળમાં ફરતા પદાર્થને સીધા રસ્તે જવાની ટેવ (જડત્વ) હોય છે, તેને વળાંક પર પાથરખામાં રાખવા માટે <span class="kw">કેન્દ્ર તરફ બળ</span> જોઈએ.</p>
+
+  <div class="eq"><span class="lbl">રેખીય ઝડપ ↔ કોણીય ઝડપ</span>
+    <i class="vr">v</i> = <i class="vr">ω</i><i class="vr">r</i>
+  </div>
+  <div class="eq"><span class="lbl">અભિકેન્દ્ર પ્રવેગ (કેન્દ્ર તરફ)</span>
+    <i class="vr">a</i><sub>c</sub> = <span class="fr"><span class="nu"><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span> = <i class="vr">ω</i>²<i class="vr">r</i>
+  </div>
+  <div class="result"><span class="tagr">🔒 આખા પ્રકરણનું મુખ્ય સૂત્ર — અભિકેન્દ્ર બળ</span>
+    <i class="vr">F</i><sub>c</sub> = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span> = <i class="vr">m</i><i class="vr">ω</i>²<i class="vr">r</i>
+  </div>
+
+  <div class="keys">
+    <div class="t">💡 શિક્ષકવાર્તા — આ જ રહેશે દરેક કેસમાં</div>
+    <ul>
+      <li>અભિકેન્દ્ર બળ કોઈ <b>નવું/અલગ બળ નથી</b> — તે ઘર્ષણ, સામાન્ય પ્રતિક્રિયા, તણાવ કે ગુરુત્વબળનું ઘટક હોય છે.</li>
+      <li>દરેક કેસમાં આપણે ફક્ત બે સમીકરણ લખીશું: <b>(1) કેન્દ્ર તરફની દિશામાં F<sub>net</sub> = mv²/r</b>, <b>(2) ઊભી દિશામાં F<sub>net</sub> = 0</b> (જ્યાં બળ સંતુલિત હોય).</li>
+      <li><span class="cW">અપકેન્દ્ર બળ (centrifugal)</span> ખરું બળ નથી — તે <b>છુપું (pseudo) બળ</b> છે, ફરતા નિરીક્ષકના માળામાં જ દેખાય. NEET માં આ ફસાવટ પૂછે છે!</li>
+      <li>અભિકેન્દ્ર બળ દૂર કરો તો પદાર્થ <b>સ્પર્શરેખા (tangent)</b> પર સીધો દોડી જાય — આથી જ વાહન વળાંકમાંથી “બહાર ફેંકાય” છે (નીચેના લેબમાં આ જુઓ!)</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= FLAT CURVE ================= -->
+<section id="flat">
+  <h2>1️⃣ સપાટ રસ્તાનો વળાંક — ફક્ત ઘર્ષણના બળ પર <span class="chip">FLAT CURVE</span></h2>
+  <p class="lead">સપાટ (unbanked) રસ્તા પર વળાંક લેતી વખતે <b>કેન્દ્ર તરફનું બળ</b> આપનાર એકમાત્ર ખરું બળ = <span class="cf">ઘર્ષણ બળ f</span>. સવાલ: કેટલી ઝડપ સુધી રાખીએ તો વાહન રોડ પરથી પડે/સરકે નહીં?</p>
+
+  <figure>
+  <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" font-size="13.5" fill="none">
+    <defs>
+      <marker id="aB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#60a5fa"/></marker>
+      <marker id="aO" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fbbf24"/></marker>
+      <marker id="aG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4ade80"/></marker>
+      <marker id="aR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fb7185"/></marker>
+    </defs>
+    <!-- top view -->
+    <text x="130" y="26" fill="#9db0cc" text-anchor="middle">ટોચનો દેખાવ (Top view)</text>
+    <circle cx="130" cy="165" r="112" stroke="#3b5590" stroke-width="10" opacity=".55"/>
+    <circle cx="130" cy="165" r="112" stroke="#0c1428" stroke-width="6" opacity=".6"/>
+    <circle cx="130" cy="165" r="86" stroke="#3b5590" stroke-width="8" opacity=".55"/>
+    <line x1="130" y1="150" x2="130" y2="180" stroke="#9db0cc" stroke-width="2"/>
+    <line x1="115" y1="165" x2="145" y2="165" stroke="#9db0cc" stroke-width="2"/>
+    <text x="130" y="205" fill="#9db0cc" text-anchor="middle">O (કેન્દ્ર)</text>
+    <path d="M 130 253 A 88 88 0 0 0 42 165" stroke="#60a5fa" stroke-width="1.6" stroke-dasharray="5 5" marker-end="url(#aB)"/>
+    <!-- tangent dashed (inertia) -->
+    <line x1="216" y1="60" x2="216" y2="278" stroke="#fb7185" stroke-width="1.4" stroke-dasharray="6 5"/>
+    <text x="224" y="52" fill="#fb7185">જડત્વથી સીધું જવા માંગે (સ્પર્શરેખા)</text>
+    <!-- car -->
+    <rect x="200" y="150" width="34" height="18" rx="5" fill="#60a5fa"/>
+    <circle cx="208" cy="171" r="4" fill="#1e293b"/><circle cx="228" cy="171" r="4" fill="#1e293b"/>
+    <text x="188" y="142" fill="#eaf1fd">વાહન</text>
+    <!-- friction arrow toward center -->
+    <line x1="200" y1="159" x2="152" y2="159" stroke="#fbbf24" stroke-width="3.4" marker-end="url(#aO)"/>
+    <text x="146" y="140" fill="#fbbf24" text-anchor="end">f (ઘર્ષણ) → કેન્દ્ર તરફ</text>
+    <!-- velocity arrow -->
+    <line x1="222" y1="150" x2="222" y2="92" stroke="#60a5fa" stroke-width="3.4" marker-end="url(#aB)"/>
+    <text x="232" y="100" fill="#60a5fa">v</text>
+    <!-- side view FBD -->
+    <text x="425" y="26" fill="#9db0cc" text-anchor="middle">FBD (બાજુનો દેખાવ)</text>
+    <line x1="330" y1="240" x2="520" y2="240" stroke="#3b5590" stroke-width="3"/>
+    <rect x="398" y="200" width="52" height="34" rx="6" fill="#334e88"/>
+    <line x1="424" y1="200" x2="424" y2="150" stroke="#4ade80" stroke-width="3.4" marker-end="url(#aG)"/>
+    <text x="434" y="152" fill="#4ade80">N (સામાન્ય પ્રતિક્રિયા)</text>
+    <line x1="424" y1="240" x2="424" y2="292" stroke="#fb7185" stroke-width="3.4" marker-end="url(#aR)"/>
+    <text x="434" y="290" fill="#fb7185">mg</text>
+    <line x1="396" y1="218" x2="344" y2="218" stroke="#fbbf24" stroke-width="3.4" marker-end="url(#aO)"/>
+    <text x="338" y="200" fill="#fbbf24" text-anchor="end">f = અભિકેન્દ્ર બળ</text>
+    <text x="338" y="238" fill="#9db0cc" text-anchor="end">(કેન્દ્ર આ બાજુ છે)</text>
+  </svg>
+  <figcaption>આકૃતિ 1.1 — સપાટ વળાંક: ઘર્ષણ જ અભિકેન્દ્ર બળ આપે છે; ઊભી દિશામાં N = mg</figcaption>
+  </figure>
+
+  <h3>📐 ડેરિવેશન — મહત્તમ સુરક્ષિત ઝડપ v<sub>max</sub></h3>
+  <div class="step"><b>પગલું 1 — ઊભી દિશામાં સંતુલન:</b> <span class="why">(ઊભી દિશામાં પ્રવેગ નથી)</span></div>
+  <div class="eq">N = mg</div>
+  <div class="step"><b>પગલું 2 — કેન્દ્ર તરફ (આડી દિશા):</b> <span class="why">ઘર્ષણ બળ જ અભિકેન્દ્ર બળ આપે</span></div>
+  <div class="eq">f = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span></div>
+  <div class="step"><b>પગલું 3 — ઘર્ષણની મર્યાદા:</b> <span class="why">સ્થિત (static) ઘર્ષણ પણ f ≤ μN થી વધુ ન બની શકે</span></div>
+  <div class="eq"><span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span> ≤ μN = μmg &nbsp;&nbsp;⟹&nbsp;&nbsp; <i class="vr">v</i>² ≤ μ<i class="vr">r</i>g &nbsp;&nbsp;(m કટ થઈ ગયું!)</div>
+  <div class="result"><span class="tagr">✅ પરિણામ — સપાટ વળાંક પર મહત્તમ ઝડપ</span>
+    <i class="vr">v</i><sub>max</sub> = <span class="rt">√<span class="rin">μ <i class="vr">r</i> g</span></span>
+  </div>
+  <div class="keys">
+    <div class="t">🔑 યાદ રાખો</div>
+    <ul>
+      <li><b>વાહનના દ્રવ્યમાન (m) પર આધાર નથી</b> — ટ્રક હોય કે બાઈક, v<sub>max</sub> એક જ!</li>
+      <li>આ કરતાં વધુ ઝડપ ⟶ ઘર્ષણ પૂરતું ન બંધાય ⟶ વાહન <b>સ્પર્શરેખા પર સીધું</b> દોડીને બહાર નીકળી જાય (skid).</li>
+      <li>જરૂરી ઘર્ષણ: μ ≥ v²/(rg) &nbsp;·&nbsp; ભીનો રસ્તો/બરફ ⟶ μ ઓછો ⟶ ઝડપ વધુ ધીમી રાખવી પડે.</li>
+      <li>🚴 <b>સાયકલ/બાઈક ચાલકનું ખૂંચાવું (leaning):</b> ઊભી દિશાથી α ખૂણે ખૂંચવું પડે જેથી tan α = v²/(rg). (પાતળો વળાંક = વધુ ખૂંચાવું!)</li>
+    </ul>
+  </div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 1 — “કેટલી ઝડપ રાખીએ તો ન પડાય?”</div>
+    <div class="ls">μ અને r ખસેડો → v<sub>max</sub> જુઓ. પછી v slider વધારો — v &gt; v<sub>max</sub> થતાં ગાડી <b>સ્પર્શરેખામાં સીધી</b> દોડી જશે (એટલે જ લોકો વળાંકમાંથી “બહાર ફેંકાય” છે)!</div>
+    <div class="ctrl">
+      <label>ઘર્ષણ ગુણાંક μ <span class="vv" id="fMuV">0.40</span>
+        <input type="range" id="fMu" min="0.05" max="0.9" step="0.05" value="0.4"></label>
+      <label>વળાંકની ત્રિજ્યા r (m) <span class="vv" id="fRV">50</span>
+        <input type="range" id="fR" min="10" max="200" step="5" value="50"></label>
+      <label>તમારી ઝડપ v (m/s) <span class="vv" id="fVV">10</span>
+        <input type="range" id="fV" min="2" max="40" step="0.5" value="10"></label>
+    </div>
+    <div class="read">
+      <div class="box" id="fVmax"></div>
+      <div class="box" id="fKmh"></div>
+      <div class="box" id="fSafe"></div>
+    </div>
+    <div class="subst" id="fSub"></div>
+    <canvas id="flatCv" width="640" height="330"></canvas>
+    <div class="note">લીલો રસ્તો = સુરક્ષિત વર્તુળ; લાલ થાય તો ગાડી ઘર્ષણ ગુમાવી સ્પર્શરેખામાં સીધી નીકળી જાય (નીચે ધૂળના ડાઘ = skid marks).</div>
+  </div>
+
+  <div class="ex"><div class="t">📝 ઉદાહરણ (NEET સ્ટાઈલ)</div>
+    μ = 0.4, r = 25 m, g = 10 ⟹ v<sub>max</sub> = √(0.4×25×10) = √100 = <b>10 m/s = 36 km/h</b>. આ કરતાં વધુ ઝડપે જશો તો સ્કિડ!
+  </div>
+</section>
+
+<!-- ================= BANKING WITHOUT FRICTION ================= -->
+<section id="bank0">
+  <h2>2️⃣ રસ્તાનો ઢાળ (Banking of Road) — ઘર્ષણ વિના <span class="chip">IDEAL CASE</span></h2>
+  <p class="lead">વળાંકની <b>બહારની કિનારી ઊંચી</b> અને <b>અંદરની કિનારી નીચી</b> રાખવાને રસ્તાનો <b>બેન્કિંગ/ઢાળ</b> કહે છે. ઢાળ કરતાં <span class="cN">સામાન્ય પ્રતિક્રિયા N</span> નું આડું ઘટક (N sinθ) પોતે જ અભિકેન્દ્ર બળ આપે છે — ઘર્ષણની જરૂર ન રહે!</p>
+
+  <figure>
+  <svg viewBox="0 0 540 330" xmlns="http://www.w3.org/2000/svg" font-size="13.5" fill="none">
+    <defs>
+      <marker id="bG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4ade80"/></marker>
+      <marker id="bR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fb7185"/></marker>
+      <marker id="bK" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#9db0cc"/></marker>
+    </defs>
+    <!-- baseline -->
+    <line x1="40" y1="252" x2="480" y2="252" stroke="#2a3f6b" stroke-width="1.6" stroke-dasharray="7 6"/>
+    <!-- road -->
+    <line x1="60" y1="252" x2="420" y2="132" stroke="#3b5590" stroke-width="8"/>
+    <line x1="60" y1="252" x2="420" y2="132" stroke="#5d7cc2" stroke-width="3"/>
+    <!-- theta arc -->
+    <path d="M 150 252 A 90 90 0 0 0 146 228" stroke="#fbbf24" stroke-width="1.8"/>
+    <text x="158" y="238" fill="#fbbf24" font-size="15">θ</text>
+    <!-- center direction -->
+    <line x1="60" y1="252" x2="118" y2="252" stroke="#9db0cc" stroke-width="0"/>
+    <text x="46" y="286" fill="#9db0cc">◄ વર્તુળનું કેન્દ્ર (અંદરની નીચી બાજુ)</text>
+    <!-- car -->
+    <g transform="translate(230,193) rotate(-17.5)">
+      <rect x="-24" y="-15" width="48" height="18" rx="5" fill="#60a5fa"/>
+      <circle cx="-14" cy="5" r="4" fill="#1e293b"/><circle cx="14" cy="5" r="4" fill="#1e293b"/>
+    </g>
+    <!-- N arrow (perpendicular to road) -->
+    <line x1="230" y1="193" x2="205" y2="105" stroke="#4ade80" stroke-width="3.6" marker-end="url(#bG)"/>
+    <text x="120" y="98" fill="#4ade80">N (રસ્તાને લંબ)</text>
+    <!-- components of N -->
+    <line x1="205" y1="105" x2="230" y2="105" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <line x1="205" y1="105" x2="205" y2="193" stroke="#4ade80" stroke-width="1.5" stroke-dasharray="5 4"/>
+    <text x="216" y="97" fill="#9db0cc" font-size="11.5">N cosθ ↑</text>
+    <text x="128" y="152" fill="#9db0cc" font-size="11.5">N sinθ (કેન્દ્ર તરફ) ←</text>
+    <line x1="205" y1="150" x2="231" y2="150" stroke="#9db0cc" stroke-width="0"/>
+    <!-- mg -->
+    <line x1="230" y1="200" x2="230" y2="292" stroke="#fb7185" stroke-width="3.6" marker-end="url(#bR)"/>
+    <text x="240" y="290" fill="#fb7185">mg</text>
+    <!-- right explanation -->
+    <text x="452" y="60" fill="#9db0cc" font-size="12.5" transform="rotate(0)">ઊભી દિશા:</text>
+    <text x="452" y="82" fill="#4ade80">N cosθ = mg</text>
+    <text x="452" y="112" fill="#9db0cc" font-size="12.5">કેન્દ્ર તરફ:</text>
+    <text x="452" y="134" fill="#4ade80">N sinθ = mv²/r</text>
+  </svg>
+  <figcaption>આકૃતિ 2.1 — ઢાળવાળો રસ્તો: N નું આડું ઘટક N sinθ અભિકેન્દ્ર બળ આપે, ઊભું ઘટક N cosθ વજનને સંતુલિત કરે</figcaption>
+  </figure>
+
+  <h3>📐 ડેરિવેશન — આદર્શ (ડિઝાઇન) ઝડપ v₀</h3>
+  <div class="step"><b>પગલું 1 — ઊભી દિશામાં સંતુલન:</b> <span class="why">પ્રવેગ ઊભી દિશામાં નથી</span></div>
+  <div class="eq">N cos θ = mg &nbsp;&nbsp;…(1)</div>
+  <div class="step"><b>પગલું 2 — કેન્દ્ર તરફની દિશામાં (અક્ષ પર):</b> <span class="why">N નું આડું ઘટક જ અભિકેન્દ્ર બળ</span></div>
+  <div class="eq">N sin θ = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span> &nbsp;&nbsp;…(2)</div>
+  <div class="step"><b>પગલું 3 — (2) ÷ (1):</b> <span class="why">N અને m બંને કટ થાય — વાહનનું દ્રવ્યમાન ફરી વાર બિનજરૂરી!</span></div>
+  <div class="eq">tan θ = <span class="fr"><span class="nu"><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i> g</span></span></div>
+  <div class="result"><span class="tagr">✅ પરિણામ — ઘર્ષણ વિનાની આદર્શ ઝડપ (optimum speed)</span>
+    <i class="vr">v</i><sub>0</sub> = <span class="rt">√<span class="rin"><i class="vr">r</i> g tan θ</span></span>
+  </div>
+
+  <div class="keys">
+    <div class="t">🔑 “ઝડપ ઓછી/વધુ કરવી હોય તો θ અને r કેટલા રાખવા?” — ડિઝાઇન સૂત્રો</div>
+    <ul>
+      <li>આપેલ ઝડપ v માટે જરૂરી ઢાળ: <b>θ = tan⁻¹(v² / rg)</b> — ઝડપ બમણી થાય તો θ ખૂબ ઝડપથી વધે!</li>
+      <li>આપેલ ઝડપ v માટે જરૂરી ત્રિજ્યા: <b>r = v² / (g tanθ)</b> — તીવ્ર વળાંક (ઓછી r) માટે મોટો ઢાળ જોઈએ.</li>
+      <li>રેલ્વે પટ્ટીનો બેન્કિંગ: બહારની પટ્ટી d જેટલી ઊંચી કરે ⟹ <b>h ≈ v²d / (rg)</b> (નાના θ માટે tanθ ≈ h/d).</li>
+      <li>v = v₀ પર ઘર્ષણ પર બિલકુલ દબાણ નહીં — એટલે જ તેને “આદર્શ ઝડપ” કહે છે. ટાયર-રસ્તો ઘસાય નહીં એવી ડિઝાઇન!</li>
+    </ul>
+  </div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 2 — ડિઝાઇન કેલ્ક્યુલેટર (θ ↔ v ↔ r)</div>
+    <div class="ls">Sliderથી r અને θ બદલો → v₀ મળે. નીચે “ઝડપ આપો” બોક્સમાં તમારી ઈચ્છાની ઝડપ નાખો → જરૂરી θ કે r મળે.</div>
+    <div class="ctrl">
+      <label>ત્રિજ્યા r (m) <span class="vv" id="b0rV">80</span>
+        <input type="range" id="b0r" min="10" max="300" step="5" value="80"></label>
+      <label>ઢાળ θ (°) <span class="vv" id="b0thV">15</span>
+        <input type="range" id="b0th" min="2" max="45" step="1" value="15"></label>
+    </div>
+    <div class="read"><div class="box" id="b0v0"></div><div class="box" id="b0kmh"></div></div>
+    <div class="ctrl" style="margin-top:16px">
+      <label>ઝડપ v (m/s) <input type="number" id="b0dv" value="20" min="1" max="80" step="0.5"></label>
+      <label>ત્રિજ્યા r (m) <input type="number" id="b0dr" value="100" min="5" max="2000"></label>
+      <label>⟶ જરૂરી ઢાળ θ <span class="vv" id="b0dthOut">—</span></label>
+    </div>
+    <div class="ctrl">
+      <label>ઝડપ v (m/s) <input type="number" id="b0tv" value="20" min="1" max="80" step="0.5"></label>
+      <label>ઢાળ θ (°) <input type="number" id="b0tth" value="15" min="1" max="60"></label>
+      <label>⟶ જરૂરી ત્રિજ્યા r <span class="vv" id="b0drOut">—</span> m</label>
+    </div>
+  </div>
+
+  <div class="ex"><div class="t">📝 ઉદાહરણ</div>
+    r = 40 m, θ = 45°, g = 10 ⟹ v₀ = √(40×10×1) = <b>20 m/s</b>. &nbsp;અને v = 20 m/s, r = 100 m માટે જરૂરી ઢાળ θ = tan⁻¹(400/1000) = <b>tan⁻¹(0.4) ≈ 21.8°</b>.
+  </div>
+</section>
+<!-- ================= BANKING WITH FRICTION ================= -->
+<section id="bankmu">
+  <h2>3️⃣ ઢાળવાળો રસ્તો + ઘર્ષણ — v<sub>max</sub> અને v<sub>min</sub> <span class="chip">COMPLETE CASE ⭐</span></h2>
+  <p class="lead">વાસ્તવિક રસ્તામાં ઢાળ <b>અને</b> ઘર્ષણ બંને હોય છે. ત્યારે ઝડપની <b>એક બેન્ડ (સીમા)</b> બને: v<sub>min</sub> થી v<sub>max</sub> વચ્ચેની કોઈપણ ઝડપ સુરક્ષિત! ઘર્ષણની <b>દિશા ઝડપ પ્રમાણે બદલાય</b> છે — આ જ આ કેસની જીભ છે:</p>
+
+  <div class="keys" style="border-style:solid">
+    <div class="t">🎯 ત્રણ સ્થિતિઓ — ઘર્ષણની દિશા જુઓ</div>
+    <ul>
+      <li><b>v = v₀</b> (આદર્શ ઝડપ): ઘર્ષણ <b>શૂન્ય</b> — N એકલું જ કામ કરે.</li>
+      <li><b>v &gt; v₀</b> (ઝડપ વધુ): વાહન ઉપર-બહાર સરકવા માંગે ⟹ ઘર્ષણ <span class="cf">ઢાળની નીચે (અંદર)</span> તરફ.</li>
+      <li><b>v &lt; v₀</b> (ઝડપ ઓછી): વાહન નીચે-અંદર ખવાઈ જવા માંગે ⟹ ઘર્ષણ <span class="cf">ઢાળની ઉપર (બહાર)</span> તરફ.</li>
+    </ul>
+  </div>
+
+  <figure>
+  <svg viewBox="0 0 540 350" xmlns="http://www.w3.org/2000/svg" font-size="13.5" fill="none">
+    <defs>
+      <marker id="cG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4ade80"/></marker>
+      <marker id="cR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fb7185"/></marker>
+      <marker id="cO" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fbbf24"/></marker>
+    </defs>
+    <!-- LEFT: fast case -->
+    <text x="150" y="26" fill="#eaf1fd" text-anchor="middle" font-weight="700">(A) v &gt; v₀ → f ઢાળ નીચે તરફ ↓</text>
+    <line x1="40" y1="252" x2="300" y2="252" stroke="#2a3f6b" stroke-width="1.4" stroke-dasharray="6 5"/>
+    <line x1="50" y1="252" x2="290" y2="172" stroke="#3b5590" stroke-width="7"/>
+    <path d="M 120 252 A 70 70 0 0 0 117 233" stroke="#fbbf24" stroke-width="1.6"/>
+    <text x="126" y="243" fill="#fbbf24" font-size="14">θ</text>
+    <g transform="translate(165,225) rotate(-18)"><rect x="-20" y="-13" width="40" height="15" rx="4" fill="#60a5fa"/></g>
+    <line x1="165" y1="222" x2="146" y2="152" stroke="#4ade80" stroke-width="3.2" marker-end="url(#cG)"/>
+    <text x="52" y="140" fill="#4ade80">N</text>
+    <line x1="165" y1="228" x2="165" y2="296" stroke="#fb7185" stroke-width="3.2" marker-end="url(#cR)"/>
+    <text x="172" y="298" fill="#fb7185">mg</text>
+    <!-- friction down the slope -->
+    <line x1="176" y1="232" x2="132" y2="246" stroke="#fbbf24" stroke-width="3.4" marker-end="url(#cO)"/>
+    <text x="40" y="290" fill="#fbbf24">f (નીચે-અંદર)</text>
+    <!-- RIGHT: slow case -->
+    <text x="415" y="26" fill="#eaf1fd" text-anchor="middle" font-weight="700">(B) v &lt; v₀ → f ઢાળ ઉપર તરફ ↑</text>
+    <line x1="310" y1="252" x2="530" y2="252" stroke="#2a3f6b" stroke-width="1.4" stroke-dasharray="6 5"/>
+    <line x1="320" y1="252" x2="520" y2="172" stroke="#3b5590" stroke-width="7"/>
+    <g transform="translate(425,225) rotate(-18)"><rect x="-20" y="-13" width="40" height="15" rx="4" fill="#60a5fa"/></g>
+    <line x1="425" y1="222" x2="406" y2="152" stroke="#4ade80" stroke-width="3.2" marker-end="url(#cG)"/>
+    <text x="384" y="140" fill="#4ade80">N</text>
+    <line x1="425" y1="228" x2="425" y2="296" stroke="#fb7185" stroke-width="3.2" marker-end="url(#cR)"/>
+    <text x="432" y="298" fill="#fb7185">mg</text>
+    <line x1="436" y1="232" x2="480" y2="218" stroke="#fbbf24" stroke-width="3.4" marker-end="url(#cO)"/>
+    <text x="452" y="290" fill="#fbbf24">f (ઉપર-બહાર)</text>
+    <!-- center labels -->
+    <text x="270" y="330" fill="#9db0cc" text-anchor="middle" font-size="12">બંને આકૃતિમાં વર્તુળનું કેન્દ્ર ડાબી (નીચેની) બાજુ છે</text>
+  </svg>
+  <figcaption>આકૃતિ 3.1 — ઘર્ષણ સાથે બેન્કિંગ: ઝડપ વધુ હોય તો f નીચે, ઓછી હોય તો f ઉપર</figcaption>
+  </figure>
+
+  <h3>📐 ડેરિવેશન — v<sub>max</sub> (વાહન ઉપર સરકવાના બળથી બચે તે માટે)</h3>
+  <div class="step"><b>સ્થિતિ (A): v મહાન</b>, ઘર્ષણ ઢાળની નીચે તરફ, f = μN (ટકવાની ક્ષણે મહત્તમ).</div>
+  <div class="eq"><span class="lbl">કેન્દ્ર તરફ (આડી દિશા) — N નું આડું ઘટક + f નું આડું ઘટક</span>
+    N sin θ + f cos θ = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span> &nbsp;&nbsp;…(1)</div>
+  <div class="eq"><span class="lbl">ઊભી દિશા — N cosθ ઊપર, mg અને f નું ઊભું ઘટક નીચે</span>
+    N cos θ − f sin θ = mg &nbsp;&nbsp;…(2)</div>
+  <div class="step"><b>પગલું:</b> f = μN નાખીને, (1) ÷ (2):</div>
+  <div class="eq"><span class="fr"><span class="nu"><i class="vr">v</i>²<sub>max</sub></span><span class="de"><i class="vr">r</i> g</span></span> =
+    <span class="fr"><span class="nu">sin θ + μ cos θ</span><span class="de">cos θ − μ sin θ</span></span> =
+    <span class="fr"><span class="nu">tan θ + μ</span><span class="de">1 − μ tan θ</span></span></div>
+  <div class="result"><span class="tagr">✅ મહત્તમ સુરક્ષિત ઝડપ (ઘર્ષણ સાથે)</span>
+    <i class="vr">v</i><sub>max</sub> = <span class="rt">√<span class="rin"><i class="vr">r</i>g <span class="fr"><span class="nu">tan θ + μ</span><span class="de">1 − μ tan θ</span></span></span></span> = <span class="rt">√<span class="rin"><i class="vr">r</i>g tan(θ + φ)</span></span>
+  </div>
+  <div class="note">અહીં <b>φ = tan⁻¹μ</b> ને <span class="kw">ઘર્ષણ ખૂણો (angle of friction)</span> કહે છે. શોર્ટકટ સૂત્ર tan(θ+φ) = (tanθ+μ)/(1−μtanθ) — ત્રિકોણમિતિનું પ્રસિદ્ધ સૂત્ર છે.</div>
+
+  <h3>📐 ડેરિવેશન — v<sub>min</sub> (વાહન નીચે ખવાઈ જાય નહીં તે માટે)</h3>
+  <div class="step"><b>સ્થિતિ (B): v ન્યૂન</b>, ઘર્ષણ ઢાળની ઉપર તરફ — સમીકરણોમાં f નાં ચિહ્ન ફેરફાર થાય:</div>
+  <div class="eq">N sin θ − f cos θ = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span> &nbsp;&nbsp;…(3)&nbsp;&nbsp;&nbsp;
+    N cos θ + f sin θ = mg &nbsp;&nbsp;…(4)</div>
+  <div class="result"><span class="tagr">✅ ન્યૂનતમ સુરક્ષિત ઝડપ</span>
+    <i class="vr">v</i><sub>min</sub> = <span class="rt">√<span class="rin"><i class="vr">r</i>g <span class="fr"><span class="nu">tan θ − μ</span><span class="de">1 + μ tan θ</span></span></span></span> = <span class="rt">√<span class="rin"><i class="vr">r</i>g tan(θ − φ)</span></span>
+  </div>
+
+  <div class="keys">
+    <div class="t">🔑 ચાર ચેક-કેસ (સહી સાચી છે કે નહીં એ આથી ચકાસો!)</div>
+    <ul>
+      <li><b>μ = 0</b> નાખો ⟶ બંને સૂત્ર v₀ = √(rg tanθ) આપે ✓ (વિભાગ 2 પાછો મળે)</li>
+      <li><b>θ = 0</b> નાખો ⟶ v<sub>max</sub> = √(μrg) ✓ (વિભાગ 1 — સપાટ રસ્તો પાછો મળે)</li>
+      <li><b>θ &lt; φ</b> (ઢાળ ઘર્ષણ ખૂણા કરતાં નાનો) ⟶ tan(θ−φ) ઋણાત્મક ⟶ <b>v<sub>min</sub> = 0</b> — વાહન ઊભું રાખીએ તો પણ નીચે ખસતું નથી!</li>
+      <li><b>μ tanθ ≥ 1</b> ⟶ છેદક (denominator) શૂન્ય/ઋણ ⟶ <b>v<sub>max</sub> → ∞</b> — એટલો બધો ઢાળ+ઘર્ષણ હોય તો કોઈપણ ઝડપે ઉપર ન ખસે.</li>
+      <li>m ફરી એક વાર કટ થયું — <b>દ્રવ્યમાનથી સ્વતંત્ર</b> પરિણામ.</li>
+    </ul>
+  </div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 3 — સુરક્ષિત ઝડપ-બેન્ડ + θ વિરુદ્ધ v નો ગ્રાફ</div>
+    <div class="ls">r, θ, μ ખસેડો → v<sub>min</sub>, v₀, v<sub>max</sub> જુઓ. ગ્રાફમાં <b>લીલો પટ્ટો = સુરક્ષિત વિસ્તાર</b>. એ જોતાં સમજાશે કે θ કે r વધારવાથી સુરક્ષિત ઝડપ કેવી વધે છે.</div>
+    <div class="ctrl">
+      <label>ત્રિજ્યા r (m) <span class="vv" id="bmRV">80</span>
+        <input type="range" id="bmR" min="10" max="300" step="5" value="80"></label>
+      <label>ઢાળ θ (°) <span class="vv" id="bmThV">20</span>
+        <input type="range" id="bmTh" min="0" max="45" step="1" value="20"></label>
+      <label>ઘર્ષણ μ <span class="vv" id="bmMuV">0.30</span>
+        <input type="range" id="bmMu" min="0" max="0.8" step="0.05" value="0.3"></label>
+    </div>
+    <div class="read">
+      <div class="box mid" id="bmV0"></div>
+      <div class="box ok" id="bmVmax"></div>
+      <div class="box" id="bmVmin"></div>
+    </div>
+    <div class="subst" id="bmNote"></div>
+    <canvas id="bankChart" width="640" height="360"></canvas>
+  </div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 4 — જીવંત FBD: તમારી ઝડપે ઘર્ષણ ક્યાં તરફ?</div>
+    <div class="ls">θ, μ, r અને <b>તમારી ઝડપ v</b> ગોઠવો — ડાયાગ્રામમાં ઘર્ષણ તીર પોતાની દિશા અને લંબાઈ બદલશે. f ની કિંમત = m(v²cosθ/r − g sinθ) — આપોઆપ ગણાય છે.</div>
+    <div class="ctrl">
+      <label>ઢાળ θ (°) <span class="vv" id="dyThV">20</span>
+        <input type="range" id="dyTh" min="0" max="40" step="1" value="20"></label>
+      <label>ઘર્ષણ μ <span class="vv" id="dyMuV">0.30</span>
+        <input type="range" id="dyMu" min="0" max="0.8" step="0.05" value="0.3"></label>
+      <label>ત્રિજ્યા r (m) <span class="vv" id="dyRV">80</span>
+        <input type="range" id="dyR" min="10" max="300" step="5" value="80"></label>
+      <label>ઝડપ v (m/s) <span class="vv" id="dyVV">25</span>
+        <input type="range" id="dyV" min="0" max="50" step="0.5" value="25"></label>
+    </div>
+    <canvas id="dyCv" width="640" height="380"></canvas>
+    <div class="read">
+      <div class="box" id="dyDir"></div>
+      <div class="box" id="dyF"></div>
+      <div class="box" id="dyN"></div>
+      <div class="box" id="dySafe"></div>
+    </div>
+    <div class="subst" id="dySub"></div>
+  </div>
+
+  <div class="ex"><div class="t">📝 ઉદાહરણ (બંને સૂત્ર એક સાથે)</div>
+    θ = 45°, μ = 0.5, r = 30 m, g = 10 ⟹ v<sub>max</sub> = √(30×10×(1+0.5)/(1−0.5)) = √(300×3) = <b>30 m/s</b> અને v<sub>min</sub> = √(300×(0.5/1.5)) = <b>10 m/s</b>. એટલે 10 થી 30 m/s વચ્ચે કોઈપણ ઝડપ સુરક્ષિત!
+  </div>
+</section>
+
+<!-- ================= WELL OF DEATH ================= -->
+<section id="well">
+  <h2>4️⃣ મોતનો કૂવો (Well of Death / मृत्यु का कुआं) <span class="chip">CLASSIC ⭐</span></h2>
+  <p class="lead">મેળામાં જોયેલું — ઊભી દિવાલ પર બાઈક ગોળ ફરતી રમતી! એમાં <b>સામાન્ય પ્રતિક્રિયા N જ અભિકેન્દ્ર બળ</b> આપે છે અને <b>ઊભા આવેલા વજનને ઘર્ષણ સંતુલિત કરે છે</b>. સવાલ: બાઈક નીચે ન પડે તે માટે ઓછામાં ઓછી ઝડપ કેટલી?</p>
+
+  <figure>
+  <svg viewBox="0 0 540 320" xmlns="http://www.w3.org/2000/svg" font-size="13.5" fill="none">
+    <defs>
+      <marker id="dG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4ade80"/></marker>
+      <marker id="dR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fb7185"/></marker>
+      <marker id="dO" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fbbf24"/></marker>
+      <marker id="dB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#60a5fa"/></marker>
+    </defs>
+    <!-- front view -->
+    <text x="130" y="26" fill="#9db0cc" text-anchor="middle">આગળથી (કાટમાળો)</text>
+    <line x1="40" y1="60" x2="40" y2="250" stroke="#3b5590" stroke-width="7"/>
+    <line x1="220" y1="60" x2="220" y2="250" stroke="#3b5590" stroke-width="7"/>
+    <line x1="40" y1="250" x2="220" y2="250" stroke="#2a3f6b" stroke-width="4"/>
+    <line x1="130" y1="55" x2="130" y2="260" stroke="#2a3f6b" stroke-width="1.4" stroke-dasharray="6 5"/>
+    <line x1="122" y1="158" x2="138" y2="158" stroke="#9db0cc" stroke-width="2"/>
+    <line x1="122" y1="146" x2="138" y2="146" stroke="#9db0cc" stroke-width="2"/>
+    <text x="130" y="285" fill="#9db0cc" text-anchor="middle">કૂવાની અક્ષ (કેન્દ્ર)</text>
+    <!-- bike on right wall -->
+    <g transform="translate(232,150) rotate(90)">
+      <circle cx="-16" cy="0" r="9" fill="none" stroke="#60a5fa" stroke-width="3"/>
+      <circle cx="16" cy="0" r="9" fill="none" stroke="#60a5fa" stroke-width="3"/>
+      <line x1="-16" y1="0" x2="16" y2="0" stroke="#60a5fa" stroke-width="3"/>
+    </g>
+    <text x="150" y="128" fill="#9db0cc">બાઈક + ચાલક</text>
+    <!-- N toward axis -->
+    <line x1="220" y1="150" x2="160" y2="150" stroke="#4ade80" stroke-width="3.4" marker-end="url(#dG)"/>
+    <text x="96" y="142" fill="#4ade80">N = mv²/r</text>
+    <!-- mg down -->
+    <line x1="238" y1="170" x2="238" y2="238" stroke="#fb7185" stroke-width="3.4" marker-end="url(#dR)"/>
+    <text x="246" y="238" fill="#fb7185">mg</text>
+    <!-- friction up -->
+    <line x1="222" y1="128" x2="222" y2="70" stroke="#fbbf24" stroke-width="3.4" marker-end="url(#dO)"/>
+    <text x="230" y="70" fill="#fbbf24">f = μN (દિવાલ ઉપર)</text>
+    <!-- top view -->
+    <text x="420" y="26" fill="#9db0cc" text-anchor="middle">ઉપરથી (Top view)</text>
+    <circle cx="420" cy="165" r="85" stroke="#3b5590" stroke-width="7" fill="none"/>
+    <circle cx="420" cy="165" r="2.6" fill="#9db0cc"/>
+    <path d="M 420 255 A 90 90 0 0 0 330 165" stroke="#60a5fa" stroke-width="1.6" stroke-dasharray="5 5" marker-end="url(#dB)"/>
+    <circle cx="505" cy="165" r="9" fill="#60a5fa"/>
+    <line x1="496" y1="165" x2="446" y2="165" stroke="#4ade80" stroke-width="3" marker-end="url(#dG)"/>
+    <text x="497" y="196" fill="#4ade80" text-anchor="middle" font-size="11.5">N અંદર તરફ</text>
+  </svg>
+  <figcaption>આકૃતિ 4.1 — મોતનો કૂવો: આડી દિશામાં N = mv²/r, ઊભી દિશામાં ઘર્ષણ વજનને ટેકો આપે</figcaption>
+  </figure>
+
+  <h3>📐 ડેરિવેશન — ન્યૂનતમ ઝડપ v<sub>min</sub></h3>
+  <div class="step"><b>પગલું 1 — કેન્દ્ર (અક્ષ) તરફ:</b> <span class="why">દિવાલ બાઈકને અંદર ધકેલે — એ જ અભિકેન્દ્ર બળ</span></div>
+  <div class="eq">N = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span></div>
+  <div class="step"><b>પગલું 2 — ઊભી દિશામાં ન પડવાની શરત:</b> <span class="why">ઊપરનું ઘર્ષણ ≥ વજન</span></div>
+  <div class="eq">f = μN ≥ mg &nbsp;&nbsp;⟹&nbsp;&nbsp; μ · <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i>²</span><span class="de"><i class="vr">r</i></span></span> ≥ mg</div>
+  <div class="result"><span class="tagr">✅ પરિણામ — મોતના કૂવાની ન્યૂનતમ ઝડપ</span>
+    <i class="vr">v</i><sub>min</sub> = <span class="rt">√<span class="rin"><span class="fr"><span class="nu"><i class="vr">r</i> g</span><span class="de">μ</span></span></span></span>
+  </div>
+
+  <div class="keys">
+    <div class="t">🔑 બિંદુઓ</div>
+    <ul>
+      <li>ફરીથી <b>m કટ</b> — પડકારાવાળો ચાલક પણ એટલી જ ઝડપે ટકે! (દ્રવ્યમાનથી સ્વતંત્ર)</li>
+      <li>ઝડપ વધે ⟹ N વધે ⟹ ઘર્ષણની મર્યાદા વધે ⟹ વધુ સલામત. <b>“ઝડપ જ જીવન છે”</b> અહીં સાચું છે!</li>
+      <li>ઊંધું પણ ખરું: μ = gr/v² ⟸ આપેલ ઝડપે ટકવા જરૂરી ઘર્ષણ. બરફાળો/પડકારાળો દિવાલ-પ્રદેશ = મોત!</li>
+      <li>વધુ નાની ત્રિજ્યા (નાનો કૂવો) ⟹ વધુ ઝડપ જોઈએ? ના! √(rg/μ) — <b>r ઓછો તો v<sub>min</sub> ઓછી</b>. પણ N = mv²/r થી દિવાલ પર દબાણ વધુ.</li>
+    </ul>
+  </div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 5 — બાઈક દિવાલ પર ટકે કે પડે?</div>
+    <div class="ls">μ, r અને ઝડપ v ગોઠવો. v &lt; v<sub>min</sub> થાય તો બાઈક દિવાલ પર સરકવા લાગશે… પછી જુઓ! 😅</div>
+    <div class="ctrl">
+      <label>ઘર્ષણ μ <span class="vv" id="wMuV">0.40</span>
+        <input type="range" id="wMu" min="0.1" max="0.9" step="0.05" value="0.4"></label>
+      <label>ત્રિજ્યા r (m) <span class="vv" id="wRV">5</span>
+        <input type="range" id="wR" min="2" max="15" step="0.5" value="5"></label>
+      <label>ઝડપ v (m/s) <span class="vv" id="wVV">12</span>
+        <input type="range" id="wV" min="2" max="30" step="0.5" value="12"></label>
+    </div>
+    <div class="read"><div class="box" id="wVmin"></div><div class="box" id="wSafe"></div><div class="box" id="wN"></div></div>
+    <canvas id="wellCv" width="640" height="330"></canvas>
+  </div>
+
+  <div class="ex"><div class="t">📝 ઉદાહરણ</div>
+    r = 4 m, μ = 0.4, g = 10 ⟹ v<sub>min</sub> = √(4×10/0.4) = √100 = <b>10 m/s (36 km/h)</b>. એટલે મેળામાં બાઈક સાચવીને ઝડપ રાખે છે!
+  </div>
+</section>
+
+<!-- ================= VERTICAL CIRCULAR MOTION ================= -->
+<section id="vcm">
+  <h2>5️⃣ ઊર્ધ્વાધર વર્તુળાકાર ગતિ — ક્રિટિકલ ઝડપ <span class="chip">MOST IMPORTANT ⭐⭐</span></h2>
+  <p class="lead">દોરી સાથે દડો ઉપર-નીચે ગોળ ફેરવો — <b>ટોચ પર સૌથી ઓછી ઝડપ જરૂરી</b>, નહીંતર દોરી ઢીલી પડી દડો પડી જાય! એ સૌથી ઓછી ઝડપ જ = <span class="kw">ક્રિટિકલ ઝડપ</span>. નોંધ: ટોચ પર દડો ધીમો, તળિયે સૌથી વેગી હોય (ઊર્જા સંરક્ષણ — ઉંચાઈ બદલાય છે!).</p>
+
+  <figure>
+  <svg viewBox="0 0 560 360" xmlns="http://www.w3.org/2000/svg" font-size="13.5" fill="none">
+    <defs>
+      <marker id="eP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c084fc"/></marker>
+      <marker id="eR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fb7185"/></marker>
+      <marker id="eB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#60a5fa"/></marker>
+    </defs>
+    <!-- circle -->
+    <circle cx="200" cy="180" r="110" stroke="#334e88" stroke-width="2" stroke-dasharray="7 6"/>
+    <circle cx="200" cy="180" r="3" fill="#9db0cc"/>
+    <text x="212" y="184" fill="#9db0cc">O (હાથ/કેન્દ્ર), R = દોરીની લંબાઈ</text>
+    <line x1="200" y1="180" x2="200" y2="70" stroke="#556" stroke-width="1.2"/>
+    <!-- top ball -->
+    <circle cx="200" cy="70" r="10" fill="#c084fc"/>
+    <line x1="200" y1="70" x2="200" y2="118" stroke="#c084fc" stroke-width="3.2" marker-end="url(#eP)"/>
+    <text x="146" y="100" fill="#c084fc">T_t +</text>
+    <line x1="228" y1="70" x2="228" y2="122" stroke="#fb7185" stroke-width="3.2" marker-end="url(#eR)"/>
+    <text x="236" y="106" fill="#fb7185">mg</text>
+    <text x="60" y="60" fill="#eaf1fd" font-weight="700">ટોચ (TOP):</text>
+    <text x="60" y="80" fill="#9db0cc" font-size="12">T_t + mg = mv_t²/R</text>
+    <text x="60" y="100" fill="#9db0cc" font-size="12">બંને બળ કેન્દ્ર તરફ ↓</text>
+    <!-- bottom ball -->
+    <circle cx="200" cy="290" r="10" fill="#c084fc"/>
+    <line x1="200" y1="290" x2="200" y2="242" stroke="#c084fc" stroke-width="3.2" marker-end="url(#eP)"/>
+    <text x="128" y="252" fill="#c084fc">T_b ↑</text>
+    <line x1="232" y1="290" x2="232" y2="338" stroke="#fb7185" stroke-width="3.2" marker-end="url(#eR)"/>
+    <text x="240" y="334" fill="#fb7185">mg</text>
+    <!-- side ball -->
+    <circle cx="310" cy="180" r="10" fill="#c084fc"/>
+    <line x1="310" y1="180" x2="258" y2="180" stroke="#c084fc" stroke-width="3.2" marker-end="url(#eP)"/>
+    <text x="300" y="166" fill="#c084fc">T</text>
+    <line x1="310" y1="180" x2="310" y2="232" stroke="#fb7185" stroke-width="3" stroke-dasharray="4 4" marker-end="url(#eR)"/>
+    <text x="318" y="230" fill="#fb7185" font-size="12">mg (બાજુ પર)</text>
+    <!-- velocity arrows -->
+    <line x1="168" y1="64" x2="140" y2="80" stroke="#60a5fa" stroke-width="2.6" marker-end="url(#eB)"/>
+    <text x="118" y="72" fill="#60a5fa" font-size="12">v_t (સૌથી ઓછી)</text>
+    <line x1="234" y1="298" x2="262" y2="282" stroke="#60a5fa" stroke-width="3.4" marker-end="url(#eB)"/>
+    <text x="266" y="286" fill="#60a5fa">v_b (સૌથી વધુ)</text>
+    <!-- right summary -->
+    <rect x="380" y="140" width="170" height="120" rx="12" stroke="#2a3f6b" fill="#0d1a31"/>
+    <text x="465" y="166" fill="#4cc2ff" text-anchor="middle" font-weight="700">યાદ રાખો (દોરી)</text>
+    <text x="465" y="192" fill="#eaf1fd" text-anchor="middle" font-size="14">ટોચ: v = √(gR)</text>
+    <text x="465" y="216" fill="#eaf1fd" text-anchor="middle" font-size="14">તળિયે: v = √(5gR)</text>
+    <text x="465" y="242" fill="#9db0cc" text-anchor="middle" font-size="12">ટોચે T = 0, તળિયે T = 6mg</text>
+  </svg>
+  <figcaption>આકૃતિ 5.1 — ઊર્ધ્વાધર વર્તુળ: ટોચ પર T અને mg બંને કેન્દ્ર તરફ; તળિયે T કેન્દ્ર તરફ અને mg બહાર</figcaption>
+  </figure>
+
+  <h3>📐 ડેરિવેશન 1 — ટોચ પર ક્રિટિકલ (ન્યૂનતમ) ઝડપ</h3>
+  <div class="step"><b>ટોચ પર FBD:</b> <span class="why">દોરીનો તણાવ T અને વજન mg — બંને કેન્દ્ર (નીચે) તરફ</span></div>
+  <div class="eq">T<sub>t</sub> + mg = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i><sub>t</sub>²</span><span class="de"><i class="vr">R</i></span></span></div>
+  <div class="step"><b>ક્રિટિકલ સ્થિતિની વ્યાખ્યા:</b> દોરી હમણાં હમણાં ઢીલી પડવાની — એટલે <b>T<sub>t</sub> = 0</b> નાખો:</div>
+  <div class="result"><span class="tagr">✅ ટોચ પર ક્રિટિકલ ઝડપ — વજન પોતે જ અભિકેન્દ્ર બળ બની જાય!</span>
+    <i class="vr">v</i><sub>t(min)</sub> = <span class="rt">√<span class="rin"><i class="vr">g</i><i class="vr">R</i></span></span>
+  </div>
+
+  <h3>📐 ડેરિવેશન 2 — તળિયે કેટલી ઝડપથી ફેંકવો જોઈએ?</h3>
+  <div class="step"><b>ઊર્જા સંરક્ષણ (તળિયે → ટોચ):</b> <span class="why">ટોચ તળિયા કરતાં 2R ઊંચો; દોરીનું તાણકમ કામ કરતું નથી (⊥ દિશામાં)</span></div>
+  <div class="eq">½ m v<sub>b</sub>² = ½ m v<sub>t</sub>² + mg(2R) &nbsp;&nbsp;⟹&nbsp;&nbsp; v<sub>b</sub>² = v<sub>t</sub>² + 4gR</div>
+  <div class="result"><span class="tagr">✅ વર્તુળ પૂરું ફરવા તળિયે ન્યૂનતમ ઝડપ</span>
+    <i class="vr">v</i><sub>b(min)</sub> = <span class="rt">√<span class="rin">5<i class="vr">g</i><i class="vr">R</i></span></span> &nbsp;&nbsp;(= √5 × ટોચની ઝડપ ≈ 2.24 √gR)
+  </div>
+
+  <h3>📐 ડેરિવેશન 3 — તણાવ ક્યાં કેટલો?</h3>
+  <div class="step"><b>તળિયે FBD:</b> T<sub>b</sub> કેન્દ્ર તરફ (↑), mg બહાર (↓):</div>
+  <div class="eq">T<sub>b</sub> − mg = <span class="fr"><span class="nu"><i class="vr">m</i><i class="vr">v</i><sub>b</sub>²</span><span class="de"><i class="vr">R</i></span></span> &nbsp;&nbsp;⟹&nbsp;&nbsp; T<sub>b</sub> = m v<sub>b</sub>²/R + mg</div>
+  <div class="step"><b>ક્રિટિકલ કિસ્સામાં</b> v<sub>b</sub>² = 5gR નાખો:</div>
+  <div class="result"><span class="tagr">✅ ક્રિટિકલ ફેરવામાં તણાવ</span>
+    T<sub>t</sub> = 0 (ટોચ)&nbsp;&nbsp;·&nbsp;&nbsp;T<sub>પાર્શ્વ</sub> = 3mg (આડી દિશા)&nbsp;&nbsp;·&nbsp;&nbsp;T<sub>b</sub> = 6mg (તળિયે)
+  </div>
+  <div class="step"><b>સામાન્ય ખૂણો θ (તળિયાથી માપેલો):</b> <span class="why">v² = v<sub>b</sub>² − 2gR(1 − cosθ) અને T = m(v²/R + g cosθ)</span></div>
+  <div class="eq">ક્રિટિકલ ફેરવા માટે: v² = gR(3 + 2cosθ) &nbsp;&nbsp;·&nbsp;&nbsp; T = 3mg(1 + cosθ) &nbsp;&nbsp;<span class="mini">(θ=0→6mg, θ=90°→3mg, θ=180°→0 ✓)</span></div>
+
+  <div class="keys">
+    <div class="t">🔑 દોરી vs દંડ (સળિયો) vs બકેટ vs ટ્રેક — ચાર ભેદ પાડીને ભણો!</div>
+    <ul>
+      <li><b>દોરી (string):</b> ફક્ત ખેંચી શકે (T ≥ 0) ⟹ ટોચે v ≥ √(gR); ઓછી ઝડપે દોરી ઢીલી ⟹ દડો <b>પ્રક્ષેપક (પેરાબોલા) પથ</b>માં પડે.</li>
+      <li><b>દંડ (rod):</b> ધકેલી પણ શકે ⟹ ટોચે v = 0 પણ ચાલે! તળિયે ન્યૂનતમ ઝડપ માત્ર <b>√(4gR)</b> (ઊર્જાથી: ½mv_b² = mg·2R).</li>
+      <li><b>પાણીનું બકેટ:</b> ટોચે પાણી ન વરસે એટલા માટે v ≥ √(gR) — ટોચે mg જ પાણીને કેન્દ્ર તરફ વળી રાખે છે (પાણી “વરસવા” નથી નીચાણે જતું, બકેટ સાથે જ ફરે છે!).</li>
+      <li><b>લૂપ-ધ-લૂપ ટ્રેક (રોલર-કોસ્ટર/દડો ટ્રેકની અંદર):</b> ટોચે N + mg = mv²/R, N ≥ 0 ⟹ v ≥ √(gR) — દોરી જેવું જ.</li>
+      <li>ટોચ પર ક્રિટિકલ ક્ષણે ગતિઊર્જા = ½mgR અને દોરી દ્વારા કેન્દ્ર તરફ બળ = <b>શૂન્ય</b> (ફક્ત mg). NEET માં વારંવાર પૂછાય!</li>
+    </ul>
+  </div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 6 — દડો ફેરવો: દોરી vs દંડ</div>
+    <div class="ls">R = 0.8 m છે. તળિયાની ઝડપ v<sub>b</sub> ખસેડો. √(5gR) કરતાં ઓછું રાખશો તો દોરી ઢીલી પડી દડો <b>પેરાબોલામાં</b> પડશે! “દંડ” પસંદ કરો તો દડો ક્યારેય છૂટતો નથી.</div>
+    <div class="ctrl">
+      <label>તળિયાની ઝડપ v<sub>b</sub> (m/s) <span class="vv" id="vcVbV">6.3</span>
+        <input type="range" id="vcVb" min="2" max="13" step="0.1" value="6.3"></label>
+      <label>કયો કેસ?
+        <select id="vcMode"><option value="string">દોરી (T ≥ 0)</option><option value="rod">દંડ (ધક્કો પણ આપે)</option></select></label>
+    </div>
+    <div class="read">
+      <div class="box" id="vcNeed"></div>
+      <div class="box" id="vcSpd"></div>
+      <div class="box" id="vcT"></div>
+      <div class="box" id="vcStat"></div>
+    </div>
+    <canvas id="vcCv" width="640" height="440"></canvas>
+    <div class="note">જાંબલી દડો = દોરી તણાયેલી · લીલો રેખાપથ = ઢીલી પડ્યા પછીનો પ્રક્ષેપક પથ · રંગ બદલાય ત્યારે T નીચે readout જુઓ.</div>
+  </div>
+
+  <div class="ex"><div class="t">📝 ઉદાહરણ (NEET 2019 સ્ટાઈલ)</div>
+    R = 0.5 m, g = 10 ⟹ ટોચે ન્યૂનતમ v = √(10×0.5) = √5 ≈ 2.24 m/s; તળિયે ન્યૂનતમ v<sub>b</sub> = √(5×10×0.5) = <b>5 m/s</b>; ત્યારે તળિયે તણાવ = 6mg.
+  </div>
+</section>
+<!-- ================= BOWL ================= -->
+<section id="bowl">
+  <h2>6️⃣ અર્ધગોળાકાર વાટકો અને ગુંબજ <span class="chip">BOWL & DOME</span></h2>
+
+  <h3>🥣 કેસ A — વાટકામાં ફરતો દડો (ઘર્ષણરહિત વાટકો)</h3>
+  <p class="lead">લોખંડના અર્ધગોળા (hemispherical) વાટકામાં દડો ω કોણીય ઝડપે આડી-ગોળ ફરે છે — વાટકાની ઊંચાઈ પર ક્યાં “ટકે” છે? (ઘસારો નહીં, તો ઊંચાઈ જ કાયમ રહે!)</p>
+
+  <figure>
+  <svg viewBox="0 0 540 340" xmlns="http://www.w3.org/2000/svg" font-size="13.5" fill="none">
+    <defs>
+      <marker id="fG" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#4ade80"/></marker>
+      <marker id="fR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fb7185"/></marker>
+      <marker id="fB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#60a5fa"/></marker>
+    </defs>
+    <!-- bowl -->
+    <path d="M 30 80 A 130 130 0 0 0 290 80" stroke="#3b5590" stroke-width="7" fill="none"/>
+    <line x1="30" y1="80" x2="290" y2="80" stroke="#2a3f6b" stroke-width="1.5" stroke-dasharray="6 5"/>
+    <circle cx="160" cy="80" r="3" fill="#9db0cc"/>
+    <text x="168" y="72" fill="#9db0cc">O (વાટકાનું ગોળ-કેન્દ્ર), R</text>
+    <line x1="160" y1="80" x2="160" y2="300" stroke="#2a3f6b" stroke-width="1.3" stroke-dasharray="6 5"/>
+    <text x="168" y="298" fill="#9db0cc" font-size="12">ઊભી અક્ષ</text>
+    <!-- ball at angle alpha -->
+    <circle cx="258" cy="168" r="11" fill="#fbbf24"/>
+    <line x1="248" y1="161" x2="198" y2="115" stroke="#4ade80" stroke-width="3.2" marker-end="url(#fG)"/>
+    <text x="128" y="108" fill="#4ade80">N (કેન્દ્ર O તરફ)</text>
+    <line x1="258" y1="168" x2="258" y2="234" stroke="#fb7185" stroke-width="3.2" marker-end="url(#fR)"/>
+    <text x="266" y="232" fill="#fb7185">mg</text>
+    <line x1="258" y1="240" x2="316" y2="240" stroke="#60a5fa" stroke-width="2.8" marker-end="url(#fB)"/>
+    <text x="322" y="244" fill="#60a5fa">v</text>
+    <!-- radius r -->
+    <line x1="160" y1="168" x2="250" y2="168" stroke="#9db0cc" stroke-width="1.4" stroke-dasharray="4 4"/>
+    <text x="178" y="160" fill="#9db0cc" font-size="12">r = R sin α</text>
+    <!-- alpha arc -->
+    <path d="M 160 240 A 160 160 0 0 1 168 176" stroke="#fbbf24" stroke-width="1.6"/>
+    <text x="146" y="228" fill="#fbbf24" font-size="14">α</text>
+    <!-- equations right -->
+    <rect x="360" y="96" width="170" height="110" rx="12" stroke="#2a3f6b" fill="#0d1a31"/>
+    <text x="445" y="122" fill="#4cc2ff" text-anchor="middle" font-weight="700">સમીકરણો</text>
+    <text x="445" y="146" fill="#eaf1fd" text-anchor="middle" font-size="13">N cos α = mg</text>
+    <text x="445" y="168" fill="#eaf1fd" text-anchor="middle" font-size="13">N sin α = mω²R sin α</text>
+    <text x="445" y="192" fill="#fbbf24" text-anchor="middle" font-size="14" font-weight="700">cos α = g/ω²R</text>
+  </svg>
+  <figcaption>આકૃતિ 6.1 — વાટકામાં ફરતો દડો: α ઝડપ ω સાથે વધે; cos α = g/(ω²R)</figcaption>
+  </figure>
+
+  <h3 class="fx">📐 ડેરિવેશન — દડો કયા ખૂણે રહેશે?</h3>
+  <div class="step"><b>ઊભી દિશા:</b> N cos α = mg &nbsp;&nbsp;<span class="why">(α = ઊભી અક્ષથી ખૂણો, r = R sin α)</span></div>
+  <div class="step"><b>કેન્દ્ર તરફ:</b> N sin α = mω²r = mω²R sin α</div>
+  <div class="step"><b>sin α કટ કરો ⟹ N = mω²R</b>, અને ઊપરનામાં નાખો:</div>
+  <div class="result"><span class="tagr">✅ સંતુલન ખૂણો</span>
+    cos α = <span class="fr"><span class="nu"><i class="vr">g</i></span><span class="de"><i class="vr">ω</i>²<i class="vr">R</i></span></span> &nbsp;&nbsp;⟹&nbsp;&nbsp; α = cos⁻¹(g/ω²R)
+  </div>
+  <div class="keys"><div class="t">🔑 બિંદુઓ</div><ul>
+    <li>ω વધે ⟹ cos α ઘટે ⟹ <b>α વધે ⟹ દડો વાટકામાં ઊંચે ચઢે!</b></li>
+    <li>દડો તળિયાથી ઊપર ચઢવા ω > √(g/R) જોઈએ; ω ≤ √(g/R) હોય તો દડો તળિયે જ ફરે (α = 0).</li>
+    <li>m ફરી કટ! અને N = mω²R — ઝડપના ચોરસ પ્રમાણે દબાણ વધે.</li>
+    <li>ખાસ નોંધ: વાટકાની <b>અંદર</b> દડો ક્યારેય “સપાટી છોડી” નથી શકતો (N = m(v²/R + g cos α) ≥ 0 હંમેશા) — એ છૂટવાની વાત તો <b>ગુંબજ (બહાર)</b>ની આવે!</li>
+  </ul></div>
+
+  <h3>🌀 કેસ B — ગુંબજ (ગોળાની બહાર) પરથી સરકતો દડો — NEET ફેવરિટ!</h3>
+  <p class="lead">સરખા ગોળાના ટોચકા પર દડો મૂકો, હળવી ધક્કો મારો — દડો સરકતો જાય અને <b>કોઈ ખૂણે સપાટી છોડીને પ્રક્ષેપક બની જાય</b>. ક્યારે? N = 0 થાય ત્યારે!</p>
+  <div class="step"><b>ખૂણો θ (ટોચથી માપેલો):</b> કેન્દ્ર તરફ: mg cos θ − N = mv²/R ⟹ N = 0 થાય ત્યારે <b>v² = gR cos θ</b></div>
+  <div class="step"><b>ઊર્જા:</b> v² = 2gR(1 − cos θ)</div>
+  <div class="eq">2gR(1 − cos θ) = gR cos θ &nbsp;&nbsp;⟹&nbsp;&nbsp; 2 = 3 cos θ</div>
+  <div class="result"><span class="tagr">✅ દડો સપાટી છોડે છે જ્યારે</span>
+    cos θ = <span class="fr"><span class="nu">2</span><span class="de">3</span></span> &nbsp;(θ ≈ 48.2°) — એટલે ટોચકાથી <b>h = R/3</b> નીચે ઉતર્યા પછી!
+  </div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 7 — વાટકામાં દડો ફેરવો</div>
+    <div class="ls">R = 1 m વાટકો. ω ખસેડો — ω > √(g/R) થતાં દડો ઊંચે ચઢવા લાગશે!</div>
+    <div class="ctrl">
+      <label>કોણીય ઝડપ ω (rad/s) <span class="vv" id="bwWV">4.0</span>
+        <input type="range" id="bwW" min="0.5" max="8" step="0.1" value="4"></label>
+    </div>
+    <div class="read"><div class="box" id="bwAl"></div><div class="box" id="bwR2"></div><div class="box" id="bwN"></div><div class="box" id="bwWmin"></div></div>
+    <canvas id="bowlCv" width="640" height="360"></canvas>
+  </div>
+</section>
+
+<!-- ================= CONICAL PENDULUM ================= -->
+<section id="coni">
+  <h2>7️⃣ શંક્વાકાર લોલક (Conical Pendulum) <span class="chip">CONICAL PENDULUM</span></h2>
+  <p class="lead">દોરીએ બાંધેલો દડો આડા-ગોળ વર્તુળમાં એવી રીતે ફરે કે દોરી <b>શંકુ (cone)</b> દોરે — ઘડિયાળની સેકન્ડ-કાંટાની ચાલ જેવું!</p>
+
+  <figure>
+  <svg viewBox="0 0 540 330" xmlns="http://www.w3.org/2000/svg" font-size="13.5" fill="none">
+    <defs>
+      <marker id="gP" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#c084fc"/></marker>
+      <marker id="gR" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#fb7185"/></marker>
+      <marker id="gB" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#60a5fa"/></marker>
+    </defs>
+    <!-- ceiling -->
+    <line x1="60" y1="40" x2="330" y2="40" stroke="#3b5590" stroke-width="4"/>
+    <rect x="150" y="34" width="8" height="10" fill="#5d7cc2"/>
+    <!-- vertical dashed -->
+    <line x1="158" y1="44" x2="158" y2="290" stroke="#2a3f6b" stroke-width="1.3" stroke-dasharray="6 5"/>
+    <!-- string -->
+    <line x1="158" y1="44" x2="268" y2="235" stroke="#c084fc" stroke-width="2.6"/>
+    <path d="M 158 110 A 66 66 0 0 1 178 74" stroke="#fbbf24" stroke-width="1.6"/>
+    <text x="164" y="102" fill="#fbbf24" font-size="14">θ</text>
+    <text x="120" y="180" fill="#9db0cc" font-size="12">h = L cos θ</text>
+    <!-- path ellipse -->
+    <ellipse cx="158" cy="235" rx="110" ry="26" stroke="#334e88" stroke-width="1.6" stroke-dasharray="6 5"/>
+    <!-- r dashed -->
+    <line x1="158" y1="235" x2="268" y2="235" stroke="#9db0cc" stroke-width="1.4" stroke-dasharray="4 4"/>
+    <text x="196" y="228" fill="#9db0cc" font-size="12">r = L sin θ</text>
+    <!-- ball -->
+    <circle cx="268" cy="235" r="11" fill="#fbbf24"/>
+    <line x1="262" y1="228" x2="222" y2="196" stroke="#c084fc" stroke-width="3.2" marker-end="url(#gP)"/>
+    <text x="196" y="188" fill="#c084fc">T</text>
+    <line x1="268" y1="235" x2="268" y2="296" stroke="#fb7185" stroke-width="3.2" marker-end="url(#gR)"/>
+    <text x="276" y="294" fill="#fb7185">mg</text>
+    <line x1="268" y1="235" x2="330" y2="222" stroke="#60a5fa" stroke-width="3" marker-end="url(#gB)"/>
+    <text x="336" y="224" fill="#60a5fa">v</text>
+    <!-- equations -->
+    <rect x="368" y="90" width="160" height="104" rx="12" stroke="#2a3f6b" fill="#0d1a31"/>
+    <text x="448" y="116" fill="#4cc2ff" text-anchor="middle" font-weight="700">સમીકરણો</text>
+    <text x="448" y="140" fill="#eaf1fd" text-anchor="middle" font-size="13">T cos θ = mg</text>
+    <text x="448" y="162" fill="#eaf1fd" text-anchor="middle" font-size="13">T sin θ = mv²/r</text>
+    <text x="448" y="184" fill="#fbbf24" text-anchor="middle" font-size="13">t = 2π√(L cos θ/g)</text>
+  </svg>
+  <figcaption>આકૃતિ 7.1 — શંક્વાકાર લોલક: તણાવનું ઊભું ઘટક વજન સંતુલિત કરે, આડું ઘટક અભિકેન્દ્ર બળ આપે</figcaption>
+  </figure>
+
+  <h3>📐 ડેરિવેશન</h3>
+  <div class="step"><b>ઊભી દિશા:</b> T cos θ = mg …(1) &nbsp;&nbsp; <b>કેન્દ્ર તરફ:</b> T sin θ = mv²/r …(2), &nbsp; r = L sin θ</div>
+  <div class="step"><b>(2) ÷ (1):</b> tan θ = v²/(rg) ⟹ v = √(rg tan θ) = √(gL sinθ·tanθ)</div>
+  <div class="step"><b>આવર્તન-સમય:</b> (2)માં v = ωr નાખો: T sin θ = mω²L sin θ ⟹ <b>ω = √(g / L cos θ)</b> = √(g/h)</div>
+  <div class="result"><span class="tagr">✅ આવર્તન-સમય (time period)</span>
+    t = 2π <span class="rt">√<span class="rin"><span class="fr"><span class="nu"><i class="vr">L</i> cos θ</span><span class="de"><i class="vr">g</i></span></span></span></span> = 2π <span class="rt">√<span class="rin"><span class="fr"><span class="nu"><i class="vr">h</i></span><span class="de"><i class="vr">g</i></span></span></span></span>
+  </div>
+  <div class="keys"><div class="t">🔑 બિંદુઓ</div><ul>
+    <li>θ વધે ⟹ h = Lcosθ ઘટે ⟹ <b>t ઘટે</b> — ઝડપી ફેરવા માટે દોરી વધુ આડી કરો!</li>
+    <li>સાદા પેન્ડુલમનો સમય t = 2π√(L/g) — એ આનો θ = 0 નો (સીમા) કેસ છે (L cos θ → L).</li>
+    <li>m કટ — દડો ભારે હોય કે હલકો, ગતિ એક જ. તણાવ T = mg/cos θ.</li>
+  </ul></div>
+
+  <div class="lab">
+    <div class="lt">🔬 લેબ 8 — લોલક ફેરવો</div>
+    <div class="ls">L અને θ ગોઠવો — દડો પોતાની જ કુદરતી ઝડપ ω = √(g/Lcosθ) એ ફરશે!</div>
+    <div class="ctrl">
+      <label>દોરીની લંબાઈ L (m) <span class="vv" id="cLV">1.0</span>
+        <input type="range" id="cL" min="0.4" max="2" step="0.05" value="1"></label>
+      <label>ખૂણો θ (°) <span class="vv" id="cThV">30</span>
+        <input type="range" id="cTh" min="5" max="60" step="1" value="30"></label>
+    </div>
+    <div class="read"><div class="box" id="cT"></div><div class="box" id="cW"></div><div class="box" id="cV2"></div><div class="box" id="cTn"></div></div>
+    <canvas id="coniCv" width="640" height="380"></canvas>
+  </div>
+
+  <div class="ex"><div class="t">📝 ઉદાહરણ</div>
+    L = 2 m, θ = 60°, g = 10 ⟹ h = L cos θ = 1 m ⟹ t = 2π√(1/10) ≈ <b>1.99 s ≈ 2 s</b>.
+  </div>
+</section>
+
+<!-- ================= FORMULA SHEET ================= -->
+<section id="sheet">
+  <h2>8️⃣ સૂત્ર-સારણી (Formula Sheet) — પરીક્ષા પહેલાં 5 મિનિટમાં ફરી વાંચો <span class="chip">REVISION</span></h2>
+  <table class="fs">
+    <tr><th>કેસ</th><th>મુખ્ય સૂત્ર</th><th>ખાસ નોંધ</th></tr>
+    <tr><td>⚖️ અભિકેન્દ્ર બળ</td><td class="f">F = mv²/r = mω²r</td><td>કેન્દ્ર તરફ; v = ωr</td></tr>
+    <tr><td>🛣️ સપાટ વળાંક</td><td class="f">v<sub>max</sub> = √(μrg)</td><td>m થી સ્વતંત્ર; ચાલક ખૂંચે tan α = v²/rg</td></tr>
+    <tr><td>🛣️ બેન્કિંગ (ઘર્ષણ વિના)</td><td class="f">v₀ = √(rg tan θ); &nbsp;θ = tan⁻¹(v²/rg)</td><td>v₀ પર ઘર્ષણ = 0; રેલ્વે: h = v²d/(rg)</td></tr>
+    <tr><td>🛣️ બેન્કિંગ + ઘર્ષણ</td><td class="f">v<sub>max</sub> = √(rg·(tanθ+μ)/(1−μtanθ)) = √(rg tan(θ+φ))<br>v<sub>min</sub> = √(rg·(tanθ−μ)/(1+μtanθ)) = √(rg tan(θ−φ))</td><td>φ = tan⁻¹μ; θ &lt; φ ⟹ v<sub>min</sub> = 0; μtanθ ≥ 1 ⟹ v<sub>max</sub> → ∞</td></tr>
+    <tr><td>🕳️ મોતનો કૂવો</td><td class="f">v<sub>min</sub> = √(rg/μ)</td><td>N = mv²/r જ અભિકેન્દ્ર; f = μN ≥ mg</td></tr>
+    <tr><td>🎯 ઊર્ધ્વાધર વર્તુળ (દોરી)</td><td class="f">ટોચ: v<sub>min</sub> = √(gR)<br>તળિયો: v<sub>min</sub> = √(5gR)</td><td>ટોચ T = 0, પાર્શ્વ T = 3mg, તળિયે T = 6mg; T = 3mg(1+cosθ)</td></tr>
+    <tr><td>🥢 દંડ (rod)</td><td class="f">ટોચ: v<sub>min</sub> = 0; તળિયો: √(4gR)</td><td>ધક્કો આપી શકે (T &lt; 0 ચાલે)</td></tr>
+    <tr><td>🪣 પાણીનું બકેટ</td><td class="f">ટોચ: v ≥ √(gR)</td><td>ટોચે N = 0 ક્ષણે mg જ અભિકેન્દ્ર</td></tr>
+    <tr><td>🍲 વાટકામાં ફરતો દડો</td><td class="f">cos α = g/(ω²R)</td><td>ω &gt; √(g/R) તો જ તળિયાથી ઊપર</td></tr>
+    <tr><td>🏔️ ગુંબજ પરથી દડો</td><td class="f">છોડે જ્યારે cos θ = 2/3</td><td>ટોચથી h = R/3 ઉતર્યા પછી</td></tr>
+    <tr><td>⏱️ શંક્વાકાર લોલક</td><td class="f">t = 2π√(Lcosθ/g) = 2π√(h/g)</td><td>ω = √(g/h); T = mg/cos θ</td></tr>
+  </table>
+</section>
+
+<!-- ================= MCQ ================= -->
+<section id="mcq">
+  <h2>9️⃣ NEET-સ્ટાઈલ પ્રેક્ટિસ MCQ <span class="chip">PRACTICE</span></h2>
+  <p class="lead">પહેલા પોતાનાથી હલ કરો, પછી “ઉકેલ જુઓ” ખોલો. (જ્યાં નહીં કહ્યું હોય ત્યાં g = 10 m/s²)</p>
+
+  <details class="q"><summary>1. સપાટ રસ્તાના વળાંક પર μ = 0.4, r = 25 m. વાહનની મહત્તમ સુરક્ષિત ઝડપ?</summary>
+    <div class="opts"><div>(a) 5 m/s</div><div>(b) 10 m/s</div><div>(c) 20 m/s</div><div>(d) 100 m/s</div></div>
+    <div class="sol">v<sub>max</sub> = √(μrg) = √(0.4×25×10) = √100 = <span class="ans">10 m/s ✓ (b)</span>. દ્રવ્યમાન પૂછવાનું જ નહીં — ફસાવણી!</div>
+  </details>
+
+  <details class="q"><summary>2. ઘર્ષણરહિત બેન્ક કરેલ રસ્તો: r = 40 m, θ = 45°. આદર્શ ઝડપ v₀?</summary>
+    <div class="opts"><div>(a) 10 m/s</div><div>(b) 20 m/s</div><div>(c) 28 m/s</div><div>(d) 40 m/s</div></div>
+    <div class="sol">v₀ = √(rg tan45°) = √(40×10×1) = <span class="ans">20 m/s ✓ (b)</span></div>
+  </details>
+
+  <details class="q"><summary>3. 20 m/s ની ઝડપ માટે 100 m ત્રિજ્યાના વળાંક પર જરૂરી બેન્કિંગ ખૂણો?</summary>
+    <div class="opts"><div>(a) tan⁻¹(0.4)</div><div>(b) tan⁻¹(0.25)</div><div>(c) tan⁻¹(2.5)</div><div>(d) 45°</div></div>
+    <div class="sol">tan θ = v²/rg = 400/1000 = 0.4 ⟹ <span class="ans">θ = tan⁻¹(0.4) ✓ (a)</span></div>
+  </details>
+
+  <details class="q"><summary>4. θ = 45°, μ = 0.5, r = 30 m બેન્ક કરેલ રસ્તા પર v<sub>max</sub>? (g = 10)</summary>
+    <div class="opts"><div>(a) 10 m/s</div><div>(b) 20 m/s</div><div>(c) 30 m/s</div><div>(d) 45 m/s</div></div>
+    <div class="sol">v²<sub>max</sub> = rg(tanθ+μ)/(1−μtanθ) = 300×(1.5/0.5) = 900 ⟹ <span class="ans">30 m/s ✓ (c)</span>. (આ જ ડેટામાં v<sub>min</sub> = 10 m/s પણ આવે — બંને યાદ રાખો!)</div>
+  </details>
+
+  <details class="q"><summary>5. મોતના કૂવામાં r = 4 m, μ = 0.4. બાઈકની ન્યૂનતમ ઝડપ?</summary>
+    <div class="opts"><div>(a) 2.5 m/s</div><div>(b) 5 m/s</div><div>(c) 10 m/s</div><div>(d) 20 m/s</div></div>
+    <div class="sol">v<sub>min</sub> = √(rg/μ) = √(40/0.4) = √100 = <span class="ans">10 m/s ✓ (c)</span></div>
+  </details>
+
+  <details class="q"><summary>6. દોરીએ બાંધેલ દડો ઊર્ધ્વાધર વર્તુળ (R = 0.5 m) પૂરું ફેરવે એ માટે તળિયે ઓછામાં ઓછી ઝડપ?</summary>
+    <div class="opts"><div>(a) √5 m/s</div><div>(b) 5 m/s</div><div>(c) √2.5 m/s</div><div>(d) 10 m/s</div></div>
+    <div class="sol">v<sub>b</sub> = √(5gR) = √(5×10×0.5) = √25 = <span class="ans">5 m/s ✓ (b)</span></div>
+  </details>
+
+  <details class="q"><summary>7. ક્રિટિકલ ઝડપે ટોચ પર દોરીનો તણાવ અને તળિયાનો તણાવ?</summary>
+    <div class="opts"><div>(a) 0 અને 6mg</div><div>(b) mg અને 6mg</div><div>(c) 0 અને 5mg</div><div>(d) 0 અને 2mg</div></div>
+    <div class="sol">ટોચે T = 0 (mg જ અભિકેન્દ્ર); તળિયે T = mv²/R + mg = 5mg + mg = <span class="ans">6mg ✓ (a)</span></div>
+  </details>
+
+  <details class="q"><summary>8. દંડ (સળિયા) સાથે ઊર્ધ્વાધર વર્તુળ પૂરું ફેરવવા તળિયાની ન્યૂનતમ ઝડપ?</summary>
+    <div class="opts"><div>(a) √(gR)</div><div>(b) √(2gR)</div><div>(c) √(4gR)</div><div>(d) √(5gR)</div></div>
+    <div class="sol">ટોચે દંડ ધક્કો આપી શકે ⟹ ટોચે v = 0 પણ ચાલે. ½mv<sub>b</sub>² = mg(2R) ⟹ <span class="ans">√(4gR) ✓ (c)</span></div>
+  </details>
+
+  <details class="q"><summary>9. પાણીથી ભરેલું બકેટ ઊર્ધ્વાધર વર્તુળમાં ફેરવીએ છીએ. ટોચ પર પાણી ન વરસે એ માટે શરત?</summary>
+    <div class="opts"><div>(a) v ≥ √(gR)</div><div>(b) v ≥ √(2gR)</div><div>(c) v ≥ √(5gR)</div><div>(d) v ≥ 0</div></div>
+    <div class="sol">બકેટની પાળી N: N + mg = mv²/R; N ≥ 0 ⟹ <span class="ans">v ≥ √(gR) ✓ (a)</span> — ત્યારે mg જ પાણીને વર્તુળમાં બાંધી રાખે.</div>
+  </details>
+
+  <details class="q"><summary>10. શંક્વાકાર લોલક L = 2 m, θ = 60°. આવર્તન-સમય t ≈ ? (g = 10)</summary>
+    <div class="opts"><div>(a) 1 s</div><div>(b) 2 s</div><div>(c) 3 s</div><div>(d) 4 s</div></div>
+    <div class="sol">t = 2π√(Lcosθ/g) = 2π√(2×0.5/10) = 2π√0.1 ≈ <span class="ans">2 s ✓ (b)</span></div>
+  </details>
+
+  <details class="q"><summary>11. સરખા ગોળાના ટોચકા પર મૂકેલો દડો સરકે છે. કેટલી ઊંચાઈ ઉતર્યા પછી સપાટી છોડે?</summary>
+    <div class="opts"><div>(a) R/2</div><div>(b) R/3</div><div>(c) 2R/3</div><div>(d) R/4</div></div>
+    <div class="sol">N = 0 ⟹ cos θ = 2/3; ઉતરેલી ઊંચાઈ = R(1−cosθ) = R/3 ⟹ <span class="ans">R/3 ✓ (b)</span></div>
+  </details>
+
+  <details class="q"><summary>12. ઘસારા-વિહીન અર્ધગોળાકાર વાટકા (R) માં દડો ω = √(2g/R) એ ફરે છે. સંતુલન ખૂણો α?</summary>
+    <div class="opts"><div>(a) 30°</div><div>(b) 45°</div><div>(c) 60°</div><div>(d) 90°</div></div>
+    <div class="sol">cos α = g/(ω²R) = g/(2g) = 0.5 ⟹ <span class="ans">α = 60° ✓ (c)</span></div>
+  </details>
+</section>
+
+<!-- ================= TIPS ================= -->
+<section id="tips">
+  <h2>🔟 ભૂલિયાટ — પરીક્ષામાં આ જ પૂછાય! <span class="chip">EXAM TIPS</span></h2>
+  <div class="keys"><div class="t">🧠 મોટા 5 નિયમ</div><ul>
+    <li><b>દ્રવ્યમાન-મુક્ત:</b> આ પ્રકરણનાં લગભગ બધાં ઝડપ-સૂત્રોમાં m કટ થાય છે — પરીક્ષામાં “દ્રવ્યમાન આપ્યું છે” એટલે કંઈ નહીં કે તે જોઈએ જ નહીં!</li>
+    <li><b>√ નો ખેલ:</b> v ∝ √r, v ∝ √μ (સપાટ), v ∝ √(tanθ) (બેન્ક) — ત્રિજ્યા 4 ગણી તો ઝડપ ફક્ત 2 ગણી!</li>
+    <li><b>ઘર્ષણ પૂરતું ન બંધાય ⟶ સ્પર્શરેખા:</b> વાહન “કેન્દ્રથી દૂર ફેંકાતું” નથી — તે સીધું જવા માંગે છે, વર્તુળ તેને તરફ ડિગાળું દે છે!</li>
+    <li><b>ટોચના ક્રિટિકલ ક્ષણે:</b> દોરી/ટ્રેક/બકેટ કંઈ જ બળ નથી આપતું — <b>વજન mg જ અભિકેન્દ્ર બળ</b> = mv²/R.</li>
+    <li><b>દોરી vs દંડ:</b> “શૂન્ય પણ ચાલે” ક્યારેય દોરી માટે નહીં, દંડ માટે હા — √(5gR) vs √(4gR)!</li>
+  </ul></div>
+  <div class="warn">⚠️ <b>સૌથી સામાન્ય ભૂલો:</b> (1) ટોચ પર T તથા mg બંને “ઉમેરવા”ની જગ્યાએ T ઊભો માની લેવો (T = 0 છે!). (2) બેન્કિંગમાં v<sub>max</sub> માટે ઘર્ષણની દિશા ખોટી લેવી. (3) tan(θ±φ) માં φ = tan⁻¹μ ને θ સાથે અદલાબદલી કરી દેવી. (4) મોતના કૂવામાં N = mg લખી દેવું (એ સપાટ જમીનનું સૂત્ર છે!)</div>
+</section>
+
+<footer>🌀 ગોળાકાર ગતિ — સંપૂર્ણ નોટ્સ · GSEB / NEET 2025–26 · બધા ડાયાગ્રામ અને એનિમેશન આ જ પેજ પર જીવંત છે — slider ખસેડીને રમો! 🚀</footer>
+
+</main>
+</div>
+<script src="app.js"></script>
+</body>
+</html>
